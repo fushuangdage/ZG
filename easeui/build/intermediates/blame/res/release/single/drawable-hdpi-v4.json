@@ -1,11 +1,11 @@
 [
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chat_video_mask_to.9.png",
-        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_chat_video_mask_to.9.png"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png",
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chat_video_mask_to.9.png",
+        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_chat_video_mask_to.9.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_7.png",
@@ -20,12 +20,12 @@
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_record_animate_09.png"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_dx_checkbox_off.png",
-        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_dx_checkbox_off.png"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_to_group_details_normal.png",
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_to_group_details_normal.png"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_dx_checkbox_off.png",
+        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_dx_checkbox_off.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_16.png",
@@ -44,12 +44,12 @@
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_settings_normal.png"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_location_msg.9.png",
-        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_location_msg.9.png"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chatfrom_bg_focused.9.png",
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_chatfrom_bg_focused.9.png"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_location_msg.9.png",
+        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_location_msg.9.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_show_head_toast_bg.9.png",
@@ -132,6 +132,10 @@
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-hdpi-v4\\abc_list_focused_holo.9.png"
     },
     {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\notification_bg_low_normal.9.png",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-hdpi-v4\\notification_bg_low_normal.9.png"
+    },
+    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_record_animate_12.png",
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_record_animate_12.png"
     },
@@ -146,10 +150,6 @@
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chatto_voice_playing_f3.png",
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_chatto_voice_playing_f3.png"
-    },
-    {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\notification_bg_low_normal.9.png",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-hdpi-v4\\notification_bg_low_normal.9.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_20.png",
@@ -280,12 +280,12 @@
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\drawable-hdpi\\ease_msg_state_fail_resend.png"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png",
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_dx_checkbox_on.png",

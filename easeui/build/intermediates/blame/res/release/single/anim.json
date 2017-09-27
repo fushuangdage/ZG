@@ -4,28 +4,28 @@
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\anim\\abc_fade_out.xml"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\push_top_out2.xml",
-        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\anim\\push_top_out2.xml"
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\push_top_in2.xml",
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\anim\\push_top_in2.xml"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\push_top_out2.xml",
+        "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\anim\\push_top_out2.xml"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\push_bottom_out.xml",
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\anim\\push_bottom_out.xml"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\abc_popup_enter.xml",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\anim\\abc_popup_enter.xml"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\head_in.xml",
         "source": "E:\\work\\ZG\\easeui\\src\\main\\res\\anim\\head_in.xml"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\anim\\abc_popup_enter.xml"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\abc_popup_exit.xml",

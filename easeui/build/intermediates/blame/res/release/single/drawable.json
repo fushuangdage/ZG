@@ -48,12 +48,12 @@
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable\\abc_ratingbar_indicator_material.xml"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_dark.xml",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable\\abc_item_background_holo_dark.xml"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_track_material.xml",
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable\\abc_item_background_holo_dark.xml"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\ease_btn_cancel_pressed_shape.xml",

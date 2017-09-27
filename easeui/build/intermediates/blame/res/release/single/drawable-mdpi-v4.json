@@ -44,12 +44,12 @@
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_low_normal.9.png",
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
@@ -152,12 +152,12 @@
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_low_pressed.9.png",
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
@@ -184,12 +184,12 @@
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png",
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",

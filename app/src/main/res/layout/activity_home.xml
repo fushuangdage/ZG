@@ -8,109 +8,189 @@
     tools:context="com.example.admin.zgapplication.ui.activity.HomeActivity">
 
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="25dp">
+        android:layout_marginTop="25dp">
 
-        <com.baidu.mapapi.map.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:id="@+id/home_toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#f9f9f9"
-            android:gravity="center_vertical">
+            android:layout_height="match_parent">
+
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#f9f9f9"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/mine"
+                    android:layout_width="28dp"
+                    android:layout_height="23dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/mine" />
+
+                <RadioGroup
+                    android:layout_width="150dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_findPerson"
+                        style="@style/home_rb"
+                        android:background="@drawable/select_home_radio_left"
+                        android:button="@null"
+                        android:checked="true"
+                        android:text="找人"
+                        android:textColor="@drawable/home_rg_text" />
+
+                    <RadioButton
+                        android:id="@+id/rb_findHouse"
+                        style="@style/home_rb"
+                        android:background="@drawable/select_home_radio_right"
+                        android:button="@null"
+                        android:text="找房"
+                        android:textColor="@drawable/home_rg_text" />
+                </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/home_find"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/sreach2" />
+
+
+                <ImageView
+                    android:id="@+id/home_message"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/msg" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/scan_bg"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/scan" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="扫一扫"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
             <ImageView
-                android:id="@+id/mine"
-                android:layout_width="28dp"
-                android:layout_height="23dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/mine" />
+                android:id="@+id/iv_red_packet"
+                android:layout_width="52dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="320dp"
+                android:background="@drawable/redpacket" />
 
-            <RadioGroup
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/top_radius_bg"
+            android:orientation="vertical"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="240dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <RelativeLayout
+                android:id="@+id/rl_bottom_sheet_head"
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/green_bottom_border"
+                    android:gravity="center"
+                    android:text="区域"
+                    android:textColor="@color/lightgreen"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="3dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="#999" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:drawableRight="@drawable/choose"
+                    android:gravity="center"
+                    android:text="筛选"
+                    android:textColor="#666E70"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/position_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_bottom_sheet_head"
+                android:background="#ccc" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_float"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="bottom"
+            android:padding="10dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/green_corner_bg"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="150dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rb_findPerson"
-                    style="@style/home_rb"
-                    android:background="@drawable/select_home_radio_left"
-                    android:button="@null"
-                    android:checked="true"
-                    android:text="找人"
-                    android:textColor="@drawable/home_rg_text" />
-
-                <RadioButton
-                    android:id="@+id/rb_findHouse"
-                    style="@style/home_rb"
-                    android:background="@drawable/select_home_radio_right"
-                    android:button="@null"
-                    android:text="找房"
-                    android:textColor="@drawable/home_rg_text" />
-            </RadioGroup>
-
-            <ImageView
-                android:id="@+id/home_find"
-                android:layout_marginRight="5dp"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:background="@drawable/search" />
-
-            <ImageView
-                android:id="@+id/home_message"
-                android:layout_marginRight="5dp"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:background="@drawable/msg" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="100dp"
-            android:layout_alignParentEnd="true"
-            android:gravity="center"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/scan_bg"
-            >
-            <View
-                android:layout_marginRight="10dp"
-                android:background="@drawable/scan"
-                android:layout_width="16dp"
-                android:layout_height="16dp" />
-            <TextView
-                android:textSize="12sp"
-                android:text="扫一扫"
+                android:text="呼叫经纪人"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:textSize="17sp" />
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/iv_red_packet"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="320dp"
-            android:background="@drawable/redpacket"
-            android:layout_width="52dp"
-            android:layout_height="45dp" />
-
-
-
-
-
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 
     <android.support.design.widget.NavigationView

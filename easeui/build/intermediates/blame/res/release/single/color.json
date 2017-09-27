@@ -44,12 +44,12 @@
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\color\\abc_primary_text_material_light.xml"
     },
     {
-        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_dark.xml",
-        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\color\\switch_thumb_material_dark.xml"
-    },
-    {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\color\\abc_hint_foreground_material_dark.xml",
         "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\color\\abc_hint_foreground_material_dark.xml"
+    },
+    {
+        "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_dark.xml",
+        "source": "C:\\Users\\fushuang\\.android\\build-cache\\eefcd084349a57ac7aed131f5698de01c8a710d0\\output\\res\\color\\switch_thumb_material_dark.xml"
     },
     {
         "merged": "E:\\work\\ZG\\easeui\\build\\intermediates\\res\\merged\\release\\color\\abc_btn_colored_text_material.xml",
