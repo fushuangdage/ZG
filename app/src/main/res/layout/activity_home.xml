@@ -102,6 +102,13 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
+            
+            <com.example.admin.zgapplication.ui.view.CustomProgressView
+                android:id="@+id/home_progress"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="240dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp" />
 
             <ImageView
                 android:id="@+id/iv_red_packet"

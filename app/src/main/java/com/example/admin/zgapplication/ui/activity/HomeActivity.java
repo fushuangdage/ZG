@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 
 
-public class HomeActivity extends MVPBaseActivity<HomePresenter> {
+public class HomeActivity extends MVPBaseActivity<HomePresenter> implements View.OnClickListener {
 
 
     private static final String TAG = "66666666666";
@@ -31,6 +31,9 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> {
     RecyclerView mRecyclerView;
     @BindView(R.id.ll_float)
     LinearLayout ll_float;
+    @BindView(R.id.home_progress)
+    View home_progress;
+
 
     @Override
     public HomePresenter createPresenter() {
@@ -45,6 +48,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> {
 
     @Override
     public void initEvent() {
+        home_progress.setOnClickListener(this);
+
         mBottomSheet.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -83,4 +88,12 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.home_progress:
+                startActivity(WaitCrabActivity.class);
+                break;
+        }
+    }
 }

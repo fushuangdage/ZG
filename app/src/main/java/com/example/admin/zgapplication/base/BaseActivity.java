@@ -64,7 +64,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(mRootView);
         //绑定ButterKnife
         mBind = ButterKnife.bind(this);
-
         //添加Activity到管理堆栈
         AppManager.getInstance().addActivity(this);
         //设置UI

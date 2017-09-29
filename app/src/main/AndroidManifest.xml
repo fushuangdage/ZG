@@ -59,7 +59,7 @@
             android:value="c03a493a8850f5abfa7582aa" />
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="561cae6ae0f55abd990035bf"></meta-data>
+            android:value="561cae6ae0f55abd990035bf" />
 
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -82,9 +82,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.activity.MainActivity">
-
-        </activity>
+        <activity android:name=".ui.activity.MainActivity"></activity>
         <activity android:name=".ui.activity.SecondActivity" />
         <activity android:name=".ui.activity.ChatActivity" />
         <activity
@@ -187,7 +185,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
@@ -198,7 +196,7 @@
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
@@ -234,6 +232,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.WaitCrabActivity"></activity>
     </application>
 
 </manifest>
