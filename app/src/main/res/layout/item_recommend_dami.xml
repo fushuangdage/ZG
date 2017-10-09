@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <Button
+            android:background="@drawable/green_corner_bg"
+            android:text="免费咨询"
+            android:textColor="@color/white"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="75dp"
+            android:layout_height="27dp" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_marginRight="10dp"
+            android:layout_width="86dp"
+            android:layout_height="86dp" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/icon"
+            android:textSize="14sp"
+            android:textColor="#2a2e32"
+            android:text="王代伟"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/ll_start"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:background="@drawable/yellow_start"
+                android:layout_marginRight="5dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp" />
+            <ImageView
+                android:background="@drawable/yellow_start"
+                android:layout_marginRight="5dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp" />
+            <ImageView
+                android:background="@drawable/yellow_start"
+                android:layout_marginRight="5dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp" />
+            <ImageView
+                android:background="@drawable/yellow_start"
+                android:layout_marginRight="5dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp" />
+            <ImageView
+                android:background="@drawable/yellow_start"
+                android:layout_width="14dp"
+                android:layout_height="14dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_company"
+            android:layout_below="@+id/tv_name"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginTop="5dp"
+            android:text="北京扎根 "
+            android:textSize="11sp"
+            android:textColor="@color/gray666"
+            android:drawableRight="@drawable/authentication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tv_house_count"
+            android:layout_below="@+id/tv_company"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginTop="5dp"
+            android:text="房源总数 "
+            android:textSize="11sp"
+            android:textColor="@color/gray666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tv_house_count_num"
+            android:layout_below="@+id/tv_company"
+            android:layout_toRightOf="@+id/tv_house_count"
+            android:layout_marginTop="5dp"
+            android:text="20套"
+            android:textSize="11sp"
+            android:textColor="@color/green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <TextView
+            android:id="@+id/tv_trade_area"
+            android:layout_below="@+id/tv_house_count"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginTop="5dp"
+            android:text="负责商圈 "
+            android:textSize="11sp"
+            android:textColor="@color/gray666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/location"/>
+        
+    </RelativeLayout>
+
+    <View
+        android:background="@color/gray666"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    
+    <LinearLayout
+       android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp">
+        <TextView
+            android:text="聊天意向  "
+            android:textSize="11sp"
+            android:textColor="#666E70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:text="快"
+            android:textSize="11sp"
+            android:textColor="@color/green"
+            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_margin="10dp"
+            android:layout_height="10dp"
+            android:background="@color/gray666"/>
+
+        <TextView
+            android:text="带看次数  "
+            android:textSize="11sp"
+            android:textColor="#666E70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:text="30"
+            android:textSize="11sp"
+            android:textColor="@color/green"
+       
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_margin="10dp"
+            android:layout_height="10dp"
+            android:background="@color/gray666"/>
+
+        <TextView
+            android:text="成交次数  "
+            android:textSize="11sp"
+            android:textColor="#666E70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:text="5"
+            android:textSize="11sp"
+            android:textColor="@color/green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    
+</LinearLayout>

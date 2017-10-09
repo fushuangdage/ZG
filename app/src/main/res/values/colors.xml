@@ -11,5 +11,6 @@
     <color name="toolbartitle">#2a2e32</color>
     <color name="lightgreen">#4dad01</color>
     <color name="activity_bg">#f0f1f5</color>
+    <color name="gray666">#666666</color>
     
 </resources>
