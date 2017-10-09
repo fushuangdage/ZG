@@ -226,13 +226,15 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".ui.activity.HomeActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.WaitCrabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.WaitCrabActivity"></activity>
     </application>
 
 </manifest>

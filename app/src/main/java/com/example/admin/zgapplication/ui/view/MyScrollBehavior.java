@@ -5,6 +5,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.admin.zgapplication.R;
@@ -24,13 +25,25 @@ public class MyScrollBehavior extends CoordinatorLayout.Behavior<View> {
 
         if (child.getId()== R.id.rl_bottom_sheet) {
             child.layout(0,0,parent.getWidth(),parent.getHeight());
-            child.setTranslationY(parent.getHeight());
+            child.setTranslationY(1000);
             return true;
         }
 
         return super.onLayoutChild(parent, child, layoutDirection);
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(CoordinatorLayout parent, View child, MotionEvent ev) {
+        return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(CoordinatorLayout parent, View child, MotionEvent ev) {
+        Log.d("6666666666", "onTouchEvent: "+ev.getRawX());
+
+
+        return true;
+    }
 
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
