@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="40dp"
-    android:layout_height="30dp"
-    android:text="123">
-
-</TextView>
+    android:layout_width="64dp"
+    android:layout_height="24dp"
+    android:textSize="11sp"
+    android:layout_margin="5dp"
+    android:gravity="center"
+    android:background="@drawable/gray_boder"
+    android:textColor="#666e70" />

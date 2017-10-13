@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_marginBottom="10dp"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
 
         <ImageView
             android:id="@+id/icon"
+            android:background="@drawable/ic_launcher"
             android:layout_marginRight="10dp"
             android:layout_width="86dp"
             android:layout_height="86dp" />
@@ -35,38 +38,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:id="@+id/ll_start"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <com.example.admin.zgapplication.ui.view.StartBar
+        android:id="@+id/rating_bar"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/tv_name"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        >
+        </com.example.admin.zgapplication.ui.view.StartBar>
 
-            <ImageView
-                android:background="@drawable/yellow_start"
-                android:layout_marginRight="5dp"
-                android:layout_width="14dp"
-                android:layout_height="14dp" />
-            <ImageView
-                android:background="@drawable/yellow_start"
-                android:layout_marginRight="5dp"
-                android:layout_width="14dp"
-                android:layout_height="14dp" />
-            <ImageView
-                android:background="@drawable/yellow_start"
-                android:layout_marginRight="5dp"
-                android:layout_width="14dp"
-                android:layout_height="14dp" />
-            <ImageView
-                android:background="@drawable/yellow_start"
-                android:layout_marginRight="5dp"
-                android:layout_width="14dp"
-                android:layout_height="14dp" />
-            <ImageView
-                android:background="@drawable/yellow_start"
-                android:layout_width="14dp"
-                android:layout_height="14dp" />
-        </LinearLayout>
+        <!--<RatingBar-->
+            <!--android:id="@+id/rating_bar"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:numStars="5"-->
+            <!--android:rating="2"-->
+            <!--style="@style/fiveRatingBar"-->
+            <!--android:layout_toRightOf="@id/tv_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="14dp"-->
+            <!--&gt;-->
+        <!--</RatingBar>-->
 
         <TextView
             android:id="@+id/tv_company"
@@ -119,7 +110,9 @@
     </RelativeLayout>
 
     <View
-        android:background="@color/gray666"
+        android:background="@color/divider_list"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
     
@@ -191,6 +184,11 @@
             />
 
     </LinearLayout>
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     
 </LinearLayout>

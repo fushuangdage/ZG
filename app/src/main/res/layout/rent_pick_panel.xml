@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="@color/white"
+    android:layout_height="187dp">
+
+    <TextView
+        android:id="@+id/tv_text_show"
+        android:text="￥0 - ¥3000"
+        android:textColor="#b6b6b6"
+        android:layout_marginTop="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <com.example.admin.zgapplication.ui.view.BidirectionalSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:ball_left_solid_color="@android:color/white"
+        app:ball_left_stroke_color="@android:color/black"
+        app:ball_right_solid_color="@android:color/white"
+        app:ball_right_stroke_color="@android:color/black"
+        app:ball_radius_size="8dp"
+        app:ball_stroke_size="1dp"
+        app:text_left_num="566"
+        app:text_right_num="820"
+        app:text_min_unit="1"
+        app:pb_height="3dp"
+        app:pb_within_color="@color/lightgreen"
+        app:pb_without_color="@color/gray666"
+        />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="155dp"
+            android:layout_height="36dp"
+            android:text="重置"
+            android:background="#ff725c"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="155dp"
+            android:layout_height="36dp"
+            android:text="确定"
+            android:background="#4dad01"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

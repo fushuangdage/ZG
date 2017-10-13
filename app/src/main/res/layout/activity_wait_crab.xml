@@ -89,6 +89,7 @@
                 android:background="@drawable/green_border_bg"/>
 
             <Button
+                android:id="@+id/bt_check_crab_list"
                 android:layout_marginLeft="20dp"
                 android:text="查看抢单"
                 android:textSize="12sp"
@@ -199,6 +200,7 @@
                        android:background="@drawable/white_border_bg"/>
 
                    <Button
+                       android:id="@+id/bt_check_crab"
                        android:text="查看抢单"
                        android:layout_width="75dp"
                        android:layout_height="24dp"
@@ -212,7 +214,9 @@
 
            <android.support.design.widget.TabLayout
                android:id="@+id/tabLayout"
+               android:background="@color/white"
                android:layout_width="match_parent"
+               app:tabIndicatorColor="@color/green"
                android:layout_height="40dp" />
 
            <android.support.v4.view.ViewPager

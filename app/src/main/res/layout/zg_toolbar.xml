@@ -8,6 +8,7 @@
     android:background="@color/toolbar"
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
+    android:fitsSystemWindows="true"
     android:id="@+id/toolbar"
     android:layout_height="?attr/actionBarSize">
 
@@ -21,7 +22,7 @@
             android:layout_marginLeft="20dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/returnwhite"
+            android:src="@drawable/return_gray"
             android:layout_width="20dp"
             android:layout_height="20dp" />
 

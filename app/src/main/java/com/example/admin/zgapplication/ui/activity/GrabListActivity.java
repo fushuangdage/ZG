@@ -1,8 +1,5 @@
-package com.example.admin.zgapplication.ui.fragment;
+package com.example.admin.zgapplication.ui.activity;
 
-
-import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.admin.zgapplication.R;
-import com.example.admin.zgapplication.base.BaseSupportFragment;
+import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.Dami;
-import com.example.admin.zgapplication.ui.activity.AgentActivity;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
@@ -25,24 +21,25 @@ import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class RecommendDamiFragment extends BaseSupportFragment {
+import static com.umeng.socialize.utils.ContextUtil.getContext;
 
-    @BindView(R.id.rv_recommend_dami)
+public class GrabListActivity extends BaseActivity {
+
+
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
     public List<Dami> list=new ArrayList<>();
     public List<String> tagList=new ArrayList<>();
 
+
     @Override
-    protected int setLayout() {
-        return R.layout.fragment_recommend_dami;
+    public int setLayout() {
+        return R.layout.activity_grab_list;
     }
 
     @Override
-    protected void init() {
+    public void initEvent() {
+
         for (int i = 0; i < 10; i++) {
             list.add(new Dami());
         }
@@ -66,9 +63,7 @@ public class RecommendDamiFragment extends BaseSupportFragment {
         adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-
-                Intent intent = new Intent(getContext(), AgentActivity.class);
-                startActivity(intent);
+                startActivity(AgentActivity.class);
             }
 
             @Override
@@ -78,7 +73,11 @@ public class RecommendDamiFragment extends BaseSupportFragment {
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-
     }
 
+    
+    @Override
+    public void initData() {
+
+    }
 }

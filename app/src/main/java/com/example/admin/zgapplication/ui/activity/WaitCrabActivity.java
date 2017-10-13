@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,7 @@ import com.example.admin.zgapplication.ui.fragment.RecommendHouseFragment;
 import com.example.admin.zgapplication.ui.view.BeforeBTBehavior;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class WaitCrabActivity extends BaseActivity {
 
@@ -26,11 +28,22 @@ public class WaitCrabActivity extends BaseActivity {
     ViewPager mViewPager;
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
+
+    @OnClick({R.id.bt_check_crab,R.id.bt_check_crab_list})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_check_crab:
+            case R.id.bt_check_crab_list:
+               startActivity(GrabListActivity.class);
+                break;
+        }
+    }
+
     private RecommendDamiFragment recommendDamiFragment;
     private RecommendHouseFragment recommendHouseFragment;
 
 
-    private String[] titles=new String[]{"推荐大秘","推荐房源"};
+    private String[] titles = new String[]{"推荐大秘", "推荐房源"};
 
     @Override
     public int setLayout() {
@@ -50,23 +63,24 @@ public class WaitCrabActivity extends BaseActivity {
         sheetBehavior.setBottomSheetCallback(new BeforeBTBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState==BeforeBTBehavior.STATE_EXPANDED){
+                if (newState == BeforeBTBehavior.STATE_EXPANDED) {
                     ((CoordinatorLayout.LayoutParams) bottomSheet.getLayoutParams()).setBehavior(null);
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                ViewCompat.setAlpha(mask_view,slideOffset);
+                ViewCompat.setAlpha(mask_view, slideOffset);
             }
         });
 
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                if (position==0){
+                if (position == 0) {
                     return recommendDamiFragment;
-                }if (position==1){
+                }
+                if (position == 1) {
                     return recommendHouseFragment;
                 }
                 return null;
@@ -84,6 +98,7 @@ public class WaitCrabActivity extends BaseActivity {
         });
 
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabTextColors(Color.parseColor("#2A2E32"), Color.parseColor("#4dad01"));
 
     }
 

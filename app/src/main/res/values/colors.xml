@@ -7,10 +7,12 @@
 
 
     <color name="green">#53b009</color>
-    <color name="toolbar">#f9f9f9</color>
+    <color name="toolbar">#F6F6F7</color>
     <color name="toolbartitle">#2a2e32</color>
     <color name="lightgreen">#4dad01</color>
     <color name="activity_bg">#f0f1f5</color>
     <color name="gray666">#666666</color>
-    
+    <color name="textgray">#666e70</color>
+    <color name="price_red">#F7513E</color>
+
 </resources>

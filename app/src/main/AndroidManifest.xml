@@ -82,7 +82,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.activity.MainActivity"></activity>
+        <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.SecondActivity" />
         <activity android:name=".ui.activity.ChatActivity" />
         <activity
@@ -225,16 +225,19 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ui.activity.HomeActivity">
-
-        </activity>
-        <activity android:name=".ui.activity.WaitCrabActivity">
+        <activity android:name=".ui.activity.HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.WaitCrabActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.GrabListActivity" />
+        <activity android:name=".ui.activity.AgentActivity" />
+        <activity android:name=".ui.activity.EvaluateActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+   <TextView
+       style="@style/gray_text_12sp"
+       android:text="不限"
+       android:gravity="center"
+       android:layout_width="match_parent"
+       android:layout_height="40dp" />
+
+    <View
+        android:background="@color/divider_list"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/gray_text_12sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="租金从低到高" />
+
+    <View
+        android:background="@color/divider_list"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:text="租金从高到底"
+        android:gravity="center"
+        style="@style/gray_text_12sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <View
+        android:background="@color/divider_list"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:text="面积从低到高"
+        android:gravity="center"
+        style="@style/gray_text_12sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <View
+        android:background="@color/divider_list"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:text="面积从高到低"
+        android:gravity="center"
+        style="@style/gray_text_12sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+</LinearLayout>
