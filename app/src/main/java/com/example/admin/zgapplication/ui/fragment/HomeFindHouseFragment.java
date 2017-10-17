@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.fragment;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseSupportFragment;
+import com.example.admin.zgapplication.ui.activity.HouseDetailActivity;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 
 import java.util.ArrayList;
@@ -79,6 +82,17 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
             }
         };
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                startActivity(new Intent(getActivity(), HouseDetailActivity.class));
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
         recyclerView.setAdapter(adapter);
 
 

@@ -12,9 +12,10 @@ import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
-public class HomeActivity extends MVPBaseActivity<HomePresenter> implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends MVPBaseActivity<HomePresenter> implements RadioGroup.OnCheckedChangeListener {
 
 
     private static final String TAG = "66666666666";
@@ -56,11 +57,13 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements View
 
     }
 
-    @Override
-    public void onClick(View v) {
+    @OnClick({R.id.home_find})
+    public void onClick(View view){
+        switch (view.getId()) {
 
-        switch (v.getId()) {
-
+            case R.id.home_find:
+                startActivity(SearchActivity.class);
+                break;
         }
     }
 

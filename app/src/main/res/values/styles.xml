@@ -19,6 +19,10 @@
         <item name="android:button">@null</item>
     </style>
 
+    <style name="room_pick_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
     <style name="white_text_12sp">
         <item name="android:textColor">@color/white</item>
@@ -28,6 +32,26 @@
     <style name="gray_text_12sp">
         <item name="android:textColor">@color/toolbartitle</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="gray_text_15sp">
+        <item name="android:textColor">@color/toolbartitle</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="light_gray_text_12sp">
+        <item name="android:textColor">@color/textgray</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="gray_text_17sp">
+        <item name="android:textColor">@color/toolbartitle</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="gray_text_25sp">
+        <item name="android:textColor">@color/toolbartitle</item>
+        <item name="android:textSize">25sp</item>
     </style>
 
     <style name="gray_text_11sp">

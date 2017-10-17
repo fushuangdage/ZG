@@ -23,9 +23,9 @@
 
             <ImageView
                 android:id="@+id/mine"
-                android:layout_width="28dp"
-                android:layout_height="23dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="16dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="15dp"
                 android:background="@drawable/mine" />
 
             <RadioGroup
@@ -34,7 +34,8 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="right"
+                android:paddingRight="55dp"
                 android:orientation="horizontal">
 
                 <RadioButton
@@ -57,16 +58,16 @@
 
             <ImageView
                 android:id="@+id/home_find"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
                 android:layout_marginRight="12dp"
                 android:background="@drawable/sreach2" />
 
 
             <ImageView
                 android:id="@+id/home_message"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginRight="12dp"
                 android:background="@drawable/msg" />
         </LinearLayout>
