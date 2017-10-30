@@ -235,10 +235,29 @@
         <activity android:name=".ui.activity.WaitCrabActivity" />
         <activity android:name=".ui.activity.GrabListActivity" />
         <activity android:name=".ui.activity.AgentActivity" />
-        <activity android:name=".ui.activity.EvaluateActivity" />
+        <activity android:name=".ui.activity.EvaluateShowActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.HouseDetailActivity" />
-        <activity android:name=".ui.activity.CompanyDetailActivity"></activity>
+        <activity android:name=".ui.activity.CompanyDetailActivity" />
+        <activity android:name=".ui.activity.OrderDetailActivity" />
+        <activity android:name=".ui.activity.PayOnlineActivity" />
+        <activity android:name=".ui.activity.FinishOrderActivity" />
+        <activity android:name=".ui.activity.CouponChooseActivity" />
+        <activity android:name=".ui.activity.OrderDetail2Activity" />
+        <activity android:name=".ui.activity.MakeEvaluateActivity" />
+        <activity android:name=".ui.activity.ChooseAgentActivity" />
+        <activity android:name=".ui.activity.TakeLookActivity" />
+        <activity android:name=".ui.activity.TakeLookProgressActivity" />
+        <activity android:name=".ui.activity.OrderListActivity" />
+        <activity android:name=".ui.activity.EvaluationListActivity" />
+        <activity android:name=".ui.activity.ShopCarActivity" />
+        <activity android:name=".ui.activity.IntentListActivity" />
+        <activity android:name=".ui.activity.IntentDetailActivity" />
+        <activity android:name=".ui.activity.TakeLookListActivity" />
+        <activity android:name=".ui.activity.MyDiscountActivity" />
+        <activity android:name=".ui.activity.MyContractActivity" />
+        <activity android:name=".ui.activity.ContractDetailActivity" />
+        <activity android:name=".ui.activity.BillDetailActivity"></activity>
     </application>
 
 </manifest>

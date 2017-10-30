@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="@color/toolbartitle"
+            android:text="2017-01-20 20:00"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="删除    "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/divider_color"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_intent_region"
+            android:textSize="12sp"
+            android:text="意向区域：朝阳区-望京"
+            android:textColor="@color/toolbartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@id/tv_intent_region"
+            android:layout_marginTop="6dp"
+            android:textSize="12sp"
+            android:textColor="@color/toolbartitle"
+            android:text=" 意向价格：不限"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_flag"
+            android:text="人抢单   "
+            android:drawableRight="@drawable/right_arrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_flag"
+            android:textSize="16sp"
+            android:textColor="@color/green"
+            android:text="8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+</LinearLayout>

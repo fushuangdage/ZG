@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.admin.zgapplication.ui.activity.MyDiscountActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        >
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/return_gray"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_centerInParent="true"
+            android:text="我的优惠"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:text="兑换"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:textSize="12sp"
+            android:textColor="@color/toolbartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout
+        app:tabSelectedTextColor="@color/green"
+        app:tabIndicatorColor="@color/green"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <android.support.design.widget.TabItem
+            android:text="未使用"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="已使用"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="已过期"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.umeng.socialize.utils.ContextUtil.getContext;
 
@@ -80,4 +81,14 @@ public class GrabListActivity extends BaseActivity {
     public void initData() {
 
     }
+
+    @OnClick({R.id.iv_left})
+    public void onClick(View view){
+        switch (view.getId()) {
+            case R.id.iv_left:
+                finish();
+                break;
+        }
+    }
+
 }

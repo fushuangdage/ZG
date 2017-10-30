@@ -14,6 +14,9 @@
         <attr name="h_pro_step" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="StartBar">
+        <attr name="can_start" format="boolean" />
+    </declare-styleable>
 
     <declare-styleable name="ScrollLayout">
 

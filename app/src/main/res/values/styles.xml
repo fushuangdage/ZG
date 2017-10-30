@@ -39,6 +39,11 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="gray_text_14sp">
+        <item name="android:textColor">@color/toolbartitle</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="light_gray_text_12sp">
         <item name="android:textColor">@color/textgray</item>
         <item name="android:textSize">12sp</item>
@@ -47,6 +52,12 @@
     <style name="gray_text_17sp">
         <item name="android:textColor">@color/toolbartitle</item>
         <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="gray_text_13sp">
+        <item name="android:textColor">@color/gray_717171</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="gray_text_25sp">
@@ -69,6 +80,13 @@
         <item name="android:button">@null</item>
         <item name="android:textSize">11sp</item>
         <item name="android:background">@drawable/filter_panel_checkbox_selector</item>
+        <item name="android:textColor">@drawable/filter_panel_tag_textcolor</item>
+    </style>
+
+    <style name="choose_checkbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@null</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:background">@drawable/selector_check_box</item>
         <item name="android:textColor">@drawable/filter_panel_tag_textcolor</item>
     </style>
 

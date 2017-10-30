@@ -72,6 +72,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
+    public Activity getmActivity() {
+        return mActivity;
+    }
+
+    public void setmActivity(Activity mActivity) {
+        this.mActivity = mActivity;
+    }
+
     /**
      * 设置布局
      *

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.admin.zgapplication.ui.activity.OrderListActivity">
+
+    <include layout="@layout/action_bar" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        app:tabIndicatorColor="@color/green"
+        app:tabSelectedTextColor="@color/green"
+        android:layout_height="50dp" >
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="全部" />
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="代付款" />
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="已完成" />
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="已取消" />
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

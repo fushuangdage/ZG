@@ -112,6 +112,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_confirm"
         android:background="@color/lightgreen"
         android:textColor="@color/white"
         android:text="确定"

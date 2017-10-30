@@ -5,5 +5,5 @@
     android:textSize="11sp"
     android:layout_margin="5dp"
     android:gravity="center"
-    android:background="@drawable/gray_boder"
-    android:textColor="#666e70" />
+    android:background="@drawable/select_evaluate_tag"
+    android:textColor="@drawable/tag_text_color" />

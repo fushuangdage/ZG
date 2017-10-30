@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="价格明细"
+                style="@style/gray_text_17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_marginTop="10dp"
+                android:background="#eee"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="租金（3000元/月）"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="*3"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    style="@style/gray_text_13sp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="¥6000"
+                    android:gravity="right"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_deposit"
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="押金"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="*1"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    style="@style/gray_text_13sp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="¥2000"
+                    android:gravity="right"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_agent_fee"
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="中介费"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="*3"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    style="@style/gray_text_13sp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="¥6000"
+                    android:gravity="right"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_serve_fee"
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="服务费"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="*3"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    style="@style/gray_text_13sp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:text="¥6000"
+                    android:gravity="right"
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="  促销活动"
+                    android:drawableLeft="@drawable/cuxiaohuodong"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/gray_text_13sp"
+                    android:gravity="right"
+                    android:text="满300减200"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="  经纪公司优惠券"
+                    android:drawableLeft="@drawable/jingjigongsiyouhuijuan"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/gray_text_13sp"
+                    android:text="-200"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/gray_text_13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="  扎根优惠券"
+                    android:drawableLeft="@drawable/zhagenyouhuijuan"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/gray_text_13sp"
+                    android:text="-200"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:background="#eee"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:gravity="right|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp">
+            <TextView
+                android:textSize="14sp"
+                android:textColor="#2a2e32"
+                android:text="实付款:   "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="14sp"
+                android:textColor="@color/price_red"
+                android:text="¥10200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+</LinearLayout>

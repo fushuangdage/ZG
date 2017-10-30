@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.example.admin.zgapplication.ui.activity.EvaluateActivity">
+    tools:context="com.example.admin.zgapplication.ui.activity.EvaluateShowActivity">
 
     <include layout="@layout/zg_toolbar" />
 

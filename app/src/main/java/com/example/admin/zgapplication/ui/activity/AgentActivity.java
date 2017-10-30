@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
@@ -20,6 +21,8 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.iv_left)
+    ImageView iv_left;
     private AgentHouseAdapter houseAdapter;
 
     @Override
@@ -38,6 +41,7 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
         HeaderAndFooterWrapper<String> wrapper = new HeaderAndFooterWrapper<>(houseAdapter);
         View list_head = LayoutInflater.from(this).inflate(R.layout.agent_list_head, ((ViewGroup) getRootView()), false);
         list_head.findViewById(R.id.tv_look_evaluate).setOnClickListener(this);
+        iv_left.setOnClickListener(this);
         wrapper.addHeaderView(list_head);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(wrapper);
@@ -52,7 +56,10 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_look_evaluate:
-                startActivity(EvaluateActivity.class);
+                startActivity(EvaluateShowActivity.class);
+                break;
+            case R.id.iv_left:
+                finish();
                 break;
         }
     }

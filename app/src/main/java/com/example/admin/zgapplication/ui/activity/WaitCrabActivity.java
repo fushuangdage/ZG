@@ -29,12 +29,15 @@ public class WaitCrabActivity extends BaseActivity {
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
 
-    @OnClick({R.id.bt_check_crab,R.id.bt_check_crab_list})
+    @OnClick({R.id.bt_check_crab,R.id.bt_check_crab_list,R.id.iv_left})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_check_crab:
             case R.id.bt_check_crab_list:
                startActivity(GrabListActivity.class);
+                break;
+            case R.id.iv_left:
+                finish();
                 break;
         }
     }

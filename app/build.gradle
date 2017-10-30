@@ -57,6 +57,7 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.hyman:flowlayout-lib:1.1.2'
+    compile 'com.zhihu.android:matisse:0.4.3'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
 }

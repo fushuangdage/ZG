@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.admin.zgapplication.ui.activity.IntentDetailActivity">
+
+
+    <include layout="@layout/action_bar" />
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_time"
+            android:text="2017-01-20 20:00"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/tv_time"
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/tv_intent_region"
+            android:layout_below="@id/tv_time"
+            android:text="意向区域：朝阳区-望京\n意向价格：不限\n出租方式：整租\n意向户型：1室、2室、三室"
+            android:lineSpacingExtra="8dp"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="重新发单"
+            android:textSize="12sp"
+            android:textColor="@color/green"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/green_border_bg"
+            android:layout_marginRight="10dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp" />
+        
+    </RelativeLayout>
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="有"
+            android:textSize="14sp"
+            android:textColor="@color/gray666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="8"
+            android:textSize="18sp"
+            android:textColor="@color/lightgreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="名经纪人抢单"
+            android:textSize="14sp"
+            android:textColor="@color/gray666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</LinearLayout>

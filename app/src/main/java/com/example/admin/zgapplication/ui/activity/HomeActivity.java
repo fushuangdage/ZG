@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
 import android.support.annotation.IdRes;
+import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -15,7 +16,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class HomeActivity extends MVPBaseActivity<HomePresenter> implements RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends MVPBaseActivity<HomePresenter> implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
 
     private static final String TAG = "66666666666";
@@ -25,6 +26,11 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
     @BindView(R.id.main_container)
     FrameLayout fl_container;
+
+    @BindView(R.id.home_navigationView)
+    NavigationView navigationView;
+
+
     private HomeFindHouseFragment houseFragment;
     private HomeFindPersonFragment personFragment;
 
@@ -49,6 +55,21 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
                 .add(R.id.main_container,personFragment)
                 .hide(houseFragment).commit();
         radioGroup.setOnCheckedChangeListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        View evaluation = headerView.findViewById(R.id.ll_evaluation);
+        View order = headerView.findViewById(R.id.ll_order);
+        View contact = headerView.findViewById(R.id.ll_contract);
+        headerView.findViewById(R.id.ll_shopping_car).setOnClickListener(this);
+        headerView.findViewById(R.id.ll_intent).setOnClickListener(this);
+        headerView.findViewById(R.id.ll_take_look).setOnClickListener(this);
+        headerView.findViewById(R.id.ll_system_msg).setOnClickListener(this);
+        headerView.findViewById(R.id.ll_discount).setOnClickListener(this);
+        headerView.findViewById(R.id.ll_friend).setOnClickListener(this);
+
+        evaluation.setOnClickListener(this);
+        order.setOnClickListener(this);
+        contact.setOnClickListener(this);
     }
 
 
@@ -57,13 +78,40 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
     }
 
+
+
     @OnClick({R.id.home_find})
     public void onClick(View view){
         switch (view.getId()) {
-
             case R.id.home_find:
                 startActivity(SearchActivity.class);
                 break;
+            case R.id.ll_evaluation:
+                startActivity(EvaluationListActivity.class);
+                break;
+            case R.id.ll_contract:
+                startActivity(MyContractActivity.class);
+                break;
+            case R.id.ll_order:
+                startActivity(OrderListActivity.class);
+                break;
+            case R.id.ll_friend:
+                break;
+            case R.id.ll_discount:
+                startActivity(MyDiscountActivity.class);
+                break;
+            case R.id.ll_system_msg:
+                break;
+            case R.id.ll_take_look:
+                startActivity(TakeLookListActivity.class);
+                break;
+            case R.id.ll_intent:
+                startActivity(IntentListActivity.class);
+                break;
+            case R.id.ll_shopping_car:
+                startActivity(ShopCarActivity.class);
+                break;
+
         }
     }
 

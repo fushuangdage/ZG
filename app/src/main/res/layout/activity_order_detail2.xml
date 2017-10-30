@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/activity_bg"
+    tools:context="com.example.admin.zgapplication.ui.activity.OrderDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:background="@color/toolbar"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:fitsSystemWindows="true"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/iv_left"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/return_gray"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:text="订单详情"
+                android:textColor="@color/toolbartitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/iv_right"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="#4dad01"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:background="@drawable/querendingdan"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp" />
+                <View
+                    android:background="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="2dp" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/zaixianzhifu" />
+
+                <View
+                    android:background="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="2dp" />
+
+                <ImageView
+                    android:background="@drawable/touming"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp" />
+            </LinearLayout>
+
+    <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#4dad01"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="确认订单"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="在线支付"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="完成交易"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="147dp">
+
+                <TextView
+                    android:text="应支付总金额"
+                    android:textSize="16sp"
+                    android:textColor="#34383c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="¥18400"
+                    android:textSize="45sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/price_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <LinearLayout
+                android:id="@+id/ll_already_pay"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="已付款"
+                    android:layout_marginRight="15dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/toolbartitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="5dp" />
+                <TextView
+                    android:text="-¥500.00"
+                    android:gravity="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="剩余款"
+                android:layout_marginRight="15dp"
+                android:textSize="14dp"
+                android:textColor="@color/toolbartitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20sp"
+                android:textColor="@color/toolbartitle"
+                android:text="¥5500.00"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_pay_this_time"
+            android:textSize="14sp"
+            android:textColor="@color/toolbartitle"
+            android:text="本次支付"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@id/tv_pay_this_time"
+            android:textSize="12sp"
+            android:layout_marginTop="7dp"
+            android:text="可自定义编辑付款金额"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/pen"
+            android:layout_width="17dp"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:textSize="23sp"
+            android:textColor="#4dad01"
+            android:layout_centerVertical="true"
+            android:text="¥1800"
+            android:layout_toLeftOf="@id/iv"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:background="@drawable/gray_boder"
+            android:id="@+id/tv_price_detail"
+            android:text="价格明细"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="#666e70"
+            android:layout_width="82dp"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/gray_boder"
+            android:gravity="center"
+            android:text="取消支付"
+            android:textColor="#666e70"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_friend_pay"
+            android:background="@drawable/gray_boder"
+            android:text="朋友代付"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:textColor="#666e70"
+            android:layout_width="82dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_pay"
+            android:text="立即支付"
+            android:textSize="12sp"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:textColor="@color/lightgreen"
+            android:layout_width="82dp"
+            android:background="@drawable/green_border_bg"
+            android:layout_height="match_parent" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+

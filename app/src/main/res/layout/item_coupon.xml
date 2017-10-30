@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/jingjigongsiweishiyong"
+    android:layout_height="130dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="13dp"
+            android:background="@drawable/user_sit" />
+
+        <TextView
+            android:id="@+id/tv_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/iv_icon"
+            android:text="扎根网络"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_company_name"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/iv_icon"
+            android:text="只限我爱我家房源使用"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="200"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_price"
+            android:layout_toLeftOf="@id/tv_price"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="¥  " />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:background="@drawable/naozhong"
+            android:layout_marginLeft="15dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp" />
+
+        <TextView
+            android:textColor="#666e70"
+            android:text="2016.04.11 - 2016.05.20"
+            android:textSize="12sp"
+            android:layout_marginLeft="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

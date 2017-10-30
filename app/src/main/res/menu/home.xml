@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="测试"  android:id="@+id/menu"/>
-    <item android:title="测试"  android:id="@+id/menu1"/>
+    <group android:id="@+id/g1">
+        <item android:title="购物车"  android:id="@+id/shop_car" android:icon="@drawable/gouwuche"/>
+        <item android:title="意向记录"  android:id="@+id/intention" android:icon="@drawable/yixiang"/>
+        <item android:title="带看记录"  android:id="@+id/take_look" android:icon="@drawable/daikan2"/>
+        <item android:title="系统消息"  android:id="@+id/system_info" android:icon="@drawable/xitongxiaoxi"/>
+    </group>
+
+    <group android:id="@+id/g2">
+        <item
+            android:id="@+id/my_cut"
+            android:icon="@drawable/youhui"
+            android:title="我的优惠"/>
+        <item
+            android:id="@+id/invite_frient"
+            android:icon="@drawable/yaoqing"
+            android:title="邀请好友"/>
+    </group>
 
 </menu>

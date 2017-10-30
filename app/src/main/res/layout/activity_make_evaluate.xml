@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/activity_bg"
+    tools:context="com.example.admin.zgapplication.ui.activity.MakeEvaluateActivity">
+
+    <include layout="@layout/action_bar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:padding="13dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="经纪人的服务"
+                    android:textColor="@color/toolbartitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_marginTop="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_icon"
+                        android:background="@drawable/user_sit"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp" />
+
+                    <TextView
+                        android:id="@+id/tv_agent_name"
+                        style="@style/gray_text_15sp"
+                        android:text="王代伟"
+                        android:layout_toRightOf="@id/iv_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        style="@style/gray_text_11sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/tv_agent_name"
+                        android:layout_toRightOf="@id/iv_icon"
+                        android:text="链家地产"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.example.admin.zgapplication.ui.view.StartBar
+                        android:layout_alignParentRight="true"
+                        app:can_start="true"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp" />
+
+                </RelativeLayout>
+
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:id="@+id/tfl_agent"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:background="@color/activity_bg"
+                    android:hint="说说哪里满意,帮大家选择"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:padding="13dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="房源评价"
+                    android:textColor="@color/toolbartitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_marginTop="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_house_name"
+                        style="@style/gray_text_15sp"
+                        android:text="百子湾小区"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        style="@style/gray_text_11sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/tv_house_name"
+                        android:text="1室1厅1卫-30.0m²"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.example.admin.zgapplication.ui.view.StartBar
+                        android:layout_alignParentRight="true"
+                        app:can_start="true"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp" />
+
+                </RelativeLayout>
+
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:id="@+id/tfl_house"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:background="@color/activity_bg"
+                    android:hint="说说哪里满意,帮大家选择"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" />
+            </LinearLayout>
+
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/tfl_pic"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:padding="13dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="经纪公司印象"
+                    android:textColor="@color/toolbartitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_marginTop="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_company_icon"
+                        android:background="@drawable/user_sit"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp" />
+
+                    <TextView
+                        android:id="@+id/tv_company_name"
+                        style="@style/gray_text_15sp"
+                        android:text="链家地产"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@id/iv_company_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.example.admin.zgapplication.ui.view.StartBar
+                        android:layout_alignParentRight="true"
+                        app:can_start="true"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp" />
+
+                </RelativeLayout>
+
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:id="@+id/tfl_company"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/activity_bg"
+                    android:hint="说说哪里满意,帮大家选择"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:background="@drawable/white_ract_border_bg"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <CheckBox
+            style="@style/choose_checkbox"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+
+        <TextView
+            android:text="匿名"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:background="@color/green"
+            android:text="提交评价"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,7 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="240dp"
     android:layout_height="match_parent"
+    android:padding="10dp"
+    android:paddingTop="20dp"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:id="@+id/iv_agent_icon"
+            android:background="@drawable/user_sit"
+            android:layout_width="52dp"
+            android:layout_height="52dp" />
+
+        <TextView
+            android:text="Miss宋"
+            android:textSize="14sp"
+            android:layout_margin="10dp"
+            android:textColor="#5D5D5D"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="188****9257"
+            android:textColor="#858585"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_order"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:background="@drawable/dingdan"/>
+            <TextView
+                android:text="订单"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_contract"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:background="@drawable/hetong"/>
+            <TextView
+                android:text="合同"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_evaluation"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:background="@drawable/pingjia"/>
+            <TextView
+                android:text="评价"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_shopping_car"
+        android:padding="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/gouwuche"/>
+
+        <TextView
+            android:text="购物车"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_intent"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/yixiang"/>
+
+        <TextView
+            android:text="意向记录"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_take_look"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/daikan2"/>
+
+        <TextView
+            android:text="带看记录"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_system_msg"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/xitongxiaoxi"/>
+
+        <TextView
+            android:text="系统消息"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_discount"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/youhui"/>
+
+        <TextView
+            android:text="我的优惠"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_friend"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/yaoqing"/>
+
+        <TextView
+            android:text="邀请好友"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:textSize="12sp"
+            android:textColor="#4a4c5b"
+            android:text="设置"/>
+
+        <TextView
+            android:text="关于我们"
+            android:textSize="12sp"
+            android:textColor="#4a4c5b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -37,7 +37,7 @@ public class FlowViewHorizontal extends View {
     private int textSize;
     private int proStep;       //已完成的步骤
     private int interval;      //间隔
-    private String[] titles = {"提交", "接单", "取件", "配送", "完成"};
+    private String[] titles = {"确认订单", "在线支付", "完成交易"};
     private String[] times = {"12:20"};
     private Map<String, String> map;
 

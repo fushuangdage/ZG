@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -69,14 +70,32 @@ public class HouseDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_write_order})
+    @OnClick({R.id.tv_write_order,R.id.tv_chat_agent})
     public void onClick(View view){
         switch (view.getId()) {
 
             case R.id.tv_write_order:
                 RoomPickDialog roomPickDialog = new RoomPickDialog(this,R.style.room_pick_dialog);
+                roomPickDialog.setResultCallBack(new RoomPickDialog.ResultCallBack() {
+                    @Override
+                    public void resultCallBack(String s) {
+                        startActivity(ChooseAgentActivity.class);
+                    }
+                });
                 roomPickDialog.show();
                 break;
+
+            case R.id.iv_left:
+                finish();
+                break;
+
+            case R.id.tv_chat_agent:
+                Bundle bundle = new Bundle();
+                bundle.putString("from","HouseDetailActivity");
+                startActivity(ChooseAgentActivity.class,bundle);
+                break;
+
+
         }
     }
 }

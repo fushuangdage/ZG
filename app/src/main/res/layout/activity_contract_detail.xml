@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.example.admin.zgapplication.ui.activity.ContractDetailActivity">
+
+    <include layout="@layout/action_bar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_room_name"
+                    style="@style/gray_text_14sp"
+                    android:text="朝阳区北京像素北区1号楼1单元1006主卧"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="12sp"
+                    android:text="履行中"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/iv_room"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/tv_room_name"
+                    android:background="@drawable/house_sit"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_tv"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="13dp"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/iv_room"
+                    android:layout_below="@id/tv_room_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textSize="14sp"
+                        android:textColor="@color/gray666"
+                        android:text="BJZG10201020201010"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/gray666"
+                        android:text="2017-03-20至2018-03-19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:textSize="14sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/gray666"
+                        android:text="3000元/月 押一付三"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:background="@color/divider_color"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:padding="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:background="@drawable/user_sit"
+                    android:id="@+id/iv_agent_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="13dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+                <TextView
+                    android:id="@+id/tv_agent_name"
+                    android:layout_toRightOf="@id/iv_agent_icon"
+                    style="@style/gray_text_14sp"
+                    android:text="王戴卫"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toRightOf="@id/iv_agent_icon"
+                    android:textColor="@color/gray666"
+                    android:textSize="12sp"
+                    android:text="链家地产"
+                    android:layout_below="@id/tv_agent_name"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_call"
+                    android:gravity="center"
+                    android:text="拨打电话"
+                    android:textColor="@color/green"
+                    android:background="@drawable/green_border_bg"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="75dp"
+                    android:layout_height="28dp" />
+
+            </RelativeLayout>
+
+            <View
+                android:background="@color/activity_bg"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                style="@style/gray_text_17sp"
+                android:text="合同信息"
+                android:padding="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="@color/divider_color"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <include layout="@layout/three_rent_info_layout" />
+
+            <View
+                android:background="@color/activity_bg"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:padding="13dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/gray_text_17sp"
+                    android:text="房租账单"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="查看全部"
+                    style="@style/light_gray_text_12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View
+                android:background="@color/divider_color"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:padding="13dp"
+                style="@style/gray_text_14sp"
+                android:text="朝阳区北京像素北区1号楼1单元1006主卧"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:paddingLeft="13dp"
+                style="@style/gray_text_14sp"
+                android:textColor="@color/textgray"
+                android:text="第二期账单：2017-06-20至2017-09-20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:padding="13dp"
+                style="@style/gray_text_14sp"
+                android:textColor="@color/textgray"
+                android:text="您有1个账单待支付"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_go_pay"
+                android:background="@drawable/green_border_bg"
+                android:gravity="center"
+                android:text="去支付"
+                android:textColor="@color/green"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="160dp"
+                android:layout_height="40dp" />
+
+            <View
+                android:layout_marginTop="15dp"
+                android:background="@color/activity_bg"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:padding="13dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/gray_text_17sp"
+                    android:text="生活账单"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="查看全部"
+                    style="@style/light_gray_text_12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View
+                android:background="@color/divider_color"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:padding="13dp"
+                style="@style/gray_text_14sp"
+                android:text="朝阳区北京像素北区1号楼1单元1006主卧"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:paddingLeft="13dp"
+                style="@style/gray_text_14sp"
+                android:textColor="@color/textgray"
+                android:text="账单总额：¥0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:padding="13dp"
+                style="@style/gray_text_14sp"
+                android:textColor="@color/textgray"
+                android:text="您有0个账单待支付"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_pay_record"
+                android:background="@drawable/gray_boder"
+                android:gravity="center"
+                android:text="缴费记录"
+                android:textColor="@color/gray666"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="160dp"
+                android:layout_height="40dp" />
+
+            <View
+                android:layout_marginTop="15dp"
+                android:background="@color/activity_bg"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

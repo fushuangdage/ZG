@@ -1,6 +1,5 @@
 package com.example.admin.zgapplication.ui.activity;
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
@@ -14,43 +13,39 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class EvaluateActivity extends BaseActivity {
+public class IntentDetailActivity extends BaseActivity {
 
-    @BindView(R.id.tv_title)
-    TextView tv_title;
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    private CommonAdapter<String> adapter;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     @Override
     public int setLayout() {
-        return R.layout.activity_evaluate;
+        return R.layout.activity_intent_detail;
     }
 
     @Override
     public void initEvent() {
-        tv_title.setText("评价详情");
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> strings = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add("");
+            strings.add("");
         }
 
-        adapter = new CommonAdapter<String>(this, R.layout.item_evaluate,list) {
+        tv_title.setText("意向记录详情");
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new CommonAdapter<String>(this,R.layout.item_recommend_dami,strings) {
             @Override
             protected void convert(ViewHolder holder, String o, int position) {
 
             }
-        };
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
-        recyclerView.setAdapter(adapter);
-
+        });
     }
 
     @Override
     public void initData() {
 
     }
-
 }

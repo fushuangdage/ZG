@@ -31,13 +31,13 @@ public abstract class BaseSupportFragment  extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mRootView = inflater.inflate(setLayout(), container, false);
         mUnbinder = ButterKnife.bind(this, mRootView);
-        EventBus.getDefault().register(this);
         mActivity = getActivity();
         return mRootView;
     }

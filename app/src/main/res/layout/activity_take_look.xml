@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/activity_bg"
+    tools:context="com.example.admin.zgapplication.ui.activity.TakeLookActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        >
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/return_gray"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_centerInParent="true"
+            android:text="预约带看"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/item_recommend_house" />
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:text="完善带看信息"
+        style="@style/gray_text_17sp"
+        android:padding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:padding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/gray_text_13sp"
+            android:text="联系人"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:hint="必选"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <LinearLayout
+        android:padding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/gray_text_13sp"
+            android:text="联系电话"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:hint="15811111111"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <LinearLayout
+        android:padding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/gray_text_13sp"
+            android:text="期望带看时间"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="请选择带看时间"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:text="带看经纪人"
+        style="@style/gray_text_17sp"
+        android:padding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_agent_icon"
+            android:background="@drawable/user_sit"
+            android:layout_marginRight="15dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        
+        <TextView
+            style="@style/gray_text_15sp"
+            android:text="王代伟"
+            android:id="@+id/tv_agent_name"
+            android:layout_toRightOf="@id/iv_agent_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="链家地产"
+            android:id="@+id/tv_agent_company"
+            android:layout_toRightOf="@id/iv_agent_icon"
+            android:layout_below="@id/tv_agent_name"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    
+    <TextView
+        android:id="@+id/tv_submit_look"
+        android:background="@color/green"
+        android:text="提交约看"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="43dp" />
+
+</LinearLayout>
