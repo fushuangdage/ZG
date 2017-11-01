@@ -65,6 +65,7 @@ public class ChooseAgentActivity extends BaseActivity {
                     view.findViewById(R.id.iv_chat).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            // TODO: 2017/11/1 跳转到单聊
 
                         }
                     });

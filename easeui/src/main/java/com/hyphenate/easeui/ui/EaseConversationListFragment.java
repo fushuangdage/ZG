@@ -44,7 +44,7 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     protected ImageButton clearSearch;
     protected boolean hidden;
     protected List<EMConversation> conversationList = new ArrayList<EMConversation>();
-    protected EaseConversationList conversationListView;
+    public EaseConversationList conversationListView;
     protected FrameLayout errorItemContainer;
 
     protected boolean isConflict;

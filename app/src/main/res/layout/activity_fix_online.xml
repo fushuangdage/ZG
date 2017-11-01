@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.admin.zgapplication.ui.activity.FixOnlineActivity">
+
+    <include layout="@layout/action_bar_tv_right" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="合同编号"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/light_gray_text_12sp"
+            android:text="BJZG10201020201010"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="入住公寓"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/light_gray_text_12sp"
+            android:text="朝阳区北京像素北区1号楼1单元1006主卧"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="联系人"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/light_gray_text_12sp"
+            android:text="必填"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="联系电话"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/light_gray_text_12sp"
+            android:text="15800000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:layout_weight="1"
+            android:text="可上门时间"
+            style="@style/gray_text_14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/light_gray_text_12sp"
+            android:text="请选择带看时间  "
+            android:drawableRight="@drawable/right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+       android:paddingLeft="15dp"
+       android:background="@color/activity_bg"
+       android:text="故障描述"
+       android:textSize="16sp"
+       android:gravity="center_vertical"
+       android:textColor="@color/textgray"
+       android:layout_width="match_parent"
+       android:layout_height="38dp" />
+
+    <EditText
+        android:background="@color/white"
+        android:padding="10dp"
+        android:hint="请简单描述故障详情，便于公寓方维修"
+        android:textSize="12sp"
+        android:gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="126dp" />
+
+    <View
+        android:layout_weight="1"
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+</LinearLayout>

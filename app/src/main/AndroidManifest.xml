@@ -257,7 +257,11 @@
         <activity android:name=".ui.activity.MyDiscountActivity" />
         <activity android:name=".ui.activity.MyContractActivity" />
         <activity android:name=".ui.activity.ContractDetailActivity" />
-        <activity android:name=".ui.activity.BillDetailActivity"></activity>
+        <activity android:name=".ui.activity.BillDetailActivity" />
+        <activity android:name=".ui.activity.FollowUpPayResultActivity" />
+        <activity android:name=".ui.activity.RentBillListActivity" />
+        <activity android:name=".ui.activity.FixOnlineActivity" />
+        <activity android:name=".ui.activity.EaseConversationListActivity"></activity>
     </application>
 
 </manifest>

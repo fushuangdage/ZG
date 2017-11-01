@@ -2,6 +2,7 @@ package com.example.admin.zgapplication.ui.activity;
 
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -11,6 +12,8 @@ import com.example.admin.zgapplication.base.MVPBaseActivity;
 import com.example.admin.zgapplication.mvp.presenter.HomePresenter;
 import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,6 +32,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
     @BindView(R.id.home_navigationView)
     NavigationView navigationView;
+
+
 
 
     private HomeFindHouseFragment houseFragment;
@@ -75,12 +80,27 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
     @Override
     public void initData() {
+        EMClient.getInstance().login("fs123", "123456", new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                Log.d("888888888888888888888", "onSuccess: 登陆成功");
+            }
 
+            @Override
+            public void onError(int i, String s) {
+                Log.d("888888888888888888888", "onError: "+s);
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
     }
 
 
 
-    @OnClick({R.id.home_find})
+    @OnClick({R.id.home_find,R.id.home_message})
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.home_find:
@@ -111,7 +131,9 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
             case R.id.ll_shopping_car:
                 startActivity(ShopCarActivity.class);
                 break;
-
+            case R.id.home_message:
+                startActivity(EaseConversationListActivity.class);
+                break;
         }
     }
 

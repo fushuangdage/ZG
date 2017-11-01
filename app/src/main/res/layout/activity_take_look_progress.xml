@@ -170,7 +170,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="30dp"
-            android:background="@drawable/gray_boder"
+            android:background="@drawable/gray_circle_boder"
             android:layout_width="83dp"
             android:layout_height="30dp" />
     </RelativeLayout>

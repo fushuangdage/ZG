@@ -39,7 +39,12 @@ public class MyContractActivity extends BaseActivity implements MultiItemTypeAda
         adapter = new CommonAdapter<String>(this, R.layout.item_my_contract_list, strings) {
             @Override
             protected void convert(ViewHolder holder, String o, int position) {
-
+                holder.getView(R.id.tv_fix_online).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(FixOnlineActivity.class);
+                    }
+                });
             }
         };
         recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));

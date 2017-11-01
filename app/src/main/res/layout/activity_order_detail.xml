@@ -482,7 +482,7 @@
         <TextView
             android:visibility="gone"
             android:layout_marginRight="10dp"
-            android:background="@drawable/gray_boder"
+            android:background="@drawable/gray_circle_boder"
             android:layout_alignParentRight="true"
             android:id="@+id/tv_del"
             android:text="删除"

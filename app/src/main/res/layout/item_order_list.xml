@@ -126,7 +126,7 @@
             android:textSize="14sp"
             android:textColor="@color/gray666"
             android:text="朋友代付"
-            android:background="@drawable/gray_boder"
+            android:background="@drawable/gray_circle_boder"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/tv_go_pay"
             android:gravity="center"

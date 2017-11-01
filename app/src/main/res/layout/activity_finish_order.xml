@@ -360,7 +360,7 @@
 
         <TextView
             android:layout_marginRight="10dp"
-            android:background="@drawable/gray_boder"
+            android:background="@drawable/gray_circle_boder"
             android:layout_toLeftOf="@id/tv_evaluate"
             android:id="@+id/tv_price_detail"
             android:text="价格明细"
