@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -103,7 +104,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         EMConversation conversation = getItem(position);
         // get username or group id
         String username = conversation.conversationId();
-        
+
         if (conversation.getType() == EMConversationType.GroupChat) {
             String groupId = conversation.conversationId();
             if(EaseAtMessageHelper.get().hasAtMeMsg(groupId)){
@@ -121,8 +122,19 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : username);
             holder.motioned.setVisibility(View.GONE);
         }else {
-            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
-            EaseUserUtils.setUserNick(username, holder.name);
+            // TODO: 2017/11/2 修改会话列表昵称和头像的加载方式
+            EMMessage lastMsg = conversation.getLastMessage();
+            String nickName = lastMsg.getStringAttribute("nickName", "未获取");
+            String headImg = lastMsg.getStringAttribute("headImageUrl",null);
+            try {
+                Glide.with(getContext()).load(headImg).into(holder.avatar);
+            } catch (Exception e) {
+                //use default avatar
+                Glide.with(getContext()).load(R.drawable.ease_default_avatar).into(holder.avatar);
+            }
+
+//            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
+            EaseUserUtils.setUserNick(nickName, holder.name);
             holder.motioned.setVisibility(View.GONE);
         }
 

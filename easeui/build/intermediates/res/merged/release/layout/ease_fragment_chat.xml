@@ -4,13 +4,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="#f2f0eb" >
+    android:background="#e9e9e9" >
 
-    <com.hyphenate.easeui.widget.EaseTitleBar
+    <RelativeLayout
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        hyphenate:titleBarLeftImage="@drawable/ease_mm_title_back" />
+        android:layout_height="53dp"
+        android:background="#f6f6f7"
+        >
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/return_gray"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_centerInParent="true"
+            android:text="标题"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

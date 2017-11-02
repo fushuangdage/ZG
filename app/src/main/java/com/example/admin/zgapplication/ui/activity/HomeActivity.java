@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.Manifest;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.util.Log;
@@ -14,9 +15,12 @@ import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 
 public class HomeActivity extends MVPBaseActivity<HomePresenter> implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
@@ -80,7 +84,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
     @Override
     public void initData() {
-        EMClient.getInstance().login("fs123", "123456", new EMCallBack() {
+        EMClient.getInstance().login("954c8d7dd5367d0cd5b1d6d740c88e82u", "66cefbd4ccb8e9a3b4f80f22aa5be0f1", new EMCallBack() {
+//        EMClient.getInstance().login("fushuang", "123456", new EMCallBack() {
             @Override
             public void onSuccess() {
                 Log.d("888888888888888888888", "onSuccess: 登陆成功");
@@ -93,6 +98,26 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
             @Override
             public void onProgress(int i, String s) {
+
+            }
+        });
+
+        RxPermissions rxPermissions = new RxPermissions(this);
+        String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SET_DEBUG_APP,
+                Manifest.permission.SYSTEM_ALERT_WINDOW,
+                Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.WRITE_APN_SETTINGS,
+                Manifest.permission.RECORD_AUDIO};
+
+        rxPermissions.request(mPermissionList).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
 
             }
         });

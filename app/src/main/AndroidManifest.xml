@@ -48,7 +48,7 @@
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1191161025178239#zg" />
+            android:value="zhagenim#fangdami" />
         <!-- 声明SDK所需的service SDK核心功能 -->
 
         <meta-data
@@ -234,7 +234,13 @@
         </activity>
         <activity android:name=".ui.activity.WaitCrabActivity" />
         <activity android:name=".ui.activity.GrabListActivity" />
-        <activity android:name=".ui.activity.AgentActivity" />
+        <activity android:name=".ui.activity.AgentActivity" >
+            <intent-filter>
+                <action android:name="com.fs.agentActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ui.activity.EvaluateShowActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.HouseDetailActivity" />

@@ -41,6 +41,9 @@
     <color name="list_itease_primary_color">#000</color>
     <color name="list_itease_secondary_color">#888888</color>
     <color name="orange">#FFA500</color>
+    <color name="recall_black">#61212121</color>
+    <color name="recall_black_38">#89ffffff</color>
+    <color name="recall_white_54">#89ffffff</color>
     <color name="top_bar_normal_bg">#00acff</color>
     <color name="voip_interface_text_color">#bababa</color>
     <declare-styleable name="EaseChatExtendMenu"><attr format="integer" name="numColumns"/></declare-styleable>
@@ -73,6 +76,12 @@
     <dimen name="image_thumbnail_spacing">1dp</dimen>
     <dimen name="margin_chat_activity">5dp</dimen>
     <dimen name="padding_search_bar">5dp</dimen>
+    <dimen name="recall_dimen">8dp</dimen>
+    <dimen name="recall_dimen_256">256dp</dimen>
+    <dimen name="recall_dimen_4">4dp</dimen>
+    <dimen name="recall_dimen_bg">2dp</dimen>
+    <dimen name="recall_size_12">12sp</dimen>
+    <dimen name="recall_size_8">8sp</dimen>
     <dimen name="sidebar_text_size">10dp</dimen>
     <dimen name="size_avatar">48dp</dimen>
     <string name="Add_a_button_was_clicked">Add a button was clicked</string>
@@ -190,6 +199,7 @@
     <string name="all_members">All members</string>
     <string name="answer">Answer</string>
     <string name="are_empty_group_of_news">Clearing messages</string>
+    <string name="attach_company">公司</string>
     <string name="attach_file">File</string>
     <string name="attach_location">Location</string>
     <string name="attach_picture">Image</string>
@@ -405,16 +415,16 @@
     <style name="HeadScale" parent="android:Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/AnimHead</item>
         <item name="android:windowFrame">@null</item>
-        <!-- 边框 -->
+        
         <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
+        
         <item name="android:windowIsTranslucent">true</item>
-        <!-- 半透明 -->
+        
         <item name="android:windowNoTitle">true</item>
-        <!-- 无标题 -->
+        
         <item name="android:windowBackground">@android:color/black</item>
         <item name="android:backgroundDimEnabled">false</item>
-        <!-- 模糊 -->
+        
     </style>
     <style name="MyAlertDialog" parent="android:Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -435,32 +445,32 @@
     <style name="MyDialogStyleBottom" parent="android:Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/AnimBottom</item>
         <item name="android:windowFrame">@null</item>
-        <!-- 边框 -->
+        
         <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
+        
         <item name="android:windowIsTranslucent">true</item>
-        <!-- 半透明 -->
+        
         <item name="android:windowNoTitle">true</item>
-        <!-- 无标题 -->
+        
         <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- 背景透明 -->
+        
         <item name="android:backgroundDimEnabled">true</item>
-        <!-- 模糊 -->
+        
     </style>
     <style name="MyDialogStyleTop" parent="android:Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/AnimTop2</item>
         <item name="android:windowFrame">@null</item>
-        <!-- 边框 -->
+        
         <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
+        
         <item name="android:windowIsTranslucent">true</item>
-        <!-- 半透明 -->
+        
         <item name="android:windowNoTitle">true</item>
-        <!-- 无标题 -->
+        
         <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- 背景透明 -->
+        
         <item name="android:backgroundDimEnabled">false</item>
-        <!-- 模糊 -->
+        
     </style>
     <style name="bottom_line_edit_text_style" parent="@android:style/Widget.EditText">
         <item name="android:gravity">center_vertical</item>

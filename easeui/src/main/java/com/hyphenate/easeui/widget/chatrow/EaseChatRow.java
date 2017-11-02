@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
@@ -121,14 +122,20 @@ public abstract class EaseChatRow extends LinearLayout {
                 }
             }
         }
-        //set nickname and avatar
-        if(message.direct() == Direct.SEND){
-            EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
-        }else{
-            EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
-            EaseUserUtils.setUserNick(message.getFrom(), usernickView);
+        if(userAvatarView != null) {
+            //set nickname and avatar
+            if (message.direct() == Direct.SEND) {
+//                EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
+                String headImageUrl = message.getStringAttribute("headImageUrl","https://www.baidu.com/img/bd_logo1.png");
+                Glide.with(getContext()).load(headImageUrl).into(userAvatarView);
+            } else {
+                // TODO: 2017/11/2 修改聊天界面里面的用户头像和昵称
+//                EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
+                String headImageUrl = message.getStringAttribute("headImageUrl","https://www.baidu.com/img/bd_logo1.png");
+                Glide.with(getContext()).load(headImageUrl).into(userAvatarView);
+                EaseUserUtils.setUserNick(message.getFrom(), usernickView);
+            }
         }
-        
         if(deliveredView != null){
             if (message.isDelivered()) {
                 deliveredView.setVisibility(View.VISIBLE);

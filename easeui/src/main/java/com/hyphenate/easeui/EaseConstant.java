@@ -17,6 +17,8 @@ public class EaseConstant {
     public static final String MESSAGE_ATTR_IS_VOICE_CALL = "is_voice_call";
     public static final String MESSAGE_ATTR_IS_VIDEO_CALL = "is_video_call";
     
+    public static final String MESSAGE_TYPE_RECALL = "message_recall";
+    
     public static final String MESSAGE_ATTR_IS_BIG_EXPRESSION = "em_is_big_expression";
     public static final String MESSAGE_ATTR_EXPRESSION_ID = "em_expression_id";
     
@@ -31,4 +33,7 @@ public class EaseConstant {
     
     public static final String EXTRA_CHAT_TYPE = "chatType";
     public static final String EXTRA_USER_ID = "userId";
+
+    public static final String NICK_NAME="nickName";
+    public static final String HEADIMAGEURL="headImageUrl";
 }

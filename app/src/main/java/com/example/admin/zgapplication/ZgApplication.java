@@ -40,7 +40,6 @@ public class ZgApplication extends Application {
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
 
         UMShareAPI.get(this);
-
         SDKInitializer.initialize(this);
     }
 }

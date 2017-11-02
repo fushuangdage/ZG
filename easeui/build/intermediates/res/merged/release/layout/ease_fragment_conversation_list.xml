@@ -6,15 +6,47 @@
     android:background="@color/common_bg"
     android:orientation="vertical">
 
-	<com.hyphenate.easeui.widget.EaseTitleBar 
-	    android:id="@+id/title_bar"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    hyphenate:titleBarTitle="@string/session"
-	    />
+	<!--<com.hyphenate.easeui.widget.EaseTitleBar -->
+	    <!--android:id="@+id/title_bar"-->
+	    <!--android:layout_width="match_parent"-->
+	    <!--android:layout_height="wrap_content"-->
+	    <!--hyphenate:titleBarTitle="@string/session"-->
+	    <!--/>-->
     
-    <include layout="@layout/ease_search_bar" />
-    
+    <!--<include layout="@layout/ease_search_bar" />-->
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="53dp"
+		android:background="#F6F6F7"
+		>
+
+		<ImageView
+			android:id="@+id/iv_left"
+			android:layout_marginLeft="20dp"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			android:src="@drawable/return_gray"
+			android:layout_width="20dp"
+			android:layout_height="20dp" />
+
+		<TextView
+			android:id="@+id/tv_title"
+			android:layout_centerInParent="true"
+			android:text="标题"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageView
+			android:id="@+id/iv_right"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:layout_marginRight="20dp"
+			android:layout_width="20dp"
+			android:layout_height="20dp" />
+
+	</RelativeLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
