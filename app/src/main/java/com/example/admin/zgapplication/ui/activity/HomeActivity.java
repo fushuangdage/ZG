@@ -3,7 +3,9 @@ package com.example.admin.zgapplication.ui.activity;
 import android.Manifest;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -37,6 +39,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     @BindView(R.id.home_navigationView)
     NavigationView navigationView;
 
+    @BindView(R.id.home_drawer)
+    DrawerLayout drawerLayout;
 
 
 
@@ -125,9 +129,12 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
 
 
-    @OnClick({R.id.home_find,R.id.home_message})
+    @OnClick({R.id.home_find,R.id.home_message,R.id.mine})
     public void onClick(View view){
         switch (view.getId()) {
+            case R.id.mine:
+                drawerLayout.openDrawer(Gravity.LEFT);
+                break;
             case R.id.home_find:
                 startActivity(SearchActivity.class);
                 break;

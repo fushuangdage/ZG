@@ -91,13 +91,14 @@
                     android:background="#999" />
 
                 <TextView
+                    android:id="@+id/tv_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="20dp"
                     android:drawableRight="@drawable/choose"
                     android:gravity="center"
-                    android:text="筛选"
+                    android:text="筛选 "
                     android:textColor="#666E70"
                     android:textSize="12sp" />
 
@@ -123,8 +124,8 @@
             android:padding="10dp">
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/green_corner_bg"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_green_button_press_bg"
                 android:gravity="center"
                 android:text="呼叫经纪人"
                 android:textColor="@color/white"

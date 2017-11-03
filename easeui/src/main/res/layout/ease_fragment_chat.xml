@@ -25,7 +25,8 @@
         <TextView
             android:id="@+id/tv_title"
             android:layout_centerInParent="true"
-            android:text="标题"
+            android:textSize="18sp"
+            android:textColor="#2a2e32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMConversationListener;
@@ -36,7 +37,7 @@ import java.util.Map;
 public class EaseConversationListFragment extends EaseBaseFragment{
 	private final static int MSG_REFRESH = 2;
 //    protected EditText query;
-//    protected ImageButton clearSearch;
+    protected ImageButton clearSearch;
     protected boolean hidden;
     protected List<EMConversation> conversationList = new ArrayList<EMConversation>();
     protected EaseConversationList conversationListView;
@@ -69,6 +70,12 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     protected void initView() {
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         conversationListView = (EaseConversationList) getView().findViewById(R.id.list);
+        getView().findViewById(R.id.iv_left).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 //        query = (EditText) getView().findViewById(R.id.query);
         // button to clear content in search bar
 //        clearSearch = (ImageButton) getView().findViewById(R.id.search_clear);

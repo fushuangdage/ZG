@@ -11,11 +11,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseSupportFragment;
 import com.example.admin.zgapplication.ui.activity.WaitCrabActivity;
 import com.example.admin.zgapplication.ui.adapter.HomePositionAdapter;
+import com.example.admin.zgapplication.ui.view.HouseFilterDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,8 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     LinearLayout ll_float;
     @BindView(R.id.home_progress)
     View home_progress;
-
+    @BindView(R.id.tv_filter)
+    TextView tv_filter;
 
 
     @Override
@@ -54,7 +57,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                 return true;
             }
         });
-
+        tv_filter.setOnClickListener(this);
 
 
         List<String> strings = new ArrayList<>();
@@ -86,6 +89,10 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
         switch (v.getId()) {
             case R.id.home_progress:
                 startActivity(new Intent(getActivity(),WaitCrabActivity.class));
+                break;
+            case R.id.tv_filter:
+                HouseFilterDialog dialog = new HouseFilterDialog(getContext(),R.style.translucent_dialog);
+                dialog.show();
                 break;
         }
     }

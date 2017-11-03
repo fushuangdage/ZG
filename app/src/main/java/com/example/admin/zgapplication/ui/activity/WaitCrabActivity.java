@@ -55,7 +55,7 @@ public class WaitCrabActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-
+        ViewCompat.setAlpha(mask_view, 0);
         recommendDamiFragment = new RecommendDamiFragment();
         recommendHouseFragment = new RecommendHouseFragment();
 
@@ -74,6 +74,8 @@ public class WaitCrabActivity extends BaseActivity {
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
                 ViewCompat.setAlpha(mask_view, slideOffset);
+//                mask_view.getBackground().setAlpha((int) (slideOffset*100));
+//                Log.d("66666666", "onSlide: "+slideOffset);
             }
         });
 

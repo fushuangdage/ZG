@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/top_arc_bottom_rect_white_bg"
+    android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="更多筛选"
+                style="@style/gray_text_14sp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/iv_close"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/close"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+        </RelativeLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="15sp"
+                android:text="价格"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="(元/月)"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_text_show"
+            android:text="￥0 - ¥3000"
+            android:textColor="#b6b6b6"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.admin.zgapplication.ui.view.BidirectionalSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            app:ball_left_solid_color="@android:color/white"
+            app:ball_left_stroke_color="@android:color/black"
+            app:ball_right_solid_color="@android:color/white"
+            app:ball_right_stroke_color="@android:color/black"
+            app:ball_radius_size="8dp"
+            app:ball_stroke_size="1dp"
+            app:text_left_num="566"
+            app:text_right_num="820"
+            app:text_min_unit="1"
+            app:pb_height="3dp"
+            app:pb_within_color="@color/lightgreen"
+            app:pb_without_color="@color/gray666"
+            />
+
+
+        <TextView
+            android:text="出租方式"
+            style="@style/light_gray_text_12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tfl_rent_way"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="户型"
+            android:layout_marginLeft="10dp"
+            style="@style/light_gray_text_12sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tfl_house_type"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        
+        <Button
+            android:layout_marginTop="20dp"
+            android:background="@color/lightgreen"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:text="确定"
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+
+
+</LinearLayout>
