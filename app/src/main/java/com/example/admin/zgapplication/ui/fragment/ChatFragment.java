@@ -20,7 +20,6 @@ public class ChatFragment extends EaseChatFragment {
         setChatFragmentHelper(new EaseChatFragmentHelper() {
             @Override
             public void onSetMessageAttributes(EMMessage message) {
-
             }
 
             @Override

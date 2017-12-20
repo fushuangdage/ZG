@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,8 +35,14 @@ public class FlowLayout extends ViewGroup {
         postInvalidate();
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
+
     public FlowLayout(Context context) {
         super(context,null);
+
     }
 
     public FlowLayout(Context context, AttributeSet attrs) {
@@ -97,6 +104,5 @@ public class FlowLayout extends ViewGroup {
         }
 
     }
-
 
 }

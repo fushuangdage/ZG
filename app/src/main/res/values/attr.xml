@@ -14,6 +14,12 @@
         <attr name="h_pro_step" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="CustomProgressView">
+        <attr name="draw_gray_bg" format="boolean" />
+        <attr name="draw_center_pic"  format="boolean"/>
+        <attr name="clock_wise"  format="boolean"/>
+    </declare-styleable>
+
     <declare-styleable name="StartBar">
         <attr name="can_start" format="boolean" />
     </declare-styleable>
@@ -54,5 +60,13 @@
         <attr name="text_units" format="string"/>
         <attr name="ball_left_drawable" format="reference"/>
         <attr name="ball_right_drawable" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="MessageBubble">
+        <attr name="radius" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="circleColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="number" format="string"/>
     </declare-styleable>
 </resources>

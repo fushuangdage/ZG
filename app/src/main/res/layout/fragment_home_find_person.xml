@@ -42,6 +42,7 @@
                 android:id="@+id/home_progress"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="240dp"
+                app:clock_wise="true"
                 android:layout_width="64dp"
                 android:layout_height="64dp" />
 

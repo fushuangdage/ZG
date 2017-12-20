@@ -41,7 +41,6 @@ public class MyScrollBehavior extends CoordinatorLayout.Behavior<View> {
     public boolean onTouchEvent(CoordinatorLayout parent, View child, MotionEvent ev) {
         Log.d("6666666666", "onTouchEvent: "+ev.getRawX());
 
-
         return true;
     }
 

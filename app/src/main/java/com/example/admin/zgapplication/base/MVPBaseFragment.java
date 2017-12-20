@@ -8,14 +8,14 @@ import android.support.annotation.Nullable;
 /**
  * Created by admin on 2016/11/1.
  */
-public abstract class MVPBaseFragment<T extends MVPBasePresenter<IBaseView>> extends BaseFragment {
+public abstract class MVPBaseFragment<T extends MVPBasePresenter<BaseContract.View,BaseContract.Model>> extends BaseFragment {
     protected MVPBasePresenter mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mPresenter = createPresenter();
-        if (mPresenter != null && this instanceof IBaseView) {
-            mPresenter.attach((IBaseView) this);
+        if (mPresenter != null && this instanceof BaseContract.View) {
+            mPresenter.attach((BaseContract.View) this);
         }
         super.onCreate(savedInstanceState);
 

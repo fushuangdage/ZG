@@ -49,6 +49,8 @@
         <com.example.admin.zgapplication.ui.view.CustomProgressView
             android:id="@+id/progress_bar"
             android:layout_centerHorizontal="true"
+            app:draw_center_pic="true"
+            app:draw_gray_bg="true"
             android:layout_marginTop="100dp"
             android:layout_width="70dp"
             android:layout_height="70dp" />

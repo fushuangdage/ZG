@@ -40,12 +40,14 @@ public class TimeUtil {
     /**
      * 时间日期格式化到年月日.
      */
-    public static String dateFormatYMD = "yyyy-MM-dd";
+    public static String dateFormatYMD = "yyyy.MM.dd";
 
     /**
      * 时间日期格式化到年月日时分.中文显示
      */
     public static String dateFormatYMDHMofChinese = "yyyy年MM月dd日 HH:mm";
+
+
 
     /**
      * 时间日期格式化到年月日.中文显示

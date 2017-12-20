@@ -47,6 +47,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.check(R.id.rb_home);
 
+
+
     }
 
     @Override

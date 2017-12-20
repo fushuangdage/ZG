@@ -59,10 +59,7 @@ public class CompanyHouseFragment extends BaseSupportFragment {
     @Override
     protected void init() {
 
-        strings = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            strings.add("第几条 "+i);
-        }
+
         initRegionPanel();
 
         initRentPanel();
@@ -71,9 +68,7 @@ public class CompanyHouseFragment extends BaseSupportFragment {
 
         initFilterPanel();
 
-        for (int i = 0; i < 10; i++) {
-            strings.add("");
-        }
+
         adapter = new CommonAdapter<String>(getActivity(), R.layout.item_recommend_house, strings) {
             @Override
             protected void convert(ViewHolder holder, String o, int position) {

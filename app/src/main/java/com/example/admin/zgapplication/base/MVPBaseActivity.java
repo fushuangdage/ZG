@@ -13,8 +13,8 @@ public abstract class MVPBaseActivity<T extends MVPBasePresenter> extends BaseAc
     @Override
     public void onCreate(Bundle savedInstanceState) {
         mPresenter = createPresenter();
-        if (mPresenter != null && this instanceof IBaseView) {
-            mPresenter.attach((IBaseView) this);
+        if (mPresenter != null && this instanceof BaseContract.View) {
+            mPresenter.attach((BaseContract.View) this);
         }
         super.onCreate(savedInstanceState);
     }

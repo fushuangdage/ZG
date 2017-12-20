@@ -2,6 +2,9 @@ package com.example.admin.zgapplication.ui.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +14,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+
+import com.example.admin.zgapplication.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +39,10 @@ public class CustomProgressView extends View{
     private RectF rectF;
     private SimpleDateFormat simpleDateFormat;
     private Date date;
+    private boolean isCountDown;
+    private boolean drawGrayBg;
+    private boolean drawCenterPic;
+    private Bitmap runBitmap;
 
 
     public float getProgress() {
@@ -50,12 +59,18 @@ public class CustomProgressView extends View{
 
     public CustomProgressView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CustomProgressView);
+        isCountDown = ta.getBoolean(R.styleable.CustomProgressView_clock_wise, false);
+        drawGrayBg = ta.getBoolean(R.styleable.CustomProgressView_draw_gray_bg, false);
+        drawCenterPic = ta.getBoolean(R.styleable.CustomProgressView_draw_center_pic, false);
+        init(context);
+
     }
 
-    private void init() {
+    private void init(Context context) {
         mTextPaint = new TextPaint();
         mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint.setStyle(Paint.Style.STROKE);
         mTextPaint.setAntiAlias(true);
         mCirclePaint = new Paint();
         mCirclePaint.setStyle(Paint.Style.STROKE);
@@ -67,7 +82,14 @@ public class CustomProgressView extends View{
         bgPaint.setAntiAlias(true);
         bgPaint.setStyle(Paint.Style.FILL);
         simpleDateFormat = new SimpleDateFormat("mm:ss");
-        start();
+        if (drawCenterPic){
+            runBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.person_run);
+        }
+        if (isCountDown){
+            startReversal();
+        }else {
+            start();
+        }
     }
 
     @Override
@@ -87,16 +109,65 @@ public class CustomProgressView extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         mTextPaint.setColor(Color.parseColor("#4dad01"));
-        canvas.drawCircle(measuredWidth/2,measuredHeight/2,measuredHeight/2,bgPaint);
-        canvas.drawText(time,0,time.length(),measuredHeight/2, (float) (measuredHeight*0.4),mTextPaint);
-        mTextPaint.setColor(Color.BLACK);
-        canvas.drawText(count,0,count.length(),measuredHeight/2, (float) (measuredHeight*0.7),mTextPaint);
+
+        if (drawGrayBg){
+            mTextPaint.setColor(Color.parseColor("#dddddd"));
+            mTextPaint.setStrokeWidth(5);
+            canvas.drawArc(rectF,0,360,false,mTextPaint);
+        }else {
+            canvas.drawCircle(measuredWidth/2,measuredHeight/2,measuredHeight/2,bgPaint);
+        }
+
+        if (drawCenterPic){
+            canvas.drawBitmap(runBitmap,getMeasuredWidth()/2-runBitmap.getWidth()/2,getMeasuredHeight()/2-runBitmap.getWidth()/2,bgPaint);
+        }else {
+            canvas.drawText(time,0,time.length(),measuredHeight/2, (float) (measuredHeight*0.4),mTextPaint);
+            mTextPaint.setColor(Color.BLACK);
+            canvas.drawText(count,0,count.length(),measuredHeight/2, (float) (measuredHeight*0.7),mTextPaint);
+        }
+
         canvas.drawArc(rectF,-90,360*progress,false,mCirclePaint);
+
     }
 
 
     public void start(){
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                int t=6000;
+//                while (t>0){
+//                    date = new Date(t);
+//                    time = simpleDateFormat.format(CustomProgressView.this.date);
+//                    postInvalidate();
+//                    try {
+//                        Thread.sleep(100);
+//                        t=t-100;
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 60);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                time="00:"+ ((int) value);
+                progress=  (value / 60f);
+                postInvalidate();
+            }
+        });
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.setDuration(60000);
+        valueAnimator.start();
+    }
+
+    public void startReversal(){
 
 //        new Thread(new Runnable() {
 //            @Override
@@ -130,6 +201,7 @@ public class CustomProgressView extends View{
         valueAnimator.setDuration(60000);
         valueAnimator.start();
     }
+
 
 
 }

@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/activity_bg"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:context="com.example.admin.zgapplication.ui.activity.SearchActivity">
 
     <LinearLayout
+        android:background="@color/activity_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="65dp">
 
         <EditText
+            android:id="@+id/et_input"
             android:layout_margin="10dp"
+            android:paddingLeft="10dp"
             android:drawableLeft="@drawable/search"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="@color/ebeced"
             android:layout_height="match_parent" />
 
         <TextView

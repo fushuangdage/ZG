@@ -75,6 +75,7 @@
             android:layout_height="14dp" />
 
         <TextView
+            android:id="@+id/tv_time"
             android:textColor="#666e70"
             android:text="2016.04.11 - 2016.05.20"
             android:textSize="12sp"

@@ -16,6 +16,7 @@
         android:layout_height="wrap_content" />
     
     <com.example.admin.zgapplication.ui.view.BidirectionalSeekBar
+        android:id="@+id/bidirectionalSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -25,8 +26,8 @@
         app:ball_right_stroke_color="@android:color/black"
         app:ball_radius_size="8dp"
         app:ball_stroke_size="1dp"
-        app:text_left_num="566"
-        app:text_right_num="820"
+        app:text_left_num="0"
+        app:text_right_num="3000"
         app:text_min_unit="1"
         app:pb_height="3dp"
         app:pb_within_color="@color/lightgreen"
@@ -39,6 +40,7 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tv_rent_reload"
             android:layout_width="155dp"
             android:layout_height="36dp"
             android:text="重置"
@@ -49,6 +51,7 @@
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/tv_rent_confirm"
             android:layout_width="155dp"
             android:layout_height="36dp"
             android:text="确定"

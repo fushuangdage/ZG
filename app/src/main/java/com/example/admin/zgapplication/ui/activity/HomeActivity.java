@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.example.admin.zgapplication.R;
@@ -43,6 +44,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     DrawerLayout drawerLayout;
 
 
+    @BindView(R.id.home_message)
+    ImageView home_message;
 
     private HomeFindHouseFragment houseFragment;
     private HomeFindPersonFragment personFragment;
@@ -83,6 +86,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         evaluation.setOnClickListener(this);
         order.setOnClickListener(this);
         contact.setOnClickListener(this);
+
     }
 
 
@@ -95,6 +99,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
                 Log.d("888888888888888888888", "onSuccess: 登陆成功");
             }
 
+
             @Override
             public void onError(int i, String s) {
                 Log.d("888888888888888888888", "onError: "+s);
@@ -105,7 +110,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
             }
         });
-
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -125,6 +129,25 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
             }
         });
+
+//      RetrofitHelper.getApi().downLoadMusic()
+//              .compose(RxScheduler.<Dami>defaultScheduler())
+//              .subscribe(new BaseObserver<Dami>(this,mActivity.getClass().getName()) {
+//                  @Override
+//                  public void error(Throwable e) {
+//
+//                  }
+//
+//                  @Override
+//                  public void next(Dami dami) {
+//                      Log.d(TAG, "next: "+dami);
+//                  }
+//
+//                  @Override
+//                  public void complete() {
+//                      Log.d(TAG, "complete: ");
+//                  }
+//              });
     }
 
 

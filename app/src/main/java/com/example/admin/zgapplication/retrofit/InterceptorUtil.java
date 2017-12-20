@@ -17,6 +17,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class InterceptorUtil {
     public static String TAG = "----";
 
+
     //日志拦截器
     public static HttpLoggingInterceptor LogInterceptor() {
         return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
@@ -32,23 +33,59 @@ public class InterceptorUtil {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request oldRequest = chain.request();
+                //在这里你可以做一些想做的事,比如token失效时,重新获取token
+                //或者添加header等等,PS我会在下一篇文章总写拦截token方法
+                HttpUrl.Builder urlBuilder = oldRequest.url()
+                        .newBuilder()
+                        .scheme(oldRequest.url().scheme())
+                        .host(oldRequest.url().host());
+//                        .addQueryParameter("uid", "33");
+//                        .addQueryParameter("showapi_sign", "274e07e744d7457bbc3e6c60682327e2");
 
+                Request newRequest = oldRequest.newBuilder()
+                        .addHeader("Accept-Charset", "UTF-8")
+                        .addHeader("Accept", " application/json")
+                        .addHeader("Content-type", "application/json")
+                        .method(oldRequest.method(), oldRequest.body())
+                        .url(urlBuilder.build())
+                        .build();
+
+                Response response = chain.proceed(newRequest);
+                response.newBuilder()
+                        .removeHeader("Pragma").build();
+                return response;
+            }
+        };
+
+    }
+
+
+    public static Interceptor HeaderInterceptorWithUid() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request oldRequest = chain.request();
                 //在这里你可以做一些想做的事,比如token失效时,重新获取token
                 //或者添加header等等,PS我会在下一篇文章总写拦截token方法
                 HttpUrl.Builder urlBuilder = oldRequest.url()
                         .newBuilder()
                         .scheme(oldRequest.url().scheme())
                         .host(oldRequest.url().host())
-                        .addQueryParameter("showapi_appid", "31490")
-                        .addQueryParameter("showapi_sign", "274e07e744d7457bbc3e6c60682327e2");
+                        .addQueryParameter("uid", "33");
+//                        .addQueryParameter("showapi_sign", "274e07e744d7457bbc3e6c60682327e2");
 
                 Request newRequest = oldRequest.newBuilder()
+                        .addHeader("Accept-Charset", "UTF-8")
+                        .addHeader("Accept", " application/json")
+                        .addHeader("Content-type", "application/json")
                         .method(oldRequest.method(), oldRequest.body())
                         .url(urlBuilder.build())
                         .build();
 
-
-                return chain.proceed(newRequest);
+                Response response = chain.proceed(newRequest);
+                response.newBuilder()
+                        .removeHeader("Pragma").build();
+                return response;
             }
         };
 

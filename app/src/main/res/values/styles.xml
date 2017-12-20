@@ -85,18 +85,22 @@
         <item name="android:textColor">@color/gray666</item>
         <item name="android:textSize">11sp</item>
     </style>
-    
+
     <style name="fiveRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/five_rating_bar</item>
         <item name="android:minHeight">14dip</item>
         <item name="android:maxHeight">14dip</item>
     </style>
-    
+
     <style name="filter_panel_checkbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:button">@null</item>
         <item name="android:textSize">11sp</item>
         <item name="android:background">@drawable/filter_panel_checkbox_selector</item>
         <item name="android:textColor">@drawable/filter_panel_tag_textcolor</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:checked">true</item>
     </style>
 
     <style name="choose_checkbox" parent="Widget.AppCompat.CompoundButton.CheckBox">

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.admin.zgapplication.ui.view.MessageBubbleView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:textSize="7sp"
+    app:number="20"
+    android:layout_alignParentEnd="true"
+    app:radius="7dp"
+    android:layout_width="15dp"
+    android:layout_height="15dp"
+    />

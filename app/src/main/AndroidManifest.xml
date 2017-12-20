@@ -36,6 +36,9 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
+
+
+
     <application
         android:name=".ZgApplication"
         android:allowBackup="true"
@@ -82,7 +85,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.MainActivity" >
+
+        </activity>
         <activity android:name=".ui.activity.SecondActivity" />
         <activity android:name=".ui.activity.ChatActivity" />
         <activity
@@ -267,7 +272,7 @@
         <activity android:name=".ui.activity.FollowUpPayResultActivity" />
         <activity android:name=".ui.activity.RentBillListActivity" />
         <activity android:name=".ui.activity.FixOnlineActivity" />
-        <activity android:name=".ui.activity.EaseConversationListActivity"></activity>
+        <activity android:name=".ui.activity.EaseConversationListActivity" />
     </application>
 
 </manifest>

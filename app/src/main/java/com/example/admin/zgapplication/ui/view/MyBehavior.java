@@ -1,4 +1,4 @@
-package com.example.admin.zgapplication.mvp.module;
+package com.example.admin.zgapplication.ui.view;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;

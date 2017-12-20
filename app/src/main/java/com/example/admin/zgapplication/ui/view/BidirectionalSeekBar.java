@@ -224,6 +224,12 @@ public class BidirectionalSeekBar extends View {
         return paint;
     }
 
+    public void dataReLoad(){
+        text_left_num=0;
+        text_right_num=3000;
+        postInvalidate();
+    }
+
     private void drawWithOut(Canvas canvas) {
             canvas.drawRect(withOutRectF, withOutPaint);
     }
@@ -240,7 +246,6 @@ public class BidirectionalSeekBar extends View {
             canvas.drawCircle(rightBallX, ballY, ball_radius_size, rightBallStrokePaint);
             canvas.drawCircle(rightBallX, ballY, ball_radius_size - ball_stroke_size, rightBallPaint);
         }
-
     }
 
     private void drawLeftCircle(Canvas canvas) {

@@ -43,7 +43,6 @@ public class TakeLookListActivity extends BaseActivity {
 
             }
         });
-
     }
 
     @Override

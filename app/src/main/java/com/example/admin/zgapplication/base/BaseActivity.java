@@ -18,6 +18,9 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.example.admin.zgapplication.mvp.module.BaseResponse;
+import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.retrofit.rx.NetManager;
 import com.example.admin.zgapplication.utils.AppManager;
 import com.example.admin.zgapplication.utils.dialog.LoadingDialog;
 import com.example.admin.zgapplication.utils.system.SystemBarTintManager;
@@ -37,6 +40,9 @@ import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -70,6 +76,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         initEvent();
         //初始化数据
         initData();
+    }
+
+    /**
+     * rx订阅
+     */
+    public  <T extends BaseResponse> void toSubscribe(Observable<T> o, BaseObserver<T> s) {
+
+        o.subscribeOn(Schedulers.io())
+
+                .unsubscribeOn(Schedulers.io())
+
+                .observeOn(AndroidSchedulers.mainThread())
+
+                .subscribe(s);
+
     }
 
     public Activity getmActivity() {
@@ -114,6 +135,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mBind.unbind();//解除ButterKnife绑定
+//        Log.d("22222222222222", "onDestroy12123: "+getClass().getName());
+        NetManager.getInstance().cancelRequests(getClass().getName());
         EventBus.getDefault().unregister(this);//解除EventBus注册
         //从管理堆栈移除Activity
         AppManager.getInstance().finishActivity(this);

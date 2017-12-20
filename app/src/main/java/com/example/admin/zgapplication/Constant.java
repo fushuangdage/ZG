@@ -16,6 +16,7 @@ package com.example.admin.zgapplication;
 import com.hyphenate.easeui.EaseConstant;
 
 public class Constant extends EaseConstant {
+	public static final String SEARCH_HISTORY="search_history";
 	public static final String NEW_FRIENDS_USERNAME = "item_new_friends";
 	public static final String GROUP_USERNAME = "item_groups";
 	public static final String CHAT_ROOM = "item_chatroom";
