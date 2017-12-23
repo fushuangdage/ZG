@@ -60,14 +60,14 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
     @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
 
-    private ArrayList<HouseResourseListBean.DataBean.ListBean> houseList =new ArrayList<>();
+    private ArrayList<HouseResourseListBean.HouseResourseDataBean.ListBean> houseList =new ArrayList<>();
     private ArrayList<String> list=new ArrayList<>();
 
     private PopupWindow region_panel;
     private PopupWindow rent_panel;
     private PopupWindow sort_panel;
     private PopupWindow filter_panel;
-    private CommonAdapter<HouseResourseListBean.DataBean.ListBean> adapter;
+    private CommonAdapter<HouseResourseListBean.HouseResourseDataBean.ListBean> adapter;
     private Integer leftProgress;
     private Integer rightProgress;
     private String order;
@@ -116,9 +116,9 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
             }
         });
 
-        adapter = new CommonAdapter<HouseResourseListBean.DataBean.ListBean>(getActivity(), R.layout.item_recommend_house, houseList) {
+        adapter = new CommonAdapter<HouseResourseListBean.HouseResourseDataBean.ListBean>(getActivity(), R.layout.item_recommend_house, houseList) {
             @Override
-            protected void convert(ViewHolder holder, HouseResourseListBean.DataBean.ListBean bean, int position) {
+            protected void convert(ViewHolder holder, HouseResourseListBean.HouseResourseDataBean.ListBean bean, int position) {
                 Glide.with(mActivity).load(bean.getHouse_photo()).into((ImageView) holder.getView(R.id.iv_house));
                 ((TextView) holder.getView(R.id.tv_house_name)).setText(bean.getHouse_title());
                 ((TextView) holder.getView(R.id.tv_house_location)).setText(bean.getHouse_address());
@@ -170,7 +170,7 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
                 });
     }
 
-    private void  showThreeTag(HouseResourseListBean.DataBean.ListBean bean, LinearLayout ll_tag_container) {
+    private void  showThreeTag(HouseResourseListBean.HouseResourseDataBean.ListBean bean, LinearLayout ll_tag_container) {
         for (int i = 0; i < 3&&bean.getHouse_label()!=null&&bean.getHouse_label().size()>i; i++) {
             TextView childAt = ((TextView) ll_tag_container.getChildAt(i));
             childAt.setVisibility(View.VISIBLE);

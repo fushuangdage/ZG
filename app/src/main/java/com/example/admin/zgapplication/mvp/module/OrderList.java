@@ -6,52 +6,11 @@ import java.util.List;
  * Created by fushuang on 2017/12/18.
  */
 
-public class OrderList  extends BaseResponse{
+public class OrderList extends BaseResponse<OrderList.OrderListDataBean>{
 
+    public static class OrderListDataBean extends BaseResponse.DataBean{
 
-    /**
-     * msg : 操作成功
-     * code : 0
-     * data : {"list":[{"id":"1259","company_name":"青年公寓","agent":"李琦","status":"待支付","pay_type":"押1付3、501","house_photo":"http://zy.zhagen.com/uploads/images/20171204/15123736509c30f665e9326c8b.jpg","house_title":"青年公寓回龙观小区103号楼-501","address":"回龙观小区","rent_money":"2300.00","label":["可以养宠物","全新墙纸","阳台视野广阔"],"payment":"3831.20"},{"id":"1083","company_name":"爱家公寓","agent":"福","status":"待支付","pay_type":"押0付3、8888","house_photo":"http://zy.zhagen.com/uploads/images/20171113/15105517505b6ea9d1e6242380.jpg","house_title":"爱家公寓凯泰大厦10号楼-8888","address":"凯泰大厦","rent_money":"80000.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"368000.00"},{"id":"1082","company_name":"爱家公寓","agent":"福","status":"待支付","pay_type":"押0付3、8888","house_photo":"http://zy.zhagen.com/uploads/images/20171113/15105517505b6ea9d1e6242380.jpg","house_title":"爱家公寓凯泰大厦10号楼-8888","address":"凯泰大厦","rent_money":"80000.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"368000.00"},{"id":"1081","company_name":"爱家公寓","agent":"福","status":"待支付","pay_type":"押0付3、8888","house_photo":"http://zy.zhagen.com/uploads/images/20171113/15105517505b6ea9d1e6242380.jpg","house_title":"爱家公寓凯泰大厦10号楼-8888","address":"凯泰大厦","rent_money":"80000.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"368000.00"},{"id":"962","company_name":"扎根公寓","agent":"张三-扎根公寓","status":"待支付","pay_type":"押1付3、401","house_photo":"http://zy.zhagen.com/uploads/images/20171119/1511059914f9c6ba1bac0893ab.jpg","house_title":"扎根公寓小关北里A座2号楼-401","address":"小关北里","rent_money":"3500.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"17500.00"}],"page":"1","sum_page":3}
-     */
-
-    private DataBean data;
-
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public static class DataBean {
-        /**
-         * list : [{"id":"1259","company_name":"青年公寓","agent":"李琦","status":"待支付","pay_type":"押1付3、501","house_photo":"http://zy.zhagen.com/uploads/images/20171204/15123736509c30f665e9326c8b.jpg","house_title":"青年公寓回龙观小区103号楼-501","address":"回龙观小区","rent_money":"2300.00","label":["可以养宠物","全新墙纸","阳台视野广阔"],"payment":"3831.20"},{"id":"1083","company_name":"爱家公寓","agent":"福","status":"待支付","pay_type":"押0付3、8888","house_photo":"http://zy.zhagen.com/uploads/images/20171113/15105517505b6ea9d1e6242380.jpg","house_title":"爱家公寓凯泰大厦10号楼-8888","address":"凯泰大厦","rent_money":"80000.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"368000.00"},{"id":"1082","company_name":"爱家公寓","agent":"福","status":"待支付","pay_type":"押0付3、8888","house_photo":"http://zy.zhagen.com/uploads/images/20171113/15105517505b6ea9d1e6242380.jpg","house_title":"爱家公寓凯泰大厦10号楼-8888","address":"凯泰大厦","rent_money":"80000.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"368000.00"},{"id":"1081","company_name":"爱家公寓","agent":"福","status":"待支付","pay_type":"押0付3、8888","house_photo":"http://zy.zhagen.com/uploads/images/20171113/15105517505b6ea9d1e6242380.jpg","house_title":"爱家公寓凯泰大厦10号楼-8888","address":"凯泰大厦","rent_money":"80000.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"368000.00"},{"id":"962","company_name":"扎根公寓","agent":"张三-扎根公寓","status":"待支付","pay_type":"押1付3、401","house_photo":"http://zy.zhagen.com/uploads/images/20171119/1511059914f9c6ba1bac0893ab.jpg","house_title":"扎根公寓小关北里A座2号楼-401","address":"小关北里","rent_money":"3500.00","label":["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"],"payment":"17500.00"}]
-         * page : 1
-         * sum_page : 3
-         */
-
-        private String page;
-        private int sum_page;
         private List<ListBean> list;
-
-        public String getPage() {
-            return page;
-        }
-
-        public void setPage(String page) {
-            this.page = page;
-        }
-
-        public int getSum_page() {
-            return sum_page;
-        }
-
-        public void setSum_page(int sum_page) {
-            this.sum_page = sum_page;
-        }
 
         public List<ListBean> getList() {
             return list;
@@ -63,20 +22,20 @@ public class OrderList  extends BaseResponse{
 
         public static class ListBean {
             /**
-             * id : 1259
-             * company_name : 青年公寓
-             * agent : 李琦
-             * status : 待支付
-             * pay_type : 押1付3、501
-             * house_photo : http://zy.zhagen.com/uploads/images/20171204/15123736509c30f665e9326c8b.jpg
-             * house_title : 青年公寓回龙观小区103号楼-501
-             * address : 回龙观小区
-             * rent_money : 2300.00
-             * label : ["可以养宠物","全新墙纸","阳台视野广阔"]
-             * payment : 3831.20
+             * order_id : 1336
+             * company_name : 链家公寓
+             * agent : 李四-链家公寓
+             * status : 待付款
+             * pay_type : 押1付3、55
+             * house_photo : http://zy.zhagen.com/uploads/images/20171116/1510835458dfe72487a81924e3.jpg
+             * house_title : 链家公寓韩家胡同102号楼-55
+             * address : 韩家胡同
+             * rent_money : 7000
+             * label : []
+             * payment : 35840.00
              */
 
-            private String id;
+            private String order_id;
             private String company_name;
             private String agent;
             private String status;
@@ -84,16 +43,16 @@ public class OrderList  extends BaseResponse{
             private String house_photo;
             private String house_title;
             private String address;
-            private String rent_money;
+            private int rent_money;
             private String payment;
             private List<String> label;
 
-            public String getId() {
-                return id;
+            public String getOrder_id() {
+                return order_id;
             }
 
-            public void setId(String id) {
-                this.id = id;
+            public void setOrder_id(String order_id) {
+                this.order_id = order_id;
             }
 
             public String getCompany_name() {
@@ -152,11 +111,11 @@ public class OrderList  extends BaseResponse{
                 this.address = address;
             }
 
-            public String getRent_money() {
+            public int getRent_money() {
                 return rent_money;
             }
 
-            public void setRent_money(String rent_money) {
+            public void setRent_money(int rent_money) {
                 this.rent_money = rent_money;
             }
 

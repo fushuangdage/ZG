@@ -93,6 +93,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     @Override
     public void initData() {
         EMClient.getInstance().login("954c8d7dd5367d0cd5b1d6d740c88e82u", "66cefbd4ccb8e9a3b4f80f22aa5be0f1", new EMCallBack() {
+
+
 //        EMClient.getInstance().login("fushuang", "123456", new EMCallBack() {
             @Override
             public void onSuccess() {
@@ -110,6 +112,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
             }
         });
+
+
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -200,7 +204,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         }else {
             getSupportFragmentManager().beginTransaction().hide(houseFragment).show(personFragment).commit();
         }
-
     }
 
 

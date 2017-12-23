@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +15,10 @@ import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.OrderList;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.retrofit.rx.FinishLoadConsumer;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -27,7 +30,6 @@ import java.util.List;
 import butterknife.BindView;
 
 public class OrderListActivity extends BaseActivity {
-
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -44,8 +46,8 @@ public class OrderListActivity extends BaseActivity {
     public Integer currentPage=1;
     public Integer status;
 
-    private List<OrderList.DataBean.ListBean> data=new ArrayList<>();
-    private CommonAdapter<OrderList.DataBean.ListBean> adapter;
+    private List<OrderList.OrderListDataBean.ListBean> data=new ArrayList<>();
+    private CommonAdapter<OrderList.OrderListDataBean.ListBean> adapter;
 
     @Override
     public int setLayout() {
@@ -93,26 +95,53 @@ public class OrderListActivity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new CommonAdapter<OrderList.DataBean.ListBean>(this, R.layout.item_order_list, data) {
+        adapter = new CommonAdapter<OrderList.OrderListDataBean.ListBean>(this, R.layout.item_order_list, data) {
 
             @Override
-            protected void convert(ViewHolder holder, OrderList.DataBean.ListBean listBean, int position) {
+            protected void convert(ViewHolder holder, OrderList.OrderListDataBean.ListBean listBean, int position) {
                 ((TextView) holder.getView(R.id.tv_user_tag)).setText(listBean.getCompany_name()+"  "+listBean.getAgent());
                 ((TextView) holder.getView(R.id.tv_state)).setText(listBean.getAgent());
-                ((TextView) holder.getView(R.id.tv_total_price)).setText(listBean.getPayment());
+                ((TextView) holder.getView(R.id.tv_total_price)).setText("¥"+listBean.getPayment());
                 ((TextView) holder.getView(R.id.tv_house_location)).setText(listBean.getAddress());
                 ((TextView) holder.getView(R.id.tv_house_name)).setText(listBean.getHouse_title());
                 Glide.with(mActivity).load(listBean.getHouse_photo()).into((ImageView) holder.getView(R.id.iv_house));
-                ((TextView) holder.getView(R.id.tv_house_rent)).setText(listBean.getRent_money());
+                ((TextView) holder.getView(R.id.tv_house_rent)).setText(listBean.getRent_money()+"元/月");
                 showThreeTag(listBean, (LinearLayout) holder.getView(R.id.ll_tag_container));
             }
         };
+
+        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+
+                String status = data.get(position).getStatus();
+                Intent intent = null;
+
+                switch (status) {
+                    case "已取消":
+                    case "待付款":
+                        intent= new Intent(mActivity,OrderDetailActivity.class);
+                        break;
+                    case "已支付":
+                        intent= new Intent(mActivity,FinishOrderActivity.class);
+                        break;
+                }
+
+                intent.putExtra("order_id",data.get(position).getOrder_id());
+                startActivity(intent);
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
 
         recyclerView.setAdapter(adapter);
         tv_title.setText("租房订单");
     }
 
-    private void  showThreeTag(OrderList.DataBean.ListBean bean, LinearLayout ll_tag_container) {
+    private void  showThreeTag(OrderList.OrderListDataBean.ListBean bean, LinearLayout ll_tag_container) {
         for (int i = 0; i < 3&&bean.getLabel()!=null&&bean.getLabel().size()>i; i++) {
             TextView childAt = ((TextView) ll_tag_container.getChildAt(i));
             childAt.setVisibility(View.VISIBLE);
@@ -126,7 +155,9 @@ public class OrderListActivity extends BaseActivity {
     }
 
     private void loadData() {
-        RetrofitHelper.getApiWithUid().getOrderList(status,currentPage).compose(RxScheduler.<OrderList>defaultScheduler())
+        RetrofitHelper.getApiWithUid().getOrderList(status,currentPage)
+                .compose(RxScheduler.<OrderList>defaultScheduler())
+                .doOnNext(new FinishLoadConsumer<OrderList>(refreshLayout,currentPage))
                 .subscribe(new BaseObserver<OrderList>(this,mActivity.getClass().getName()) {
             @Override
             public void error(Throwable e) {
@@ -135,11 +166,10 @@ public class OrderListActivity extends BaseActivity {
 
             @Override
             public void next(OrderList orderList) {
-
                 /**
                  * 集中在返回数据时处理上拉加载和刷新的分页问题
                  */
-                if (orderList.getData().getPage().equals("1")){
+                if (orderList.getData().getPage()==1){
                     data.clear();
                     data.addAll(orderList.getData().getList());
                 }else if (orderList.getData().getSum_page()==currentPage) {

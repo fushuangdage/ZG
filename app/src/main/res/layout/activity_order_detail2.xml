@@ -393,8 +393,6 @@
             android:background="@drawable/green_border_bg"
             android:layout_height="match_parent" />
 
-
-
     </LinearLayout>
 
 </LinearLayout>

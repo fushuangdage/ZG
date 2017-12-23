@@ -1,0 +1,39 @@
+package com.example.admin.zgapplication.retrofit.rx;
+
+import com.example.admin.zgapplication.mvp.module.BaseResponse;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+
+import io.reactivex.functions.Consumer;
+
+
+/**
+ * Created by fushuang on 2017/12/22.
+ */
+
+public class   FinishLoadConsumer<T extends BaseResponse> implements Consumer<T> {
+
+    private final RefreshLayout refreshLayout;
+    private Integer currentPage;
+
+    public FinishLoadConsumer(RefreshLayout refreshLayout) {
+        this.refreshLayout = refreshLayout;
+    }
+
+    public FinishLoadConsumer(RefreshLayout refreshLayout, Integer currentPage) {
+        this.refreshLayout = refreshLayout;
+        this.currentPage = currentPage;
+    }
+
+
+    @Override
+    public void accept(T t) throws Exception {
+
+        if (currentPage!=null&&currentPage>=t.getData().getSum_page()){
+            refreshLayout.setEnableLoadmore(false);
+        }else {
+            refreshLayout.setEnableLoadmore(true);
+        }
+        refreshLayout.finishLoadmore();
+        refreshLayout.finishRefresh();
+    }
+}

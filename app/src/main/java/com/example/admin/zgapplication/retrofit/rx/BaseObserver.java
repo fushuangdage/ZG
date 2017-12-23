@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.retrofit.rx;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -30,6 +31,11 @@ public abstract class BaseObserver<T extends BaseResponse> implements Observer<T
         this.clzName = clz.getName();
     }
 
+    public BaseObserver(Activity activity){
+        this.mContext = new WeakReference<>(activity.getBaseContext());
+        this.clzName = activity.getClass().getSimpleName();
+    }
+
     public BaseObserver(Context context, Object clzObj) {
         this.mContext = new WeakReference<>(context);
         this.clzName = clzObj.getClass().getName();
@@ -39,7 +45,6 @@ public abstract class BaseObserver<T extends BaseResponse> implements Observer<T
         this.mContext = new WeakReference<>(context);
         this.clzName = clzName;
     }
-
 
     @Override
     public void onError(Throwable e) {

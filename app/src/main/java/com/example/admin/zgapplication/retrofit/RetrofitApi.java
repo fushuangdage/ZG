@@ -2,6 +2,7 @@ package com.example.admin.zgapplication.retrofit;
 
 import com.example.admin.zgapplication.mvp.module.DiscountListResponse;
 import com.example.admin.zgapplication.mvp.module.HouseResourseListBean;
+import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
 import com.example.admin.zgapplication.mvp.module.OrderList;
 
 import io.reactivex.Observable;
@@ -39,7 +40,12 @@ public interface RetrofitApi {
     @GET("/member/order/index")
     Observable<OrderList> getOrderList(@Query("status") Integer status,@Query("page") Integer page);
 
-    @GET("/coupon/index")
-    Observable<DiscountListResponse> getDiscountList(@Query("status") int status);
+    @GET("/member/coupon/index")
+    Observable<DiscountListResponse> getDiscountList(@Query("status") int status,@Query("page") Integer page);
+
+
+    @GET("/member/order/detail")
+    Observable<OrderDetailResponse> getOrderDetail(@Query("order_id") String order_id);
+
 
 }

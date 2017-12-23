@@ -42,6 +42,8 @@ public class TimeUtil {
      */
     public static String dateFormatYMD = "yyyy.MM.dd";
 
+    public static String dateFormatYMD3 = "yyyy-MM-dd";
+
     /**
      * 时间日期格式化到年月日时分.中文显示
      */
