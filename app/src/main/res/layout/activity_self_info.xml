@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context="com.example.admin.zgapplication.ui.activity.SelfInfoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/activity_bg"
+        >
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/return_gray"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_centerInParent="true"
+            android:text="个人信息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:background="@color/activity_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_user_icon"
+            android:background="@drawable/user_sit"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_nick_name"
+    android:layout_marginLeft="17dp"
+    android:layout_marginRight="17dp"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:layout_height="70dp">
+    <TextView
+        style="@style/gray_text_15sp"
+        android:text="昵称"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        style="@style/gray_text_15sp"
+        android:text="top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="2dp"
+        android:background="@drawable/right_arrow"
+        android:layout_width="10dp"
+        android:layout_height="11dp" />
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="70dp">
+        <TextView
+            style="@style/gray_text_15sp"
+            android:text="手机号"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_user_tel"
+            style="@style/gray_text_15sp"
+            android:text="18612418024"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+
+    <TextView
+        android:id="@+id/tv_login_exit"
+        style="@style/gray_text_15sp"
+        android:text="退出登录"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
+
+
+</LinearLayout>

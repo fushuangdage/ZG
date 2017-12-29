@@ -121,19 +121,6 @@
             android:layout_width="80dp"
             android:layout_height="26dp" />
 
-        <TextView
-            android:id="@+id/tv_friend_pay"
-            android:textSize="14sp"
-            android:textColor="@color/gray666"
-            android:text="朋友代付"
-            android:background="@drawable/gray_round_boder"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@id/tv_go_pay"
-            android:gravity="center"
-            android:layout_width="80dp"
-            android:layout_height="26dp" />
-        
-        
     </RelativeLayout>
 
     <View

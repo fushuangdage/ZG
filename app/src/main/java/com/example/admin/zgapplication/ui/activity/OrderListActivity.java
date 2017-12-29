@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
+import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.OrderList;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
@@ -98,7 +100,7 @@ public class OrderListActivity extends BaseActivity {
         adapter = new CommonAdapter<OrderList.OrderListDataBean.ListBean>(this, R.layout.item_order_list, data) {
 
             @Override
-            protected void convert(ViewHolder holder, OrderList.OrderListDataBean.ListBean listBean, int position) {
+            protected void convert(ViewHolder holder, final OrderList.OrderListDataBean.ListBean listBean, int position) {
                 ((TextView) holder.getView(R.id.tv_user_tag)).setText(listBean.getCompany_name()+"  "+listBean.getAgent());
                 ((TextView) holder.getView(R.id.tv_state)).setText(listBean.getAgent());
                 ((TextView) holder.getView(R.id.tv_total_price)).setText("¥"+listBean.getPayment());
@@ -107,6 +109,54 @@ public class OrderListActivity extends BaseActivity {
                 Glide.with(mActivity).load(listBean.getHouse_photo()).into((ImageView) holder.getView(R.id.iv_house));
                 ((TextView) holder.getView(R.id.tv_house_rent)).setText(listBean.getRent_money()+"元/月");
                 showThreeTag(listBean, (LinearLayout) holder.getView(R.id.ll_tag_container));
+                final TextView tv_go_pay = (TextView) holder.getView(R.id.tv_go_pay);
+                switch (listBean.getStatus()) {
+                    case "已完成":
+                        tv_go_pay.setText("去评价");
+                        break;
+                    case "已取消":
+                        tv_go_pay.setText("删除订单");
+                        break;
+                    case "待付款":
+                        tv_go_pay.setText("去支付");
+                        break;
+                }
+
+                tv_go_pay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (listBean.getStatus()) {
+                            case "已完成":
+                                tv_go_pay.setText("去评价");
+                                break;
+                            case "已取消":
+                                //删除订单
+                                RetrofitHelper.getApiWithUid().delOrder("33",listBean.getOrder_id(),1)
+                                        .compose(RxScheduler.<BaseResponse>defaultScheduler())
+                                        .subscribe(new BaseObserver<BaseResponse>(mActivity) {
+                                            @Override
+                                            public void error(Throwable e) {
+
+                                            }
+
+                                            @Override
+                                            public void next(BaseResponse baseResponse) {
+                                                Toast.makeText(OrderListActivity.this,baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            @Override
+                                            public void complete() {
+
+                                            }
+                                        });
+                                break;
+                            case "待付款":
+                                tv_go_pay.setText("去支付");
+                                break;
+                        }
+                    }
+                });
+
             }
         };
 
@@ -123,6 +173,7 @@ public class OrderListActivity extends BaseActivity {
                         intent= new Intent(mActivity,OrderDetailActivity.class);
                         break;
                     case "已支付":
+                    case "已完成":
                         intent= new Intent(mActivity,FinishOrderActivity.class);
                         break;
                 }
@@ -172,9 +223,6 @@ public class OrderListActivity extends BaseActivity {
                 if (orderList.getData().getPage()==1){
                     data.clear();
                     data.addAll(orderList.getData().getList());
-                }else if (orderList.getData().getSum_page()==currentPage) {
-                   refreshLayout.setEnableLoadmore(false);
-                   data.addAll(orderList.getData().getList());
                 }else {
                     data.addAll(orderList.getData().getList());
                 }
@@ -183,8 +231,7 @@ public class OrderListActivity extends BaseActivity {
 
             @Override
             public void complete() {
-                refreshLayout.finishLoadmore();
-                refreshLayout.finishRefresh();
+
             }
         });
     }

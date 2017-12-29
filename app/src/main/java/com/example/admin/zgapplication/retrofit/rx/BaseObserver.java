@@ -26,6 +26,9 @@ public abstract class BaseObserver<T extends BaseResponse> implements Observer<T
     private String clzName;
     private Disposable disposable;
 
+
+
+
     public BaseObserver(Context context, Class clz) {
         this.mContext = new WeakReference<>(context);
         this.clzName = clz.getName();
@@ -67,7 +70,7 @@ public abstract class BaseObserver<T extends BaseResponse> implements Observer<T
             Toast.makeText(context, "未知错误！", Toast.LENGTH_SHORT).show();
             LogUtils.e("-----RxJavaRxJava-----", "error----------->" + e.toString());
         }
-        NetManager.getInstance().removeRequest(clzName, disposable);
+//        NetManager.getInstance().removeRequest(clzName, disposable);
         error(e);
     }
 
@@ -75,7 +78,7 @@ public abstract class BaseObserver<T extends BaseResponse> implements Observer<T
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-        NetManager.getInstance().recordRequest(clzName, d);
+//        NetManager.getInstance().recordRequest(clzName, d);
         disposable = d;
     }
 

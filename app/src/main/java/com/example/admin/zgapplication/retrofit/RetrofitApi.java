@@ -1,12 +1,24 @@
 package com.example.admin.zgapplication.retrofit;
 
+import com.example.admin.zgapplication.mvp.module.BaseResponse;
+import com.example.admin.zgapplication.mvp.module.CityResponse;
+import com.example.admin.zgapplication.mvp.module.ContactDetailResponse;
+import com.example.admin.zgapplication.mvp.module.ContractListResponse;
 import com.example.admin.zgapplication.mvp.module.DiscountListResponse;
 import com.example.admin.zgapplication.mvp.module.HouseResourseListBean;
 import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
 import com.example.admin.zgapplication.mvp.module.OrderList;
+import com.example.admin.zgapplication.mvp.module.RegionResponse;
+import com.example.admin.zgapplication.mvp.module.RentBillResponse;
+import com.example.admin.zgapplication.mvp.module.RentIntentListResponse;
+import com.example.admin.zgapplication.mvp.module.SelfInfo;
+import com.example.admin.zgapplication.mvp.module.StartIntent;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -44,8 +56,50 @@ public interface RetrofitApi {
     Observable<DiscountListResponse> getDiscountList(@Query("status") int status,@Query("page") Integer page);
 
 
+    @FormUrlEncoded
+    @POST("/member/coupon/change")
+    Observable<BaseResponse> exChangeCoupon(@Field("uid") String uid,@Field("code") String code);
+
+
     @GET("/member/order/detail")
     Observable<OrderDetailResponse> getOrderDetail(@Query("order_id") String order_id);
 
+    //删除订单,取消订单一个接口
+    @FormUrlEncoded
+    @POST("/member/order/del")
+    Observable<BaseResponse> delOrder(@Field("uid") String uid,@Field("order_id") String order_id,@Field("type") Integer type);
 
+    @GET("/member/user/index")
+    Observable<SelfInfo> getSelfInfo();
+
+    @GET("/member/user/save")
+    Observable<BaseResponse> modifyUserInfo(@Query("nickname") String nickname);
+
+    @GET("/member/contract/mycontract")
+    Observable<ContractListResponse> getContractList();
+
+    @GET("/member/intention/index")
+    Observable<RentIntentListResponse> getIntentList(@Query("page") Integer page);
+
+    @GET("/member/intention/del")
+    Observable<BaseResponse> delIntentItem(@Query("i_id") String i_id);
+
+    @GET("/district/city")
+    Observable<CityResponse> getCityList();
+
+    @GET("/district/region")
+    Observable<RegionResponse> getRegionResponse(@Query("cityId") String cityId);
+
+    //发起意向
+    @GET("/member/intention/add")
+    Observable<StartIntent> startIntention(@Query("district_id")String district_id, @Query("outset") Integer outset,
+                                           @Query("cutoff") Integer cutoff, @Query("method") Integer method,
+                                           @Query("room") String room);
+    //合同详情
+    @GET("/member/contract/detail")
+    Observable<ContactDetailResponse> getContactDetail(@Query("order_num") String order_id);
+
+    //账单详情
+    @GET("/member/contract/bill")
+    Observable<RentBillResponse> getRentBill(@Query("order_num") String order_num);
 }

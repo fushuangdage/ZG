@@ -57,6 +57,7 @@
             android:layout_height="wrap_content" />
 
         <com.example.admin.zgapplication.ui.view.BidirectionalSeekBar
+            android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -111,6 +112,7 @@
 
         
         <Button
+            android:id="@+id/btn_confirm"
             android:layout_marginTop="20dp"
             android:background="@color/lightgreen"
             android:textSize="12sp"

@@ -3,6 +3,8 @@ package com.example.admin.zgapplication.retrofit.rx;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
+import java.util.List;
+
 import io.reactivex.functions.Consumer;
 
 
@@ -14,6 +16,7 @@ public class   FinishLoadConsumer<T extends BaseResponse> implements Consumer<T>
 
     private final RefreshLayout refreshLayout;
     private Integer currentPage;
+    private List<Object> list;
 
     public FinishLoadConsumer(RefreshLayout refreshLayout) {
         this.refreshLayout = refreshLayout;

@@ -140,7 +140,7 @@ public class MyDiscountActivity extends BaseActivity {
                          */
                         if (data.getPage()==1){
                             list.clear();
-                            list.addAll(list);
+                            list.addAll(data.getList());
                         }
                         else {
                             list.addAll(data.getList());
@@ -155,11 +155,14 @@ public class MyDiscountActivity extends BaseActivity {
                 });
     }
 
-    @OnClick(R.id.iv_left)
+    @OnClick({R.id.iv_left,R.id.tv_right})
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.iv_left:
                 finish();
+                break;
+            case R.id.tv_right:
+                startActivity(ExchangeCouponActivity.class);
                 break;
         }
     }

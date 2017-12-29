@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
-import com.example.admin.zgapplication.retrofit.rx.NetManager;
 import com.example.admin.zgapplication.utils.AppManager;
 import com.example.admin.zgapplication.utils.dialog.LoadingDialog;
 import com.example.admin.zgapplication.utils.system.SystemBarTintManager;
@@ -136,7 +135,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         mBind.unbind();//解除ButterKnife绑定
 //        Log.d("22222222222222", "onDestroy12123: "+getClass().getName());
-        NetManager.getInstance().cancelRequests(getClass().getName());
+//        NetManager.getInstance().cancelRequests(getClass().getName());
         EventBus.getDefault().unregister(this);//解除EventBus注册
         //从管理堆栈移除Activity
         AppManager.getInstance().finishActivity(this);

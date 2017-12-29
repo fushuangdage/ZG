@@ -34,7 +34,6 @@ public class BaseResponse<T extends BaseResponse.DataBean>{
         this.msg = msg;
     }
 
-
     public static class DataBean {
 
         //分页数据
@@ -42,14 +41,14 @@ public class BaseResponse<T extends BaseResponse.DataBean>{
         private int sum_page;
 
         //状态标志位
-        private int status;
+        private String status;
 
 
-        public int getStatus() {
+        public String getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(String status) {
             this.status = status;
         }
 

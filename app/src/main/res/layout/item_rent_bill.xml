@@ -14,12 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tv_order_stage"
             style="@style/gray_text_17sp"
             android:text="第三期房租"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_status"
             android:textSize="12sp"
             android:text="待支付"
             android:textColor="@color/toolbartitle"
@@ -28,6 +30,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_order_time"
         style="@style/light_gray_text_12sp"
         android:paddingLeft="13dp"
         android:text="账单周期"
@@ -35,6 +38,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/tv_pay_way"
         android:layout_marginTop="7dp"
         style="@style/light_gray_text_12sp"
         android:paddingLeft="13dp"
@@ -43,6 +47,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/tv_pay_count"
         style="@style/light_gray_text_12sp"
         android:layout_marginTop="7dp"
         android:paddingLeft="13dp"
@@ -61,12 +66,14 @@
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/tv_left_pay"
             style="@style/gray_text_14sp"
-            android:text="需缴纳费用: ¥150"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="需缴纳费用: ¥150" />
         
         
         <TextView

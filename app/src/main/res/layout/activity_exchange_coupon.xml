@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_bg"
+    android:orientation="vertical"
+    tools:context="com.example.admin.zgapplication.ui.activity.ExchangeCouponActivity">
+
+
+    <include layout="@layout/action_bar" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:background="@drawable/shouji"
+            android:layout_marginTop="30dp"
+            android:layout_width="40dp"
+            android:layout_height="80dp" />
+
+
+        <TextView
+            android:textSize="17sp"
+            android:layout_marginTop="36dp"
+            android:textColor="@color/toolbartitle"
+            android:text="兑换码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_exchange_coupon"
+            android:textSize="17sp"
+            android:textColor="#ccc"
+            android:layout_marginTop="30dp"
+            android:hint="请输入您的兑换码"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <View
+            android:background="#ccc"
+            android:layout_marginTop="20dp"
+            android:layout_width="230dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/tv_exchange"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/lightgreen"
+            android:gravity="center"
+            android:text="兑换"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/toolbartitle"
+            android:text="查看我的优惠券 >>"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

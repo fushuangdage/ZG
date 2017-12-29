@@ -35,6 +35,19 @@
                     android:background="@drawable/mine" />
             </com.example.admin.zgapplication.ui.view.RedNoticeRelativeLayout>
 
+            <TextView
+                android:id="@+id/tv_city"
+                android:text="北京"
+                android:layout_marginLeft="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/choose_arrow_down"/>
+
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="150dp"

@@ -29,4 +29,9 @@ public class Constant extends EaseConstant {
 	public static final String MESSAGE_ATTR_ROBOT_MSGTYPE = "msgtype";
 	public static final String ACTION_GROUP_CHANAGED = "action_group_changed";
 	public static final String ACTION_CONTACT_CHANAGED = "action_contact_changed";
+
+	public static final int REFRESH_REGION_FITSTLEVEL_LIST=1001;
+	public static final int REGION_SELECT=1002;
+	public static final int SECOND_LEVEL_REGION=1003;
+
 }
