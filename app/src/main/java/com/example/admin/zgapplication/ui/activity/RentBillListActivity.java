@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -54,13 +55,42 @@ public class RentBillListActivity extends BaseActivity {
             iv_right.setVisibility(View.GONE);
             adapter = new CommonAdapter<RentBillResponse.DataBean.ListBean>(this, R.layout.item_rent_bill, list) {
                 @Override
-                protected void convert(ViewHolder holder, RentBillResponse.DataBean.ListBean s, int position) {
+                protected void convert(ViewHolder holder, final RentBillResponse.DataBean.ListBean s, int position) {
                     ((TextView) holder.getView(R.id.tv_order_stage)).setText(String.format("第%d期房租",s.getWeek()));
-                    ((TextView) holder.getView(R.id.tv_status)).setText(s.getStatus());
+                    if (s.getStatus().equals("已完成")) {
+
+                        ((TextView) holder.getView(R.id.tv_status)).setText(s.getStatus());
+                        ((TextView) holder.getView(R.id.tv_pay)).setText("查看详情");
+                        ((TextView) holder.getView(R.id.tv_pay)).setBackgroundResource(R.drawable.white_ract_border_bg);
+
+                        holder.setOnClickListener(R.id.tv_pay, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(mActivity, PaidBillDetailActivity.class);
+                                intent.putExtra("bill_num",s.getBill_num());
+                                startActivity(intent);
+                            }
+                        });
+                    }else {
+                        ((TextView) holder.getView(R.id.tv_pay)).setText("去支付");
+
+                        ((TextView) holder.getView(R.id.tv_pay)).setBackgroundResource(R.drawable.green_border_bg);
+
+                        holder.setOnClickListener(R.id.tv_pay, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(mActivity, BillDetailActivity.class);
+                                intent.putExtra("bill_num",s.getBill_num());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+
                     ((TextView) holder.getView(R.id.tv_order_time)).setText("账单周期 : "+s.getCircle());
                     ((TextView) holder.getView(R.id.tv_pay_way)).setText("付款方式 : "+s.getPay());
                     ((TextView) holder.getView(R.id.tv_pay_count)).setText("应付金额 : "+s.getPayment());
                     ((TextView) holder.getView(R.id.tv_left_pay)).setText("需缴纳费用: ¥"+s.getLeave());
+
 
                 }
             };

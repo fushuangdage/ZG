@@ -77,6 +77,7 @@
         
         
         <TextView
+            android:id="@+id/tv_pay"
             android:textColor="@color/lightgreen"
             android:text="去支付"
             android:gravity="center"

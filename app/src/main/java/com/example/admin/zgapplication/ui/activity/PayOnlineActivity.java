@@ -33,7 +33,7 @@ public class PayOnlineActivity extends BaseActivity {
 
             case R.id.tv_pay:
                 // TODO: 2017/10/20 调用支付宝
-                startActivity(FollowUpPayResultActivity.class);
+                startActivity(PaidBillDetailActivity.class);
                 break;
             case R.id.iv_left:
                 finish();

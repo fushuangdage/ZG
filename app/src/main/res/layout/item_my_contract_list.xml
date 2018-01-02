@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:paddingBottom="30dp"
+    android:paddingBottom="15dp"
     android:paddingTop="30dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -79,23 +79,27 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/tv_fix_online"
-            android:text="在线报修"
-            android:gravity="center"
+            android:text="支付房租"
             style="@style/gray_text_14sp"
-            android:background="@drawable/gray_circle_boder"
+            android:textColor="@color/green"
+            android:background="@drawable/green_border_bg"
+            android:gravity="center"
             android:layout_marginRight="10dp"
             android:layout_width="160dp"
             android:layout_height="40dp" />
 
         <TextView
-            android:text="支付房租"
-            style="@style/gray_text_14sp"
-            android:background="@drawable/gray_circle_boder"
+            android:id="@+id/tv_fix_online"
+            android:text="在线报修"
             android:gravity="center"
+            style="@style/gray_text_14sp"
+            android:background="@drawable/white_ract_border_bg"
             android:layout_width="160dp"
             android:layout_height="40dp" />
+
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.example.admin.zgapplication.ui.activity.FollowUpPayResultActivity">
+    tools:context="com.example.admin.zgapplication.ui.activity.PaidBillDetailActivity">
 
 
     <include layout="@layout/action_bar" />
@@ -48,6 +48,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/bill_num"
                     android:textSize="12sp"
                     android:textColor="@color/gray_717171"
                     android:text="BJZG10201020201010"
@@ -76,6 +77,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/info"
                     android:textSize="12sp"
                     android:textColor="@color/gray_717171"
                     android:text="朝阳区北京像素北区1号楼1单元1006主卧"
@@ -90,6 +92,7 @@
                 android:layout_height="1dp" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:paddingLeft="13dp"
                 android:paddingRight="13dp"
                 android:gravity="center_vertical"
@@ -104,6 +107,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/rent_stage"
                     android:textSize="12sp"
                     android:textColor="@color/gray_717171"
                     android:text="第二期"
@@ -133,6 +137,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/lease_term"
                     android:textSize="12sp"
                     android:textColor="@color/gray_717171"
                     android:text="2017-06-20至2017-09-20"
@@ -154,7 +159,7 @@
                 android:layout_height="10dp" />
 
             <TextView
-                android:text="价格明细"
+                android:text="订单信息"
                 android:padding="13dp"
                 style="@style/gray_text_17sp"
                 android:layout_width="wrap_content"
@@ -173,12 +178,13 @@
 
                 <TextView
                     style="@style/gray_order_info"
-                    android:text="合同编号"
+                    android:text="订单号"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_bill_num"
                     style="@style/gray_order_info"
                     android:text="BJZG10201020201010"
                     android:layout_width="wrap_content"
@@ -195,12 +201,13 @@
 
                 <TextView
                     style="@style/gray_order_info"
-                    android:text="合同编号"
+                    android:text="支付时间"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_pay_time"
                     style="@style/gray_order_info"
                     android:text="BJZG10201020201010"
                     android:layout_width="wrap_content"
@@ -217,12 +224,13 @@
 
                 <TextView
                     style="@style/gray_order_info"
-                    android:text="合同编号"
+                    android:text="支付方式"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_pay_kind"
                     style="@style/gray_order_info"
                     android:text="BJZG10201020201010"
                     android:layout_width="wrap_content"
@@ -239,14 +247,14 @@
 
                 <TextView
                     style="@style/gray_order_info"
-                    android:text="合同编号"
+                    android:text="代理商"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     style="@style/gray_order_info"
-                    android:text="BJZG10201020201010"
+                    android:text="扎根网"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

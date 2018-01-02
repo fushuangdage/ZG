@@ -5,8 +5,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.ContractListResponse;
@@ -57,6 +59,8 @@ public class MyContractActivity extends BaseActivity implements MultiItemTypeAda
                 ((TextView) holder.getView(R.id.tv_order_no)).setText(o.getOrder());
                 ((TextView) holder.getView(R.id.tv_data)).setText(o.getDate());
                 ((TextView) holder.getView(R.id.tv_price)).setText(String.format("%s元/月 %s",o.getRent(),o.getPay()));
+                Glide.with(mActivity).load(o.getImg()).into((ImageView) holder.getView(R.id.iv_room));
+
 
                 holder.getView(R.id.tv_fix_online).setOnClickListener(new View.OnClickListener() {
                     @Override

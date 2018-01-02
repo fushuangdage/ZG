@@ -9,7 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.R;
@@ -19,6 +18,8 @@ import com.example.admin.zgapplication.mvp.module.RentBillResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -63,9 +64,13 @@ public class ContractDetailActivity extends BaseActivity {
     TextView tv_bill_time;
     @BindView(R.id.tv_to_pay_count)
     TextView tv_to_pay_count;
+    @BindView(R.id.tv_go_pay_rent)
+    TextView tv_pay_rent;
+
 
 
     private ContactDetailResponse.DataBean o;
+    private RentBillResponse.DataBean.ListBean first_rent_list_bean;
 
 
     @Override
@@ -118,7 +123,14 @@ public class ContractDetailActivity extends BaseActivity {
 
                     @Override
                     public void next(RentBillResponse rentBillResponse) {
-                        Toast.makeText(ContractDetailActivity.this, rentBillResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        List<RentBillResponse.DataBean.ListBean> list = rentBillResponse.getData().getList();
+                        if (list==null&&list.size()==0) {
+                            tv_pay_rent.setClickable(false);
+                        }else {
+                            tv_pay_rent.setClickable(true);
+                            first_rent_list_bean = list.get(0);
+                        }
+//                        Toast.makeText(ContractDetailActivity.this, rentBillResponse.getMsg(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -129,12 +141,15 @@ public class ContractDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_go_pay, R.id.iv_left, R.id.tv_rent_bill_list, R.id.tv_life_bill_list, R.id.tv_call})
+    @OnClick({R.id.tv_go_pay_rent, R.id.iv_left, R.id.tv_rent_bill_list, R.id.tv_life_bill_list, R.id.tv_call})
     public void onClick(View view) {
+        Intent intent;
         Bundle bundle = new Bundle();
         switch (view.getId()) {
-            case R.id.tv_go_pay:
-                startActivity(BillDetailActivity.class);
+            case R.id.tv_go_pay_rent:
+                intent = new Intent(mActivity,BillDetailActivity.class);
+                intent.putExtra("bill_num",first_rent_list_bean.getBill_num());
+                startActivity(intent);
                 break;
             case R.id.iv_left:
                 finish();
@@ -150,7 +165,7 @@ public class ContractDetailActivity extends BaseActivity {
                 startActivity(RentBillListActivity.class, bundle);
                 break;
             case R.id.tv_call:
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+o.getTel()));
+               intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+o.getTel()));
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions

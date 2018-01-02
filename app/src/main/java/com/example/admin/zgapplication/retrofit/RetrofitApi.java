@@ -1,7 +1,9 @@
 package com.example.admin.zgapplication.retrofit;
 
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
+import com.example.admin.zgapplication.mvp.module.BillFinishResponse;
 import com.example.admin.zgapplication.mvp.module.CityResponse;
+import com.example.admin.zgapplication.mvp.module.ConfirmPayResponse;
 import com.example.admin.zgapplication.mvp.module.ContactDetailResponse;
 import com.example.admin.zgapplication.mvp.module.ContractListResponse;
 import com.example.admin.zgapplication.mvp.module.DiscountListResponse;
@@ -99,7 +101,19 @@ public interface RetrofitApi {
     @GET("/member/contract/detail")
     Observable<ContactDetailResponse> getContactDetail(@Query("order_num") String order_id);
 
-    //账单详情
+    //房租账单列表
     @GET("/member/contract/bill")
     Observable<RentBillResponse> getRentBill(@Query("order_num") String order_num);
+
+    //房租账单详情(已完成)
+    @GET("/member/contract/fbill")
+    Observable<BillFinishResponse> getDoneBill(@Query("bill_num") String bill_num);
+
+    @GET("/member/contract/topay")
+    Observable<BillFinishResponse> getToPayBill(@Query("bill_num") String bill_num);
+
+    @FormUrlEncoded
+    @POST("/member/contract/sure")
+    Observable<ConfirmPayResponse> confirmPayResponse(@Field("bill_num") String bill_num, @Field("user_coupon_id") String user_coupon_id, @Field("user_coupon_money") String user_coupon_money);
+
 }

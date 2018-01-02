@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,12 +9,17 @@ import android.widget.TextView;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
+import com.example.admin.zgapplication.mvp.module.DiscountListResponse;
+import com.example.admin.zgapplication.retrofit.RetrofitHelper;
+import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.HeaderAndFooterWrapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,8 +31,10 @@ public class CouponChooseActivity extends BaseActivity implements View.OnClickLi
     TextView tv_title;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    private CommonAdapter<String> adapter;
+    public int currentPage=1;
+    private CommonAdapter<DiscountListResponse.DataBean.ListBean> adapter;
     private HeaderAndFooterWrapper wrapper;
+    private ArrayList<DiscountListResponse.DataBean.ListBean> data=new ArrayList<>();
 
     @Override
     public int setLayout() {
@@ -38,19 +46,17 @@ public class CouponChooseActivity extends BaseActivity implements View.OnClickLi
         final String title = getIntent().getStringExtra("title");
         tv_title.setText(title);
 
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            strings.add("");
-        }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CommonAdapter<String>(this, R.layout.item_coupon, strings) {
+        adapter = new CommonAdapter<DiscountListResponse.DataBean.ListBean>(this, R.layout.item_coupon, data) {
             @Override
-            protected void convert(ViewHolder holder, String s, int position) {
+            protected void convert(ViewHolder holder, DiscountListResponse.DataBean.ListBean s, int position) {
                 if (title.equals("选择经纪公司优惠券")) {
                     holder.itemView.setBackgroundResource(R.drawable.jingjigongsiweishiyong);
                 }else {
                     holder.itemView.setBackgroundResource(R.drawable.zhagenweishiyong);
                 }
+
+
             }
         };
 
@@ -61,6 +67,11 @@ public class CouponChooseActivity extends BaseActivity implements View.OnClickLi
         adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                Intent intent = new Intent();
+                intent.putExtra("user_coupon_id",data.get(position).getId());
+                intent.putExtra("user_coupon_money",data.get(position).getMoney());
+
+                setResult(1,intent);
                 finish();
             }
 
@@ -74,7 +85,27 @@ public class CouponChooseActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initData() {
+        RetrofitHelper.getApiWithUid().getDiscountList(1,currentPage)
+                .compose(RxScheduler.<DiscountListResponse>defaultScheduler())
+                .subscribe(new BaseObserver<DiscountListResponse>(mActivity) {
+                    @Override
+                    public void error(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void next(DiscountListResponse discountListResponse) {
+                        List<DiscountListResponse.DataBean.ListBean> list = discountListResponse.getData().getList();
+                        data.clear();
+                        data.addAll(list);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void complete() {
+
+                    }
+                });
     }
 
     @OnClick({R.id.iv_left})
