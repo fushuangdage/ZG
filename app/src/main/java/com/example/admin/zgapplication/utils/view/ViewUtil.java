@@ -180,7 +180,7 @@ public class ViewUtil {
      * @param <T> 泛型
      * @param parent ViewGroup
      * @param filter Type of views which will be returned.
-     * @param includeSubClass Whether returned list will include views which
+     * @param includeSubClass Whether returned data will include views which
      * are
      * subclass of filter or not.
      * @return View

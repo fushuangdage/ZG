@@ -155,7 +155,7 @@ public class FileUtil {
 
 
     /**
-     * write file, the string list will be written to the begin of the file
+     * write file, the string data will be written to the begin of the file
      * @param filePath    地址
      * @param contentList    集合
      * @return  是否写入成功
@@ -298,7 +298,7 @@ public class FileUtil {
 
 
     /**
-     * read file to string list, a element of list is a line
+     * read file to string data, a element of data is a line
      *
      * @param filePath    路径
      * @param charsetName The name of a supported {@link

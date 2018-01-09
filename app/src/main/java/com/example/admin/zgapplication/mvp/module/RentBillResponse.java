@@ -11,7 +11,7 @@ public class RentBillResponse extends BaseResponse<RentBillResponse.DataBean> {
 
     public static class DataBean extends BaseResponse.DataBean {
         /**
-         * list : [{"bill_num":"201712221742053572560456","week":2,"status":"已完成","circle":"2017-12-22至2018-01-22","pay":"押1付12","payment":"104000.00","leave":"104000.00"}]
+         * data : [{"bill_num":"201712221742053572560456","week":2,"status":"已完成","circle":"2017-12-22至2018-01-22","pay":"押1付12","payment":"104000.00","leave":"104000.00"}]
          * page : 1
          * sum_page : 1
          */

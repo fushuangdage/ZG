@@ -133,7 +133,12 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
         adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                startActivity(new Intent(getActivity(), HouseDetailActivity.class));
+
+                Intent intent = new Intent(getActivity(), HouseDetailActivity.class);
+                intent.putExtra("house_id",houseList.get(position).getHouse_id());
+                intent.putExtra("type",houseList.get(position).getType());
+                intent.putExtra("room_id",houseList.get(position).getRoom_id());
+                startActivity(intent);
             }
 
             @Override

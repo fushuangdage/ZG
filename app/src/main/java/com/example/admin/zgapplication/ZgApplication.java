@@ -18,6 +18,16 @@ import cn.jpush.android.api.JPushInterface;
 
 public class ZgApplication extends Application {
 
+    public static  String uid;
+
+    public static String getUid() {
+        return uid;
+    }
+
+    public static void setUid(String uid) {
+        ZgApplication.uid = uid;
+    }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

@@ -11,7 +11,7 @@ public class RentIntentListResponse  extends BaseResponse<RentIntentListResponse
 
     public static class DataBean extends BaseResponse.DataBean{
         /**
-         * list : [{"id":"2","outset":"2000","cutoff":"4000","room":"1室,2室,3室","method":"2","create_at":"1514267197","sum":"2","parent":"昌平","district":"回龙观"},{"id":"4","outset":"2500","cutoff":"5000","room":"1室,2室,3室","method":"1","create_at":"1514267200","sum":"3","parent":"朝阳","district":"望京"}]
+         * data : [{"id":"2","outset":"2000","cutoff":"4000","room":"1室,2室,3室","method":"2","create_at":"1514267197","sum":"2","parent":"昌平","district":"回龙观"},{"id":"4","outset":"2500","cutoff":"5000","room":"1室,2室,3室","method":"1","create_at":"1514267200","sum":"3","parent":"朝阳","district":"望京"}]
          * page : 1
          * sum_page : 1
          */

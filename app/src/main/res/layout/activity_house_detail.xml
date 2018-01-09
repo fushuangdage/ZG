@@ -63,7 +63,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="50dp"
-            android:background="@drawable/shoppingcar" />
+            android:background="@drawable/shoucang_button" />
 
     </RelativeLayout>
 
@@ -83,9 +83,10 @@
         android:gravity="center_vertical">
 
         <TextView
-            android:layout_marginLeft="10dp"
-            android:text="加入购物车"
-            android:drawableTop="@drawable/add_shoppingcar"
+            android:id="@+id/tv_collect"
+            android:padding="10dp"
+            android:text="收藏"
+            android:drawableTop="@drawable/shoucang_normal"
             android:textSize="9sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

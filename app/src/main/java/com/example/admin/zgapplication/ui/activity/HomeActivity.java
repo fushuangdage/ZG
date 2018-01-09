@@ -288,6 +288,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
                 startActivity(IntentListActivity.class);
                 break;
             case R.id.ll_shopping_car:
+                //购物车改为我的收藏
                 startActivity(ShopCarActivity.class);
                 break;
             case R.id.home_message:

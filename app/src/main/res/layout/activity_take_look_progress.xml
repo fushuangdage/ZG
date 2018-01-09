@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@color/activity_bg"
     tools:context="com.example.admin.zgapplication.ui.activity.TakeLookActivity">
 
@@ -39,7 +40,6 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/item_recommend_house" />
 
     <LinearLayout
         android:background="@drawable/yiquxiao"
@@ -54,13 +54,16 @@
             android:layout_width="16dp"
             android:layout_height="16dp" />
         <TextView
+            android:id="@+id/tv_status"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:text="大秘待确认"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    
+
+    <include layout="@layout/item_recommend_house" />
+
     <View
         android:background="@color/activity_bg"
         android:layout_width="match_parent"
@@ -68,42 +71,83 @@
 
     <TextView
         android:text="带看信息"
+        android:background="@color/white"
         style="@style/gray_text_17sp"
         android:padding="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
-    <TextView
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
             android:padding="14dp"
             style="@style/gray_text_13sp"
-            android:text="联系人: top"
-            android:layout_width="wrap_content"
+            android:text="联系人: "
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider_color" />
-
-    <TextView
-         android:padding="14dp"
+        <TextView
+            android:id="@+id/tv_custom_name"
+            android:text="top"
+            android:padding="14dp"
             style="@style/gray_text_13sp"
-            android:text="联系电话: 15888888888888"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/divider_color" />
 
-    <TextView
-        android:padding="14dp"
-        style="@style/gray_text_13sp"
-        android:text="期望带看时间：2017-06-20 18:20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="14dp"
+            style="@style/gray_text_13sp"
+            android:text="联系电话: "
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_tel"
+            android:text="15165123"
+            android:padding="14dp"
+            style="@style/gray_text_13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <LinearLayout
+        android:background="@color/white"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="14dp"
+            style="@style/gray_text_13sp"
+            android:text="期望带看时间: "
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_expect_time"
+            android:text="1994-666--6666"
+            android:padding="14dp"
+            style="@style/gray_text_13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <View
         android:background="@color/activity_bg"
@@ -114,6 +158,7 @@
         android:text="带看经纪人"
         style="@style/gray_text_17sp"
         android:padding="14dp"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -123,7 +168,8 @@
         android:background="@color/divider_color" />
 
     <RelativeLayout
-        android:padding="15dp"
+        android:padding="10dp"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -157,22 +203,40 @@
     <View
         android:layout_weight="1"
         android:layout_width="match_parent"
+        android:background="@color/activity_bg"
         android:layout_height="0dp" />
 
     <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:visibility="gone"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:text="确认带看"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/green_border_bg"
+            android:layout_width="83dp"
+            android:layout_height="30dp" />
         <TextView
             android:id="@+id/tv_cancel"
+            android:layout_toLeftOf="@id/tv_confirm"
             android:text="取消带看"
             android:gravity="center"
             android:textColor="#aaa"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/gray_circle_boder"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gray_round_boder"
             android:layout_width="83dp"
             android:layout_height="30dp" />
+
+
     </RelativeLayout>
 
 </LinearLayout>

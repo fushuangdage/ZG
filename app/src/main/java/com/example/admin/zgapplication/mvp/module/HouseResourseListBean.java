@@ -31,6 +31,43 @@ public class HouseResourseListBean  extends BaseResponse<HouseResourseListBean.H
              * house_label : ["全新墙纸","阳台视野广阔"]
              */
 
+            private String house_id;
+            private String type;
+            private String create_at;
+            private String room_id;
+
+            public String getRoom_id() {
+                return room_id;
+            }
+
+            public void setRoom_id(String room_id) {
+                this.room_id = room_id;
+            }
+
+            public String getHouse_id() {
+                return house_id;
+            }
+
+            public void setHouse_id(String house_id) {
+                this.house_id = house_id;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
+
+            public String getCreate_at() {
+                return create_at;
+            }
+
+            public void setCreate_at(String create_at) {
+                this.create_at = create_at;
+            }
+
             private String house_photo;
             private String house_title;
             private String house_info;

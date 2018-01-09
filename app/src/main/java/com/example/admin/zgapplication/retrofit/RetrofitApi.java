@@ -1,20 +1,27 @@
 package com.example.admin.zgapplication.retrofit;
 
+import com.example.admin.zgapplication.mvp.module.AgentListResponse;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.BillFinishResponse;
 import com.example.admin.zgapplication.mvp.module.CityResponse;
+import com.example.admin.zgapplication.mvp.module.CollectionListResponse;
 import com.example.admin.zgapplication.mvp.module.ConfirmPayResponse;
 import com.example.admin.zgapplication.mvp.module.ContactDetailResponse;
 import com.example.admin.zgapplication.mvp.module.ContractListResponse;
 import com.example.admin.zgapplication.mvp.module.DiscountListResponse;
 import com.example.admin.zgapplication.mvp.module.HouseResourseListBean;
+import com.example.admin.zgapplication.mvp.module.LaunchTakeLookResponse;
 import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
 import com.example.admin.zgapplication.mvp.module.OrderList;
 import com.example.admin.zgapplication.mvp.module.RegionResponse;
 import com.example.admin.zgapplication.mvp.module.RentBillResponse;
 import com.example.admin.zgapplication.mvp.module.RentIntentListResponse;
+import com.example.admin.zgapplication.mvp.module.RoomDetailResponse;
 import com.example.admin.zgapplication.mvp.module.SelfInfo;
 import com.example.admin.zgapplication.mvp.module.StartIntent;
+import com.example.admin.zgapplication.mvp.module.TakeLookDetail;
+import com.example.admin.zgapplication.mvp.module.TakeLookInfoResponse;
+import com.example.admin.zgapplication.mvp.module.TakeLookListResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -115,5 +122,58 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("/member/contract/sure")
     Observable<ConfirmPayResponse> confirmPayResponse(@Field("bill_num") String bill_num, @Field("user_coupon_id") String user_coupon_id, @Field("user_coupon_money") String user_coupon_money);
+
+    @GET("/member/index/all")
+    Observable<RoomDetailResponse> getRoomDetail(@Query("type")String type,@Query("house_id") String house_id,@Query("room_id") String room_id);
+
+    @FormUrlEncoded
+    @POST("/member/collection/add")
+    Observable<BaseResponse> addCollection(@Field("uid") String uid,@Field("house_id") String house_id,@Field("room_id") String room_id,@Field("type") String type);
+
+    @GET("/member/collection/index")
+    Observable<CollectionListResponse> getCollectList(@Query("page") Integer page);
+
+    //删除收藏
+    @GET("/member/collection/del")
+    Observable<BaseResponse> delCollectionRecord(@Query("id") String id);
+
+
+    //用户带看列表
+    @GET("/member/visit-house/data")
+    Observable<TakeLookListResponse> getTakeLookList(@Query("page") Integer page, @Query("status") Integer status);
+
+
+    @GET("/member/visit-house/detail")
+    Observable<TakeLookDetail> getTakelookDetail(@Query("id") String id);
+
+    @FormUrlEncoded
+    @POST("/member/visit-house/success")
+    Observable<BaseResponse> confirmTakeLook(@Field("uid") String uid, @Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("/member/visit-house/cancel")
+    Observable<BaseResponse> cancelTakeLook(@Field("uid") String uid,@Field("id") String id,@Field("name") String name);
+
+
+    //获取经纪人列表
+    @GET("/member/visit-house/index")
+    Observable<AgentListResponse> getAgentList(@Query("room_id") String room_id,@Query("is_centra")String is_centra,
+                                               @Query("house_id") String house_id,@Query("page") Integer page);
+
+    //预约带看页面
+    @FormUrlEncoded
+    @POST("/member/visit-house/create")
+    Observable<TakeLookInfoResponse> getTakeLookInfo(@Field("room_id") String room_id, @Field("type")String type,
+                                                     @Field("house_id") String house_id, @Field("member_id") String member_id,
+                                                     @Field("uid") String uid);
+
+
+    //发起带看
+    @FormUrlEncoded
+    @POST("/member/visit-house/add")
+    Observable<LaunchTakeLookResponse> lanchTakeLookResponse(@Field("room_id") String room_id, @Field("type")String type,
+                                                             @Field("house_id") String house_id, @Field("member_id") String member_id,
+                                                             @Field("uid") String uid, @Field("name")String name, @Field("expect_time") String expect_time);
+
 
 }

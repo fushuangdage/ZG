@@ -44,7 +44,7 @@ public class CompanyHouseFragment extends BaseSupportFragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private ArrayList<String> strings;
+    private ArrayList<String> strings= new ArrayList<>();
     private PopupWindow region_panel;
     private PopupWindow rent_panel;
     private PopupWindow sort_panel;
