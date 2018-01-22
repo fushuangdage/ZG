@@ -93,6 +93,9 @@ public class HouseDetailFragment extends BaseSupportFragment {
     @BindView(R.id.recyclerView)
     RecyclerView sameRecyclerView;
 
+
+
+
     public List<RoomDetailResponse.DataBean.SameBean> sameList=new ArrayList<>();
 
     private Integer[] roomIconOnList={R.drawable.chuang_on,R.drawable.wifi_on,R.drawable.kongtiao_on,
@@ -246,6 +249,10 @@ public class HouseDetailFragment extends BaseSupportFragment {
 
     }
 
+    public RoomDetailResponse.DataBean getData() {
+        return data;
+    }
+
     @OnClick({R.id.ll_choose_room, R.id.ll_goto_company})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -254,7 +261,9 @@ public class HouseDetailFragment extends BaseSupportFragment {
                 roomPickDialog.show();
                 break;
             case R.id.ll_goto_company:
-                startActivity(new Intent(getContext(), CompanyDetailActivity.class));
+                Intent intent = new Intent(mActivity, CompanyDetailActivity.class);
+                intent.putExtra("company_id",Integer.parseInt(data.getCompany_id()));
+                startActivity(intent);
                 break;
 
         }

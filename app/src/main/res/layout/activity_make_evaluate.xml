@@ -54,6 +54,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_company"
                         style="@style/gray_text_11sp"
                         android:layout_marginTop="5dp"
                         android:layout_below="@+id/tv_agent_name"
@@ -63,6 +64,7 @@
                         android:layout_height="wrap_content" />
 
                     <com.example.admin.zgapplication.ui.view.StartBar
+                        android:id="@+id/sb_agent"
                         android:layout_alignParentRight="true"
                         app:can_start="true"
                         android:layout_width="150dp"
@@ -77,6 +79,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/et_agent_content"
                     android:background="@color/activity_bg"
                     android:hint="说说哪里满意,帮大家选择"
                     android:textSize="12sp"
@@ -114,6 +117,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_house_area"
                         style="@style/gray_text_11sp"
                         android:layout_marginTop="5dp"
                         android:layout_below="@+id/tv_house_name"
@@ -122,6 +126,7 @@
                         android:layout_height="wrap_content" />
 
                     <com.example.admin.zgapplication.ui.view.StartBar
+                        android:id="@+id/sb_house"
                         android:layout_alignParentRight="true"
                         app:can_start="true"
                         android:layout_width="150dp"
@@ -136,11 +141,15 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/et_house_content"
                     android:background="@color/activity_bg"
                     android:hint="说说哪里满意,帮大家选择"
                     android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp" />
+
+
+
             </LinearLayout>
 
 
@@ -155,6 +164,7 @@
                 android:layout_height="10dp" />
 
             <LinearLayout
+                android:id="@+id/ll_company_impression"
                 android:padding="13dp"
                 android:background="@color/white"
                 android:orientation="vertical"
@@ -190,6 +200,7 @@
                         android:layout_height="wrap_content" />
 
                     <com.example.admin.zgapplication.ui.view.StartBar
+                        android:id="@+id/sb_company"
                         android:layout_alignParentRight="true"
                         app:can_start="true"
                         android:layout_width="150dp"
@@ -204,7 +215,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/et_company"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@color/activity_bg"
@@ -219,12 +230,14 @@
     </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
+        android:id="@+id/ll_foot"
         android:background="@drawable/white_ract_border_bg"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="45dp">
 
         <CheckBox
+            android:id="@+id/cb_anonymous"
             style="@style/choose_checkbox"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
@@ -238,6 +251,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/tv_submit"
             android:textColor="@color/white"
             android:background="@color/green"
             android:text="提交评价"

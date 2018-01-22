@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="422dp">
@@ -24,7 +25,7 @@
             <TextView
                 android:id="@+id/tv_price"
                 android:text="¥ 5000"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/price_red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -32,7 +33,7 @@
             <TextView
                 android:id="@+id/tv_room_id"
                 android:layout_below="@id/tv_price"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:textSize="12sp"
                 android:textColor="#666e70"
                 android:text="房源编号：BJ120910203"
@@ -46,6 +47,16 @@
                 android:textSize="12sp"
                 android:textColor="@color/toolbartitle"
                 android:text="已选: 押一付一，101"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_payment_info"
+                android:layout_below="@id/tv_room_pay_mode"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/toolbartitle"
+                android:text="租金***,押金***"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -94,6 +105,7 @@
         <com.zhy.view.flowlayout.TagFlowLayout
             android:id="@+id/fl_pay_way"
             android:layout_margin="10dp"
+            app:max_select="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -106,6 +118,20 @@
         <com.zhy.view.flowlayout.TagFlowLayout
             android:id="@+id/fl_room_num"
             android:layout_margin="10dp"
+            app:max_select="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="#666e70"
+            android:text="租赁期限"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/fl_rent_time"
+            android:layout_margin="10dp"
+            app:max_select="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

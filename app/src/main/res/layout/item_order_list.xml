@@ -122,6 +122,20 @@
             android:layout_width="80dp"
             android:layout_height="26dp" />
 
+
+        <TextView
+            android:id="@+id/tv_contact_agent"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:textColor="@color/gray666"
+            android:text="联系大秘"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/tv_go_pay"
+            android:background="@drawable/gray_rect_boder"
+            android:gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="26dp" />
+
     </RelativeLayout>
 
     <View

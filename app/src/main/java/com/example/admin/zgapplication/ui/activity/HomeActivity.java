@@ -40,8 +40,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class HomeActivity extends MVPBaseActivity<HomePresenter> implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
@@ -68,8 +72,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     @BindView(R.id.tv_city)
     TextView tv_city;
 
-    private HomeFindHouseFragment houseFragment;
-    private HomeFindPersonFragment personFragment;
+    public HomeFindHouseFragment houseFragment;
+    public HomeFindPersonFragment personFragment;
     private CityResponse cityResponse;
     private PopupWindow popupWindow;
     private List<CityResponse.DataBean.ListBean> cityList;
@@ -141,7 +145,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
             }
         });
 
-
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -165,16 +168,31 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
         RetrofitHelper.getApiWithUid().getCityList()
                 .compose(RxScheduler.<CityResponse>defaultScheduler())
-                .subscribe(new BaseObserver<CityResponse>(mActivity) {
+                .doOnNext(new Consumer<CityResponse>() {
+                    @Override
+                    public void accept(CityResponse cityResponse) throws Exception {
+                        cityList = cityResponse.getData().getList();
+                        tv_city.setText(cityList.get(0).getName());
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .flatMap(new Function<CityResponse, ObservableSource<RegionResponse>>() {
+                    @Override
+                    public ObservableSource<RegionResponse> apply(CityResponse cityResponse) throws Exception {
+                        return RetrofitHelper.getApi().getRegionResponse(cityResponse.getData().getList().get(0).getId());
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<RegionResponse>(mActivity) {
                     @Override
                     public void error(Throwable e) {
 
                     }
 
                     @Override
-                    public void next(CityResponse cityResponse) {
-                        cityList = cityResponse.getData().getList();
-
+                    public void next(RegionResponse regionResponse) {
+                        HomeActivity.this.regionResponse = regionResponse;
+                        personFragment.setRegionList(regionResponse);
                     }
 
                     @Override
@@ -183,24 +201,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
                 });
 
 
-//      RetrofitHelper.getApi().downLoadMusic()
-//              .compose(RxScheduler.<Dami>defaultScheduler())
-//              .subscribe(new BaseObserver<Dami>(this,mActivity.getClass().getName()) {
-//                  @Override
-//                  public void error(Throwable e) {
-//
-//                  }
-//
-//                  @Override
-//                  public void next(Dami dami) {
-//                      Log.d(TAG, "next: "+dami);
-//                  }
-//
-//                  @Override
-//                  public void complete() {
-//                      Log.d(TAG, "complete: ");
-//                  }
-//              });
     }
 
 

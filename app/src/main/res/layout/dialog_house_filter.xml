@@ -115,11 +115,11 @@
             android:id="@+id/btn_confirm"
             android:layout_marginTop="20dp"
             android:background="@color/lightgreen"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/white"
             android:text="确定"
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="45dp" />
 
 
 

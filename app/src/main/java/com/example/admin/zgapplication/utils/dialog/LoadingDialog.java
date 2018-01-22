@@ -20,13 +20,13 @@ public class LoadingDialog {
     }
 
     public void show(Context context, String message, boolean cancleable) {
-        mDialog = ProgressDialog.show(context.getApplicationContext(), null, message);
+        mDialog = ProgressDialog.show(context, null, message);
         mDialog.setCancelable(cancleable);
         mDialog.show();
     }
 
     public void show(Context context, int message, boolean cancleable) {
-        mDialog = ProgressDialog.show(context.getApplicationContext(), null, context.getResources().getString(message));
+        mDialog = ProgressDialog.show(context, null, context.getResources().getString(message));
         mDialog.setCancelable(cancleable);
         mDialog.show();
     }

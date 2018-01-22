@@ -48,6 +48,7 @@
 
 
         <TextView
+            android:id="@+id/tv_district"
             style="@style/gray_text_11sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -180,7 +181,7 @@
         android:layout_marginRight="15dp"
         android:background="#eee" />
 
-    <com.zhy.view.flowlayout.FlowLayout
+    <com.zhy.view.flowlayout.TagFlowLayout
         android:id="@+id/flow_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -193,6 +194,7 @@
         android:background="#eee" />
 
     <RelativeLayout
+        android:id="@+id/rl_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
@@ -237,6 +239,7 @@
                 android:text="房源  " />
 
             <TextView
+                android:id="@+id/tv_house_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -258,6 +261,7 @@
                 android:text="经纪人  " />
 
             <TextView
+                android:id="@+id/tv_agent_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -279,6 +283,7 @@
                 android:text="评价  " />
 
             <TextView
+                android:id="@+id/tv_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"

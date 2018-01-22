@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,6 +14,8 @@ import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
+import com.example.admin.zgapplication.mvp.module.RoomDetailResponse;
+import com.example.admin.zgapplication.mvp.module.SelectOrderInfoBean;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
@@ -39,7 +42,7 @@ public class HouseDetailActivity extends BaseActivity {
     private HouseDetailFragment detailFragment;
     private String house_id;
     private String type;
-    private String room_id;
+    private String room_id="0";
 
     @Override
     public int setLayout() {
@@ -94,13 +97,23 @@ public class HouseDetailActivity extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.tv_write_order:
+
+                RoomDetailResponse.DataBean data = detailFragment.getData();
+
                 RoomPickDialog roomPickDialog = new RoomPickDialog(this,R.style.room_pick_dialog);
                 roomPickDialog.setResultCallBack(new RoomPickDialog.ResultCallBack() {
                     @Override
-                    public void resultCallBack(String s) {
-                        startActivity(ChooseAgentActivity.class);
+                    public void resultCallBack(SelectOrderInfoBean bean) {
+                        Intent intent = new Intent(mActivity, ChooseAgentActivity.class);
+                        intent.putExtra("bean",bean);
+                        intent.putExtra("house_id",bean.house_id);
+                        intent.putExtra("room_id",bean.room_id);
+                        intent.putExtra("type",bean.type);
+                        startActivity(intent);
                     }
                 });
+                roomPickDialog.create();
+                roomPickDialog.setData(data);
                 roomPickDialog.show();
                 break;
 

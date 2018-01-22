@@ -24,7 +24,7 @@ public class StartBar extends View {
     private int mHeight;
     private int mWidth;
     private int startNum=5;
-    private int rating=2;
+    public int rating=2;
     private int spacing=0;
     private Bitmap grayStart;
     private Bitmap yellowStart;
@@ -33,6 +33,13 @@ public class StartBar extends View {
     private Rect rect;
     private boolean canStart=false;
 
+    public boolean isCanStart() {
+        return canStart;
+    }
+
+    public void setCanStart(boolean canStart) {
+        this.canStart = canStart;
+    }
 
     public StartBar(Context context) {
         super(context);
@@ -43,6 +50,10 @@ public class StartBar extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.StartBar);
         canStart = ta.getBoolean(R.styleable.StartBar_can_start, false);
         init();
+    }
+
+    public int getRating() {
+        return rating;
     }
 
     public void setRating(int rating) {

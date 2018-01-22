@@ -25,6 +25,7 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -34,8 +35,8 @@ import java.util.Set;
 public class HouseFilterDialog extends Dialog implements DialogInterface.OnDismissListener {
 
     private final Context context;
-    private Set<Integer> rent_way_set;
-    private Set<Integer> house_type_set;
+    private Set<Integer> rent_way_set=new LinkedHashSet<>();
+    private Set<Integer> house_type_set=new LinkedHashSet<>();
     private int leftProgress;
     private int rightProgress;
 
@@ -85,13 +86,19 @@ public class HouseFilterDialog extends Dialog implements DialogInterface.OnDismi
         tfl_rent_way.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
             @Override
             public void onSelected(Set<Integer> selectPosSet) {
-                rent_way_set = selectPosSet;
+                rent_way_set.clear();
+                for (Integer integer : selectPosSet) {
+                    rent_way_set.add(integer+1);
+                }
             }
         });
         tfl_house_type.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
             @Override
             public void onSelected(Set<Integer> selectPosSet) {
-                house_type_set = selectPosSet;
+                house_type_set.clear();
+                for (Integer integer : selectPosSet) {
+                    house_type_set.add(integer+1);
+                }
             }
         });
         tfl_rent_way.setAdapter(new TagAdapter<String>(rent_way) {

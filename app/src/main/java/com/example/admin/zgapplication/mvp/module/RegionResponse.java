@@ -36,8 +36,7 @@ public class RegionResponse extends BaseResponse<RegionResponse.DataBean> {
              * sub : [{"id":"54","name":"回龙观","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"335","name":"天通苑","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"345","name":"北七家","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"346","name":"昌平县城","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"348","name":"霍营","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"349","name":"立水桥","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"350","name":"龙泽","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"351","name":"南口","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"352","name":"沙河","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"353","name":"小汤山","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"354","name":"百善镇","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"},{"id":"355","name":"阳坊","parent":"20","city":"655","province":"668","country":"654","create_at":"0","update_at":"0","deleted":"0"}]
              */
 
-            private List<BaseRegion> sub;
-
+            public List<BaseRegion> sub;
 
             public List<BaseRegion> getSub() {
                 return sub;
@@ -53,7 +52,7 @@ public class RegionResponse extends BaseResponse<RegionResponse.DataBean> {
 
     public static class BaseRegion{
 
-        private String id;
+        private Integer id;
         private String name;
         private String parent;
         private String city;
@@ -63,11 +62,11 @@ public class RegionResponse extends BaseResponse<RegionResponse.DataBean> {
         private String update_at;
         private String deleted;
 
-        public String getId() {
+        public Integer getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 

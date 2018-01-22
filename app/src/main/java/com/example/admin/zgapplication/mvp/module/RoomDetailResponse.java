@@ -48,6 +48,7 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
 
         private String house_id;
         private String room_id;
+        private String company_id;
         private String type;
         private String room_number;
         private String house_title;
@@ -78,6 +79,15 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
         private List<SameBean> same;
         private List<PayMethodBean> pay_method;
         private List<Integer> date;
+
+
+        public String getCompany_id() {
+            return company_id;
+        }
+
+        public void setCompany_id(String company_id) {
+            this.company_id = company_id;
+        }
 
         public String getHouse_id() {
             return house_id;
@@ -372,8 +382,8 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
              */
 
             private String method_name;
-            private String pay;
-            private String pledge;
+            private int pay;
+            private int pledge;
 
             public String getMethod_name() {
                 return method_name;
@@ -383,27 +393,45 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
                 this.method_name = method_name;
             }
 
-            public String getPay() {
+            public int getPay() {
                 return pay;
             }
 
-            public void setPay(String pay) {
+            public void setPay(int pay) {
                 this.pay = pay;
             }
 
-            public String getPledge() {
+            public int getPledge() {
                 return pledge;
             }
 
-            public void setPledge(String pledge) {
+            public void setPledge(int pledge) {
                 this.pledge = pledge;
             }
         }
 
         public static class RoomNBean {
+            public Integer room_deposit;
+            public String room_code;
             public String room_number;
-            public String rental;
+            public Integer rental;
             public String room_id;
+
+            public Integer getRoom_deposit() {
+                return room_deposit;
+            }
+
+            public void setRoom_deposit(Integer room_deposit) {
+                this.room_deposit = room_deposit;
+            }
+
+            public String getRoom_code() {
+                return room_code;
+            }
+
+            public void setRoom_code(String room_code) {
+                this.room_code = room_code;
+            }
 
             public String getRoom_number() {
                 return room_number;
@@ -413,11 +441,11 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
                 this.room_number = room_number;
             }
 
-            public String getRental() {
+            public int getRental() {
                 return rental;
             }
 
-            public void setRental(String rental) {
+            public void setRental(int rental) {
                 this.rental = rental;
             }
 

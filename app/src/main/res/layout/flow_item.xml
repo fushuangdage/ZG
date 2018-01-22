@@ -3,6 +3,7 @@
     android:layout_width="64dp"
     android:layout_height="24dp"
     android:textSize="11sp"
+    android:text="1111"
     android:layout_margin="5dp"
     android:gravity="center"
     android:background="@drawable/select_evaluate_tag"

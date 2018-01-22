@@ -156,20 +156,20 @@
             android:padding="10dp"
             android:layout_marginRight="25dp"/>
 
-        <CheckBox
-            android:text="微波炉"
-            android:layout_marginTop="50dp"
-            style="@style/filter_panel_checkbox"
-            android:padding="10dp"
-           />
+        <!--<CheckBox-->
+            <!--android:text="微波炉"-->
+            <!--android:layout_marginTop="50dp"-->
+            <!--style="@style/filter_panel_checkbox"-->
+            <!--android:padding="10dp"-->
+           <!--/>-->
 
-        <CheckBox
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="-290dp"
-            android:text="微波炉"
-            style="@style/filter_panel_checkbox"
-            android:padding="10dp"
-            android:layout_marginRight="25dp"/>
+        <!--<CheckBox-->
+            <!--android:layout_marginTop="100dp"-->
+            <!--android:layout_marginLeft="-290dp"-->
+            <!--android:text="微波炉"-->
+            <!--style="@style/filter_panel_checkbox"-->
+            <!--android:padding="10dp"-->
+            <!--android:layout_marginRight="25dp"/>-->
 
     </LinearLayout>
 
@@ -180,6 +180,7 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tv_reset"
             android:layout_width="155dp"
             android:layout_height="36dp"
             android:text="重置"

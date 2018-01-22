@@ -69,7 +69,7 @@ public class AgentListResponse extends BaseResponse<AgentListResponse.DataBean> 
             private String house_sum;
             private String visit_sum;
             private String order_sum;
-            private int score;
+            private float score;
             private List<String> label;
 
             public String getUsername() {
@@ -144,11 +144,11 @@ public class AgentListResponse extends BaseResponse<AgentListResponse.DataBean> 
                 this.order_sum = order_sum;
             }
 
-            public int getScore() {
+            public float getScore() {
                 return score;
             }
 
-            public void setScore(int score) {
+            public void setScore(float score) {
                 this.score = score;
             }
 

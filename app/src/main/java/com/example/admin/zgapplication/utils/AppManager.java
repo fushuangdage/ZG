@@ -17,6 +17,15 @@ public class AppManager {
     private AppManager() {
     }
 
+
+    public static Stack<Activity> getActivities() {
+        return activities;
+    }
+
+    public static void setActivities(Stack<Activity> activities) {
+        AppManager.activities = activities;
+    }
+
     /**
      * 实例化单例的静态内部类
      */

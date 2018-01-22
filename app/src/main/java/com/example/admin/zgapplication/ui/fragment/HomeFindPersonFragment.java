@@ -19,7 +19,6 @@ import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseSupportFragment;
 import com.example.admin.zgapplication.base.EventCenter;
 import com.example.admin.zgapplication.base.EventRegionSelect;
-import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.RegionResponse;
 import com.example.admin.zgapplication.mvp.module.StartIntent;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
@@ -57,6 +56,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     private HomePositionAdapter regionAdapter;
     private EventRegionSelect customFilter;
     private RegionResponse.BaseRegion select_region;
+    private RegionResponse currentSelectRegion;
 
 
     @Override
@@ -76,7 +76,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
         });
         tv_filter.setOnClickListener(this);
         btn_call_agent.setOnClickListener(this);
-        regionAdapter = new HomePositionAdapter(getActivity(), R.layout.home_position_item, regionList);
+        regionAdapter = new HomePositionAdapter(getActivity(), R.layout.home_position_item, regionList,this);
         mRecyclerView.setAdapter(regionAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         final BottomSheetBehavior<RelativeLayout> behavior = BottomSheetBehavior.from(mBottomSheet);
@@ -106,63 +106,80 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                 dialog.show();
                 break;
             case R.id.btn_call_agent:
-                if (customFilter != null) {
-                    String s = customFilter.getHouse_type_set().toString();
-                    int rentWayFlay=0;
-                    if (customFilter.getRent_way_set().toString().contains(",")) {
-                        rentWayFlay=1;
-                    }else if (customFilter.getRent_way_set().toString().contains("1")){
-                        rentWayFlay=2;
-                    }else {
-                        rentWayFlay=3;
-                    }
-
-                    RetrofitHelper.getApiWithUid().startIntention(
-                            select_region==null?null:select_region.getId(),
-                            customFilter.getLeftProgress(),
-                            customFilter.getRightProgress(),
-//                            customFilter.getRent_way_set()==null?null:customFilter.getRent_way_set().toString(),
-                           1,
-                            customFilter.getHouse_type_set()==null?null:customFilter.getHouse_type_set().toString().replace("b",""))
-                            .compose(RxScheduler.<BaseResponse>defaultScheduler())
-                            .subscribe(new BaseObserver<BaseResponse>(mActivity) {
-                                @Override
-                                public void error(Throwable e) {
-
-                                }
-
-                                @Override
-                                public void next(BaseResponse baseResponse) {
-                                    Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void complete() {
-
-                                }
-                            });
-
-                }else {
-                    RetrofitHelper.getApiWithUid().startIntention( select_region==null?null:select_region.getId(),null,null,null,null)
-                            .compose(RxScheduler.<StartIntent>defaultScheduler())
-                            .subscribe(new BaseObserver<StartIntent>(mActivity){
-                                @Override
-                                public void error(Throwable e) {
-
-                                }
-
-                                @Override
-                                public void next(StartIntent baseResponse) {
-                                    Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void complete() {
-
-                                }
-                            });
-                }
+                startCrabIntent();
                 break;
+        }
+    }
+
+    public void startCrabIntent() {
+        if (customFilter != null) {
+            String room = customFilter.getHouse_type_set().toString().replaceAll(" ","");
+            if (room.length()>2) {
+                room=room.substring(1,room.length()-1);
+            }else {
+                room=null;
+            }
+
+            int method = 1;
+            if (customFilter.getRent_way_set().size()==1) {
+                for (int i: customFilter.getRent_way_set()) {
+                    method=i;
+                }
+            }
+
+            RetrofitHelper.getApiWithUid().startIntention(
+                    select_region==null?null:select_region.getId(),
+                    customFilter.getLeftProgress(),
+                    customFilter.getRightProgress(),
+                    method,
+                    room, Constant.uid)
+                    .compose(RxScheduler.<StartIntent>defaultScheduler())
+                    .subscribe(new BaseObserver<StartIntent>(mActivity) {
+                        @Override
+                        public void error(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void next(StartIntent baseResponse) {
+                            Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                            if (baseResponse.getCode()==0){
+                                Intent intent = new Intent(mActivity, WaitCrabActivity.class);
+                                intent.putExtra("iid",baseResponse.getData().getId());
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void complete() {
+
+                        }
+                    });
+
+        }else {
+            RetrofitHelper.getApiWithUid().startIntention( select_region==null?null:select_region.getId(),null,null,null,null,Constant.uid)
+                    .compose(RxScheduler.<StartIntent>defaultScheduler())
+                    .subscribe(new BaseObserver<StartIntent>(mActivity){
+                        @Override
+                        public void error(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void next(StartIntent baseResponse) {
+                            Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                            if (baseResponse.getCode()==0){
+                                Intent intent = new Intent(mActivity, WaitCrabActivity.class);
+                                intent.putExtra("iid",baseResponse.getData().getId());
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void complete() {
+
+                        }
+                    });
         }
     }
 
@@ -179,6 +196,13 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     public void setRegionList(RegionResponse regionResponse) {
         regionList.clear();
         regionList.addAll(regionResponse.getData().getList());
+        regionAdapter.notifyDataSetChanged();
+        currentSelectRegion = regionResponse;
+    }
+
+    public void reloadFirstLevelData() {
+        regionList.clear();
+        regionList.addAll(currentSelectRegion.getData().getList());
         regionAdapter.notifyDataSetChanged();
     }
 }

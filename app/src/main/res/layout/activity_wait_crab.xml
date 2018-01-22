@@ -83,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
+                android:id="@+id/bt_reset_crab"
                 android:text="取消抢单"
                 android:textSize="12sp"
                 android:layout_width="100dp"

@@ -15,11 +15,14 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseSupportFragment;
 import com.example.admin.zgapplication.mvp.module.HouseResourseListBean;
+import com.example.admin.zgapplication.mvp.module.RegionResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.retrofit.rx.FinishLoadConsumer;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.activity.HouseDetailActivity;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
@@ -31,6 +34,8 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,7 +43,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFindHouseFragment extends BaseSupportFragment {
+public class HomeFindHouseFragment extends BaseSupportFragment implements MultiItemTypeAdapter.OnItemClickListener {
 
 
     @BindView(R.id.ll_region)
@@ -61,7 +66,8 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
     RefreshLayout refreshLayout;
 
     private ArrayList<HouseResourseListBean.HouseResourseDataBean.ListBean> houseList =new ArrayList<>();
-    private ArrayList<String> list=new ArrayList<>();
+    private ArrayList<RegionResponse.BaseRegion> list1=new ArrayList<>();
+    private ArrayList<RegionResponse.BaseRegion> list2=new ArrayList<>();
 
     private PopupWindow region_panel;
     private PopupWindow rent_panel;
@@ -76,7 +82,11 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
     private String param_rent_type;
     private String param_room_num;
     private String param_house_type;
-
+    private CommonAdapter<RegionResponse.BaseRegion> regionListAdapter1;
+    private CommonAdapter<RegionResponse.BaseRegion> regionListAdapter2;
+    private Integer areaid;
+    private Integer page=1;
+    private HashMap<String, Integer> configMap;
 
     @Override
     protected int setLayout() {
@@ -85,12 +95,12 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
 
     @Override
     protected void init() {
-
-        for (int i = 0; i < 10; i++) {
-            list.add("123456");
-        }
+        initConfigMap();
 
         loadFindHouseList();
+
+        loadRegionList();
+
 
         initRegionPanel();
 
@@ -151,9 +161,39 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
 
     }
 
+
+
+    private void loadRegionList() {
+        RetrofitHelper.getApi().getRegionResponse(Constant.city_id)
+                .compose(RxScheduler.<RegionResponse>defaultScheduler())
+                .subscribe(new BaseObserver<RegionResponse>(mActivity) {
+                    @Override
+                    public void error(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void next(RegionResponse regionResponse) {
+                        list1.clear();
+                        list2.clear();
+                        List<RegionResponse.DataBean.ListBean> list = regionResponse.getData().getList();
+                        list1.addAll(list);
+                        list2.addAll(list.get(0).getSub());
+                        regionListAdapter1.notifyDataSetChanged();
+                        regionListAdapter2.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void complete() {
+
+                    }
+                });
+    }
+
     private void loadFindHouseList() {
-        RetrofitHelper.getApiWithUid().getApartmentList(leftProgress,rightProgress,param_room_num,param_rent_type,order,sort,null,null,null,param_house_type)
+        RetrofitHelper.getApiWithUid().getApartmentList(leftProgress,rightProgress,param_room_num,param_rent_type,order,sort,areaid,null,page,param_house_type,param_house_config)
                 .compose(RxScheduler.<HouseResourseListBean>defaultScheduler())
+                .doOnNext(new FinishLoadConsumer<HouseResourseListBean>(refreshLayout,page))
                 .subscribe(new BaseObserver<HouseResourseListBean>(mActivity,mActivity.getClass().getName()) {
 
                     @Override
@@ -163,7 +203,9 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
 
                     @Override
                     public void next(HouseResourseListBean houseResourseListBean) {
-                        houseList.clear();
+                        if (page==1) {
+                            houseList.clear();
+                        }
                         houseList.addAll(houseResourseListBean.getData().getList());
                         adapter.notifyDataSetChanged();
                     }
@@ -196,12 +238,34 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
             }
         });
 
+        rent_pick_panel.findViewById(R.id.tv_reset).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setChildCheck(ll_house_config);
+                setChildCheck(ll_house_rent_type);
+                setChildCheck(ll_house_source_type);
+                setChildCheck(ll_room_num);
+            }
+        });
+
         filter_panel = new PopupWindow(rent_pick_panel, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         filter_panel.getContentView().measure(View.MeasureSpec.EXACTLY, View.MeasureSpec.UNSPECIFIED);
         filter_panel.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                param_house_config = getRequstParam(ll_house_config);
+
+                param_house_config="";
+                param_house_type="";
+                param_rent_type="";
+                param_room_num="";
+
+                for (int i = 0; i < ll_house_config.getChildCount(); i++) {
+                    String ck_string = ((CheckBox) ll_house_config.getChildAt(i)).getText().toString();
+                    Integer integer = configMap.get(ck_string);
+                    param_house_config=param_house_config+integer+",";
+                }
+                param_house_config=param_house_config.substring(0,param_house_config.length()-2);
+
                 param_house_type = getRequstParam(ll_house_source_type);
                 param_rent_type = getRequstParam(ll_house_rent_type);
                 param_room_num = getRequstParam(ll_room_num);
@@ -209,6 +273,13 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
                 loadFindHouseList();
             }
         });
+    }
+
+    private void setChildCheck(LinearLayout ll_house_config) {
+        for (int i = 0; i < ll_house_config.getChildCount(); i++) {
+            CheckBox childAt = (CheckBox) ll_house_config.getChildAt(i);
+            childAt.setChecked(false);
+        }
     }
 
     private String getRequstParam(LinearLayout ll_house_config) {
@@ -219,8 +290,10 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
                 builder.append(i+',');
             }
         }
-        String  s = builder.toString();
-        s = s.substring(0, s.length()-2);
+        String  s = builder.toString().trim();
+        if (s.length()>0){
+            s = s.substring(0, s.length()-2);
+        }
         return s;
     }
 
@@ -332,34 +405,30 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
 
         RecyclerView rv_region1 = (RecyclerView) region_pick_panel.findViewById(R.id.region1);
         RecyclerView rv_region2 = (RecyclerView) region_pick_panel.findViewById(R.id.region2);
-        RecyclerView rv_region3 = (RecyclerView) region_pick_panel.findViewById(R.id.region3);
 
         rv_region1.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         rv_region2.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        rv_region3.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
 
-        rv_region1.setAdapter(new CommonAdapter<String>(getActivity(),R.layout.item_region_pick_panel, list) {
-
-            @Override
-            protected void convert(ViewHolder holder, String s, int position) {
-                ((TextView) holder.getView(R.id.region_name)).setText(s);
-            }
-        });
-        rv_region2.setAdapter(new CommonAdapter<String>(getActivity(),R.layout.item_region_pick_panel, list) {
+        regionListAdapter1 = new CommonAdapter<RegionResponse.BaseRegion>(getActivity(), R.layout.item_region_pick_panel, list1) {
 
             @Override
-            protected void convert(ViewHolder holder, String s, int position) {
-                ((TextView) holder.getView(R.id.region_name)).setText(s);
+            protected void convert(ViewHolder holder, RegionResponse.BaseRegion s, int position) {
+                ((TextView) holder.getView(R.id.region_name)).setText(s.getName());
             }
-        });
-        rv_region3.setAdapter(new CommonAdapter<String>(getActivity(),R.layout.item_region_pick_panel, list) {
+        };
+        rv_region1.setAdapter(regionListAdapter1);
 
+        regionListAdapter2 = new CommonAdapter<RegionResponse.BaseRegion>(getActivity(), R.layout.item_region_pick_panel, list2) {
             @Override
-            protected void convert(ViewHolder holder, String s, int position) {
-                ((TextView) holder.getView(R.id.region_name)).setText(s);
+            protected void convert(ViewHolder holder, RegionResponse.BaseRegion s, int position) {
+                ((TextView) holder.getView(R.id.region_name)).setText(s.getName());
             }
-        });
+        };
 
+        rv_region2.setAdapter(regionListAdapter2);
+
+        regionListAdapter1.setOnItemClickListener(this);
+        regionListAdapter2.setOnItemClickListener(this);
     }
 
     @OnClick({R.id.ll_region,R.id.ll_rent,R.id.ll_sort,R.id.ll_filter})
@@ -397,6 +466,53 @@ public class HomeFindHouseFragment extends BaseSupportFragment {
 
         }
     }
+
+
+    @Override
+    public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+        switch (((View) view.getParent()).getId()) {
+            case R.id.region1:
+                list2.clear();
+                list2.addAll(((RegionResponse.DataBean.ListBean) list1.get(position)).getSub());
+                regionListAdapter2.notifyDataSetChanged();
+                break;
+            case R.id.region2:
+                RegionResponse.BaseRegion baseRegion = list2.get(position);
+                areaid = baseRegion.getId();
+                region_panel.dismiss();
+                loadFindHouseList();
+                break;
+        }
+    }
+
+    @Override
+    public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+        return false;
+    }
+
+    private void initConfigMap() {
+
+        configMap = new HashMap<>();
+        configMap.put("床",1);
+        configMap.put("wifi",2);
+        configMap.put("空调",3);
+        configMap.put("书桌",4);
+        configMap.put("卫生间",5);
+        configMap.put("衣柜",6);
+        configMap.put("沙发",7);
+        configMap.put("电视",8);
+        configMap.put("洗衣机",9);
+        configMap.put("冰箱",10);
+        configMap.put("热水器",11);
+        configMap.put("电磁炉",12);
+        configMap.put("微波炉",13);
+        configMap.put("燃气灶",14);
+        configMap.put("油烟机",15);
+        configMap.put("阳台",16);
+
+    }
+
+
 
 
 }

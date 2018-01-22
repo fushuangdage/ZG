@@ -10,6 +10,7 @@ import com.example.admin.zgapplication.ui.view.PriceDetailDialog;
 import butterknife.OnClick;
 
 public class OrderDetail2Activity extends BaseActivity {
+    private int order_id;
 
 //    @BindView(R.id.recyclerView)
 //    RecyclerView recyclerView;
@@ -72,7 +73,7 @@ public class OrderDetail2Activity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        order_id = getIntent().getIntExtra("order_id", 0);
     }
 
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/iv_house"
+        android:layout_width="100dp"
+        android:layout_height="76dp"
+        android:src="@drawable/house_sit" />
+
+    <TextView
+        android:id="@+id/tv_company_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:singleLine="true"
+        android:text="朝阳区魔方公寓"
+        android:textColor="#2a2e32"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/iv_house" />
+
+
+    <TextView
+        android:id="@+id/tv_house"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="房源总数"
+        android:textColor="@color/gray666"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_agent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_house"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_name" />
+
+    <TextView
+        android:id="@+id/tv_agent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="经纪人总数"
+        android:textColor="@color/gray666"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_score"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_house"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_name" />
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="综合评价"
+        android:textColor="@color/gray666"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_agent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_name" />
+
+
+    <TextView
+        android:id="@+id/tv_house_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="20套"
+        android:textColor="@color/green"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_house"
+        app:layout_constraintStart_toStartOf="@+id/tv_house"
+        app:layout_constraintTop_toBottomOf="@+id/tv_house"
+        android:layout_marginTop="10dp"
+         />
+
+    <TextView
+        android:id="@+id/tv_agent_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="20套"
+        android:textColor="@color/green"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_agent"
+        app:layout_constraintStart_toStartOf="@+id/tv_agent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_house"
+        android:layout_marginTop="10dp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_score_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="20套"
+        android:textColor="@color/green"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_score"
+        app:layout_constraintStart_toStartOf="@+id/tv_score"
+        app:layout_constraintTop_toBottomOf="@+id/tv_house"
+        android:layout_marginTop="10dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

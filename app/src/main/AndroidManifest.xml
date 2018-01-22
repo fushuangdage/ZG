@@ -235,7 +235,7 @@
         </activity>
         <activity android:name=".ui.activity.WaitCrabActivity" />
         <activity android:name=".ui.activity.GrabListActivity" />
-        <activity android:name=".ui.activity.AgentActivity">
+        <activity android:name=".ui.activity.AgentActivity" >
             <intent-filter>
                 <action android:name="com.fs.agentActivity" />
 
@@ -271,7 +271,9 @@
         <activity android:name=".ui.activity.EaseConversationListActivity" />
         <activity android:name=".ui.activity.ExchangeCouponActivity" />
         <activity android:name=".ui.activity.SelfInfoActivity" />
-        <activity android:name=".ui.activity.ModifyUserNameActivity"></activity>
+        <activity android:name=".ui.activity.ModifyUserNameActivity" />
+        <activity android:name=".ui.activity.SearchResultActivity" />
+        <activity android:name=".ui.activity.SearchListActivity"></activity>
     </application>
 
 </manifest>

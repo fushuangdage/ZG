@@ -109,8 +109,7 @@
                 android:id="@+id/position_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/rl_bottom_sheet_head"
-                android:background="#ccc" />
+                android:layout_below="@+id/rl_bottom_sheet_head" />
 
         </RelativeLayout>
 

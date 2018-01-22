@@ -18,6 +18,7 @@ import com.hyphenate.easeui.EaseConstant;
 public class Constant extends EaseConstant {
 
 	public static String uid="33";
+	public static String city_id="655";
 
 
 	public static final String SEARCH_HISTORY="search_history";
@@ -37,5 +38,6 @@ public class Constant extends EaseConstant {
 	public static final int REFRESH_REGION_FITSTLEVEL_LIST=1001;
 	public static final int REGION_SELECT=1002;
 	public static final int SECOND_LEVEL_REGION=1003;
+	public static final int RESULT_FOR_CHOOSE_COUPON=1004;
 
 }

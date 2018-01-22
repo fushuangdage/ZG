@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.AgentListResponse;
+import com.example.admin.zgapplication.mvp.module.SelectOrderInfoBean;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
@@ -49,7 +50,6 @@ public class ChooseAgentActivity extends BaseActivity {
     @Override
     public void initEvent() {
         from = getIntent().getStringExtra("from");
-
         //代表是从咨询经纪人跳转过来,显示三个按钮
         // TODO: 2017/11/1 跳转到单聊
         adapter = new CommonAdapter<AgentListResponse.DataBean.ListBean>(mActivity, R.layout.item_choose_agent, data) {
@@ -65,7 +65,7 @@ public class ChooseAgentActivity extends BaseActivity {
                 Glide.with(mActivity).load(bean.getAvatar())
                         .into((ImageView) holder.getView(R.id.icon));
 
-                ((StartBar) holder.getView(R.id.rating_bar)).setRating(bean.getScore());
+                ((StartBar) holder.getView(R.id.rating_bar)).setRating((int) bean.getScore());
 
 
                 TagFlowLayout flowLayout = (TagFlowLayout) holder.getView(R.id.flow_layout);
@@ -86,7 +86,7 @@ public class ChooseAgentActivity extends BaseActivity {
                         @Override
                         public void onClick(View v) {
                             // TODO: 2017/11/1 跳转到单聊
-
+                            startActivity(ChatActivity.class);
                         }
                     });
                     view.findViewById(R.id.iv_tel).setOnClickListener(new View.OnClickListener() {
@@ -96,6 +96,24 @@ public class ChooseAgentActivity extends BaseActivity {
                         }
                     });
 
+                }else {
+                    //选择经纪人,填写订单
+                    adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+
+                            Intent intent = new Intent(mActivity, OrderDetailActivity.class);
+                            SelectOrderInfoBean extra = (SelectOrderInfoBean) getIntent().getSerializableExtra("bean");
+                            extra.member_id=data.get(position).getId();
+                            intent.putExtra("bean",extra);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                            return false;
+                        }
+                    });
                 }
                 tagList.clear();
                 tagList.addAll(bean.getLabel());
@@ -109,19 +127,7 @@ public class ChooseAgentActivity extends BaseActivity {
                 });
             }
         };
-        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
 
-                Intent intent = new Intent(mActivity, OrderDetailActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
-                return false;
-            }
-        });
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setAdapter(adapter);
     }

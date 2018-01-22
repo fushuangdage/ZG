@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -9,15 +10,22 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
+import com.example.admin.zgapplication.mvp.module.CrabCountResponse;
+import com.example.admin.zgapplication.retrofit.RetrofitHelper;
+import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.fragment.RecommendDamiFragment;
 import com.example.admin.zgapplication.ui.fragment.RecommendHouseFragment;
 import com.example.admin.zgapplication.ui.view.BeforeBTBehavior;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class WaitCrabActivity extends BaseActivity {
 
@@ -28,16 +36,25 @@ public class WaitCrabActivity extends BaseActivity {
     ViewPager mViewPager;
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
+    @BindView(R.id.bt_check_crab_list)
+    TextView bt_check_crab_list;
 
-    @OnClick({R.id.bt_check_crab,R.id.bt_check_crab_list,R.id.iv_left})
+    @OnClick({R.id.bt_check_crab,R.id.bt_check_crab_list,R.id.iv_left,R.id.bt_reset_crab})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_check_crab:
             case R.id.bt_check_crab_list:
-               startActivity(GrabListActivity.class);
+                int iid = getIntent().getIntExtra("iid", 0);
+                Intent intent = new Intent(mActivity, GrabListActivity.class);
+                intent.putExtra("iid",iid);
+                startActivity(intent);
                 break;
             case R.id.iv_left:
                 finish();
+                break;
+            case R.id.bt_reset_crab:
+//                HomeActivity activity = (HomeActivity) AppManager.getActivities().get(AppManager.getActivities().size() - 2);
+//                activity.personFragment.startCrabIntent();
                 break;
         }
     }
@@ -55,7 +72,10 @@ public class WaitCrabActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
+
+
         ViewCompat.setAlpha(mask_view, 0);
+
         recommendDamiFragment = new RecommendDamiFragment();
         recommendHouseFragment = new RecommendHouseFragment();
 
@@ -109,6 +129,34 @@ public class WaitCrabActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        RetrofitHelper.getApiWithUid().getCrabCount(getIntent().getIntExtra("iid",0))
+                .compose(RxScheduler.<CrabCountResponse>defaultScheduler())
+                .subscribe(new Observer<CrabCountResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(CrabCountResponse crabCountResponse) {
+                        if (crabCountResponse.getCode()==0){
+                            CrabCountResponse.DataBean data = crabCountResponse.getData();
+                            bt_check_crab_list.setText(String.format("查看抢单(%s)",data.getCount()));
+                        }else {
+                            Toast.makeText(mActivity, crabCountResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
