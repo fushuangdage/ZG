@@ -9,8 +9,8 @@
     <TextView
         android:text="房源类型"
         android:textSize="14sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -40,8 +40,8 @@
     <TextView
         android:text="出租方式"
         android:textSize="14sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -67,8 +67,8 @@
     <TextView
         android:text="居室"
         android:textSize="14sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -97,7 +97,7 @@
             android:text="4居室"
             style="@style/filter_panel_checkbox"
             android:padding="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="-290dp"
             android:layout_marginRight="25dp"/>
 
@@ -105,7 +105,7 @@
             android:text="5居室"
             style="@style/filter_panel_checkbox"
             android:padding="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             />
 
     </LinearLayout>
@@ -114,8 +114,8 @@
     <TextView
         android:text="特色配置"
         android:textSize="14sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -142,7 +142,7 @@
 
 
         <CheckBox
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="-290dp"
             android:text="WIFI"
             style="@style/filter_panel_checkbox"
@@ -151,7 +151,7 @@
 
         <CheckBox
             android:text="电视"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             style="@style/filter_panel_checkbox"
             android:padding="10dp"
             android:layout_marginRight="25dp"/>

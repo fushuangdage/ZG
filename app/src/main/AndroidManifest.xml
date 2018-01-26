@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -24,11 +24,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!-- Jpush -->
-    <permission
-        android:name="com.example.admin.zgapplication.permission.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature" />
+    <!--<permission-->
+        <!--android:name="com.example.admin.zgapplication.permission.permission.JPUSH_MESSAGE"-->
+        <!--android:protectionLevel="signature" />-->
 
-    <uses-permission android:name="com.example.admin.zgapplication.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -40,7 +39,7 @@
     <application
         android:name=".ZgApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/zhagen_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -226,7 +225,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ui.activity.HomeActivity">
+        <activity android:name=".ui.activity.HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -235,7 +234,7 @@
         </activity>
         <activity android:name=".ui.activity.WaitCrabActivity" />
         <activity android:name=".ui.activity.GrabListActivity" />
-        <activity android:name=".ui.activity.AgentActivity" >
+        <activity android:name=".ui.activity.AgentActivity">
             <intent-filter>
                 <action android:name="com.fs.agentActivity" />
 
@@ -273,7 +272,15 @@
         <activity android:name=".ui.activity.SelfInfoActivity" />
         <activity android:name=".ui.activity.ModifyUserNameActivity" />
         <activity android:name=".ui.activity.SearchResultActivity" />
-        <activity android:name=".ui.activity.SearchListActivity"></activity>
+        <activity android:name=".ui.activity.SearchListActivity" />
+        <activity android:name=".ui.activity.LoginActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.AboutUsActivity" />
+        <activity android:name=".ui.activity.CompanyinfoActivity" />
+        <activity android:name=".ui.activity.LifeBillShowListActivity" />
+        <activity android:name=".ui.activity.LaunchActivity" />
+        <activity android:name=".ui.activity.GuideActivity"></activity>
     </application>
 
 </manifest>

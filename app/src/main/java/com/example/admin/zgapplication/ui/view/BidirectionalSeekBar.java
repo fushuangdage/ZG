@@ -80,6 +80,26 @@ public class BidirectionalSeekBar extends View {
     private int downX;
     private boolean isBitmap;
 
+
+    public void setLeftBallX(int leftBallX) {
+        this.leftBallX = leftBallX;
+        postInvalidate();
+    }
+
+    public int getLeftBallX() {
+        return leftBallX;
+    }
+
+
+    public int getRightBallX() {
+        return rightBallX;
+    }
+
+    public void setRightBallX(int rightBallX) {
+        this.rightBallX = rightBallX;
+        postInvalidate();
+    }
+
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BidirectionalSeekBar);
         withInColor = typedArray.getColor(R.styleable.BidirectionalSeekBar_pb_within_color, Color.parseColor("#111111"));
@@ -226,7 +246,7 @@ public class BidirectionalSeekBar extends View {
 
     public void dataReLoad(){
         text_left_num=0;
-        text_right_num=3000;
+        text_right_num=20000;
         postInvalidate();
     }
 

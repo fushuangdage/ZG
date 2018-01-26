@@ -2,12 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:padding="5dp"
     android:layout_width="160dp"
     android:layout_height="136dp">
 
     <ImageView
         android:id="@+id/iv_house"
-        android:background="@drawable/house_sit"
+        android:src="@drawable/house_sit"
+        android:scaleType="fitCenter"
         android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_height="0dp" />

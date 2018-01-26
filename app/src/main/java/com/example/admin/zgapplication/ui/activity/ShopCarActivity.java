@@ -16,10 +16,14 @@ import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.CollectionListResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.retrofit.rx.FinishLoadConsumer;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 
@@ -34,10 +38,15 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
     @BindView(R.id.tv_title)
     TextView tv_title;
 
-    public Integer page=1;
+
+    @BindView(R.id.refreshLayout)
+    RefreshLayout refreshLayout;
+
+
+    public Integer page = 1;
 
     private CommonAdapter<CollectionListResponse.DataBean.ListBean> adapter;
-    private ArrayList<CollectionListResponse.DataBean.ListBean> data=new ArrayList<>();
+    private ArrayList<CollectionListResponse.DataBean.ListBean> data = new ArrayList<>();
 
     @Override
     public int setLayout() {
@@ -48,6 +57,23 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
     public void initEvent() {
 
         tv_title.setText("我的收藏");
+
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                page = 0;
+                initData();
+            }
+        });
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                page++;
+                initData();
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CommonAdapter<CollectionListResponse.DataBean.ListBean>(this, R.layout.item_shopping_car, data) {
             @Override
@@ -56,7 +82,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
                 ((TextView) holder.getView(R.id.tv_house_name)).setText(bean.getHouse_title());
                 ((TextView) holder.getView(R.id.tv_house_location)).setText(bean.getHouse_address());
                 ((TextView) holder.getView(R.id.tv_house_info)).setText(bean.getHouse_info());
-                ((TextView) holder.getView(R.id.tv_house_rent)).setText(bean.getHouse_rental()+"元/月");
+                ((TextView) holder.getView(R.id.tv_house_rent)).setText(bean.getHouse_rental() + "元/月");
                 LinearLayout ll_tag_container = holder.getView(R.id.ll_tag_container);
                 showThreeTag(bean, ll_tag_container);
                 holder.setOnClickListener(R.id.iv_del, new View.OnClickListener() {
@@ -74,7 +100,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
                                     @Override
                                     public void next(BaseResponse baseResponse) {
                                         Toast.makeText(ShopCarActivity.this, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                                        if (baseResponse.getCode()==0){
+                                        if (baseResponse.getCode() == 0) {
                                             data.remove(position);
                                             adapter.notifyItemRemoved(position);
                                         }
@@ -96,7 +122,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
     }
 
     private void showThreeTag(CollectionListResponse.DataBean.ListBean bean, LinearLayout ll_tag_container) {
-        for (int i = 0; i < 3&&bean.getHouse_label()!=null&&bean.getHouse_label().size()>i; i++) {
+        for (int i = 0; i < 3 && bean.getHouse_label() != null && bean.getHouse_label().size() > i; i++) {
             TextView childAt = ((TextView) ll_tag_container.getChildAt(i));
             childAt.setVisibility(View.VISIBLE);
             childAt.setText(bean.getHouse_label().get(i));
@@ -107,6 +133,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
     public void initData() {
         RetrofitHelper.getApiWithUid().getCollectList(page)
                 .compose(RxScheduler.<CollectionListResponse>defaultScheduler())
+                .doOnNext(new FinishLoadConsumer<CollectionListResponse>(refreshLayout, page))
                 .subscribe(new BaseObserver<CollectionListResponse>(mActivity) {
                     @Override
                     public void error(Throwable e) {
@@ -115,6 +142,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
 
                     @Override
                     public void next(CollectionListResponse collectionListResponse) {
+                        if (page==0)
                         data.clear();
                         data.addAll(collectionListResponse.getData().getList());
                         adapter.notifyDataSetChanged();
@@ -126,11 +154,12 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
                     }
                 });
     }
+
     @OnClick({R.id.iv_left})
-    public void onClick(View view){
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_left:
-              finish();
+                finish();
                 break;
         }
     }
@@ -139,9 +168,9 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
         CollectionListResponse.DataBean.ListBean listBean = data.get(position);
         Intent intent = new Intent(mActivity, HouseDetailActivity.class);
-        intent.putExtra("house_id",listBean.getHouse_id());
-        intent.putExtra("room_id",listBean.getRoom_id());
-        intent.putExtra("type",listBean.getType());
+        intent.putExtra("house_id", listBean.getHouse_id());
+        intent.putExtra("room_id", listBean.getRoom_id());
+        intent.putExtra("type", listBean.getType());
         startActivity(intent);
     }
 

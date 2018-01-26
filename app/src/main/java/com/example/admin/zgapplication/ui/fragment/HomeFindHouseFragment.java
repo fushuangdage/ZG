@@ -87,6 +87,9 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
     private Integer areaid;
     private Integer page=1;
     private HashMap<String, Integer> configMap;
+    private BidirectionalSeekBar seekBar;
+    private int leftBallX;
+    private int rightBallX;
 
     @Override
     protected int setLayout() {
@@ -100,7 +103,6 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
         loadFindHouseList();
 
         loadRegionList();
-
 
         initRegionPanel();
 
@@ -191,7 +193,7 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
     }
 
     private void loadFindHouseList() {
-        RetrofitHelper.getApiWithUid().getApartmentList(leftProgress,rightProgress,param_room_num,param_rent_type,order,sort,areaid,null,page,param_house_type,param_house_config)
+        RetrofitHelper.getApiWithUid().getApartmentList(leftProgress,rightProgress,param_room_num,param_rent_type,order,sort,areaid,0,page,param_house_type,param_house_config)
                 .compose(RxScheduler.<HouseResourseListBean>defaultScheduler())
                 .doOnNext(new FinishLoadConsumer<HouseResourseListBean>(refreshLayout,page))
                 .subscribe(new BaseObserver<HouseResourseListBean>(mActivity,mActivity.getClass().getName()) {
@@ -262,9 +264,10 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
                 for (int i = 0; i < ll_house_config.getChildCount(); i++) {
                     String ck_string = ((CheckBox) ll_house_config.getChildAt(i)).getText().toString();
                     Integer integer = configMap.get(ck_string);
+                    if (integer!=null)
                     param_house_config=param_house_config+integer+",";
                 }
-                param_house_config=param_house_config.substring(0,param_house_config.length()-2);
+                param_house_config=param_house_config.substring(0,param_house_config.length()-1);
 
                 param_house_type = getRequstParam(ll_house_source_type);
                 param_rent_type = getRequstParam(ll_house_rent_type);
@@ -287,24 +290,24 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
         for (int i = 0; i < ll_house_config.getChildCount(); i++) {
             CheckBox childAt = ((CheckBox) ll_house_config.getChildAt(i));
             if (childAt.isChecked()) {
-                builder.append(i+',');
+                builder.append(i+1+",");
             }
         }
         String  s = builder.toString().trim();
         if (s.length()>0){
-            s = s.substring(0, s.length()-2);
+            s = s.substring(0, s.length()-1);
         }
         return s;
     }
 
     private void initRentPanel() {
         View rent_pick_panel = LayoutInflater.from(getActivity()).inflate(R.layout.rent_pick_panel, null, false);
-        final BidirectionalSeekBar bidirectionalSeekBar = (BidirectionalSeekBar) rent_pick_panel.findViewById(R.id.bidirectionalSeekBar);
+        seekBar = (BidirectionalSeekBar) rent_pick_panel.findViewById(R.id.bidirectionalSeekBar);
         final TextView rent_region = (TextView) rent_pick_panel.findViewById(R.id.tv_text_show);
         rent_pick_panel.findViewById(R.id.tv_rent_reload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bidirectionalSeekBar.dataReLoad();
+                seekBar.dataReLoad();
             }
         });
         rent_pick_panel.findViewById(R.id.tv_rent_confirm).setOnClickListener(new View.OnClickListener() {
@@ -314,7 +317,7 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
             }
         });
 
-        bidirectionalSeekBar.setOnSeekBarChangeListener(new BidirectionalSeekBar.OnSeekBarChangeListener() {
+        seekBar.setOnSeekBarChangeListener(new BidirectionalSeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(int leftProgress, int rightProgress) {
                 HomeFindHouseFragment.this.leftProgress = leftProgress;
@@ -327,6 +330,8 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
         rent_panel.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                leftBallX = seekBar.getLeftBallX();
+                rightBallX = seekBar.getRightBallX();
                 loadFindHouseList();
             }
         });
@@ -445,6 +450,8 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
                 if(rent_panel.isShowing()){
                     rent_panel.dismiss();
                 }else {
+                    seekBar.setLeftBallX(leftBallX);
+                    seekBar.setRightBallX(rightBallX);
                     rent_panel.showAsDropDown(ll_rent);
                 }
                 break;

@@ -91,7 +91,6 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
     @Override
     protected void init() {
 
-
         initConfigMap();
 
         initRegionPanel();
@@ -136,7 +135,6 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
             }
         });
         recyclerView.setAdapter(adapter);
-
 
         loadCompanyHouseList();
         loadRegionList();
@@ -252,7 +250,9 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
                 for (int i = 0; i < ll_house_config.getChildCount(); i++) {
                     String ck_string = ((CheckBox) ll_house_config.getChildAt(i)).getText().toString();
                     Integer integer = configMap.get(ck_string);
-                    param_house_config=param_house_config+integer+",";
+                    if (integer != null)
+                        param_house_config=param_house_config+integer+",";
+
                 }
                 param_house_config=param_house_config.substring(0,param_house_config.length()-2);
 

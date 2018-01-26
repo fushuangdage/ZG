@@ -19,6 +19,16 @@ public class Constant extends EaseConstant {
 
 	public static String uid="33";
 	public static String city_id="655";
+	public static String username="";
+	public static String password="";
+	public static String hx_username="";
+	public static String hx_password="";
+	public static String avatar="";
+
+
+	public static String SP_TABLE_USER_HX_NM="hx_username";
+	public static String SP_TABLE_USER_HX_PWD="hx_username";
+
 
 
 	public static final String SEARCH_HISTORY="search_history";

@@ -21,4 +21,7 @@
     <color name="ebeced">#ebeced</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="tab_background_pressed">#66000000</color>
+
 </resources>

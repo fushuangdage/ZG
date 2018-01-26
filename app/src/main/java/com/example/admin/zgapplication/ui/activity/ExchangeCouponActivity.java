@@ -2,6 +2,7 @@ package com.example.admin.zgapplication.ui.activity;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.zgapplication.R;
@@ -19,7 +20,8 @@ public class ExchangeCouponActivity extends BaseActivity {
 
     @BindView(R.id.et_exchange_coupon)
     EditText et_exchange_coupon;
-
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
 
     @Override
@@ -29,7 +31,7 @@ public class ExchangeCouponActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-
+        tv_title.setText("兑换优惠卷");
     }
 
     @Override

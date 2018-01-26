@@ -97,7 +97,6 @@ public class HouseDetailActivity extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.tv_write_order:
-
                 RoomDetailResponse.DataBean data = detailFragment.getData();
 
                 RoomPickDialog roomPickDialog = new RoomPickDialog(this,R.style.room_pick_dialog);
@@ -140,7 +139,6 @@ public class HouseDetailActivity extends BaseActivity {
                             public void error(Throwable e) {
 
                             }
-
                             @Override
                             public void next(BaseResponse baseResponse) {
                                 Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();

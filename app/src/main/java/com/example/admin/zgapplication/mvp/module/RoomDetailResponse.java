@@ -46,6 +46,7 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
          * date : [1,2,3,4,5,6,7,8,9,10,11,12]
          */
 
+        private String hx_username;
         private String house_id;
         private String room_id;
         private String company_id;
@@ -80,6 +81,13 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
         private List<PayMethodBean> pay_method;
         private List<Integer> date;
 
+        public String getHx_username() {
+            return hx_username;
+        }
+
+        public void setHx_username(String hx_username) {
+            this.hx_username = hx_username;
+        }
 
         public String getCompany_id() {
             return company_id;
@@ -348,6 +356,33 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
             private String house_photo;
             private String house_title;
             private int rental;
+            private int house_id;
+            private  int room_id;
+            private int type;
+
+            public int getHouse_id() {
+                return house_id;
+            }
+
+            public void setHouse_id(int house_id) {
+                this.house_id = house_id;
+            }
+
+            public int getRoom_id() {
+                return room_id;
+            }
+
+            public void setRoom_id(int room_id) {
+                this.room_id = room_id;
+            }
+
+            public int getType() {
+                return type;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
 
             public String getHouse_photo() {
                 return house_photo;

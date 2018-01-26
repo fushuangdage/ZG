@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tv_text_show"
-        android:text="￥0 - ¥3000"
+        android:text="￥0 - ¥20000"
         android:textColor="#b6b6b6"
         android:layout_marginTop="45dp"
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         app:ball_radius_size="8dp"
         app:ball_stroke_size="1dp"
         app:text_left_num="0"
-        app:text_right_num="3000"
+        app:text_right_num="20000"
         app:text_min_unit="1"
         app:pb_height="3dp"
         app:pb_within_color="@color/lightgreen"

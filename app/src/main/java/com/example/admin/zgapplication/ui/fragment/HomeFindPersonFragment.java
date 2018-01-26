@@ -19,6 +19,7 @@ import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseSupportFragment;
 import com.example.admin.zgapplication.base.EventCenter;
 import com.example.admin.zgapplication.base.EventRegionSelect;
+import com.example.admin.zgapplication.mvp.module.AgentLocationResponse;
 import com.example.admin.zgapplication.mvp.module.RegionResponse;
 import com.example.admin.zgapplication.mvp.module.StartIntent;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
@@ -26,12 +27,15 @@ import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.activity.WaitCrabActivity;
 import com.example.admin.zgapplication.ui.adapter.HomePositionAdapter;
+import com.example.admin.zgapplication.ui.view.CustomProgressView;
 import com.example.admin.zgapplication.ui.view.HouseFilterDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 /**
@@ -46,7 +50,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     @BindView(R.id.ll_float)
     LinearLayout ll_float;
     @BindView(R.id.home_progress)
-    View home_progress;
+    CustomProgressView home_progress;
     @BindView(R.id.tv_filter)
     TextView tv_filter;
     @BindView(R.id.btn_call_agent)
@@ -93,6 +97,31 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
 
             }
         });
+
+
+        RetrofitHelper.getApiWithUid().getAgentLocation()
+                .compose(RxScheduler.<AgentLocationResponse>defaultScheduler())
+                .subscribe(new Observer<AgentLocationResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(AgentLocationResponse agentLocationResponse) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -120,7 +149,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                 room=null;
             }
 
-            int method = 1;
+            int method = 1;  //整租+合租  整租: 2 合租: 3
             if (customFilter.getRent_way_set().size()==1) {
                 for (int i: customFilter.getRent_way_set()) {
                     method=i;
@@ -144,6 +173,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                         public void next(StartIntent baseResponse) {
                             Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
                             if (baseResponse.getCode()==0){
+                                home_progress.start();
                                 Intent intent = new Intent(mActivity, WaitCrabActivity.class);
                                 intent.putExtra("iid",baseResponse.getData().getId());
                                 startActivity(intent);

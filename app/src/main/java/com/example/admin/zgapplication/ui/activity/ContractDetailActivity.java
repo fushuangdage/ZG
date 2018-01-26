@@ -66,10 +66,16 @@ public class ContractDetailActivity extends BaseActivity {
     TextView tv_to_pay_count;
     @BindView(R.id.tv_go_pay_rent)
     TextView tv_pay_rent;
+    @BindView(R.id.tv_life_bill_title)
+    TextView tv_life_bill_title;
+    @BindView(R.id.tv_life_bill_total)
+    TextView tv_life_bill_total;
+
+    @BindView(R.id.tv_life_bill_count)
+    TextView tv_life_bill_count;
 
 
-
-    private ContactDetailResponse.DataBean o;
+    private ContactDetailResponse.DataBean dataBean;
     private RentBillResponse.DataBean.ListBean first_rent_list_bean;
 
 
@@ -91,21 +97,26 @@ public class ContractDetailActivity extends BaseActivity {
                 .doOnNext(new Consumer<ContactDetailResponse>() {
                     @Override
                     public void accept(ContactDetailResponse contactDetailResponse) throws Exception {
-                        o = contactDetailResponse.getData();
-                        tv_room_name.setText(o.getTitle());
-                        tv_status.setText(o.getStatus());
-                        tv_order_no.setText(o.getOrder());
-                        tv_time.setText(o.getDate());
-                        tv_price.setText(String.format("%s元/月 %s", o.getRent(), o.getPay()));
-                        Glide.with(mActivity).load(o.getImg()).into(iv_room);
-                        Glide.with(mActivity).load(o.getImg()).into(iv_agent_icon);
-                        rent_mouth.setText(o.getRent_month()+"个月");
-                        pay_type.setText(o.getPay());
-                        room_no.setText(o.getRoom());
+                        dataBean = contactDetailResponse.getData();
+                        tv_room_name.setText(dataBean.getTitle());
+                        tv_status.setText(dataBean.getStatus());
+                        tv_order_no.setText(dataBean.getOrder());
+                        tv_time.setText(dataBean.getDate());
+                        tv_price.setText(String.format("%s元/月 %s", dataBean.getRent(), dataBean.getPay()));
+                        Glide.with(mActivity).load(dataBean.getImg()).into(iv_room);
+                        Glide.with(mActivity).load(dataBean.getImg()).into(iv_agent_icon);
+                        rent_mouth.setText(dataBean.getRent_month() + "个月");
+                        pay_type.setText(dataBean.getPay());
+                        room_no.setText(dataBean.getRoom());
 
-                        tv_house_name.setText(o.getTitle());
-                        tv_bill_time.setText(o.getCircle());
-                        tv_to_pay_count.setText(String.format("您有%s个账单待支付",o.getPaying()));
+                        tv_house_name.setText(dataBean.getTitle());
+                        tv_life_bill_title.setText(dataBean.getTitle());
+                        tv_bill_time.setText(dataBean.getCircle());
+                        tv_life_bill_total.setText("账单总额 : ¥" + dataBean.getLife_pay());
+
+                        tv_to_pay_count.setText(String.format("您有%s个账单待支付", dataBean.getPaying()));
+                        tv_life_bill_count.setText(String.format("您有%d个账单待支付", dataBean.getLife_count()));
+
                     }
                 }).observeOn(Schedulers.io())
                 .flatMap(new Function<ContactDetailResponse, ObservableSource<RentBillResponse>>() {
@@ -124,9 +135,9 @@ public class ContractDetailActivity extends BaseActivity {
                     @Override
                     public void next(RentBillResponse rentBillResponse) {
                         List<RentBillResponse.DataBean.ListBean> list = rentBillResponse.getData().getList();
-                        if (list==null&&list.size()==0) {
+                        if (list == null && list.size() == 0) {
                             tv_pay_rent.setClickable(false);
-                        }else {
+                        } else {
                             tv_pay_rent.setClickable(true);
                             first_rent_list_bean = list.get(0);
                         }
@@ -141,14 +152,14 @@ public class ContractDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_go_pay_rent, R.id.iv_left, R.id.tv_rent_bill_list, R.id.tv_life_bill_list, R.id.tv_call})
+    @OnClick({R.id.tv_go_pay_rent, R.id.iv_left, R.id.tv_rent_bill_list, R.id.tv_life_bill_list, R.id.tv_call,R.id.tv_pay_record})
     public void onClick(View view) {
         Intent intent;
         Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.tv_go_pay_rent:
-                intent = new Intent(mActivity,BillDetailActivity.class);
-                intent.putExtra("bill_num",first_rent_list_bean.getBill_num());
+                intent = new Intent(mActivity, BillDetailActivity.class);
+                intent.putExtra("bill_num", first_rent_list_bean.getBill_num());
                 startActivity(intent);
                 break;
             case R.id.iv_left:
@@ -157,15 +168,16 @@ public class ContractDetailActivity extends BaseActivity {
             case R.id.tv_rent_bill_list:
                 bundle = new Bundle();
                 bundle.putString("title", "房租账单");
-                bundle.putString("order_num",o.getOrder());
+                bundle.putString("order_num", dataBean.getOrder());
                 startActivity(RentBillListActivity.class, bundle);
                 break;
             case R.id.tv_life_bill_list:
-                bundle.putString("title", "生活账单");
-                startActivity(RentBillListActivity.class, bundle);
+                intent=new Intent(mActivity,LifeBillShowListActivity.class);
+                intent.putExtra("order_num", dataBean.getOrder());
+                startActivity(intent);
                 break;
             case R.id.tv_call:
-               intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+o.getTel()));
+                intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + dataBean.getTel()));
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -177,6 +189,11 @@ public class ContractDetailActivity extends BaseActivity {
                     return;
                 }
                 startActivity(intent);
+                break;
+            case R.id.tv_pay_record:
+                bundle.putString("title", "全部账单");
+                bundle.putString("order_num", dataBean.getOrder());
+                startActivity(RentBillListActivity.class, bundle);
                 break;
         }
     }

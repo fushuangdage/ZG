@@ -17,7 +17,9 @@ import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.activity.CompanyDetailActivity;
+import com.example.admin.zgapplication.ui.activity.HouseDetailActivity;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.view.RoomPickDialog;
 import com.example.admin.zgapplication.utils.img.BannerGlideLoader;
@@ -127,9 +129,25 @@ public class HouseDetailFragment extends BaseSupportFragment {
             protected void convert(ViewHolder holder, RoomDetailResponse.DataBean.SameBean sameBean, int position) {
                 Glide.with(mActivity).load(sameBean.getHouse_photo()).into((ImageView) holder.getView(R.id.iv_house));
                 ((TextView) holder.getView(R.id.tv_house_info)).setText(sameBean.getHouse_title());
-                ((TextView) holder.getView(R.id.tv_rent)).setText(sameBean.getRental()+"");
+                ((TextView) holder.getView(R.id.tv_rent)).setText(sameBean.getRental()+"元/月");
             }
         };
+        sameAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                RoomDetailResponse.DataBean.SameBean sameBean = sameList.get(position);
+                Intent intent = new Intent(mActivity, HouseDetailActivity.class);
+                intent.putExtra("house_id",sameBean.getHouse_id());
+                intent.putExtra("room_id",sameBean.getRoom_id());
+                intent.putExtra("type",sameBean.getType());
+                startActivity(intent);
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
         sameRecyclerView.setAdapter(sameAdapter);
 
         RetrofitHelper.getApiWithUid().getRoomDetail(type, house_id, room_id)
@@ -230,7 +248,6 @@ public class HouseDetailFragment extends BaseSupportFragment {
 
                     }
                 });
-
 
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);

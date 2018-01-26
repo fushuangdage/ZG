@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAd
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.view.StartBar;
+import com.hyphenate.easeui.EaseConstant;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -37,8 +39,8 @@ public class ChooseAgentActivity extends BaseActivity {
 
     public Integer page;
 
-    public List<AgentListResponse.DataBean.ListBean> data =new ArrayList<>();
-    public List<String> tagList=new ArrayList<>();
+    public List<AgentListResponse.DataBean.ListBean> data = new ArrayList<>();
+    public List<String> tagList = new ArrayList<>();
     private String from;
     private CommonAdapter<AgentListResponse.DataBean.ListBean> adapter;
 
@@ -56,12 +58,12 @@ public class ChooseAgentActivity extends BaseActivity {
             @Override
             protected void convert(ViewHolder holder, final AgentListResponse.DataBean.ListBean bean, int position) {
 
-                holder.setText(R.id.tv_name,bean.getUsername());
-                holder.setText(R.id.tv_company,bean.getCompany_name()+" ");
-                holder.setText(R.id.tv_house_count_num,bean.getHouse_sum());
-                holder.setText(R.id.tv_trade_area,"负责商圈 "+bean.getDistrict()+" ");
-                holder.setText(R.id.tv_visit_count,bean.getVisit_sum());
-                holder.setText(R.id.tv_deal_count,bean.getOrder_sum());
+                holder.setText(R.id.tv_name, bean.getUsername());
+                holder.setText(R.id.tv_company, bean.getCompany_name() + " ");
+                holder.setText(R.id.tv_house_count_num, bean.getHouse_sum());
+                holder.setText(R.id.tv_trade_area, "负责商圈 " + bean.getDistrict() + " ");
+                holder.setText(R.id.tv_visit_count, bean.getVisit_sum());
+                holder.setText(R.id.tv_deal_count, bean.getOrder_sum());
                 Glide.with(mActivity).load(bean.getAvatar())
                         .into((ImageView) holder.getView(R.id.icon));
 
@@ -69,7 +71,7 @@ public class ChooseAgentActivity extends BaseActivity {
 
 
                 TagFlowLayout flowLayout = (TagFlowLayout) holder.getView(R.id.flow_layout);
-                if (from!=null) {
+                if (from != null) {
                     //代表是从咨询经纪人跳转过来,显示三个按钮
                     View view = holder.getView(R.id.ll_chat_agent_show);
                     view.setVisibility(View.VISIBLE);
@@ -78,25 +80,32 @@ public class ChooseAgentActivity extends BaseActivity {
                         @Override
                         public void onClick(View v) {
                             Bundle extras = getIntent().getExtras();
-                            extras.putString("member_id",bean.getId());  //经纪人id
-                            startActivity(TakeLookActivity.class,extras);
+                            extras.putString("member_id", bean.getId());  //经纪人id
+                            startActivity(TakeLookActivity.class, extras);
                         }
                     });
                     view.findViewById(R.id.iv_chat).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             // TODO: 2017/11/1 跳转到单聊
-                            startActivity(ChatActivity.class);
+                            Intent intent = new Intent(mActivity, ChatActivity.class);
+                            Bundle bundle = new Bundle();
+//                            bundle.putString(EaseConstant.EXTRA_USER_ID,);
+                            bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, 1);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                         }
                     });
                     view.findViewById(R.id.iv_tel).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+bean.getTelephone()));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
                         }
                     });
 
-                }else {
+                } else {
                     //选择经纪人,填写订单
                     adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
                         @Override
@@ -104,8 +113,8 @@ public class ChooseAgentActivity extends BaseActivity {
 
                             Intent intent = new Intent(mActivity, OrderDetailActivity.class);
                             SelectOrderInfoBean extra = (SelectOrderInfoBean) getIntent().getSerializableExtra("bean");
-                            extra.member_id=data.get(position).getId();
-                            intent.putExtra("bean",extra);
+                            extra.member_id = data.get(position).getId();
+                            intent.putExtra("bean", extra);
                             startActivity(intent);
                         }
 
@@ -138,7 +147,7 @@ public class ChooseAgentActivity extends BaseActivity {
         String house_id = bundle.getString("house_id");
         String room_id = bundle.getString("room_id");
         String type = bundle.getString("type");
-        RetrofitHelper.getApi().getAgentList(room_id,type,house_id,page)
+        RetrofitHelper.getApiWithUid().getAgentList(room_id, type, house_id, page)
                 .compose(RxScheduler.<AgentListResponse>defaultScheduler())
                 .subscribe(new BaseObserver<AgentListResponse>(mActivity) {
                     @Override

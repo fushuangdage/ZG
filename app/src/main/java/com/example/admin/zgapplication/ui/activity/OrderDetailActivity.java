@@ -171,7 +171,7 @@ public class OrderDetailActivity extends BaseActivity {
         tv_house_name.setText(bean.getHouse_title());
         tv_house_info.setText(bean.getHouse_area());
         tv_house_location.setText(bean.getAddress());
-        tv_house_rent.setText(bean.getRent()+"元/月");
+        tv_house_rent.setText(bean.getRent_money()+"元/月");
 
         showThreeTag(bean,ll_tag_container);
 
@@ -180,9 +180,9 @@ public class OrderDetailActivity extends BaseActivity {
         room_no.setText(bean.getRoom_num());
         tv_tel.setText(bean.getPhone_number());
 
-        rent_money.setText("¥"+bean.getRent()+"");
+        rent_money.setText("¥"+bean.getRent_money()+"");
         tv_rent_count.setText(bean.getRent_pay()+"");
-        deposit_money.setText("¥"+bean.getPay()+"");
+        deposit_money.setText("¥"+bean.getPay());
         tv_deposit_count.setText(bean.getDeposit());
         middle_count.setText(bean.getMiddle_count());
         middle_money.setText("¥"+bean.getMiddle_money());

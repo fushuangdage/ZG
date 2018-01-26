@@ -249,7 +249,7 @@
 
                 <TextView
                     android:id="@+id/tv_life_bill_list"
-                    android:text="查看全部"
+                    android:text="缴费记录"
                     style="@style/light_gray_text_12sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -261,6 +261,7 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_life_bill_title"
                 android:padding="13dp"
                 style="@style/gray_text_14sp"
                 android:text="朝阳区北京像素北区1号楼1单元1006主卧"
@@ -268,6 +269,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_life_bill_total"
                 android:paddingLeft="13dp"
                 style="@style/gray_text_14sp"
                 android:textColor="@color/textgray"
@@ -276,6 +278,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_life_bill_count"
                 android:padding="13dp"
                 style="@style/gray_text_14sp"
                 android:textColor="@color/textgray"
@@ -287,7 +290,7 @@
                 android:id="@+id/tv_pay_record"
                 android:background="@drawable/gray_circle_boder"
                 android:gravity="center"
-                android:text="缴费记录"
+                android:text="去支付"
                 android:textColor="@color/gray666"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="160dp"

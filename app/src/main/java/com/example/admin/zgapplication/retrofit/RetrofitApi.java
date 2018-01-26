@@ -2,10 +2,12 @@ package com.example.admin.zgapplication.retrofit;
 
 import com.example.admin.zgapplication.base.CompanyEvaluationList;
 import com.example.admin.zgapplication.base.EvaluationListResponse;
+import com.example.admin.zgapplication.mvp.module.AboutUsResponse;
 import com.example.admin.zgapplication.mvp.module.AddEvaluationResponse;
 import com.example.admin.zgapplication.mvp.module.AgentDetailResponse;
 import com.example.admin.zgapplication.mvp.module.AgentEvaluationResponse;
 import com.example.admin.zgapplication.mvp.module.AgentListResponse;
+import com.example.admin.zgapplication.mvp.module.AgentLocationResponse;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.BillFinishResponse;
 import com.example.admin.zgapplication.mvp.module.CityResponse;
@@ -25,7 +27,11 @@ import com.example.admin.zgapplication.mvp.module.HotSearchListResponse;
 import com.example.admin.zgapplication.mvp.module.HouseEvaluationRespose;
 import com.example.admin.zgapplication.mvp.module.HouseResourseListBean;
 import com.example.admin.zgapplication.mvp.module.LaunchTakeLookResponse;
+import com.example.admin.zgapplication.mvp.module.LifeBillRecordResponse;
+import com.example.admin.zgapplication.mvp.module.LifeRentBillResponse;
+import com.example.admin.zgapplication.mvp.module.LoginResponse;
 import com.example.admin.zgapplication.mvp.module.MakeEvaluationDetailResponse;
+import com.example.admin.zgapplication.mvp.module.MsgCodeResponse;
 import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
 import com.example.admin.zgapplication.mvp.module.OrderList;
 import com.example.admin.zgapplication.mvp.module.RecommendAgentsListResponse;
@@ -112,7 +118,7 @@ public interface RetrofitApi {
     Observable<RentIntentListResponse> getIntentList(@Query("page") Integer page);
 
     @GET("/member/intention/del")
-    Observable<BaseResponse> delIntentItem(@Query("i_id") String i_id);
+    Observable<BaseResponse> delIntentItem(@Query("id") String id);
 
     @GET("/district/city")
     Observable<CityResponse> getCityList();
@@ -162,7 +168,7 @@ public interface RetrofitApi {
 
 
     //用户带看列表
-    @GET("/member/visit-house/data")
+    @GET("/member/visit-house/list")
     Observable<TakeLookListResponse> getTakeLookList(@Query("page") Integer page, @Query("status") Integer status);
 
 
@@ -312,6 +318,30 @@ public interface RetrofitApi {
 
     @GET("/member/review/detail")
     Observable<EvaluationSuccessDetail> getEvaluationDetail(@Query("method") String method,@Query("id") String id);
+
+
+    @GET("district/aboutus")
+    Observable<AboutUsResponse> getAboutUsResponse();
+
+    @GET("member/contract/life-pay")
+    Observable<LifeRentBillResponse> getLifeRentBillResponse(@Query("order_num") String order_num);
+
+
+    @GET("member/contract/record")
+    Observable<LifeBillRecordResponse> getLifeRecordList(@Query("order_num") String order_num);
+
+    @FormUrlEncoded
+    @POST("sms/code")
+    Observable<MsgCodeResponse> getMsgCodeResponse(@Field("phone_number") String number);
+
+
+    @FormUrlEncoded
+    @POST("member/login")
+    Observable<LoginResponse> login(@Field("phone_number") String phone_number, @Field("code") String code);
+
+
+    @GET("/member/home")
+    Observable<AgentLocationResponse> getAgentLocation();
 
 
 }

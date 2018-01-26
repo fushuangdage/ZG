@@ -129,6 +129,7 @@ public class WaitCrabActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
         RetrofitHelper.getApiWithUid().getCrabCount(getIntent().getIntExtra("iid",0))
                 .compose(RxScheduler.<CrabCountResponse>defaultScheduler())
                 .subscribe(new Observer<CrabCountResponse>() {
@@ -139,6 +140,7 @@ public class WaitCrabActivity extends BaseActivity {
 
                     @Override
                     public void onNext(CrabCountResponse crabCountResponse) {
+
                         if (crabCountResponse.getCode()==0){
                             CrabCountResponse.DataBean data = crabCountResponse.getData();
                             bt_check_crab_list.setText(String.format("查看抢单(%s)",data.getCount()));

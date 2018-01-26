@@ -15,17 +15,20 @@
         android:layout_height="wrap_content">
         
         <CheckBox
+            android:id="@+id/cb_life_bill"
             android:layout_marginRight="10dp"
             style="@style/choose_checkbox"
             android:layout_width="20dp"
             android:layout_height="20dp" />
         <TextView
+            android:id="@+id/tv_type"
             style="@style/gray_text_17sp"
             android:text="水费"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_status"
             android:textSize="12sp"
             android:text="待支付"
             android:textColor="@color/toolbartitle"
@@ -34,6 +37,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_time"
         android:paddingLeft="13dp"
         android:text="账单周期"
         style="@style/light_gray_text_12sp"
@@ -41,9 +45,21 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/tv_last_pay"
         android:layout_marginTop="7dp"
         android:paddingLeft="13dp"
-        android:text="应付金额"
+        android:text="上次缴纳费用 :"
+        style="@style/light_gray_text_12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tv_pay_time"
+        android:visibility="gone"
+        android:layout_marginTop="7dp"
+        android:paddingLeft="13dp"
+        android:text="支付时间 :"
         style="@style/light_gray_text_12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -60,21 +76,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tv_should_pay"
             style="@style/gray_text_14sp"
             android:text="需缴纳费用: ¥150"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        
-        
-        <TextView
-            android:id="@+id/tv_go_pay"
-            android:textColor="@color/lightgreen"
-            android:text="去支付"
-            android:gravity="center"
-            android:background="@drawable/green_border_bg"
-            android:layout_width="80dp"
-            android:layout_height="29dp" />
+
     </LinearLayout>
     
 </LinearLayout>

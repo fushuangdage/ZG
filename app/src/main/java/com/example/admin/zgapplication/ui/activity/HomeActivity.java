@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.EventCenter;
@@ -32,10 +32,9 @@ import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiIte
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -72,6 +71,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     @BindView(R.id.tv_city)
     TextView tv_city;
 
+
     public HomeFindHouseFragment houseFragment;
     public HomeFindPersonFragment personFragment;
     private CityResponse cityResponse;
@@ -99,8 +99,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         houseFragment = new HomeFindHouseFragment();
         personFragment = new HomeFindPersonFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_container,houseFragment)
-                .add(R.id.main_container,personFragment)
+                .add(R.id.main_container, houseFragment)
+                .add(R.id.main_container, personFragment)
                 .hide(houseFragment).commit();
         radioGroup.setOnCheckedChangeListener(this);
 
@@ -108,6 +108,13 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         View evaluation = headerView.findViewById(R.id.ll_evaluation);
         View order = headerView.findViewById(R.id.ll_order);
         View contact = headerView.findViewById(R.id.ll_contract);
+
+        ImageView iv_agent_icon = (ImageView) headerView.findViewById(R.id.iv_agent_icon);
+
+        Glide.with(mActivity).load(Constant.avatar).into(iv_agent_icon);
+        ((TextView) headerView.findViewById(R.id.tv_user_name)).setText(Constant.username);
+
+
         headerView.findViewById(R.id.ll_shopping_car).setOnClickListener(this);
         headerView.findViewById(R.id.ll_intent).setOnClickListener(this);
         headerView.findViewById(R.id.ll_take_look).setOnClickListener(this);
@@ -115,6 +122,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         headerView.findViewById(R.id.ll_discount).setOnClickListener(this);
         headerView.findViewById(R.id.ll_friend).setOnClickListener(this);
         headerView.findViewById(R.id.ll_self).setOnClickListener(this);
+        headerView.findViewById(R.id.tv_about_us).setOnClickListener(this);
+        headerView.findViewById(R.id.tv_setting).setOnClickListener(this);
         evaluation.setOnClickListener(this);
         order.setOnClickListener(this);
         contact.setOnClickListener(this);
@@ -124,26 +133,10 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
     @Override
     public void initData() {
-        EMClient.getInstance().login("954c8d7dd5367d0cd5b1d6d740c88e82u", "66cefbd4ccb8e9a3b4f80f22aa5be0f1", new EMCallBack() {
+
+        Serializable loginBean = getIntent().getSerializableExtra("loginBean");
 
 
-//        EMClient.getInstance().login("fushuang", "123456", new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                Log.d("888888888888888888888", "onSuccess: 登陆成功");
-            }
-
-
-            @Override
-            public void onError(int i, String s) {
-                Log.d("888888888888888888888", "onError: "+s);
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-
-            }
-        });
 
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -204,9 +197,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     }
 
 
-
-    @OnClick({R.id.home_find,R.id.home_message,R.id.mine,R.id.tv_city})
-    public void onClick(View view){
+    @OnClick({R.id.home_find, R.id.home_message, R.id.mine, R.id.tv_city})
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_city:
                 View contentView = LayoutInflater.from(mActivity).inflate(R.layout.city_choose_panel, null, false);
@@ -247,6 +239,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
 
                     }
+
                     @Override
                     public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
                         return false;
@@ -255,7 +248,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
                 recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
                 recyclerView.setAdapter(cityAdapter);
                 popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                popupWindow.getContentView().measure(View.MeasureSpec.EXACTLY,View.MeasureSpec.UNSPECIFIED);
+                popupWindow.getContentView().measure(View.MeasureSpec.EXACTLY, View.MeasureSpec.UNSPECIFIED);
                 popupWindow.setContentView(contentView);
                 popupWindow.showAsDropDown(tv_city);
                 break;
@@ -297,12 +290,18 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
             case R.id.ll_self:
                 startActivity(SelfInfoActivity.class);
                 break;
+            case R.id.tv_setting :
+
+                break;
+            case R.id.tv_about_us:
+                startActivity(AboutUsActivity.class);
+                break;
         }
     }
 
     @Override
     public void onEventBusResult(EventCenter event) {
-        if (event.getCode()== Constant.REFRESH_REGION_FITSTLEVEL_LIST) {
+        if (event.getCode() == Constant.REFRESH_REGION_FITSTLEVEL_LIST) {
             //上拉区域选择区域回传
             personFragment.setRegionList(regionResponse);
             select_region = ((RegionResponse.BaseRegion) event.getData());
@@ -312,9 +311,9 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
 
-        if(checkedId==R.id.rb_findHouse){
+        if (checkedId == R.id.rb_findHouse) {
             getSupportFragmentManager().beginTransaction().hide(personFragment).show(houseFragment).commit();
-        }else {
+        } else {
             getSupportFragmentManager().beginTransaction().hide(houseFragment).show(personFragment).commit();
         }
     }

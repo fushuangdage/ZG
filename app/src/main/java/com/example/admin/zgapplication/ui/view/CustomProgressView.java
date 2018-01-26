@@ -85,11 +85,11 @@ public class CustomProgressView extends View{
         if (drawCenterPic){
             runBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.person_run);
         }
-        if (isCountDown){
-            startReversal();
-        }else {
-            start();
-        }
+//        if (isCountDown){
+//            startReversal();
+//        }else {
+//            start();
+//        }
     }
 
     @Override

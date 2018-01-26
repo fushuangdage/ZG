@@ -88,7 +88,7 @@ public class HouseFilterDialog extends Dialog implements DialogInterface.OnDismi
             public void onSelected(Set<Integer> selectPosSet) {
                 rent_way_set.clear();
                 for (Integer integer : selectPosSet) {
-                    rent_way_set.add(integer+1);
+                    rent_way_set.add(integer+2);   //可恶的后台小姐姐第一个整租用2 表示,合租用3表示
                 }
             }
         });
