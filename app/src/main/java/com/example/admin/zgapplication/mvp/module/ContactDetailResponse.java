@@ -41,15 +41,15 @@ public class ContactDetailResponse extends BaseResponse<ContactDetailResponse.Da
         private String circle;
         private String paying;
 
-        private int life_pay;
+        private double life_pay;
         private int life_status;
         private int life_count;
 
-        public int getLife_pay() {
+        public double getLife_pay() {
             return life_pay;
         }
 
-        public void setLife_pay(int life_pay) {
+        public void setLife_pay(double life_pay) {
             this.life_pay = life_pay;
         }
 

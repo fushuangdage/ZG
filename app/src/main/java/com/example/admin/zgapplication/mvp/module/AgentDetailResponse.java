@@ -51,6 +51,15 @@ public class AgentDetailResponse extends BaseResponse<AgentDetailResponse.DataBe
         private List<String> label;
         private List<ListBean> list;
 
+        public String hx_username;
+
+        public String getHx_username() {
+            return hx_username;
+        }
+
+        public void setHx_username(String hx_username) {
+            this.hx_username = hx_username;
+        }
 
         public String getCompany_id() {
             return company_id;

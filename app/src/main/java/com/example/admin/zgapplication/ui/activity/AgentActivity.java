@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiIte
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.HeaderAndFooterWrapper;
 import com.example.admin.zgapplication.ui.view.StartBar;
+import com.hyphenate.easeui.EaseConstant;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class AgentActivity extends BaseActivity implements View.OnClickListener {
@@ -53,6 +56,7 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
     private TagAdapter<String> tag;
     private String aid;
     private String company_id;
+    private AgentDetailResponse.DataBean data;
 
     @Override
     public int setLayout() {
@@ -157,7 +161,7 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
 
                     @Override
                     public void next(AgentDetailResponse agentDetailResponse) {
-                        AgentDetailResponse.DataBean data = agentDetailResponse.getData();
+                        data = agentDetailResponse.getData();
                         company_id = data.getCompany_id();
                         Glide.with(mActivity).load(data.getAvatar()).into((ImageView) list_head.findViewById(R.id.iv_agent_icon));
                         ((TextView) list_head.findViewById(R.id.tv_agent_name)).setText(data.getUsername());
@@ -190,6 +194,7 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
+    @OnClick({R.id.tv_contact_agent})
     public void onClick(View v) {
 
         Intent intent;
@@ -205,6 +210,16 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
             case R.id.rl_company:
                 intent = new Intent(mActivity, CompanyDetailActivity.class);
                 intent.putExtra("company_id",company_id);
+                startActivity(intent);
+                break;
+            case R.id.tv_contact_agent:
+                intent = new Intent(mActivity, ChatActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(EaseConstant.EXTRA_USER_ID,data.getHx_username());
+                bundle.putString(EaseConstant.NICK_NAME,data.getUsername());
+                bundle.putString(EaseConstant.HEADIMAGEURL,data.getAvatar());
+                bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
         }

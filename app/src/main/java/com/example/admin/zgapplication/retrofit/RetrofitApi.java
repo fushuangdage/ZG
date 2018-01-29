@@ -10,6 +10,7 @@ import com.example.admin.zgapplication.mvp.module.AgentListResponse;
 import com.example.admin.zgapplication.mvp.module.AgentLocationResponse;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.BillFinishResponse;
+import com.example.admin.zgapplication.mvp.module.BillPayImmediately;
 import com.example.admin.zgapplication.mvp.module.CityResponse;
 import com.example.admin.zgapplication.mvp.module.CollectionListResponse;
 import com.example.admin.zgapplication.mvp.module.CompanyHomePageResponse;
@@ -35,6 +36,7 @@ import com.example.admin.zgapplication.mvp.module.MakeEvaluationDetailResponse;
 import com.example.admin.zgapplication.mvp.module.MsgCodeResponse;
 import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
 import com.example.admin.zgapplication.mvp.module.OrderList;
+import com.example.admin.zgapplication.mvp.module.PayInfoResponse;
 import com.example.admin.zgapplication.mvp.module.RecommendAgentsListResponse;
 import com.example.admin.zgapplication.mvp.module.RecommendHouseListResponse;
 import com.example.admin.zgapplication.mvp.module.RegionResponse;
@@ -348,5 +350,12 @@ public interface RetrofitApi {
     @GET("/member/intention/detail")
     Observable<IntentionDetailResponse> getIntentDetail(@Query("id") String iid,@Query("page") int page);
 
+    @GET("/member/contract/select")
+    Observable<BillPayImmediately> getPayImmediately(@Query("id") String id);
+
+
+    @FormUrlEncoded
+    @POST("/member/pay/to-pay")
+    Observable<PayInfoResponse> getPayInfo(@Field("type") String type,@Field("order_num") String order_num,@Field("method") String method);
 
 }

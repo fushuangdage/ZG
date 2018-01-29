@@ -34,12 +34,19 @@ public class LifeRentBillResponse extends BaseResponse <LifeRentBillResponse.Dat
             private String bill_num;
             private String item_name;
             private String circle;
-            private int payment;
+            private double payment;
             private String last_pay;
             public boolean isCheck=false;
             public String pay_time;
             public String status;
 
+            public boolean isCheck() {
+                return isCheck;
+            }
+
+            public void setCheck(boolean check) {
+                isCheck = check;
+            }
 
             public String getLast_pay() {
                 return last_pay;
@@ -89,11 +96,11 @@ public class LifeRentBillResponse extends BaseResponse <LifeRentBillResponse.Dat
                 this.circle = circle;
             }
 
-            public int getPayment() {
+            public double getPayment() {
                 return payment;
             }
 
-            public void setPayment(int payment) {
+            public void setPayment(double payment) {
                 this.payment = payment;
             }
         }
