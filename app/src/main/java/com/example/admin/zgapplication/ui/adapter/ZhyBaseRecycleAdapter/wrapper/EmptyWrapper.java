@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.utils.WrapperUtils;
 
@@ -16,12 +18,12 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
 {
     public static final int ITEM_TYPE_EMPTY = Integer.MAX_VALUE - 1;
 
-    private RecyclerView.Adapter mInnerAdapter;
+    private CommonAdapter mInnerAdapter;
     private View mEmptyView;
     private int mEmptyLayoutId;
 
 
-    public EmptyWrapper(RecyclerView.Adapter adapter)
+    public EmptyWrapper(CommonAdapter adapter)
     {
         mInnerAdapter = adapter;
     }
@@ -29,6 +31,11 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private boolean isEmpty()
     {
         return (mEmptyView != null || mEmptyLayoutId != 0) && mInnerAdapter.getItemCount() == 0;
+    }
+
+
+    public CommonAdapter getmInnerAdapter() {
+        return mInnerAdapter;
     }
 
     @Override
@@ -100,7 +107,7 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
         {
             return;
         }
-        mInnerAdapter.onBindViewHolder(holder, position);
+        mInnerAdapter.onBindViewHolder((ViewHolder) holder, position);
     }
 
     @Override
@@ -122,4 +129,7 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
         mEmptyLayoutId = layoutId;
     }
 
+    public void setOnItemClickListener(MultiItemTypeAdapter.OnItemClickListener clickListener) {
+        mInnerAdapter.setOnItemClickListener(clickListener);
+    }
 }

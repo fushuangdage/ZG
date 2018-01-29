@@ -1,12 +1,9 @@
 package com.example.admin.zgapplication.retrofit.rx;
 
-import android.content.Context;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.support.v7.widget.RecyclerView;
 
-import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.EmptyWrapper;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -35,21 +32,16 @@ public class   FinishLoadConsumer<T extends BaseResponse> implements Consumer<T>
     }
 
 
+
     @Override
     public void accept(T t) throws Exception {
 
-        if (t.getCode()!=0){
+        RecyclerView recyclerView = (RecyclerView) ((SmartRefreshLayout) refreshLayout).getChildAt(0);
+        if (t.getCode()!=0&&t.getMsg().equals("暂无数据")){
 
-            int rl_width = refreshLayout.getLayout().getWidth();
-            int rl_height = refreshLayout.getLayout().getHeight();
-            View recyclerView = ((SmartRefreshLayout) refreshLayout).getChildAt(0);
-            recyclerView.setVisibility(View.GONE);
-            Context context = recyclerView.getContext();
-            ImageView imageView = new ImageView(context);
-//            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            imageView.setLayoutParams(new LinearLayout.LayoutParams(1000, 1000));
-            imageView.setBackgroundResource(R.drawable.ic_launcher);
-            ((SmartRefreshLayout) refreshLayout).addView(imageView,new LinearLayout.LayoutParams(1000, 1000));
+            EmptyWrapper adapter = (EmptyWrapper) recyclerView.getAdapter();
+            adapter.getmInnerAdapter().getDatas().clear();
+            adapter.notifyDataSetChanged();
 
         }else {
 

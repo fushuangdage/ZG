@@ -20,6 +20,7 @@ import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.EmptyWrapper;
 import com.example.admin.zgapplication.utils.date.TimeUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -45,7 +46,7 @@ public class TakeLookListActivity extends BaseActivity {
     private ArrayList<TakeLookListResponse.DataBean.ListBean> data = new ArrayList<>();
     public Integer currentPager = 1;
     public Integer status = 1;
-    private CommonAdapter<TakeLookListResponse.DataBean.ListBean> adapter;
+    private EmptyWrapper<TakeLookListResponse.DataBean.ListBean> adapter;
 
     @Override
     public int setLayout() {
@@ -91,7 +92,7 @@ public class TakeLookListActivity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //                ((TextView) holder.getView(R.id.tv_friend_pay)).setText("取消带看");
-        adapter = new CommonAdapter<TakeLookListResponse.DataBean.ListBean>(this, R.layout.item_order_list, data) {
+        adapter = new EmptyWrapper<>(new CommonAdapter<TakeLookListResponse.DataBean.ListBean>(this, R.layout.item_order_list, data) {
             @Override
             protected void convert(ViewHolder holder, TakeLookListResponse.DataBean.ListBean bean, int position) {
 
@@ -149,7 +150,10 @@ public class TakeLookListActivity extends BaseActivity {
 //                ((TextView) holder.getView(R.id.tv_friend_pay)).setText("取消带看");
 
             }
-        };
+        });
+
+        initEmptyView(adapter,"",recyclerView);
+
         adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
@@ -166,6 +170,9 @@ public class TakeLookListActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
         tv_title.setText("带看记录");
     }
+
+
+
 
     private void showThreeTag(TakeLookListResponse.DataBean.ListBean bean, LinearLayout ll_tag_container) {
         for (int i = 0; i < 3 && bean.getHouse_label() != null && bean.getHouse_label().size() > i; i++) {

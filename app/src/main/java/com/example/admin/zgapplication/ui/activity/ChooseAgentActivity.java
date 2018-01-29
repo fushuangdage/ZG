@@ -138,7 +138,6 @@ public class ChooseAgentActivity extends BaseActivity {
                 });
             }
         };
-
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setAdapter(adapter);
     }

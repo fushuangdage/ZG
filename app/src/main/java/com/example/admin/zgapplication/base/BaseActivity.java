@@ -10,16 +10,21 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.EmptyWrapper;
 import com.example.admin.zgapplication.utils.AppManager;
 import com.example.admin.zgapplication.utils.dialog.LoadingDialog;
 import com.example.admin.zgapplication.utils.system.SystemBarTintManager;
@@ -254,6 +259,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(strId);
         }
+    }
+
+    public void initEmptyView(EmptyWrapper adapter, String s, RecyclerView recyclerView) {
+        View empty_view = LayoutInflater.from(mActivity).inflate(R.layout.view_empty, recyclerView, false);
+        ImageView imageView = (ImageView) empty_view.findViewById(R.id.img_error_layout);
+        TextView textView = (TextView) empty_view.findViewById(R.id.tv_error_layout);
+        textView.setText(s);
+        adapter.setEmptyView(empty_view);
     }
 
     protected ActionBar getToolbar() {
