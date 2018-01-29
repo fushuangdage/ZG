@@ -14,6 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseSupportFragment;
@@ -55,12 +60,15 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     TextView tv_filter;
     @BindView(R.id.btn_call_agent)
     TextView btn_call_agent;
+    @BindView(R.id.mapView)
+    MapView mapView;
 
     private List<RegionResponse.BaseRegion> regionList=new ArrayList<RegionResponse.BaseRegion>();
     private HomePositionAdapter regionAdapter;
     private EventRegionSelect customFilter;
     private RegionResponse.BaseRegion select_region;
     private RegionResponse currentSelectRegion;
+    public int iid;
 
 
     @Override
@@ -99,7 +107,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
         });
 
 
-        RetrofitHelper.getApiWithUid().getAgentLocation()
+        RetrofitHelper.getApiWithUid().getAgentLocation("100.00083479","50.00026726")
                 .compose(RxScheduler.<AgentLocationResponse>defaultScheduler())
                 .subscribe(new Observer<AgentLocationResponse>() {
                     @Override
@@ -109,6 +117,20 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
 
                     @Override
                     public void onNext(AgentLocationResponse agentLocationResponse) {
+                        List<AgentLocationResponse.DataBean> data = agentLocationResponse.getData();
+                        List<OverlayOptions> options = new ArrayList<OverlayOptions>();
+
+                        if (data!=null){
+                            for (AgentLocationResponse.DataBean datum : data) {
+                                MarkerOptions markerOptions = new MarkerOptions()
+                                        .position(new LatLng(datum.getLat(), datum.getLnt()))
+                                        .icon(BitmapDescriptorFactory
+                                                .fromResource(R.drawable.ic_launcher));
+                                options.add(markerOptions);
+                            }
+                        }
+
+                        mapView.getMap().addOverlays(options);
 
                     }
 
@@ -128,7 +150,9 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_progress:
-                startActivity(new Intent(getActivity(),WaitCrabActivity.class));
+                Intent intent = new Intent(getActivity(), WaitCrabActivity.class);
+                intent.putExtra("iid",iid);
+                startActivity(intent);
                 break;
             case R.id.tv_filter:
                 HouseFilterDialog dialog = new HouseFilterDialog(getContext(),R.style.translucent_dialog);
@@ -175,7 +199,8 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                             if (baseResponse.getCode()==0){
                                 home_progress.start();
                                 Intent intent = new Intent(mActivity, WaitCrabActivity.class);
-                                intent.putExtra("iid",baseResponse.getData().getId());
+                                iid = baseResponse.getData().getId();
+                                intent.putExtra("iid", iid);
                                 startActivity(intent);
                             }
                         }

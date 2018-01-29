@@ -38,6 +38,18 @@ public class RentIntentListResponse  extends BaseResponse<RentIntentListResponse
              * district : 回龙观
              */
 
+
+            /**
+             {  可能是改了
+                "id": "414",
+                "method": "1",
+                "create_at": "1517038938",
+                "parent": "门头沟",
+                "district": "双峪",
+                "price": "不限",
+                "sum": "0"
+            },
+             */
             private String id;
             private String outset;
             private String cutoff;
@@ -47,6 +59,15 @@ public class RentIntentListResponse  extends BaseResponse<RentIntentListResponse
             private String sum;
             private String parent;
             private String district;
+            private String price;
+
+            public String getPrice() {
+                return price;
+            }
+
+            public void setPrice(String price) {
+                this.price = price;
+            }
 
             public String getId() {
                 return id;

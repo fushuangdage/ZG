@@ -15,11 +15,21 @@ android {
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', "x86"
         }
-        manifestPlaceholders = [
-                JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "c03a493a8850f5abfa7582aa",
-                JPUSH_CHANNEL: "developer-default",
+        //测试环境
+//        manifestPlaceholders = [
+//                JPUSH_PKGNAME:  applicationId,
+//                JPUSH_APPKEY : "e2d06b9dac4c892f175a1279",
+//                JPUSH_CHANNEL: "Publish channel",
+//        ]
+        //正式环境 jpush
+                manifestPlaceholders = [
+                JPUSH_PKGNAME:  applicationId,
+                JPUSH_APPKEY : "d4f54769b9e21df62f95f272",
+                JPUSH_CHANNEL: "Publish channel",
         ]
+
+
+
     }
     buildTypes {
         release {
@@ -59,6 +69,12 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.10'
     testCompile 'junit:junit:4.12'
     compile 'com.contrarywind:Android-PickerView:3.2.7'
+
+
+    compile 'com.pingxx:pingpp-core:2.1.16' // 必须添加
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+' // 使用微信支付时添加,具体版本参考微信官方文档
+    compile 'com.pingxx:pingpp-alipay:2.1.16' // 使用支付宝时添加
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile project(':easeui')
 }

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +23,14 @@ import com.example.admin.zgapplication.ui.fragment.RecommendDamiFragment;
 import com.example.admin.zgapplication.ui.fragment.RecommendHouseFragment;
 import com.example.admin.zgapplication.ui.view.BeforeBTBehavior;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class WaitCrabActivity extends BaseActivity {
 
@@ -38,6 +43,7 @@ public class WaitCrabActivity extends BaseActivity {
     TabLayout mTabLayout;
     @BindView(R.id.bt_check_crab_list)
     TextView bt_check_crab_list;
+    private Disposable disposable;
 
     @OnClick({R.id.bt_check_crab,R.id.bt_check_crab_list,R.id.iv_left,R.id.bt_reset_crab})
     public void onClick(View view) {
@@ -130,24 +136,52 @@ public class WaitCrabActivity extends BaseActivity {
     @Override
     public void initData() {
 
-        RetrofitHelper.getApiWithUid().getCrabCount(getIntent().getIntExtra("iid",0))
-                .compose(RxScheduler.<CrabCountResponse>defaultScheduler())
-                .subscribe(new Observer<CrabCountResponse>() {
+        Observable.interval(5, TimeUnit.SECONDS).
+                subscribeOn(Schedulers.io()).
+                takeUntil(Observable.timer(60, TimeUnit.SECONDS)).
+                subscribe(new Observer<Long>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
+                        disposable = d;
                     }
 
                     @Override
-                    public void onNext(CrabCountResponse crabCountResponse) {
+                    public void onNext(Long aLong) {
+                        RetrofitHelper.getApiWithUid().getCrabCount(getIntent().getIntExtra("iid",0))
+                                .compose(RxScheduler.<CrabCountResponse>defaultScheduler())
+                                .subscribe(new Observer<CrabCountResponse>() {
 
-                        if (crabCountResponse.getCode()==0){
-                            CrabCountResponse.DataBean data = crabCountResponse.getData();
-                            bt_check_crab_list.setText(String.format("查看抢单(%s)",data.getCount()));
-                        }else {
-                            Toast.makeText(mActivity, crabCountResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                        }
+                                    @Override
+                                    public void onSubscribe(Disposable d) {
 
+                                    }
+
+                                    @Override
+                                    public void onNext(CrabCountResponse crabCountResponse) {
+
+                                        if (crabCountResponse.getCode()==0){
+                                            CrabCountResponse.DataBean data = crabCountResponse.getData();
+                                            bt_check_crab_list.setText(String.format("查看抢单(%s)",data.getCount()));
+
+                                            Log.d("88888888", "accept: 查看抢单"+data.getCount());
+
+                                        }else {
+                                            Toast.makeText(mActivity, crabCountResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+
+                                    }
+
+                                    @Override
+                                    public void onComplete() {
+
+                                    }
+                                });
                     }
 
                     @Override
@@ -160,5 +194,14 @@ public class WaitCrabActivity extends BaseActivity {
 
                     }
                 });
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        if (!disposable.isDisposed())
+        disposable.dispose();
+        super.onStop();
     }
 }

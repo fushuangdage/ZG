@@ -54,7 +54,17 @@ public class CrabListResponse extends BaseResponse<CrabListResponse.DataBean> {
             private String order_sum;
             private String score;
             private String chat_intention;
+            private String hx_username;
             private List<String> label;
+
+
+            public String getHx_username() {
+                return hx_username;
+            }
+
+            public void setHx_username(String hx_username) {
+                this.hx_username = hx_username;
+            }
 
             public String getUsername() {
                 return username;

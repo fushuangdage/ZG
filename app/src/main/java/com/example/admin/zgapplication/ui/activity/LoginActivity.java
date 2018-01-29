@@ -141,11 +141,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             public void onNext(LoginResponse msgCodeResponse) {
                                 if (msgCodeResponse.getCode() == 0) {
                                     Constant.uid = msgCodeResponse.getData().getId() + "";
-                                    Constant.hx_password = msgCodeResponse.getData().getHx_password();
                                     Constant.hx_username = msgCodeResponse.getData().getHx_username();
+                                    Constant.hx_password = msgCodeResponse.getData().getHx_password();
                                     Constant.username = msgCodeResponse.getData().getUsername();
                                     Constant.password = msgCodeResponse.getData().getPassword();
+                                    Constant.avatar=msgCodeResponse.getData().getAvatar();
 
+                                    SPUtil.put(mActivity,"uid",Constant.uid);
                                     SPUtil.put(mActivity,"hx_username",Constant.hx_username);
                                     SPUtil.put(mActivity,"hx_password",Constant.hx_password);
                                     SPUtil.put(mActivity,"username",Constant.username);

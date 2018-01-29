@@ -90,8 +90,10 @@ public class ChooseAgentActivity extends BaseActivity {
                             // TODO: 2017/11/1 跳转到单聊
                             Intent intent = new Intent(mActivity, ChatActivity.class);
                             Bundle bundle = new Bundle();
-//                            bundle.putString(EaseConstant.EXTRA_USER_ID,);
-                            bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, 1);
+                            bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+                            bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
+                            bundle.putString(EaseConstant.HEADIMAGEURL,bean.getAvatar());
+                            bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }

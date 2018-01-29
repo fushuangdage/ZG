@@ -2,6 +2,8 @@ package com.example.admin.zgapplication.retrofit;
 
 import android.util.Log;
 
+import com.example.admin.zgapplication.Constant;
+
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -71,7 +73,7 @@ public class InterceptorUtil {
                         .newBuilder()
                         .scheme(oldRequest.url().scheme())
                         .host(oldRequest.url().host())
-                        .addQueryParameter("uid", "33");
+                        .addQueryParameter("uid", Constant.uid);
 //                        .addQueryParameter("showapi_sign", "274e07e744d7457bbc3e6c60682327e2");
 
                 Request newRequest = oldRequest.newBuilder()

@@ -26,6 +26,7 @@ import com.example.admin.zgapplication.mvp.module.GenerateOrderResponse;
 import com.example.admin.zgapplication.mvp.module.HotSearchListResponse;
 import com.example.admin.zgapplication.mvp.module.HouseEvaluationRespose;
 import com.example.admin.zgapplication.mvp.module.HouseResourseListBean;
+import com.example.admin.zgapplication.mvp.module.IntentionDetailResponse;
 import com.example.admin.zgapplication.mvp.module.LaunchTakeLookResponse;
 import com.example.admin.zgapplication.mvp.module.LifeBillRecordResponse;
 import com.example.admin.zgapplication.mvp.module.LifeRentBillResponse;
@@ -280,7 +281,7 @@ public interface RetrofitApi {
 
     //确认订单
     @FormUrlEncoded
-    @POST("/member/order/confirm")
+    @POST("/member/order/generate")
     Observable<GenerateOrderResponse> generateOrder(@Field("room_id") String room_id, @Field("type") String type,
                                                     @Field("house_id") String house_id, @Field("member_id") String member_id,
                                                     @Field("uid") String uid, @Field("date") int date, @Field("pay") int pay,
@@ -341,7 +342,11 @@ public interface RetrofitApi {
 
 
     @GET("/member/home")
-    Observable<AgentLocationResponse> getAgentLocation();
+    Observable<AgentLocationResponse> getAgentLocation(@Query("lng") String lng,@Query("lat") String lat);
+
+
+    @GET("/member/intention/detail")
+    Observable<IntentionDetailResponse> getIntentDetail(@Query("id") String iid,@Query("page") int page);
 
 
 }

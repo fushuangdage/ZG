@@ -227,9 +227,9 @@ public class OrderDetailActivity extends BaseActivity {
 
                     @Override
                     public void onNext(GenerateOrderResponse generateOrderResponse) {
-                        Intent intent1 = new Intent(mActivity, OrderDetail2Activity.class);
-                        intent1.putExtra("order_id",generateOrderResponse.getData().getOrder_id());
-                        startActivity(intent1);
+                        Intent intent = new Intent(mActivity, OrderDetail2Activity.class);
+                        intent.putExtra("order_id",generateOrderResponse.getData().getOrder_id());
+                        startActivity(intent);
                     }
 
                     @Override

@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
+import com.hyphenate.easeui.EaseConstant;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -74,7 +76,7 @@ public class GrabListActivity extends BaseActivity {
 
         adapter = new CommonAdapter<CrabListResponse.DataBean.ListBean>(getContext(), R.layout.item_recommend_dami, list) {
             @Override
-            protected void convert(ViewHolder holder, CrabListResponse.DataBean.ListBean bean, int position) {
+            protected void convert(ViewHolder holder, final CrabListResponse.DataBean.ListBean bean, int position) {
 
                 ((TagFlowLayout) holder.getView(R.id.flow_layout)).setAdapter(new TagAdapter<String>(bean.getLabel()) {
                      @Override
@@ -93,12 +95,17 @@ public class GrabListActivity extends BaseActivity {
                 holder.setText(R.id.tv_visit_count,bean.getVisit_sum());
                 holder.setText(R.id.tv_deal_count,bean.getOrder_sum());
 
-                ((TagFlowLayout) holder.getView(R.id.flow_layout)).setAdapter(new TagAdapter<String>(bean.getLabel()) {
+                holder.setOnClickListener(R.id.bt_chat, new View.OnClickListener() {
                     @Override
-                    public View getView(FlowLayout parent, int position, String o) {
-                        TextView textView = (TextView) LayoutInflater.from(mActivity).inflate(R.layout.item_agent_tag, null, false);
-                        textView.setText(o);
-                        return textView;
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mActivity, ChatActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+                        bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
+                        bundle.putString(EaseConstant.HEADIMAGEURL,bean.getAvatar());
+                        bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                 });
 

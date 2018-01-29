@@ -36,4 +36,6 @@ public class EaseConstant {
 
     public static final String NICK_NAME="nickName";
     public static final String HEADIMAGEURL="headImageUrl";
+
+    public static final String MY_HEAD="my_head_img";
 }

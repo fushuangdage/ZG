@@ -65,11 +65,11 @@ public class EvaluateShowActivity extends BaseActivity {
                 holder.setText(R.id.tv_user_name,listBean.getNick_name());
                 holder.setText(R.id.tv_evaluate_content,listBean.getContent());
                 holder.setText(R.id.tv_evaluate_content, TimeUtil.formatData(TimeUtil.dateFormatMDofChinese,listBean.getCreate_at()));
-                ((StartBar) holder.getView(R.id.start_bar)).setRating(listBean.getScore());
+                ((StartBar) holder.getView(R.id.start_bar)).setRating((int) listBean.getScore());
                 holder.setText(R.id.tv_evaluate_content,listBean.getContent());
 
 
-                ((StartBar) holder.getView(R.id.start_bar)).setRating(listBean.getScore());
+                ((StartBar) holder.getView(R.id.start_bar)).setRating((int) listBean.getScore());
                 ((TagFlowLayout) holder.getView(R.id.flow_layout)).setAdapter(new TagAdapter<String>(listBean.getLabel()) {
                     @Override
                     public View getView(FlowLayout parent, int position, String o) {

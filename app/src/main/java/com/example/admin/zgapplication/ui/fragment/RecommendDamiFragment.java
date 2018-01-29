@@ -19,10 +19,13 @@ import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.FinishLoadConsumer;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.activity.AgentActivity;
+import com.example.admin.zgapplication.ui.activity.ChatActivity;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.view.StartBar;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -81,18 +84,36 @@ public class RecommendDamiFragment extends BaseSupportFragment {
 
         adapter = new CommonAdapter<RecommendAgentsListResponse.DataBean.ListBean>(getContext(), R.layout.item_recommend_dami, list) {
             @Override
-            protected void convert(ViewHolder holder, RecommendAgentsListResponse.DataBean.ListBean bean, int position) {
+            protected void convert(ViewHolder holder, final RecommendAgentsListResponse.DataBean.ListBean bean, int position) {
                 TagFlowLayout flowLayout = (TagFlowLayout) holder.getView(R.id.flow_layout);
 
                 Glide.with(mActivity).load(bean.getAvatar()).into((ImageView) holder.getView(R.id.icon));
                 holder.setText(R.id.tv_name,bean.getUsername());
-                ((StartBar) holder.getView(R.id.rating_bar)).setRating(bean.getScore());
+                ((StartBar) holder.getView(R.id.rating_bar)).setRating((int) bean.getScore());
                 holder.setText(R.id.tv_company,bean.getCompany_name());
                 holder.setText(R.id.tv_house_count_num,bean.getHouse_sum()+"套");
                 holder.setText(R.id.tv_trade_area,"负责商圈 : "+bean.getDistrict());
 
+                holder.setOnClickListener(R.id.bt_chat, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mActivity, ChatActivity.class);
+                        intent.putExtra(EaseConstant.EXTRA_USER_ID,bean.getHx_username()+"123");
+                        intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE,EMMessage.ChatType.Chat);
+
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+//                        bundle.pu(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
+//                        intent.putExtras(bundle);
+
+                        startActivity(intent);
+                    }
+                });
+
                 holder.setText(R.id.tv_visit_count,bean.getVisit_sum());
                 holder.setText(R.id.tv_deal_count,bean.getOrder_sum());
+
+
 
 
                 flowLayout.setAdapter(new TagAdapter<String>(bean.getLabel()) {

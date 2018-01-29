@@ -141,6 +141,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CAMERA,
                 Manifest.permission.CALL_PHONE,
                 Manifest.permission.READ_LOGS,
                 Manifest.permission.READ_PHONE_STATE,

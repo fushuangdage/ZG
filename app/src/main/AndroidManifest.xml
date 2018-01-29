@@ -23,10 +23,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <!-- Jpush -->
-    <!--<permission-->
-        <!--android:name="com.example.admin.zgapplication.permission.permission.JPUSH_MESSAGE"-->
-        <!--android:protectionLevel="signature" />-->
+     <!--Jpush -->
+    <permission
+        android:name="com.example.admin.zgapplication.permission.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -53,10 +53,14 @@
 
         <meta-data
             android:name="JPUSH_CHANNEL"
-            android:value="developer-default" />
+            android:value="Publish channel" />
+
+       <!--//测试环境推送 key: d4f54769b9e21df62f95f272 -->
+
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="c03a493a8850f5abfa7582aa" />
+            android:value="d4f54769b9e21df62f95f272" />
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="561cae6ae0f55abd990035bf" />
@@ -83,7 +87,9 @@
         </receiver>
 
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.SecondActivity" />
+        <activity android:name=".ui.activity.SecondActivity" >
+
+        </activity>
         <activity android:name=".ui.activity.ChatActivity" />
         <activity
             android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
@@ -225,12 +231,43 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ui.activity.HomeActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+        <!-- Ping++ SDK -->
+        <activity
+            android:name="com.pingplusplus.android.PaymentActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+
+        </activity>
+
+        <!-- 微信支付 -->
+        <!-- 1.需要将以下"替换成自己 APK 的包名"换成在微信平台上注册填写的包名 -->
+        <!-- 2.WxPayEntryActivity 这个类在 SDK 内部实现，开发者不需要额外实现该类 -->
+        <activity-alias
+            android:name="com.example.admin.zgapplication.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity="com.pingplusplus.android.PaymentActivity" />
+
+        <!-- 支付宝 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+
+
+
+        <activity android:name=".ui.activity.HomeActivity" >
+
         </activity>
         <activity android:name=".ui.activity.WaitCrabActivity" />
         <activity android:name=".ui.activity.GrabListActivity" />
@@ -279,8 +316,17 @@
         <activity android:name=".ui.activity.AboutUsActivity" />
         <activity android:name=".ui.activity.CompanyinfoActivity" />
         <activity android:name=".ui.activity.LifeBillShowListActivity" />
-        <activity android:name=".ui.activity.LaunchActivity" />
+        <activity android:name=".ui.activity.LaunchActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.GuideActivity"></activity>
+
+
+
     </application>
 
 </manifest>

@@ -126,8 +126,8 @@ public abstract class EaseChatRow extends LinearLayout {
             //set nickname and avatar
             if (message.direct() == Direct.SEND) {
 //                EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
-                String headImageUrl = message.getStringAttribute("headImageUrl","https://www.baidu.com/img/bd_logo1.png");
-                Glide.with(getContext()).load(headImageUrl).into(userAvatarView);
+                String myHead = message.getStringAttribute("myHeadImg","https://www.baidu.com/img/bd_logo1.png");
+                Glide.with(getContext()).load(myHead).into(userAvatarView);
             } else {
                 // TODO: 2017/11/2 修改聊天界面里面的用户头像和昵称
 //                EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);

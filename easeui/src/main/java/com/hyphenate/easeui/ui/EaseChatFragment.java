@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.Gravity;
@@ -75,7 +76,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected static final int REQUEST_CODE_CAMERA = 2;
     protected static final int REQUEST_CODE_LOCAL = 3;
 
-    /**
+    /**g
      * params to fragment
      */
     protected Bundle fragmentArgs;
@@ -118,6 +119,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     private String nickName;
     private String headImageUrl;
     private TextView tv_title;
+    private String my_head;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -139,6 +141,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
         nickName = fragmentArgs.getString(EaseConstant.NICK_NAME);
         headImageUrl = fragmentArgs.getString(EaseConstant.HEADIMAGEURL);
+        my_head = fragmentArgs.getString(EaseConstant.MY_HEAD);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -786,7 +789,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         //send message
         // TODO: 2017/11/2 给发送的信息添加附带信息
         message.setAttribute("dataType","101");
-        message.setAttribute("headImageUrl","https://www.baidu.com/img/bd_logo1.png");
+        message.setAttribute("headImageUrl",headImageUrl);
+        message.setAttribute("myHeadImg",my_head);
         message.setAttribute("nickName","付爽");
         EMClient.getInstance().chatManager().sendMessage(message);
         //refresh ui
@@ -891,8 +895,10 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                 + System.currentTimeMillis() + ".jpg");
         //noinspection ResultOfMethodCallIgnored
         cameraFile.getParentFile().mkdirs();
+
+        Uri uri = FileProvider.getUriForFile(getActivity(), "com.example.admin.zgapplication.fileprovider", cameraFile);
         startActivityForResult(
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, uri),
                 REQUEST_CODE_CAMERA);
     }
 

@@ -35,7 +35,7 @@ public class AgentEvaluationResponse extends BaseResponse<AgentEvaluationRespons
             private String nick_name;
             private String avatar;
             private String content;
-            private int score;
+            private float score;
             private long create_at;
             private String hide;
             private List<String> label;
@@ -64,11 +64,11 @@ public class AgentEvaluationResponse extends BaseResponse<AgentEvaluationRespons
                 this.content = content;
             }
 
-            public int getScore() {
+            public float getScore() {
                 return score;
             }
 
-            public void setScore(int score) {
+            public void setScore(float score) {
                 this.score = score;
             }
 

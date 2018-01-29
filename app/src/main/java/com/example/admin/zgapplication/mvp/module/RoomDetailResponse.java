@@ -356,31 +356,31 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
             private String house_photo;
             private String house_title;
             private int rental;
-            private int house_id;
-            private  int room_id;
-            private int type;
+            private String house_id;
+            private  String room_id;
+            private String type;
 
-            public int getHouse_id() {
+            public String getHouse_id() {
                 return house_id;
             }
 
-            public void setHouse_id(int house_id) {
+            public void setHouse_id(String house_id) {
                 this.house_id = house_id;
             }
 
-            public int getRoom_id() {
+            public String getRoom_id() {
                 return room_id;
             }
 
-            public void setRoom_id(int room_id) {
+            public void setRoom_id(String room_id) {
                 this.room_id = room_id;
             }
 
-            public int getType() {
+            public String getType() {
                 return type;
             }
 
-            public void setType(int type) {
+            public void setType(String type) {
                 this.type = type;
             }
 

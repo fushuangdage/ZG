@@ -43,8 +43,17 @@ public class RecommendAgentsListResponse extends BaseResponse<RecommendAgentsLis
             private String house_sum;
             private String visit_sum;
             private String order_sum;
-            private int score;
+            private float score;
             private List<String> label;
+            private String hx_username;
+
+            public String getHx_username() {
+                return hx_username;
+            }
+
+            public void setHx_username(String hx_username) {
+                this.hx_username = hx_username;
+            }
 
             public String getId() {
                 return id;
@@ -110,11 +119,11 @@ public class RecommendAgentsListResponse extends BaseResponse<RecommendAgentsLis
                 this.order_sum = order_sum;
             }
 
-            public int getScore() {
+            public float getScore() {
                 return score;
             }
 
-            public void setScore(int score) {
+            public void setScore(float score) {
                 this.score = score;
             }
 

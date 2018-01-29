@@ -72,6 +72,16 @@ public class AgentListResponse extends BaseResponse<AgentListResponse.DataBean> 
             private float score;
             private List<String> label;
 
+            private String hx_username;
+
+            public String getHx_username() {
+                return hx_username;
+            }
+
+            public void setHx_username(String hx_username) {
+                this.hx_username = hx_username;
+            }
+
             public String getUsername() {
                 return username;
             }

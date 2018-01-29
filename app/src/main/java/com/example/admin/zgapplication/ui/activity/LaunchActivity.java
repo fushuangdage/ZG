@@ -9,6 +9,8 @@ import com.example.admin.zgapplication.utils.SPUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class LaunchActivity extends BaseActivity {
 
     @Override
@@ -23,26 +25,7 @@ public class LaunchActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        EMClient.getInstance().login(Constant.hx_username, Constant.hx_password, new EMCallBack() {
 
-
-            //        EMClient.getInstance().login("fushuang", "123456", new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                Log.d("888888888888888888888", "onSuccess: 登陆成功");
-            }
-
-
-            @Override
-            public void onError(int i, String s) {
-                Log.d("888888888888888888888", "onError: " + s);
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-
-            }
-        });
 
         Constant.hx_username = (String) SPUtil.get(mActivity, "hx_username", "");
         Constant.hx_password = (String) SPUtil.get(mActivity, "hx_password", "");
@@ -50,5 +33,39 @@ public class LaunchActivity extends BaseActivity {
         Constant.password=(String) SPUtil.get(mActivity, "password", "");
         Constant.uid=(String) SPUtil.get(mActivity, "uid", "33");
 
+
+        if (!Constant.uid.equals("")&& !Constant.hx_username.equals("")){
+
+            JPushInterface.setAlias(mActivity, 1,"u"+Constant.uid);
+
+            EMClient.getInstance().login(Constant.hx_username, Constant.hx_password, new EMCallBack() {
+
+
+                //        EMClient.getInstance().login("fushuang", "123456", new EMCallBack() {
+                @Override
+                public void onSuccess() {
+                    Log.d("888888888888888888888", "onSuccess: 登陆成功");
+                }
+
+
+                @Override
+                public void onError(int i, String s) {
+                    Log.d("888888888888888888888", "onError: " + s);
+                }
+
+                @Override
+                public void onProgress(int i, String s) {
+
+                }
+            });
+
+            startActivity(HomeActivity.class);
+        }else {
+            startActivity(LoginActivity.class);
+        }
+
+
     }
+
+
 }

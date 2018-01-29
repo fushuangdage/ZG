@@ -183,7 +183,7 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
                     public void next(CompanyHouseListResponse companyHouseListResponse) {
 
                         CompanyHouseListResponse.DataBean data = companyHouseListResponse.getData();
-                        if (data.getPage() == 1) {
+                        if (page == 1) {
                             list.clear();
                         }
                         list.addAll(data.getList());
@@ -254,13 +254,12 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
                         param_house_config=param_house_config+integer+",";
 
                 }
-                param_house_config=param_house_config.substring(0,param_house_config.length()-2);
+                param_house_config=param_house_config.substring(0,param_house_config.length()-1);
 
 
                 param_house_type = getRequestParam(ll_house_source_type);
                 param_rent_type = getRequestParam(ll_house_rent_type);
                 param_room_num = getRequestParam(ll_room_num);
-
                 loadCompanyHouseList();
             }
         });
@@ -271,12 +270,12 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
         for (int i = 0; i < ll_house_config.getChildCount(); i++) {
             CheckBox childAt = ((CheckBox) ll_house_config.getChildAt(i));
             if (childAt.isChecked()) {
-                builder.append(i+',');
+                builder.append(i+1+",");
             }
         }
         String  s = builder.toString().trim();
         if (s.length()>0){
-            s = s.substring(0, s.length()-2);  //从0开始
+            s = s.substring(0, s.length()-1);
         }
         return s;
     }

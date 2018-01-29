@@ -161,7 +161,7 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
                         company_id = data.getCompany_id();
                         Glide.with(mActivity).load(data.getAvatar()).into((ImageView) list_head.findViewById(R.id.iv_agent_icon));
                         ((TextView) list_head.findViewById(R.id.tv_agent_name)).setText(data.getUsername());
-                        ((StartBar) list_head.findViewById(R.id.start_bar)).setRating(data.getScore());
+                        ((StartBar) list_head.findViewById(R.id.start_bar)).setRating((int) data.getScore());
                         ((TextView) list_head.findViewById(R.id.tv_district)).setText(data.getDistrict());
                         ((TextView) list_head.findViewById(R.id.tv_take_time)).setText(data.getVisit_sum());
                         ((TextView) list_head.findViewById(R.id.tv_deal_time)).setText(data.getOrder_sum());
