@@ -217,7 +217,6 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
                 Bundle bundle = new Bundle();
                 bundle.putString(EaseConstant.EXTRA_USER_ID,data.getHx_username());
                 bundle.putString(EaseConstant.NICK_NAME,data.getUsername());
-                bundle.putString(EaseConstant.HEADIMAGEURL,data.getAvatar());
                 bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
                 intent.putExtras(bundle);
                 startActivity(intent);

@@ -111,7 +111,6 @@ public class IntentDetailActivity extends BaseActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
                         bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
-                        bundle.putString(EaseConstant.HEADIMAGEURL,bean.getAvatar());
                         bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
                         intent.putExtras(bundle);
                         startActivity(intent);

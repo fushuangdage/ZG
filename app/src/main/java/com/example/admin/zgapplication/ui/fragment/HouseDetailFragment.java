@@ -1,6 +1,8 @@
 package com.example.admin.zgapplication.ui.fragment;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,9 +15,11 @@ import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseSupportFragment;
 import com.example.admin.zgapplication.mvp.module.RoomDetailResponse;
+import com.example.admin.zgapplication.mvp.module.SelectOrderInfoBean;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
+import com.example.admin.zgapplication.ui.activity.ChooseAgentActivity;
 import com.example.admin.zgapplication.ui.activity.CompanyDetailActivity;
 import com.example.admin.zgapplication.ui.activity.HouseDetailActivity;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
@@ -95,7 +99,8 @@ public class HouseDetailFragment extends BaseSupportFragment {
     @BindView(R.id.recyclerView)
     RecyclerView sameRecyclerView;
 
-
+    @BindView(R.id.tv_pick_room_info)
+    TextView tv_pick_room_info;
 
 
     public List<RoomDetailResponse.DataBean.SameBean> sameList=new ArrayList<>();
@@ -274,7 +279,16 @@ public class HouseDetailFragment extends BaseSupportFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_choose_room:
-                RoomPickDialog roomPickDialog = new RoomPickDialog(getContext(), R.style.room_pick_dialog);
+                RoomPickDialog roomPickDialog = new RoomPickDialog(getActivity(),R.style.room_pick_dialog);
+                roomPickDialog.setResultCallBack(new RoomPickDialog.ResultCallBack() {
+                    @Override
+                    public void resultCallBack(SelectOrderInfoBean bean) {
+                        ((HouseDetailActivity) getActivity()).setRoomPickInfo(bean);
+                        tv_pick_room_info.setText(String.format("已选    :押%d付%d,%s",bean.pledge,bean.pay,bean.room_number));
+                    }
+                });
+                roomPickDialog.create();
+                roomPickDialog.setData(data);
                 roomPickDialog.show();
                 break;
             case R.id.ll_goto_company:

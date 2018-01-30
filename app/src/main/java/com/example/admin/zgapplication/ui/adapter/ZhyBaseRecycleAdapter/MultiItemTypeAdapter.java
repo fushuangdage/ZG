@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ItemViewDelegate;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ItemViewDelegateManager;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
@@ -21,17 +22,41 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     protected ItemViewDelegateManager mItemViewDelegateManager;
     protected OnItemClickListener mOnItemClickListener;
 
-
     public MultiItemTypeAdapter(Context context, List<T> datas) {
         mContext = context;
         mDatas = datas;
+        mDatas.add(null);
         mItemViewDelegateManager = new ItemViewDelegateManager();
+        mItemViewDelegateManager.addDelegate(new ItemViewDelegate<T>()
+        {
+            @Override
+            public int getItemViewLayoutId()
+            {
+                return R.layout.view_empty;
+            }
+
+            @Override
+            public boolean isForViewType( T item, int position)
+            {
+                if (item==null){
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+
+            @Override
+            public void convert(ViewHolder holder, T t, int position)
+            {
+//                CommonAdapter.this.convert(holder, t, position);
+            }
+        });
     }
 
     @Override
     public int getItemViewType(int position) {
         if (!useItemViewDelegateManager()) return super.getItemViewType(position);
-        return mItemViewDelegateManager.getItemViewType(mDatas.get(position), position);
+        return mItemViewDelegateManager.getItemViewType(mDatas.size()==0?null:mDatas.get(position), position);
     }
 
 
@@ -58,12 +83,12 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     }
 
 
-    protected void setListener(final ViewGroup parent, final ViewHolder viewHolder, int viewType) {
+    protected void setListener(final ViewGroup parent, final ViewHolder viewHolder, final int viewType) {
         if (!isEnabled(viewType)) return;
         viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnItemClickListener != null) {
+                if (mOnItemClickListener != null&&viewType!=0) {
                     int position = viewHolder.getAdapterPosition();
                     mOnItemClickListener.onItemClick(v, viewHolder , position);
                 }

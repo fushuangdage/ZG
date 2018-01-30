@@ -32,6 +32,7 @@ import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiIte
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
+import com.example.admin.zgapplication.utils.img.GlideRoundTransform;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.Serializable;
@@ -111,7 +112,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
         ImageView iv_agent_icon = (ImageView) headerView.findViewById(R.id.iv_agent_icon);
 
-        Glide.with(mActivity).load(Constant.avatar).into(iv_agent_icon);
+        Glide.with(mActivity).load(Constant.avatar).transform(new GlideRoundTransform(mActivity)).into(iv_agent_icon);
         ((TextView) headerView.findViewById(R.id.tv_user_name)).setText(Constant.username);
 
 
@@ -135,8 +136,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     public void initData() {
 
         Serializable loginBean = getIntent().getSerializableExtra("loginBean");
-
-
 
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,

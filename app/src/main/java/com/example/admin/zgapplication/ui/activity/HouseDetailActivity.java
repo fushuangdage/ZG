@@ -43,6 +43,7 @@ public class HouseDetailActivity extends BaseActivity {
     private String house_id;
     private String type;
     private String room_id="0";
+    private SelectOrderInfoBean roomPickInfo;
 
     @Override
     public int setLayout() {
@@ -97,23 +98,34 @@ public class HouseDetailActivity extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.tv_write_order:
-                RoomDetailResponse.DataBean data = detailFragment.getData();
 
-                RoomPickDialog roomPickDialog = new RoomPickDialog(this,R.style.room_pick_dialog);
-                roomPickDialog.setResultCallBack(new RoomPickDialog.ResultCallBack() {
-                    @Override
-                    public void resultCallBack(SelectOrderInfoBean bean) {
-                        Intent intent = new Intent(mActivity, ChooseAgentActivity.class);
-                        intent.putExtra("bean",bean);
-                        intent.putExtra("house_id",bean.house_id);
-                        intent.putExtra("room_id",bean.room_id);
-                        intent.putExtra("type",bean.type);
-                        startActivity(intent);
-                    }
-                });
-                roomPickDialog.create();
-                roomPickDialog.setData(data);
-                roomPickDialog.show();
+                if (roomPickInfo==null){
+                    RoomDetailResponse.DataBean data = detailFragment.getData();
+
+                    RoomPickDialog roomPickDialog = new RoomPickDialog(this,R.style.room_pick_dialog);
+                    roomPickDialog.setResultCallBack(new RoomPickDialog.ResultCallBack() {
+                        @Override
+                        public void resultCallBack(SelectOrderInfoBean bean) {
+                            Intent intent = new Intent(mActivity, ChooseAgentActivity.class);
+                            intent.putExtra("bean",bean);
+                            intent.putExtra("house_id",bean.house_id);
+                            intent.putExtra("room_id",bean.room_id);
+                            intent.putExtra("type",bean.type);
+                            startActivity(intent);
+                        }
+                    });
+                    roomPickDialog.create();
+                    roomPickDialog.setData(data);
+                    roomPickDialog.show();
+                }else {
+                    Intent intent = new Intent(mActivity, ChooseAgentActivity.class);
+                    intent.putExtra("bean",roomPickInfo);
+                    intent.putExtra("house_id",roomPickInfo.house_id);
+                    intent.putExtra("room_id",roomPickInfo.room_id);
+                    intent.putExtra("type",roomPickInfo.type);
+                    startActivity(intent);
+                }
+
                 break;
 
             case R.id.iv_left:
@@ -158,5 +170,9 @@ public class HouseDetailActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    public void setRoomPickInfo(SelectOrderInfoBean roomPickInfo) {
+        this.roomPickInfo = roomPickInfo;
     }
 }

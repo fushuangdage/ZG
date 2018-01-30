@@ -32,10 +32,15 @@ public class EaseConstant {
     public static final int CHATTYPE_CHATROOM = 3;
     
     public static final String EXTRA_CHAT_TYPE = "chatType";
-    public static final String EXTRA_USER_ID = "userId";
+    public static final String EXTRA_USER_ID = "chatAgentHxName";
 
     public static final String NICK_NAME="nickName";
     public static final String HEADIMAGEURL="headImageUrl";
 
     public static final String MY_HEAD="my_head_img";
+
+    public static final String  USER_ID="userId";
+    public static final String  MY_NAME="my_name";
+    public static final String  AGENT_ID="agentID";
+
 }

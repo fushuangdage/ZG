@@ -100,9 +100,9 @@ public class GrabListActivity extends BaseActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(mActivity, ChatActivity.class);
                         Bundle bundle = new Bundle();
+                        bundle.putString(EaseConstant.AGENT_ID,bean.getId());
                         bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
                         bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
-                        bundle.putString(EaseConstant.HEADIMAGEURL,bean.getAvatar());
                         bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
                         intent.putExtras(bundle);
                         startActivity(intent);

@@ -109,17 +109,19 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     static final int ITEM_COMPANY=4;
     
     protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location,R.string.attach_company};
-    protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.fangyuan,
-            R.drawable.ease_chat_location_selector ,R.drawable.ease_chat_takepic_selector};
+    protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
+            R.drawable.ease_chat_location_selector ,R.drawable.fangyuan};
     protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION,ITEM_COMPANY };
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
     protected boolean isRoaming = false;
     private ExecutorService fetchQueue;
-    private String nickName;
-    private String headImageUrl;
+    private String agentName;
     private TextView tv_title;
     private String my_head;
+    private String userId;
+    private String aid;
+    private String myName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -139,9 +141,10 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
-        nickName = fragmentArgs.getString(EaseConstant.NICK_NAME);
-        headImageUrl = fragmentArgs.getString(EaseConstant.HEADIMAGEURL);
+        agentName = fragmentArgs.getString(EaseConstant.NICK_NAME);
+        userId = fragmentArgs.getString(EaseConstant.USER_ID);
         my_head = fragmentArgs.getString(EaseConstant.MY_HEAD);
+        myName=fragmentArgs.getString(EaseConstant.MY_NAME);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -153,7 +156,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         //noinspection ConstantConditions
         voiceRecorderView = (EaseVoiceRecorderView) getView().findViewById(R.id.voice_recorder);
         tv_title = ((TextView) getView().findViewById(R.id.tv_title));
-        tv_title.setText(nickName);
+        tv_title.setText(agentName);
         // message list layout
         messageList = (EaseChatMessageList) getView().findViewById(R.id.message_list);
         if(chatType != EaseConstant.CHATTYPE_SINGLE)
@@ -201,6 +204,10 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         if (isRoaming) {
             fetchQueue = Executors.newSingleThreadExecutor();
         }
+
+
+        EMMessage message = EMMessage.createTxtSendMessage("你好!我是"+myName, toChatUsername);
+        sendMessage(message);
     }
 
     protected void setUpView() {
@@ -598,6 +605,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             } else {
                 // single chat message
                 username = message.getFrom();
+                aid=message.getStringAttribute("userId","0");
             }
 
             // if the message is for current conversation
@@ -667,9 +675,11 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             case ITEM_LOCATION:
                 startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
                 break;
-            //跳转到公司详情页
+            //跳转到经纪人详情页
                 case ITEM_COMPANY:
-                    startActivity(new Intent("com.fs.agentActivity"));
+                    Intent intent = new Intent("com.fs.agentActivity");
+                    intent.putExtra("aid",aid);
+                    startActivity(intent);
                     break;
 
             default:
@@ -789,9 +799,9 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         //send message
         // TODO: 2017/11/2 给发送的信息添加附带信息
         message.setAttribute("dataType","101");
-        message.setAttribute("headImageUrl",headImageUrl);
-        message.setAttribute("myHeadImg",my_head);
-        message.setAttribute("nickName","付爽");
+        message.setAttribute("headImg",my_head);
+        message.setAttribute("userId",userId);
+        message.setAttribute("userName",myName);
         EMClient.getInstance().chatManager().sendMessage(message);
         //refresh ui
         if(isMessageListInited) {

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.utils.WrapperUtils;
 
@@ -21,9 +22,9 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
     private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
     private SparseArrayCompat<View> mFootViews = new SparseArrayCompat<>();
 
-    private RecyclerView.Adapter mInnerAdapter;
+    public CommonAdapter mInnerAdapter;
 
-    public HeaderAndFooterWrapper(RecyclerView.Adapter adapter)
+    public HeaderAndFooterWrapper(CommonAdapter adapter)
     {
         mInnerAdapter = adapter;
     }
@@ -74,7 +75,7 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
         {
             return;
         }
-        mInnerAdapter.onBindViewHolder(holder, position - getHeadersCount());
+        mInnerAdapter.onBindViewHolder((ViewHolder) holder, position - getHeadersCount());
     }
 
     @Override

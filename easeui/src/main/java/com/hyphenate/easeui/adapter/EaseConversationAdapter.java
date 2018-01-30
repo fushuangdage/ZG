@@ -124,8 +124,8 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         }else {
             // TODO: 2017/11/2 修改会话列表昵称和头像的加载方式
             EMMessage lastMsg = conversation.getLastMessage();
-            String nickName = lastMsg.getStringAttribute("nickName", "未获取");
-            String headImg = lastMsg.getStringAttribute("headImageUrl",null);
+            String nickName = lastMsg.getStringAttribute("userName", "未获取");
+            String headImg = lastMsg.getStringAttribute("headImg",null);
             try {
                 Glide.with(getContext()).load(headImg).into(holder.avatar);
             } catch (Exception e) {

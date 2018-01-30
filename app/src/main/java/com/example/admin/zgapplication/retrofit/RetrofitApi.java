@@ -33,6 +33,7 @@ import com.example.admin.zgapplication.mvp.module.LifeBillRecordResponse;
 import com.example.admin.zgapplication.mvp.module.LifeRentBillResponse;
 import com.example.admin.zgapplication.mvp.module.LoginResponse;
 import com.example.admin.zgapplication.mvp.module.MakeEvaluationDetailResponse;
+import com.example.admin.zgapplication.mvp.module.ModifyIconResponse;
 import com.example.admin.zgapplication.mvp.module.MsgCodeResponse;
 import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
 import com.example.admin.zgapplication.mvp.module.OrderList;
@@ -357,5 +358,9 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("/member/pay/to-pay")
     Observable<PayInfoResponse> getPayInfo(@Field("type") String type,@Field("order_num") String order_num,@Field("method") String method);
+
+    @POST("/member/user/saves")
+    Observable<ModifyIconResponse> modifyHeadIcon(@Body MultipartBody multipartBody);
+
 
 }

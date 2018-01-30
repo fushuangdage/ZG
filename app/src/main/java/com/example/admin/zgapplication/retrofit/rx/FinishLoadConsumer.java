@@ -3,7 +3,8 @@ package com.example.admin.zgapplication.retrofit.rx;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
-import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.EmptyWrapper;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
+import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.HeaderAndFooterWrapper;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -37,11 +38,20 @@ public class   FinishLoadConsumer<T extends BaseResponse> implements Consumer<T>
     public void accept(T t) throws Exception {
 
         RecyclerView recyclerView = (RecyclerView) ((SmartRefreshLayout) refreshLayout).getChildAt(0);
-        if (t.getCode()!=0&&t.getMsg().equals("暂无数据")){
+        if (t.getCode()!=0){
 
-            EmptyWrapper adapter = (EmptyWrapper) recyclerView.getAdapter();
-            adapter.getmInnerAdapter().getDatas().clear();
-            adapter.notifyDataSetChanged();
+            RecyclerView.Adapter rv_adapter = recyclerView.getAdapter();
+            if (rv_adapter instanceof CommonAdapter) {
+                CommonAdapter adapter = (CommonAdapter) rv_adapter;
+                adapter.getDatas().clear();
+                adapter.getDatas().add(null);
+                adapter.notifyDataSetChanged();
+            }else if (rv_adapter instanceof HeaderAndFooterWrapper){
+                HeaderAndFooterWrapper headerAndFooterWrapper = (HeaderAndFooterWrapper) rv_adapter;
+                headerAndFooterWrapper.mInnerAdapter.getDatas().clear();
+                headerAndFooterWrapper.mInnerAdapter.getDatas().add(null);
+                headerAndFooterWrapper.notifyDataSetChanged();
+            }
 
         }else {
 

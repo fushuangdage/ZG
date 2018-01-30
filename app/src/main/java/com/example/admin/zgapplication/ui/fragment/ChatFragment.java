@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
@@ -14,12 +15,18 @@ import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
 public class ChatFragment extends EaseChatFragment {
 
+    private String aid;
+
+
+
     @Override
     protected void setUpView() {
         super.setUpView();
+        aid=getArguments().getString(EaseConstant.AGENT_ID,"0");
         setChatFragmentHelper(new EaseChatFragmentHelper() {
             @Override
             public void onSetMessageAttributes(EMMessage message) {
+
             }
 
             @Override
@@ -31,7 +38,9 @@ public class ChatFragment extends EaseChatFragment {
             public void onAvatarClick(String username) {
                 if (!username.equals(EMClient.getInstance().getCurrentUser())){
                     //说明点击的是经纪人的头像
-                    startActivity(new Intent("com.fs.agentActivity"));
+                    Intent intent = new Intent("com.fs.agentActivity");
+                    intent.putExtra("aid",aid);
+                    startActivity(intent);
                 }
             }
 

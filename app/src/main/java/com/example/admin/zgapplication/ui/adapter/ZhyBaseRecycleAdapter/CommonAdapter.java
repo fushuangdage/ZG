@@ -37,7 +37,11 @@ public abstract class CommonAdapter<T> extends MultiItemTypeAdapter<T>
             @Override
             public boolean isForViewType( T item, int position)
             {
-                return true;
+                if (item != null) {
+                    return true;
+                }else {
+                    return false;
+                }
             }
 
             @Override
@@ -46,6 +50,7 @@ public abstract class CommonAdapter<T> extends MultiItemTypeAdapter<T>
                 CommonAdapter.this.convert(holder, t, position);
             }
         });
+
     }
 
 
