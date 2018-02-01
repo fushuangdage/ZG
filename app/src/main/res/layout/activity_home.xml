@@ -95,6 +95,7 @@
                     android:layout_height="18dp"
                     android:background="@drawable/msg" />
                 <com.example.admin.zgapplication.ui.view.MessageBubbleView
+                    android:id="@+id/mb_message"
                      app:textSize="7sp"
                      app:number="20"
                      android:layout_alignParentEnd="true"

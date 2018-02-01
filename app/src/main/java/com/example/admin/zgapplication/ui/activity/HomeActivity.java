@@ -32,6 +32,7 @@ import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiIte
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
+import com.example.admin.zgapplication.ui.view.MessageBubbleView;
 import com.example.admin.zgapplication.utils.img.GlideRoundTransform;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -72,6 +73,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     @BindView(R.id.tv_city)
     TextView tv_city;
 
+    @BindView(R.id.mb_message)
+    MessageBubbleView mb_message;
 
     public HomeFindHouseFragment houseFragment;
     public HomeFindPersonFragment personFragment;
@@ -134,6 +137,11 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     public void initData() {
 
         Serializable loginBean = getIntent().getSerializableExtra("loginBean");
+
+//        EMConversation conversation = EMClient.getInstance().chatManager().getConversation(Constant.hx_username);
+//        int unreadMsgCount = conversation.getUnreadMsgCount();
+//        mb_message.setNumber(unreadMsgCount+"");
+
 
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
