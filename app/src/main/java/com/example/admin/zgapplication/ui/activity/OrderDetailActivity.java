@@ -87,9 +87,13 @@ public class OrderDetailActivity extends BaseActivity {
 
     @BindView(R.id.et_username)
     EditText et_username;
+
+    @BindView(R.id.tv_rent_sum)
+    TextView tv_rent_sum;
     private OrderDetailResponse.OrderDetailDataBean.ListBean data;
     private SelectOrderInfoBean bean;
     private int user_coupon_id;
+    private int user_coupon_money;
 
 
     @Override
@@ -188,6 +192,7 @@ public class OrderDetailActivity extends BaseActivity {
         middle_money.setText("¥"+bean.getMiddle_money());
         service_count.setText(bean.getService_count());
         service_money.setText("¥"+bean.getService_money());
+        tv_rent_sum.setText("¥"+(bean.getSum_money()-user_coupon_money));
     }
 
 
@@ -262,6 +267,7 @@ public class OrderDetailActivity extends BaseActivity {
         }
         if (resultCode==Constant.RESULT_FOR_CHOOSE_COUPON){
             user_coupon_id = data.getIntExtra("user_coupon_id", 0);
+            user_coupon_money=data.getIntExtra("user_coupon_money",0);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

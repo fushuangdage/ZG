@@ -22,6 +22,9 @@ import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.fragment.HouseDetailFragment;
 import com.example.admin.zgapplication.ui.fragment.HouseEvaluteFragment;
 import com.example.admin.zgapplication.ui.view.RoomPickDialog;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -93,9 +96,36 @@ public class HouseDetailActivity extends BaseActivity {
         room_id = getIntent().getStringExtra("room_id");
     }
 
-    @OnClick({R.id.tv_write_order,R.id.tv_chat_agent,R.id.tv_collect,R.id.iv_shoppingcar})
+    @OnClick({R.id.tv_write_order,R.id.tv_chat_agent,R.id.tv_collect,R.id.iv_shoppingcar,R.id.iv_share})
     public void onClick(View view){
         switch (view.getId()) {
+            case R.id.iv_share:
+                new ShareAction(this)
+                        .withText("hello")
+                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        })
+                        .open();
+                break;
 
             case R.id.tv_write_order:
 

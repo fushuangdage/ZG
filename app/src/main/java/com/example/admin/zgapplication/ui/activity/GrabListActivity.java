@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.CrabListResponse;
@@ -47,6 +48,7 @@ public class GrabListActivity extends BaseActivity {
     private int page=1;
     private CommonAdapter<CrabListResponse.DataBean.ListBean> adapter;
     private int iid;
+    private String str;
 
 
     @Override
@@ -100,6 +102,7 @@ public class GrabListActivity extends BaseActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(mActivity, ChatActivity.class);
                         Bundle bundle = new Bundle();
+                        bundle.putString(EaseConstant.STR,str);
                         bundle.putString(EaseConstant.AGENT_ID,bean.getId());
                         bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
                         bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
@@ -146,6 +149,7 @@ public class GrabListActivity extends BaseActivity {
                         if (page==1) {
                             list.clear();
                         }
+                        str = "我是租客"+ Constant.username+",我要租"+crabListResponse.getData().getStr();
                         list.addAll(crabListResponse.getData().getList());
                         adapter.notifyDataSetChanged();
                     }

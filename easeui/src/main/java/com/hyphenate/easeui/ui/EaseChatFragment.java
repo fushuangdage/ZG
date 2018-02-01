@@ -122,6 +122,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     private String userId;
     private String aid;
     private String myName;
+    private String str;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -145,6 +146,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         userId = fragmentArgs.getString(EaseConstant.USER_ID);
         my_head = fragmentArgs.getString(EaseConstant.MY_HEAD);
         myName=fragmentArgs.getString(EaseConstant.MY_NAME);
+        str = fragmentArgs.getString(EaseConstant.STR);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -205,9 +207,11 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             fetchQueue = Executors.newSingleThreadExecutor();
         }
 
+        if (str!=null&&!str.equals("")){
+            EMMessage message = EMMessage.createTxtSendMessage(str, toChatUsername);
+            sendMessage(message);
+        }
 
-        EMMessage message = EMMessage.createTxtSendMessage("你好!我是"+myName, toChatUsername);
-        sendMessage(message);
     }
 
     protected void setUpView() {

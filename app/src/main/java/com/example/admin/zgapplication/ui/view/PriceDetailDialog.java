@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
+import com.example.admin.zgapplication.mvp.module.RentReadyPayResponse;
 
 import butterknife.BindView;
 
@@ -45,15 +46,40 @@ public class PriceDetailDialog extends Dialog{
 
     @BindView(R.id.service_money)
     TextView service_money;
+    private View tv_rent_sum;
 
     public PriceDetailDialog(@NonNull Context context) {
         super(context);
         this.context = context;
+        init();
+
+
+    }
+
+    private void init() {
+        View view = LayoutInflater.from(context).inflate(R.layout.price_detail_panel, null, false);
+        tv_rent_count= (TextView) view.findViewById(R.id.tv_rent_count);
+        tv_deposit_count= (TextView) view.findViewById(R.id.tv_deposit_count);
+        middle_count= (TextView) view.findViewById(R.id.middle_count);
+        rent_money= (TextView) view.findViewById(R.id.rent_money);
+        deposit_money= (TextView) view.findViewById(R.id.deposit_money);
+        middle_money= (TextView) view.findViewById(R.id.middle_money);
+        service_count= (TextView) view.findViewById(R.id.service_count);
+        service_money= (TextView) view.findViewById(R.id.service_money);
+        tv_rent_sum = view.findViewById(R.id.tv_rent_sum);
+
+        setContentView(view);
+        Window window = getWindow();
+        WindowManager.LayoutParams params  = window.getAttributes();
+        window.setGravity(Gravity.CENTER);
+        params.width= ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
+        window.setAttributes(params);
     }
 
     public PriceDetailDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
         this.context = context;
+        init();
     }
 
     public OrderDetailResponse.OrderDetailDataBean.ListBean getBean() {
@@ -70,27 +96,27 @@ public class PriceDetailDialog extends Dialog{
         middle_money.setText("¥"+bean.getMiddle_money());
         service_count.setText(bean.getService_count());
         service_money.setText("¥"+bean.getService_money());
+        tv_rent_sum.setTag("¥"+bean.getSum_money());
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = LayoutInflater.from(context).inflate(R.layout.price_detail_panel, null, false);
-        tv_rent_count= (TextView) view.findViewById(R.id.tv_rent_count);
-        tv_deposit_count= (TextView) view.findViewById(R.id.tv_deposit_count);
-        middle_count= (TextView) view.findViewById(R.id.middle_count);
-        rent_money= (TextView) view.findViewById(R.id.rent_money);
-        deposit_money= (TextView) view.findViewById(R.id.deposit_money);
-        middle_money= (TextView) view.findViewById(R.id.middle_money);
-        service_count= (TextView) view.findViewById(R.id.service_count);
-        service_money= (TextView) view.findViewById(R.id.service_money);
+    }
 
-        setContentView(view);
-        Window window = getWindow();
-        WindowManager.LayoutParams params  = window.getAttributes();
-        window.setGravity(Gravity.CENTER);
-        params.width= ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
-        window.setAttributes(params);
+    public void setBean(RentReadyPayResponse.DataBean bean) {
+        rent_money.setText("¥"+bean.getRent_pay()+"");
+        tv_rent_count.setText(bean.getRent_pay()+"");
+        deposit_money.setText("¥"+bean.getPay()+"");
+        tv_deposit_count.setText(bean.getDeposit());
+        middle_count.setText(bean.getMiddle_count());
+        middle_money.setText("¥"+bean.getMiddle_money());
+        service_count.setText(bean.getService_count());
+        service_money.setText("¥"+bean.getService_money());
+        tv_rent_sum.setTag("¥"+bean.getPayment());
 
     }
+
 }

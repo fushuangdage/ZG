@@ -80,6 +80,24 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
         private List<SameBean> same;
         private List<PayMethodBean> pay_method;
         private List<Integer> date;
+        private String lng;
+        private String lat;
+
+        public String getLng() {
+            return lng;
+        }
+
+        public void setLng(String lng) {
+            this.lng = lng;
+        }
+
+        public String getLat() {
+            return lat;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
 
         public String getHx_username() {
             return hx_username;

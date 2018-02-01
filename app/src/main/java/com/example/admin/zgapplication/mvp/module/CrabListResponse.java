@@ -18,6 +18,15 @@ public class CrabListResponse extends BaseResponse<CrabListResponse.DataBean> {
 
         private List<ListBean> list;
 
+        private String str;
+
+        public String getStr() {
+            return str;
+        }
+
+        public void setStr(String str) {
+            this.str = str;
+        }
 
         public List<ListBean> getList() {
             return list;
@@ -56,7 +65,6 @@ public class CrabListResponse extends BaseResponse<CrabListResponse.DataBean> {
             private String chat_intention;
             private String hx_username;
             private List<String> label;
-
 
             public String getHx_username() {
                 return hx_username;

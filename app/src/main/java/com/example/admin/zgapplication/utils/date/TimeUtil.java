@@ -105,6 +105,7 @@ public class TimeUtil {
 
     public static String dateFormatYMDE = "yyyy/MM/dd E";
     public static String dateFormatYMD2 = "yyyy/MM/dd";
+    public static final String dateFormatms="mm:ss";
 
     private final static ThreadLocal<SimpleDateFormat> dateFormater = new ThreadLocal<SimpleDateFormat>() {
         @SuppressLint("SimpleDateFormat")

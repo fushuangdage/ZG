@@ -298,6 +298,7 @@
                 android:layout_height="wrap_content" />
 
             <CheckBox
+                android:id="@+id/cb_ali"
                 style="@style/choose_checkbox"
                 android:layout_marginRight="10dp"
                 android:layout_width="17dp"
@@ -326,6 +327,7 @@
                 android:layout_height="wrap_content" />
 
             <CheckBox
+                android:id="@+id/cb_weixin"
                 style="@style/choose_checkbox"
                 android:layout_marginRight="10dp"
                 android:layout_width="17dp"

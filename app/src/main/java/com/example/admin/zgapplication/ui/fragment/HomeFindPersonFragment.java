@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,9 +15,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.admin.zgapplication.Constant;
@@ -69,6 +76,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     private RegionResponse.BaseRegion select_region;
     private RegionResponse currentSelectRegion;
     public int iid;
+    private BaiduMap baiduMap;
 
 
     @Override
@@ -107,43 +115,78 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
         });
 
 
-        RetrofitHelper.getApiWithUid().getAgentLocation("100.00083479","50.00026726")
-                .compose(RxScheduler.<AgentLocationResponse>defaultScheduler())
-                .subscribe(new Observer<AgentLocationResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+        initLocation();
 
-                    }
 
-                    @Override
-                    public void onNext(AgentLocationResponse agentLocationResponse) {
-                        List<AgentLocationResponse.DataBean> data = agentLocationResponse.getData();
-                        List<OverlayOptions> options = new ArrayList<OverlayOptions>();
+    }
 
-                        if (data!=null){
-                            for (AgentLocationResponse.DataBean datum : data) {
-                                MarkerOptions markerOptions = new MarkerOptions()
-                                        .position(new LatLng(datum.getLat(), datum.getLnt()))
-                                        .icon(BitmapDescriptorFactory
-                                                .fromResource(R.drawable.ic_launcher));
-                                options.add(markerOptions);
+    private void initLocation() {
+
+        LocationClient locationClient = new LocationClient(getActivity());
+        LocationClientOption option = new LocationClientOption();
+        baiduMap = mapView.getMap();
+        baiduMap.setMyLocationEnabled(true);
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        option.setCoorType("bd09ll");
+        locationClient.setLocOption(option);
+
+        locationClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+
+                Log.d("88888888", "onReceiveLocation: "+bdLocation.getLongitude()+"  :   "+bdLocation.getLatitude());
+                RetrofitHelper.getApiWithUid().getAgentLocation(bdLocation.getLatitude(),bdLocation.getLongitude())   //维度,精度
+                        .compose(RxScheduler.<AgentLocationResponse>defaultScheduler())
+                        .subscribe(new Observer<AgentLocationResponse>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
                             }
-                        }
 
-                        mapView.getMap().addOverlays(options);
+                            @Override
+                            public void onNext(AgentLocationResponse agentLocationResponse) {
+                                List<AgentLocationResponse.DataBean> data = agentLocationResponse.getData();
+                                List<OverlayOptions> options = new ArrayList<OverlayOptions>();
 
-                    }
+                                if (data!=null){
+                                    for (AgentLocationResponse.DataBean datum : data) {
+                                        Log.d("88888888", "onNext: "+datum.getLat()+"   :  "+datum.getLnt());
+                                        MarkerOptions markerOptions = new MarkerOptions()
+                                                .position(new LatLng(datum.getLat(), datum.getLnt()))
+                                                .icon(BitmapDescriptorFactory
+                                                        .fromResource(R.drawable.person));
+                                        options.add(markerOptions);
+                                    }
+                                }
 
-                    @Override
-                    public void onError(Throwable e) {
+                                baiduMap.addOverlays(options);
 
-                    }
+                            }
 
-                    @Override
-                    public void onComplete() {
+                            @Override
+                            public void onError(Throwable e) {
 
-                    }
-                });
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+
+
+                MyLocationData build = new MyLocationData.Builder().accuracy(bdLocation.getRadius())
+                        .direction(100).latitude(bdLocation.getLatitude())
+                        .longitude(bdLocation.getLongitude()).build();
+
+
+                baiduMap.setMyLocationData(build);
+
+            }
+        });
+
+        locationClient.start();
+
     }
 
     @Override

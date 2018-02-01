@@ -94,7 +94,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         return R.layout.activity_home;
     }
 
-
     @Override
     public void initEvent() {
         houseFragment = new HomeFindHouseFragment();
@@ -130,7 +129,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
         contact.setOnClickListener(this);
 
     }
-
 
     @Override
     public void initData() {
@@ -190,6 +188,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
                     @Override
                     public void complete() {
+
                     }
                 });
 

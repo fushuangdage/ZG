@@ -23,7 +23,7 @@ public class Constant extends EaseConstant {
 	public static String password="";
 	public static String hx_username="";
 	public static String hx_password="";
-	public static String avatar="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1517194045&di=830ff8e9f8b8fa8fbacaee4296c8c5e9&src=http://imgsrc.baidu.com/imgad/pic/item/bf096b63f6246b60553a62a0e1f81a4c510fa22a.jpg";
+	public static String avatar="";
 
 
 	public static String SP_TABLE_USER_HX_NM="hx_username";

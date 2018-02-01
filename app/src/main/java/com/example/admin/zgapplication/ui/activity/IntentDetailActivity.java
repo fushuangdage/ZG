@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.IntentionDetailResponse;
+import com.example.admin.zgapplication.mvp.module.RestartIntentResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
@@ -29,6 +31,7 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -112,6 +115,13 @@ public class IntentDetailActivity extends BaseActivity {
                         bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
                         bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
                         bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+
+//                        bundle.putString(EaseConstant.STR,str);
+//                        bundle.putString(EaseConstant.AGENT_ID,bean.getId());
+//                        bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+//                        bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
+//                        bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
@@ -174,6 +184,44 @@ public class IntentDetailActivity extends BaseActivity {
                 });
 
 
+    }
+
+    @OnClick({R.id.tv_restart_intent})
+    public void onClick(View view){
+        switch (view.getId()) {
+
+            case R.id.tv_restart_intent:
+                RetrofitHelper.getApi().restartIntent(Constant.uid,iid)
+                        .compose(RxScheduler.<RestartIntentResponse>defaultScheduler())
+                        .subscribe(new Observer<RestartIntentResponse>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(RestartIntentResponse restartIntentResponse) {
+                                if (restartIntentResponse.getCode()==0) {
+                                    Intent intent = new Intent(mActivity, WaitCrabActivity.class);
+                                    intent.putExtra("iid",restartIntentResponse.getData().getId());
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+                break;
+
+
+        }
     }
 
 }

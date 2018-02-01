@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.example.admin.zgapplication.R;
+import com.example.admin.zgapplication.utils.date.TimeUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class CustomProgressView extends View{
     private Paint mCirclePaint;
     private float progress=0.5f;
     private int radius;
-    private String time="00:30";  //记录抢单剩余时间
+    private String time="02:30";  //记录抢单剩余时间
     private Paint bgPaint;
     private String count="3";   //记录抢单经纪人数
     private RectF rectF;
@@ -152,18 +153,18 @@ public class CustomProgressView extends View{
 //                }
 //            }
 //        }).start();
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 60);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 300);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
-                time="00:"+ ((int) value);
-                progress=  (value / 60f);
+                time=TimeUtil.formatData(TimeUtil.dateFormatms, (long) value);
+                progress=  (value / 300f);
                 postInvalidate();
             }
         });
         valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setDuration(60000);
+        valueAnimator.setDuration(300000);
         valueAnimator.start();
     }
 
@@ -187,18 +188,19 @@ public class CustomProgressView extends View{
 //            }
 //        }).start();
 
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(60, 0);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(300, 0);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
-                time="00:"+ ((int) value);
-                progress=  (value / 60f);
+//                time="00:"+ ((int) value);
+                time = TimeUtil.formatData(TimeUtil.dateFormatms, (long) value);
+                progress=  (value / 300f);
                 postInvalidate();
             }
         });
         valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setDuration(60000);
+        valueAnimator.setDuration(300000);
         valueAnimator.start();
     }
 

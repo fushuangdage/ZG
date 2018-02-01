@@ -16,12 +16,15 @@ import android.widget.Toast;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
+import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.CrabCountResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
+import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.fragment.RecommendDamiFragment;
 import com.example.admin.zgapplication.ui.fragment.RecommendHouseFragment;
 import com.example.admin.zgapplication.ui.view.BeforeBTBehavior;
+import com.example.admin.zgapplication.ui.view.CustomProgressView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,6 +47,9 @@ public class WaitCrabActivity extends BaseActivity {
     @BindView(R.id.bt_check_crab_list)
     TextView bt_check_crab_list;
     private Disposable disposable;
+    @BindView(R.id.progress_bar)
+    CustomProgressView progress_bar;
+
 
     @OnClick({R.id.bt_check_crab,R.id.bt_check_crab_list,R.id.iv_left,R.id.bt_reset_crab})
     public void onClick(View view) {
@@ -59,6 +65,28 @@ public class WaitCrabActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.bt_reset_crab:
+                RetrofitHelper.getApiWithUid().cancleIntention(getIntent().getIntExtra("iid", 0))
+                        .compose(RxScheduler.<BaseResponse>defaultScheduler())
+                        .subscribe(new BaseObserver<BaseResponse>(mActivity) {
+                            @Override
+                            public void error(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void next(BaseResponse baseResponse) {
+                                if (baseResponse.getCode()==0) {
+                                    Toast.makeText(WaitCrabActivity.this, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void complete() {
+
+                            }
+                        });
+
 //                HomeActivity activity = (HomeActivity) AppManager.getActivities().get(AppManager.getActivities().size() - 2);
 //                activity.personFragment.startCrabIntent();
                 break;
@@ -85,6 +113,7 @@ public class WaitCrabActivity extends BaseActivity {
         recommendDamiFragment = new RecommendDamiFragment();
         recommendHouseFragment = new RecommendHouseFragment();
 
+        progress_bar.startReversal();
 
         View bottomSheet = findViewById(R.id.rl_bottom_sheet);
         final View rl_wait_vrab_content = findViewById(R.id.rl_wait_crab_content);

@@ -22,6 +22,7 @@ import com.example.admin.zgapplication.mvp.module.ContractListResponse;
 import com.example.admin.zgapplication.mvp.module.CrabCountResponse;
 import com.example.admin.zgapplication.mvp.module.CrabListResponse;
 import com.example.admin.zgapplication.mvp.module.DiscountListResponse;
+import com.example.admin.zgapplication.mvp.module.EmptyResponse;
 import com.example.admin.zgapplication.mvp.module.EvaluationSuccessDetail;
 import com.example.admin.zgapplication.mvp.module.GenerateOrderResponse;
 import com.example.admin.zgapplication.mvp.module.HotSearchListResponse;
@@ -43,6 +44,8 @@ import com.example.admin.zgapplication.mvp.module.RecommendHouseListResponse;
 import com.example.admin.zgapplication.mvp.module.RegionResponse;
 import com.example.admin.zgapplication.mvp.module.RentBillResponse;
 import com.example.admin.zgapplication.mvp.module.RentIntentListResponse;
+import com.example.admin.zgapplication.mvp.module.RentReadyPayResponse;
+import com.example.admin.zgapplication.mvp.module.RestartIntentResponse;
 import com.example.admin.zgapplication.mvp.module.RoomDetailResponse;
 import com.example.admin.zgapplication.mvp.module.SearchResultResponse;
 import com.example.admin.zgapplication.mvp.module.SelfInfo;
@@ -345,7 +348,7 @@ public interface RetrofitApi {
 
 
     @GET("/member/home")
-    Observable<AgentLocationResponse> getAgentLocation(@Query("lng") String lng,@Query("lat") String lat);
+    Observable<AgentLocationResponse> getAgentLocation(@Query("lat") double lng,@Query("lng") double lat);
 
 
     @GET("/member/intention/detail")
@@ -361,6 +364,23 @@ public interface RetrofitApi {
 
     @POST("/member/user/saves")
     Observable<ModifyIconResponse> modifyHeadIcon(@Body MultipartBody multipartBody);
+
+
+    @GET("/member/order/pay")
+    Observable<RentReadyPayResponse> getRentReadyPayResponse(@Query("order_id") String order_id);
+
+    @FormUrlEncoded
+    @POST("/member/intention/adds")
+    Observable<RestartIntentResponse> restartIntent(@Field("uid")String uid,@Field("id") String iid);
+
+
+    @GET("member/intention/cancel")
+    Observable<BaseResponse> cancleIntention(@Query("id") int id);
+
+    @FormUrlEncoded
+    @POST("/agent/chat/add")
+    Observable<EmptyResponse> addHXFriend(@Field("member_id") String member_id, @Field("uid") String uid);
+
 
 
 }

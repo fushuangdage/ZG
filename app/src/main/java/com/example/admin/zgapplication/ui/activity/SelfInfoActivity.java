@@ -175,7 +175,8 @@ public class SelfInfoActivity extends BaseActivity {
                         public void onNext(ModifyIconResponse addEvaluationResponse) {
                             if (addEvaluationResponse.getCode()==0){
                                 Glide.with(mActivity).load(addEvaluationResponse.getData().getAvatar()).transform(new GlideRoundTransform(mActivity)).into(iv_user_icon);
-                                Constant.avatar=addEvaluationResponse.getData().getAvatar();
+                                Constant.
+                                        avatar=addEvaluationResponse.getData().getAvatar();
                                 SPUtil.put(mActivity,"avatar",Constant.avatar);
                             }
 

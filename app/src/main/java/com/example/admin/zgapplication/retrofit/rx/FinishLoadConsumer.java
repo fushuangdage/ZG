@@ -33,7 +33,6 @@ public class   FinishLoadConsumer<T extends BaseResponse> implements Consumer<T>
     }
 
 
-
     @Override
     public void accept(T t) throws Exception {
 

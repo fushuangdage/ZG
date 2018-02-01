@@ -43,4 +43,6 @@ public class EaseConstant {
     public static final String  MY_NAME="my_name";
     public static final String  AGENT_ID="agentID";
 
+    public static final String  STR="str";
+
 }

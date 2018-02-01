@@ -17,6 +17,7 @@ import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
+    public static boolean isForeground;
     @BindView(R.id.main_rg)  RadioGroup radioGroup;
 
 

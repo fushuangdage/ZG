@@ -84,7 +84,15 @@ public class OrderDetailResponse extends BaseResponse<OrderDetailResponse.OrderD
             private String net;
             private String real_name;
             private String telephone;
+            private int sum_money;
 
+            public int getSum_money() {
+                return sum_money;
+            }
+
+            public void setSum_money(int sum_money) {
+                this.sum_money = sum_money;
+            }
 
             public long getPay_time() {
                 return pay_time;
