@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/tv_state"
             android:textSize="12sp"
-            android:text="代付款"
+            android:text="已付款"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
@@ -47,6 +47,7 @@
     <include layout="@layout/item_recommend_house" />
 
     <RelativeLayout
+        android:id="@+id/rl_pay_info"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -61,7 +62,8 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="代付款:  "
+            android:id="@+id/tv_pay_status"
+            android:text="已付款:  "
             android:textColor="@color/toolbartitle"
             android:layout_toLeftOf="@id/tv_total_price"
             android:layout_width="wrap_content"

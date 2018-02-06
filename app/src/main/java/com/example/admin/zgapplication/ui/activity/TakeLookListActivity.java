@@ -44,7 +44,7 @@ public class TakeLookListActivity extends BaseActivity {
 
     private ArrayList<TakeLookListResponse.DataBean.ListBean> data = new ArrayList<>();
     public Integer currentPager = 1;
-    public Integer status = 1;
+    public Integer status = 0;
     private CommonAdapter<TakeLookListResponse.DataBean.ListBean> adapter;
 
     @Override

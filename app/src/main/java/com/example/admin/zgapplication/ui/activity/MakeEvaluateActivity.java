@@ -292,6 +292,9 @@ public class MakeEvaluateActivity extends BaseActivity {
                     EvaluationSuccessDetail.DataBean.ListBean bean = evaluationSuccessDetail.getData().getList();
                     Glide.with(mActivity).load(bean.getAvatar()).into(iv_icon);
                     Glide.with(mActivity).load(bean.getLogo()).into(iv_company_icon);
+                    sb_agent.setRating(Float.valueOf(bean.getMember_score()));
+                    sb_company.setRating(Float.valueOf(bean.getCompany_score()));
+                    sb_house.setRating(Float.valueOf(bean.getHouse_score()));
                     tv_agent_name.setText(bean.getUsername());
                     tv_company.setText(bean.getCompany_name());
                     tv_house_area.setText(bean.getHouse_area());

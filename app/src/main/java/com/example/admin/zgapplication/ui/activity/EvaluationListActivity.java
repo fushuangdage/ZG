@@ -113,6 +113,13 @@ public class EvaluationListActivity extends BaseActivity {
 
 
                 Glide.with(mActivity).load(bean.getHouse_photo()).into((ImageView) holder.getView(R.id.iv_house));
+                Glide.with(mActivity).load(bean.getAvatar()).into((ImageView) holder.getView(R.id.iv_userhead));
+
+
+                ((TextView) holder.getView(R.id.tv_user_name)).setText(bean.getAgent());
+                ((TextView) holder.getView(R.id.tv_company)).setText(bean.getCompany_name());
+
+
                 ((TextView) holder.getView(R.id.tv_house_name)).setText(bean.getHouse_title());
                 ((TextView) holder.getView(R.id.tv_house_location)).setText(bean.getHouse_address());
                 ((TextView) holder.getView(R.id.tv_house_info)).setText(bean.getHouse_info());
@@ -123,9 +130,12 @@ public class EvaluationListActivity extends BaseActivity {
                 if (method==1){
                     //成交
                     holder.setText(R.id.tv_user_tag,bean.getCompany_name()+" "+bean.getAgent());
+                    holder.setText(R.id.tv_total_price,"¥"+bean.getPayment());
+                    holder.getView(R.id.rl_pay_info).setVisibility(View.VISIBLE);
                 }else {
                     //带看
                     holder.setText(R.id.tv_user_tag, TimeUtil.formatData(TimeUtil.dateFormat,bean.getExpect_time()));
+                    holder.getView(R.id.rl_pay_info).setVisibility(View.GONE);
                 }
 
                 if (reviewed==0){

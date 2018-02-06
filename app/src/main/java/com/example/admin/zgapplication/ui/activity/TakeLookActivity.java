@@ -44,6 +44,9 @@ public class TakeLookActivity extends BaseActivity {
     TextView tv_house_rent;
     @BindView(R.id.ll_tag_container)
     LinearLayout ll_tag_container;
+    @BindView(R.id.iv_agent_icon)
+    ImageView iv_agent_icon;
+
 
     @BindView(R.id.tv_tel)
     TextView tv_tel;

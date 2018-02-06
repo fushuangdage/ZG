@@ -102,7 +102,7 @@ public class OrderListActivity extends BaseActivity {
             @Override
             protected void convert(ViewHolder holder, final OrderList.OrderListDataBean.ListBean listBean, final int position) {
                 ((TextView) holder.getView(R.id.tv_user_tag)).setText(listBean.getCompany_name()+"  "+listBean.getAgent());
-                ((TextView) holder.getView(R.id.tv_state)).setText(listBean.getAgent());
+                ((TextView) holder.getView(R.id.tv_state)).setText(listBean.getStatus());
                 ((TextView) holder.getView(R.id.tv_total_price)).setText("¥"+listBean.getPayment());
                 ((TextView) holder.getView(R.id.tv_house_location)).setText(listBean.getAddress());
                 ((TextView) holder.getView(R.id.tv_house_name)).setText(listBean.getHouse_title());
@@ -138,9 +138,9 @@ public class OrderListActivity extends BaseActivity {
                                 }else {
                                     intent.putExtra("evaluated",true);
                                 }
-
-//                                intent.putExtra("evaluated",listBean.get)
-//                                startActivity();
+                                intent.putExtra("method","1");
+                                intent.putExtra("id",listBean.getOrder_id());
+                                startActivity(intent);
                                 break;
                             case "已取消":
                                 //删除订单
@@ -168,7 +168,11 @@ public class OrderListActivity extends BaseActivity {
                                         });
                                 break;
                             case "待付款":
-                                intent= new Intent(mActivity,PayOnlineActivity.class);
+                                intent= new Intent(mActivity,OrderDetail2Activity.class);
+                                intent.putExtra("order_id",Integer.parseInt(listBean.getOrder_id()));
+                                intent.putExtra("type","1");
+                                startActivity(intent);
+//                                intent.putExtra("order_num")
                                 break;
                         }
                     }

@@ -236,6 +236,7 @@
                     android:id="@+id/et_username"
                     android:textSize="13sp"
                     android:hint="请输入姓名  "
+                    android:singleLine="true"
                     android:layout_alignParentEnd="true"
                     android:textColor="#666e70"
                     android:background="@color/white"

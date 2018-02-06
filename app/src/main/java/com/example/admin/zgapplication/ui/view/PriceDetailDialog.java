@@ -46,7 +46,7 @@ public class PriceDetailDialog extends Dialog{
 
     @BindView(R.id.service_money)
     TextView service_money;
-    private View tv_rent_sum;
+    private TextView tv_rent_sum;
 
     public PriceDetailDialog(@NonNull Context context) {
         super(context);
@@ -66,7 +66,7 @@ public class PriceDetailDialog extends Dialog{
         middle_money= (TextView) view.findViewById(R.id.middle_money);
         service_count= (TextView) view.findViewById(R.id.service_count);
         service_money= (TextView) view.findViewById(R.id.service_money);
-        tv_rent_sum = view.findViewById(R.id.tv_rent_sum);
+        tv_rent_sum = (TextView) view.findViewById(R.id.tv_rent_sum);
 
         setContentView(view);
         Window window = getWindow();
@@ -89,14 +89,14 @@ public class PriceDetailDialog extends Dialog{
     public void setBean(OrderDetailResponse.OrderDetailDataBean.ListBean bean) {
         this.bean = bean;
         rent_money.setText("¥"+bean.getRent()+"");
-        tv_rent_count.setText(bean.getRent_pay()+"");
+        tv_rent_count.setText("×"+bean.getRent_pay());
         deposit_money.setText("¥"+bean.getPay()+"");
         tv_deposit_count.setText(bean.getDeposit());
-        middle_count.setText(bean.getMiddle_count());
+        middle_count.setText("×"+bean.getMiddle_count());
         middle_money.setText("¥"+bean.getMiddle_money());
-        service_count.setText(bean.getService_count());
+        service_count.setText("×"+bean.getService_count());
         service_money.setText("¥"+bean.getService_money());
-        tv_rent_sum.setTag("¥"+bean.getSum_money());
+        tv_rent_sum.setText("¥"+bean.getPayment());
     }
 
 
@@ -107,7 +107,7 @@ public class PriceDetailDialog extends Dialog{
     }
 
     public void setBean(RentReadyPayResponse.DataBean bean) {
-        rent_money.setText("¥"+bean.getRent_pay()+"");
+        rent_money.setText("¥"+bean.getR_money()+"");
         tv_rent_count.setText(bean.getRent_pay()+"");
         deposit_money.setText("¥"+bean.getPay()+"");
         tv_deposit_count.setText(bean.getDeposit());
@@ -115,7 +115,7 @@ public class PriceDetailDialog extends Dialog{
         middle_money.setText("¥"+bean.getMiddle_money());
         service_count.setText(bean.getService_count());
         service_money.setText("¥"+bean.getService_money());
-        tv_rent_sum.setTag("¥"+bean.getPayment());
+        tv_rent_sum.setText("¥"+bean.getPayment());
 
     }
 

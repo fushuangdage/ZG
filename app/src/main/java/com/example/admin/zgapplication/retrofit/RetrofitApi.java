@@ -360,6 +360,7 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("/member/pay/to-pay")
+    //method 支付方式1：支付宝 ，2：微信
     Observable<PayInfoResponse> getPayInfo(@Field("type") String type,@Field("order_num") String order_num,@Field("method") String method);
 
     @POST("/member/user/saves")

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +23,7 @@ import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class OrderDetail2Activity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
+public class OrderDetail2Activity extends BaseActivity {
 
     @BindView(R.id.cb_ali)
     CheckBox cb_ali;
@@ -45,9 +44,25 @@ public class OrderDetail2Activity extends BaseActivity implements CompoundButton
 //    RecyclerView recyclerView;
 //    private CommonAdapter<String> adapter;
 
-    @OnClick({R.id.tv_cancel, R.id.tv_price_detail, R.id.tv_pay, R.id.tv_friend_pay, R.id.iv_left})
+    public void solveCheck(View view){
+        cb_weixin.setChecked(false);
+        cb_ali.setChecked(false);
+        ((CheckBox) view).setChecked(true);
+    }
+
+    @OnClick({R.id.tv_cancel, R.id.tv_price_detail, R.id.tv_pay, R.id.tv_friend_pay, R.id.iv_left,R.id.cb_ali,R.id.cb_weixin})
     public void onClick(View view) {
         switch (view.getId()) {
+
+            case R.id.cb_ali:
+                solveCheck(view);
+                method="1";
+                break;
+
+            case R.id.cb_weixin:
+                solveCheck(view);
+                method="2";
+                break;
 
             case R.id.tv_cancel:
                 Intent intent = new Intent();
@@ -109,10 +124,6 @@ public class OrderDetail2Activity extends BaseActivity implements CompoundButton
 
     @Override
     public void initEvent() {
-
-        cb_ali.setOnCheckedChangeListener(this);
-        cb_weixin.setOnCheckedChangeListener(this);
-
         dialog = new PriceDetailDialog(this);
 //        ArrayList<String> strings = new ArrayList<>();
 //        for (int i = 0; i < 1; i++) {
@@ -190,19 +201,4 @@ public class OrderDetail2Activity extends BaseActivity implements CompoundButton
         }
     }
 
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            switch (buttonView.getId()) {
-
-                case R.id.cb_ali:
-                    method="1";
-                    break;
-                case R.id.cb_weixin:
-                    method="2";
-                    break;
-            }
-        }
-    }
 }

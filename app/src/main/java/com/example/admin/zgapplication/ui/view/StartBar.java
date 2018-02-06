@@ -24,7 +24,7 @@ public class StartBar extends View {
     private int mHeight;
     private int mWidth;
     private int startNum=5;
-    public int rating=2;
+    public float rating=2;
     private int spacing=0;
     private Bitmap grayStart;
     private Bitmap yellowStart;
@@ -52,11 +52,11 @@ public class StartBar extends View {
         init();
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
         postInvalidate();
     }

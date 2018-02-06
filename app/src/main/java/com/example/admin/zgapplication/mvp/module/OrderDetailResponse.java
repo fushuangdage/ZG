@@ -84,7 +84,7 @@ public class OrderDetailResponse extends BaseResponse<OrderDetailResponse.OrderD
             private String net;
             private String real_name;
             private String telephone;
-            private int sum_money;
+            private float sum_money;
             public String avatar;
 
             public String getAvatar() {
@@ -95,11 +95,11 @@ public class OrderDetailResponse extends BaseResponse<OrderDetailResponse.OrderD
                 this.avatar = avatar;
             }
 
-            public int getSum_money() {
+            public float getSum_money() {
                 return sum_money;
             }
 
-            public void setSum_money(int sum_money) {
+            public void setSum_money(float sum_money) {
                 this.sum_money = sum_money;
             }
 
