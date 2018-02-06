@@ -35,10 +35,10 @@ public class SecondActivity extends BaseActivity {
     public void chat(){
 //        EaseChatFragment easeChatFragment = new EaseChatFragment();
 //        Bundle bundle = new Bundle();
-//        bundle.putString(EaseConstant.EXTRA_USER_ID,et_chatwith.getText().toString());
+//        bundle.putString(EaseConstant.CHAT_HX_NAME,et_chatwith.getText().toString());
 //        bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, 1);
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra(EaseConstant.EXTRA_USER_ID,et_chatwith.getText().toString());
+        intent.putExtra(EaseConstant.CHAT_HX_NAME,et_chatwith.getText().toString());
         intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
         startActivity(intent);
 //        easeChatFragment.setArguments(bundle);

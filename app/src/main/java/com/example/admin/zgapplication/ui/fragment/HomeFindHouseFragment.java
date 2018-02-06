@@ -116,7 +116,8 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
 
-                refreshlayout.finishRefresh(2000);
+               page=1;
+               loadFindHouseList();
             }
         });
         refreshLayout.setEnableLoadmore(true);
@@ -124,7 +125,8 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
 
-                refreshlayout.finishLoadmore(2000);
+               page++;
+               loadFindHouseList();
             }
         });
 

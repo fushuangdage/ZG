@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 
 
 android {
+    signingConfigs {
+        zg {
+            keyAlias 'zg'
+            keyPassword '123456'
+            storeFile file('C:/Users/fushuang/Desktop/zg.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
     defaultConfig {
@@ -22,12 +30,11 @@ android {
 //                JPUSH_CHANNEL: "Publish channel",
 //        ]
         //正式环境 jpush
-                manifestPlaceholders = [
-                JPUSH_PKGNAME:  applicationId,
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "d4f54769b9e21df62f95f272",
                 JPUSH_CHANNEL: "Publish channel",
         ]
-
 
 
     }
@@ -35,9 +42,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.zg
+        }
+        debug {
+            signingConfig signingConfigs.zg
         }
     }
-
 }
 
 dependencies {
@@ -69,12 +79,13 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.10'
     testCompile 'junit:junit:4.12'
     compile 'com.contrarywind:Android-PickerView:3.2.7'
-
-
-    compile 'com.pingxx:pingpp-core:2.1.16' // 必须添加
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+' // 使用微信支付时添加,具体版本参考微信官方文档
-    compile 'com.pingxx:pingpp-alipay:2.1.16' // 使用支付宝时添加
-
+    compile 'com.pingxx:pingpp-core:2.1.16'
+    // 必须添加
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    // 使用微信支付时添加,具体版本参考微信官方文档
+    compile 'com.pingxx:pingpp-alipay:2.1.16'
+    // 使用支付宝时添加
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile project(':easeui')
+    implementation files('libs/SocialSDK_alipay.jar')
 }

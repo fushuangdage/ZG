@@ -104,7 +104,7 @@ public class GrabListActivity extends BaseActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString(EaseConstant.STR,str);
                         bundle.putString(EaseConstant.AGENT_ID,bean.getId());
-                        bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+                        bundle.putString(EaseConstant.CHAT_HX_NAME,bean.getHx_username());
                         bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
                         bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
                         intent.putExtras(bundle);

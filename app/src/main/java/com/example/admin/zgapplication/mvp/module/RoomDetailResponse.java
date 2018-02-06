@@ -82,6 +82,15 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
         private List<Integer> date;
         private String lng;
         private String lat;
+        private String share;
+
+        public String getShare() {
+            return share;
+        }
+
+        public void setShare(String share) {
+            this.share = share;
+        }
 
         public String getLng() {
             return lng;

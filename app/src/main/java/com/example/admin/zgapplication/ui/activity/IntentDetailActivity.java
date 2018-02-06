@@ -112,13 +112,13 @@ public class IntentDetailActivity extends BaseActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(mActivity, ChatActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+                        bundle.putString(EaseConstant.CHAT_HX_NAME,bean.getHx_username());
                         bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
                         bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
 
 //                        bundle.putString(EaseConstant.STR,str);
 //                        bundle.putString(EaseConstant.AGENT_ID,bean.getId());
-//                        bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+//                        bundle.putString(EaseConstant.CHAT_HX_NAME,bean.getHx_username());
 //                        bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
 //                        bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
 

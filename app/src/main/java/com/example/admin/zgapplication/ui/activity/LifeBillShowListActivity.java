@@ -10,10 +10,14 @@ import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.LifeBillRecordResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.retrofit.rx.FinishLoadConsumer;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.utils.date.TimeUtil;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,10 @@ public class LifeBillShowListActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.refreshLayout)
+    RefreshLayout refreshLayout;
+
+    int page=1;
 
     public List<LifeBillRecordResponse.DataBean.ListBeanX.ListBean> list=new ArrayList<>();
     private CommonAdapter<LifeBillRecordResponse.DataBean.ListBeanX.ListBean> adapter;
@@ -39,6 +47,22 @@ public class LifeBillShowListActivity extends BaseActivity {
     @Override
     public void initEvent() {
         tv_title.setText("缴费记录");
+
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                page++;
+                initData();
+            }
+        });
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                page=1;
+                initData();
+            }
+        });
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         adapter = new CommonAdapter<LifeBillRecordResponse.DataBean.ListBeanX.ListBean>(mActivity,R.layout.item_life_record,list) {
@@ -70,6 +94,7 @@ public class LifeBillShowListActivity extends BaseActivity {
         String order_num = getIntent().getStringExtra("order_num");
         RetrofitHelper.getApiWithUid().getLifeRecordList(order_num)
                 .compose(RxScheduler.<LifeBillRecordResponse>defaultScheduler())
+                .doOnNext(new FinishLoadConsumer<LifeBillRecordResponse>(refreshLayout,page))
                 .subscribe(new BaseObserver<LifeBillRecordResponse>(mActivity) {
                     @Override
                     public void error(Throwable e) {
@@ -80,6 +105,7 @@ public class LifeBillShowListActivity extends BaseActivity {
                     public void next(LifeBillRecordResponse lifeBillRecordResponse) {
                         List<LifeBillRecordResponse.DataBean.ListBeanX> listX = lifeBillRecordResponse.getData().getList();
                         for (LifeBillRecordResponse.DataBean.ListBeanX x : listX) {
+                            list.clear();
                             list.add(new LifeBillRecordResponse.DataBean.ListBeanX.ListBean(x.getTime()));
                             for (LifeBillRecordResponse.DataBean.ListBeanX.ListBean listBean : x.getList()) {
                                 list.add(listBean);

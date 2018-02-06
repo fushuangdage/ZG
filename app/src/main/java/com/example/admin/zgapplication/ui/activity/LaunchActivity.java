@@ -26,13 +26,12 @@ public class LaunchActivity extends BaseActivity {
     @Override
     public void initData() {
 
-
         Constant.hx_username = (String) SPUtil.get(mActivity, "hx_username", "");
         Constant.hx_password = (String) SPUtil.get(mActivity, "hx_password", "");
         Constant.username = (String) SPUtil.get(mActivity, "username", "");
+        Constant.avatar = (String) SPUtil.get(mActivity, "avatar", "");
         Constant.password=(String) SPUtil.get(mActivity, "password", "");
-        Constant.uid=(String) SPUtil.get(mActivity, "uid", "33");
-
+        Constant.uid=(String) SPUtil.get(mActivity, "uid", "");
 
         if (!Constant.uid.equals("")&& !Constant.hx_username.equals("")){
 
@@ -40,13 +39,11 @@ public class LaunchActivity extends BaseActivity {
 
             EMClient.getInstance().login(Constant.hx_username, Constant.hx_password, new EMCallBack() {
 
-
                 //        EMClient.getInstance().login("fushuang", "123456", new EMCallBack() {
                 @Override
                 public void onSuccess() {
                     Log.d("888888888888888888888", "onSuccess: 登陆成功");
                 }
-
 
                 @Override
                 public void onError(int i, String s) {
@@ -59,12 +56,9 @@ public class LaunchActivity extends BaseActivity {
                 }
             });
 
-            startActivity(HomeActivity.class);
-        }else {
-            startActivity(LoginActivity.class);
         }
 
-
+        startActivity(HomeActivity.class);
     }
 
 

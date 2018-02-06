@@ -38,7 +38,7 @@ public class RentBillListActivity extends BaseActivity implements MultiItemTypeA
     @BindView(R.id.ll_pay_all)
     View ll_pay_all;
     @BindView(R.id.iv_right)
-    View iv_right;
+    TextView tv_pay_record_list;
     @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
 
@@ -52,10 +52,13 @@ public class RentBillListActivity extends BaseActivity implements MultiItemTypeA
     private Set<Integer> life_bill = new HashSet<>();
     private ArrayList<RentBillResponse.DataBean.ListBean> list = new ArrayList<RentBillResponse.DataBean.ListBean>();
     private ArrayList<LifeRentBillResponse.DataBean.ListBean> life_list = new ArrayList<LifeRentBillResponse.DataBean.ListBean>();
-    private int currentPage = 0;
+    private int currentPage = 1;
     private CommonAdapter<LifeRentBillResponse.DataBean.ListBean> life_adapter;
     private double sum_pay;
     private String pay_id;
+
+    private String order_num;
+
 
     @Override
     public int setLayout() {
@@ -70,7 +73,7 @@ public class RentBillListActivity extends BaseActivity implements MultiItemTypeA
 
         if (title.equals("房租账单")) {
             ll_pay_all.setVisibility(View.GONE);
-            iv_right.setVisibility(View.GONE);
+            tv_pay_record_list.setVisibility(View.GONE);
             adapter = new CommonAdapter<RentBillResponse.DataBean.ListBean>(this, R.layout.item_rent_bill, list) {
                 @Override
                 protected void convert(ViewHolder holder, final RentBillResponse.DataBean.ListBean s, int position) {
@@ -150,7 +153,7 @@ public class RentBillListActivity extends BaseActivity implements MultiItemTypeA
     @Override
     public void initData() {
 
-        String order_num = getIntent().getStringExtra("order_num");
+        order_num = getIntent().getStringExtra("order_num");
 
         if (title.equals("房租账单")) {
             RetrofitHelper.getApiWithUid().getRentBill(order_num)
@@ -205,11 +208,20 @@ public class RentBillListActivity extends BaseActivity implements MultiItemTypeA
 
     }
 
-    @OnClick({R.id.iv_left, R.id.tv_go_pay})
+    @OnClick({R.id.iv_left, R.id.tv_go_pay,R.id.iv_right})
     public void onClick(View view) {
-        Intent intent = new Intent(mActivity, PayOnlineActivity.class);
+        Intent intent;
         switch (view.getId()) {
+            case R.id.iv_right:
+                //缴费记录
+                if (title.equals("全部账单")){
+                    intent=new Intent(mActivity,LifeBillShowListActivity.class);
+                    intent.putExtra("order_num",order_num);
+                    startActivity(intent);
+                }
+                break;
             case R.id.tv_go_pay:
+                intent = new Intent(mActivity, PayOnlineActivity.class);
                 if (!title.equals("全部账单")) {
 //                    intent = new Intent(mActivity, PayOnlineActivity.class);
                 } else {
@@ -225,6 +237,7 @@ public class RentBillListActivity extends BaseActivity implements MultiItemTypeA
                         pay_id = string.substring(0, string.length() - 1);
                     }
                     intent.putExtra("pay_id", pay_id);
+                    intent.putExtra("order_num",order_num);
                     intent.putExtra("type", "2");
 
                 }

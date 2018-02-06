@@ -110,6 +110,7 @@
                 android:src="@drawable/take_phone" />
 
             <TextView
+                android:id="@+id/tv_take_tel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="免费咨询"

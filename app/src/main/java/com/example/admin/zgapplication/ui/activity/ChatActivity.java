@@ -26,9 +26,9 @@ public class ChatActivity extends AppCompatActivity {
 
 
 
-        toChatUsername = getIntent().getExtras().getString(Constant.EXTRA_USER_ID);
+        toChatUsername = getIntent().getExtras().getString(Constant.CHAT_HX_NAME);
         Bundle extras = getIntent().getExtras();
-        aid = extras.getString(EaseConstant.AGENT_ID, "1");
+        aid = extras.getString(EaseConstant.AGENT_ID, "0");
 
         RetrofitHelper.getApi()
                 .addHXFriend(aid,Constant.uid)
@@ -58,6 +58,7 @@ public class ChatActivity extends AppCompatActivity {
         extras.putString(EaseConstant.MY_HEAD, Constant.avatar);
         extras.putString(EaseConstant.USER_ID, Constant.uid);
         extras.putString(EaseConstant.MY_NAME,Constant.username);
+        extras.putString(EaseConstant.AGENT_ID,aid);
         ChatFragment chatFragment=new ChatFragment();
         chatFragment.setArguments(extras);
         getSupportFragmentManager().beginTransaction().add(R.id.fl_content,chatFragment).commit();

@@ -193,6 +193,7 @@ public class RoomPickDialog extends Dialog implements View.OnClickListener {
         tv_room_id.setText("房源编号: "+check_roomBean.getRoom_code());
         tv_price.setText("¥ "+(check_roomBean.getRental()*check_pay_way.getPay()+check_roomBean.getRoom_deposit()*check_pay_way.getPay()));
         tv_payment_info.setText(String.format("租金: %d元/月, 押金: %d元",check_roomBean.getRental(),check_roomBean.getRoom_deposit()));
+        tv_room_pay_mode.setText(String.format("已选: %s，%s",check_pay_way.getMethod_name(),check_roomBean.getRoom_number()));
     }
 
     public interface ResultCallBack{

@@ -2,11 +2,13 @@ package com.example.admin.zgapplication.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.Constant;
@@ -90,10 +92,27 @@ public class OrderDetailActivity extends BaseActivity {
 
     @BindView(R.id.tv_rent_sum)
     TextView tv_rent_sum;
+
+    @BindView(R.id.tv_zg_discount)
+    TextView tv_zg_discount;
+
+    @BindView(R.id.iv_userhead)
+    ImageView iv_userhead;
+
+    @BindView(R.id.tv_user_name)
+    TextView tv_user_name;
+
+    @BindView(R.id.tv_agent_company)
+    TextView tv_agent_company;
+
+
+
+
     private OrderDetailResponse.OrderDetailDataBean.ListBean data;
     private SelectOrderInfoBean bean;
     private int user_coupon_id;
     private int user_coupon_money;
+    private String agent_phone_num;
 
 
     @Override
@@ -171,6 +190,12 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     private void setView(OrderDetailResponse.OrderDetailDataBean.ListBean bean) {
+
+
+        Glide.with(mActivity).load(bean.getAvatar()).into(iv_userhead);
+        tv_user_name.setText(bean.getAgent());
+        tv_agent_company.setText(bean.getCompany_name());
+        agent_phone_num = bean.getPhone_number();
         Glide.with(mActivity).load(bean.getHouse_photo()).into(iv_house);
         tv_house_name.setText(bean.getHouse_title());
         tv_house_info.setText(bean.getHouse_area());
@@ -192,7 +217,7 @@ public class OrderDetailActivity extends BaseActivity {
         middle_money.setText("¥"+bean.getMiddle_money());
         service_count.setText(bean.getService_count());
         service_money.setText("¥"+bean.getService_money());
-        tv_rent_sum.setText("¥"+(bean.getSum_money()-user_coupon_money));
+        tv_rent_sum.setText("¥"+(Double.valueOf(bean.getPayment())-user_coupon_money));
     }
 
 
@@ -205,48 +230,66 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rl_zg_coupon,R.id.rl_company_coupon,R.id.tv_confirm,R.id.iv_left})
+    @OnClick({R.id.rl_zg_coupon,R.id.tv_confirm,R.id.iv_left,R.id.tv_chat_agent})
     public void onClick(View view){
         final Intent intent;
         switch (view.getId()) {
+
+            case R.id.tv_chat_agent:
+                intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+agent_phone_num));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+
             case R.id.rl_zg_coupon:
                 intent= new Intent(this,CouponChooseActivity.class);
                 intent.putExtra("title","选择扎根优惠券");
                 startActivityForResult(intent,Constant.RESULT_FOR_CHOOSE_COUPON);
                 break;
-            case R.id.rl_company_coupon:
-                intent = new Intent(this,CouponChooseActivity.class);
-                intent.putExtra("title","选择经纪公司优惠券");
-//                startActivityForResult(intent,Constant.RESULT_FOR_CHOOSE_COUPON);
-                break;
+//            case R.id.rl_company_coupon:
+//                intent = new Intent(this,CouponChooseActivity.class);
+//                intent.putExtra("title","选择经纪公司优惠券");
+////                startActivityForResult(intent,Constant.RESULT_FOR_CHOOSE_COUPON);
+//                break;
             case R.id.tv_confirm:
-                RetrofitHelper.getApi().generateOrder(bean.room_id,bean.type,bean.house_id,bean.member_id,Constant.uid,bean.date,
-                        bean.pay,bean.pledge,et_username.getText().toString(),data.getPhone_number(),user_coupon_id)
-                .compose(RxScheduler.<GenerateOrderResponse>defaultScheduler())
-                .subscribe(new Observer<GenerateOrderResponse>() {
 
-                    @Override
-                    public void onSubscribe(Disposable d) {
+                if ("".equals(et_username.getText().toString())){
+                    Toast.makeText(mActivity, "请先输入姓名", Toast.LENGTH_SHORT).show();
+                }else {
+                    RetrofitHelper.getApi().generateOrder(bean.room_id,bean.type,bean.house_id,bean.member_id,Constant.uid,bean.date,
+                            bean.pay,bean.pledge,et_username.getText().toString(),data.getPhone_number(),user_coupon_id)
+                            .compose(RxScheduler.<GenerateOrderResponse>defaultScheduler())
+                            .subscribe(new Observer<GenerateOrderResponse>() {
 
-                    }
+                                @Override
+                                public void onSubscribe(Disposable d) {
 
-                    @Override
-                    public void onNext(GenerateOrderResponse generateOrderResponse) {
-                        Intent intent = new Intent(mActivity, OrderDetail2Activity.class);
-                        intent.putExtra("order_id",generateOrderResponse.getData().getOrder_id());
-                        startActivity(intent);
-                    }
+                                }
 
-                    @Override
-                    public void onError(Throwable e) {
+                                @Override
+                                public void onNext(GenerateOrderResponse generateOrderResponse) {
+                                    if (generateOrderResponse.getCode()!=0){
+                                        Toast.makeText(mActivity, generateOrderResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        Intent intent = new Intent(mActivity, OrderDetail2Activity.class);
+                                        intent.putExtra("order_id",generateOrderResponse.getData().getOrder_id());
+                                        startActivity(intent);
+                                    }
 
-                    }
+                                }
 
-                    @Override
-                    public void onComplete() {
+                                @Override
+                                public void onError(Throwable e) {
 
-                    }
-                });
+                                }
+
+                                @Override
+                                public void onComplete() {
+
+                                }
+                            });
+                }
+
                 break;
             case R.id.iv_left:
                 finish();
@@ -268,6 +311,7 @@ public class OrderDetailActivity extends BaseActivity {
         if (resultCode==Constant.RESULT_FOR_CHOOSE_COUPON){
             user_coupon_id = data.getIntExtra("user_coupon_id", 0);
             user_coupon_money=data.getIntExtra("user_coupon_money",0);
+            tv_zg_discount.setText("- "+user_coupon_money);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

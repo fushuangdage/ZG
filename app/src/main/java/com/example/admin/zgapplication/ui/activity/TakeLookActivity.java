@@ -155,7 +155,7 @@ public class TakeLookActivity extends BaseActivity {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
                         time = getTime(date);
-                        ((TextView) view).setText(time);
+                        ((TextView) view).setText(TakeLookActivity.this.time);
                     }
                 }).build();
 
@@ -167,7 +167,7 @@ public class TakeLookActivity extends BaseActivity {
     }
 
     private String getTime(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return format.format(date);
 
     }

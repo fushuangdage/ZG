@@ -75,6 +75,8 @@ public class ContractDetailActivity extends BaseActivity {
     TextView tv_life_bill_count;
 
 
+
+
     private ContactDetailResponse.DataBean dataBean;
     private RentBillResponse.DataBean.ListBean first_rent_list_bean;
 
@@ -117,6 +119,10 @@ public class ContractDetailActivity extends BaseActivity {
                         tv_to_pay_count.setText(String.format("您有%s个账单待支付", dataBean.getPaying()));
                         tv_life_bill_count.setText(String.format("您有%d个账单待支付", dataBean.getLife_count()));
 
+                        if (dataBean.getPaying().equals("0")){
+                            tv_pay_rent.setClickable(false);
+                        }
+
                     }
                 }).observeOn(Schedulers.io())
                 .flatMap(new Function<ContactDetailResponse, ObservableSource<RentBillResponse>>() {
@@ -135,10 +141,10 @@ public class ContractDetailActivity extends BaseActivity {
                     @Override
                     public void next(RentBillResponse rentBillResponse) {
                         List<RentBillResponse.DataBean.ListBean> list = rentBillResponse.getData().getList();
-                        if (list == null && list.size() == 0) {
+                        if (list == null || list.size() == 0) {
                             tv_pay_rent.setClickable(false);
                         } else {
-                            tv_pay_rent.setClickable(true);
+//                            tv_pay_rent.setClickable(true);
                             first_rent_list_bean = list.get(0);
                         }
 //                        Toast.makeText(ContractDetailActivity.this, rentBillResponse.getMsg(), Toast.LENGTH_SHORT).show();

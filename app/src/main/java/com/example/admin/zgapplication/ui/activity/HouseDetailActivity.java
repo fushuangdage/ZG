@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -22,9 +23,12 @@ import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.fragment.HouseDetailFragment;
 import com.example.admin.zgapplication.ui.fragment.HouseEvaluteFragment;
 import com.example.admin.zgapplication.ui.view.RoomPickDialog;
+import com.hyphenate.easeui.EaseConstant;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -100,9 +104,19 @@ public class HouseDetailActivity extends BaseActivity {
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.iv_share:
+                String imageUrl =detailFragment.data.getShare();
+                UMImage image = new UMImage(HouseDetailActivity.this, detailFragment.data.getHouse_photo().get(0));
+                image.compressStyle = UMImage.CompressStyle.SCALE;//大小压缩，默认为大小压缩，适合普通很大的图
+                image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分享
+                image.compressFormat = Bitmap.CompressFormat.PNG;//网络图片
+                UMWeb  web = new UMWeb(imageUrl);
+
+                web.setTitle(detailFragment.data.getHouse_title());//标题
+                web.setThumb(image);  //缩略图
+                web.setDescription(detailFragment.data.getHouse_desc()+"|"+detailFragment.data.getRental());//描述
                 new ShareAction(this)
-                        .withText("hello")
-                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .withMedia(web)
+                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.ALIPAY)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
@@ -125,9 +139,15 @@ public class HouseDetailActivity extends BaseActivity {
                             }
                         })
                         .open();
+
                 break;
 
             case R.id.tv_write_order:
+
+                if ("".equals(Constant.uid)){
+                    startActivity(LoginActivity.class);
+                    break;
+                }
 
                 if (roomPickInfo==null){
                     RoomDetailResponse.DataBean data = detailFragment.getData();
@@ -136,24 +156,15 @@ public class HouseDetailActivity extends BaseActivity {
                     roomPickDialog.setResultCallBack(new RoomPickDialog.ResultCallBack() {
                         @Override
                         public void resultCallBack(SelectOrderInfoBean bean) {
-                            Intent intent = new Intent(mActivity, ChooseAgentActivity.class);
-                            intent.putExtra("bean",bean);
-                            intent.putExtra("house_id",bean.house_id);
-                            intent.putExtra("room_id",bean.room_id);
-                            intent.putExtra("type",bean.type);
-                            startActivity(intent);
+                            roomPickInfo=bean;
+                            startChooseAgent();
                         }
                     });
                     roomPickDialog.create();
                     roomPickDialog.setData(data);
                     roomPickDialog.show();
                 }else {
-                    Intent intent = new Intent(mActivity, ChooseAgentActivity.class);
-                    intent.putExtra("bean",roomPickInfo);
-                    intent.putExtra("house_id",roomPickInfo.house_id);
-                    intent.putExtra("room_id",roomPickInfo.room_id);
-                    intent.putExtra("type",roomPickInfo.type);
-                    startActivity(intent);
+                    startChooseAgent();
                 }
 
                 break;
@@ -169,6 +180,9 @@ public class HouseDetailActivity extends BaseActivity {
                 bundle.putString("type",type);
                 bundle.putString("room_id",room_id);
 
+                bundle.putString(EaseConstant.HOUSE_TITLE,detailFragment.data.getHouse_title());
+                bundle.putString(EaseConstant.HOUSE_PRISE,detailFragment.data.getRental());
+                bundle.putString(EaseConstant.HOUSE_IMG,detailFragment.data.getHouse_photo().get(0));
                 startActivity(ChooseAgentActivity.class,bundle);
                 break;
 
@@ -200,6 +214,15 @@ public class HouseDetailActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    private void startChooseAgent() {
+        Intent intent = new Intent(mActivity, ChooseAgentActivity.class);
+        intent.putExtra("bean",roomPickInfo);
+        intent.putExtra("house_id",roomPickInfo.house_id);
+        intent.putExtra("room_id",roomPickInfo.room_id);
+        intent.putExtra("type",roomPickInfo.type);
+        startActivity(intent);
     }
 
     public void setRoomPickInfo(SelectOrderInfoBean roomPickInfo) {

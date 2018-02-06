@@ -266,36 +266,36 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
                 startActivity(SearchActivity.class);
                 break;
             case R.id.ll_evaluation:
-                startActivity(EvaluationListActivity.class);
+                checkIsLogin(EvaluationListActivity.class);
                 break;
             case R.id.ll_contract:
-                startActivity(MyContractActivity.class);
+                checkIsLogin(MyContractActivity.class);
                 break;
             case R.id.ll_order:
-                startActivity(OrderListActivity.class);
+                checkIsLogin(OrderListActivity.class);
                 break;
             case R.id.ll_friend:
                 break;
             case R.id.ll_discount:
-                startActivity(MyDiscountActivity.class);
+                checkIsLogin(MyDiscountActivity.class);
                 break;
             case R.id.ll_system_msg:
                 break;
             case R.id.ll_take_look:
-                startActivity(TakeLookListActivity.class);
+                checkIsLogin(TakeLookListActivity.class);
                 break;
             case R.id.ll_intent:
-                startActivity(IntentListActivity.class);
+                checkIsLogin(IntentListActivity.class);
                 break;
             case R.id.ll_shopping_car:
                 //购物车改为我的收藏
-                startActivity(ShopCarActivity.class);
+                checkIsLogin(ShopCarActivity.class);
                 break;
             case R.id.home_message:
-                startActivity(EaseConversationListActivity.class);
+                checkIsLogin(EaseConversationListActivity.class);
                 break;
             case R.id.ll_self:
-                startActivity(SelfInfoActivity.class);
+               checkIsLogin(SelfInfoActivity.class);
                 break;
             case R.id.tv_setting :
 

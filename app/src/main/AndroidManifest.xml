@@ -28,7 +28,6 @@
         <!--android:name="com.example.admin.zgapplication.permission.permission.JPUSH_MESSAGE"-->
         <!--android:protectionLevel="signature" />-->
 
-
     <uses-permission android:name="com.example.admin.zgapplication.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -108,7 +107,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+            android:value="WPVHzpvltmtHShdmunExmbyzZnB9VrkB" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

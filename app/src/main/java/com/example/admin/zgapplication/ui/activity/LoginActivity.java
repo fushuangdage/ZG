@@ -1,11 +1,15 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.zgapplication.Constant;
@@ -38,8 +42,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @BindView(R.id.et_message_code)
     EditText et_message_code;
+
+    @BindView(R.id.tv_reget_message_code)
+    TextView tv_reget_message_code;
     private String net_code;  //服务器给的短信验证码
     private String user_phoneNumber;
+    private ValueAnimator valueAnimator;
 
     @Override
     public int setLayout() {
@@ -72,6 +80,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 user_phoneNumber = act_login_phone.getText().toString();
                 if (StringUtils.isMobile(user_phoneNumber)) {
                     dialog = new Dialog(mActivity);
+                    ViewGroup parent = (ViewGroup) inflate.getParent();
+                    if (parent != null) {
+                        parent.removeView(inflate);
+                    }
                     dialog.setContentView(inflate);
                     dialog.show();
                 } else {
@@ -92,33 +104,69 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.tv_post:
                 String trim = editText.getText().toString().trim();
                 if (trim.equals(numCode)) {
-                    RetrofitHelper.getApi().getMsgCodeResponse(user_phoneNumber)
-                            .compose(RxScheduler.<MsgCodeResponse>defaultScheduler())
-                            .subscribe(new Observer<MsgCodeResponse>() {
-                                @Override
-                                public void onSubscribe(Disposable d) {
 
-                                }
+                    valueAnimator = new ValueAnimator();
+                    valueAnimator.setIntValues(60,0);
+                    valueAnimator.setDuration(60000);
+                    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            Integer value = (Integer) valueAnimator.getAnimatedValue();
+                            tv_reget_message_code.setText(value+"s");
+                        }
+                    });
 
-                                @Override
-                                public void onNext(MsgCodeResponse lifeRentBillResponse) {
-                                    if (lifeRentBillResponse.getCode() == 0) {
-                                        net_code = lifeRentBillResponse.getData().getVerificationCode() + "";
-                                    } else {
-                                        Toast.makeText(mActivity, lifeRentBillResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+                    valueAnimator.addListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            RetrofitHelper.getApi().getMsgCodeResponse(user_phoneNumber)
+                                    .compose(RxScheduler.<MsgCodeResponse>defaultScheduler())
+                                    .subscribe(new Observer<MsgCodeResponse>() {
+                                        @Override
+                                        public void onSubscribe(Disposable d) {
 
-                                @Override
-                                public void onError(Throwable e) {
+                                        }
 
-                                }
+                                        @Override
+                                        public void onNext(MsgCodeResponse lifeRentBillResponse) {
+                                            if (lifeRentBillResponse.getCode() == 0) {
+                                                net_code = lifeRentBillResponse.getData().getVerificationCode() + "";
+                                            } else {
+                                                Toast.makeText(mActivity, lifeRentBillResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
 
-                                @Override
-                                public void onComplete() {
-                                    dialog.hide();
-                                }
-                            });
+                                        @Override
+                                        public void onError(Throwable e) {
+
+                                        }
+
+                                        @Override
+                                        public void onComplete() {
+                                            dialog.hide();
+                                        }
+                                    });
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            tv_reget_message_code.setText("获取验证码");
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    });
+                    valueAnimator.start();
+
+
+
                 } else {
                     Toast.makeText(mActivity, "验证码错误", Toast.LENGTH_SHORT).show();
                 }
@@ -129,50 +177,57 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             case R.id.act_login_submit:
 
-                RetrofitHelper.getApi().login(user_phoneNumber, net_code)
-                        .compose(RxScheduler.<LoginResponse>defaultScheduler())
-                        .subscribe(new Observer<LoginResponse>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
+                if (et_message_code.getText().toString().trim().equals(net_code)) {
+                    RetrofitHelper.getApi().login(user_phoneNumber, net_code)
+                            .compose(RxScheduler.<LoginResponse>defaultScheduler())
+                            .subscribe(new Observer<LoginResponse>() {
+                                @Override
+                                public void onSubscribe(Disposable d) {
 
-                            }
-
-                            @Override
-                            public void onNext(LoginResponse msgCodeResponse) {
-                                if (msgCodeResponse.getCode() == 0) {
-                                    Constant.uid = msgCodeResponse.getData().getId() + "";
-                                    Constant.hx_username = msgCodeResponse.getData().getHx_username();
-                                    Constant.hx_password = msgCodeResponse.getData().getHx_password();
-                                    Constant.username = msgCodeResponse.getData().getUsername();
-                                    Constant.password = msgCodeResponse.getData().getPassword();
-                                    Constant.avatar=msgCodeResponse.getData().getAvatar();
-
-                                    SPUtil.put(mActivity,"uid",Constant.uid);
-                                    SPUtil.put(mActivity,"hx_username",Constant.hx_username);
-                                    SPUtil.put(mActivity,"hx_password",Constant.hx_password);
-                                    SPUtil.put(mActivity,"username",Constant.username);
-                                    SPUtil.put(mActivity,"password",Constant.password);
-                                    SPUtil.put(mActivity,"avatar",Constant.avatar);
-
-                                    Intent intent = new Intent(mActivity, HomeActivity.class);
-                                    intent.putExtra("loginBean",msgCodeResponse.getData());
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(mActivity, msgCodeResponse.getMsg(), Toast.LENGTH_SHORT).show();
                                 }
-                            }
 
-                            @Override
-                            public void onError(Throwable e) {
+                                @Override
+                                public void onNext(LoginResponse msgCodeResponse) {
+                                    if (msgCodeResponse.getCode() == 0) {
+                                        Constant.uid = msgCodeResponse.getData().getId() + "";
+                                        Constant.hx_username = msgCodeResponse.getData().getHx_username();
+                                        Constant.hx_password = msgCodeResponse.getData().getHx_password();
+                                        Constant.username = msgCodeResponse.getData().getUsername();
+                                        Constant.password = msgCodeResponse.getData().getPassword();
+                                        Constant.avatar=msgCodeResponse.getData().getAvatar();
 
-                            }
+                                        SPUtil.put(mActivity,"uid",Constant.uid);
+                                        SPUtil.put(mActivity,"hx_username",Constant.hx_username);
+                                        SPUtil.put(mActivity,"hx_password",Constant.hx_password);
+                                        SPUtil.put(mActivity,"username",Constant.username);
+                                        SPUtil.put(mActivity,"password",Constant.password);
+                                        SPUtil.put(mActivity,"avatar",Constant.avatar);
 
-                            @Override
-                            public void onComplete() {
+                                        Intent intent = new Intent(mActivity, HomeActivity.class);
+                                        intent.putExtra("loginBean",msgCodeResponse.getData());
+                                        startActivity(intent);
+                                        if (valueAnimator.isRunning()){
+                                            valueAnimator.cancel();
+                                        }
+                                        finish();
+                                    } else {
+                                        Toast.makeText(mActivity, msgCodeResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
-                            }
-                        });
+                                @Override
+                                public void onError(Throwable e) {
 
+                                }
+
+                                @Override
+                                public void onComplete() {
+
+                                }
+                            });
+                }else {
+                    Toast.makeText(mActivity, "验证码输入错误!", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
         }

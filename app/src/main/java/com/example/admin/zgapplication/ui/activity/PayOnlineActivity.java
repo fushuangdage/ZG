@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +24,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * 调用支付宝微信支付 选择界面
  */
-public class PayOnlineActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
+public class PayOnlineActivity extends BaseActivity  {
 
     private String pay_id;
 
@@ -37,8 +36,9 @@ public class PayOnlineActivity extends BaseActivity implements CompoundButton.On
     @BindView(R.id.cb_weixin)
     CheckBox cb_weixin;
     private String water_num;
-    private String type;
+    private String type;   //订单类型1：租房账单， 2：生活账单
     private String method="1";
+    private String order_num;
 
     @Override
     public int setLayout() {
@@ -54,6 +54,7 @@ public class PayOnlineActivity extends BaseActivity implements CompoundButton.On
     public void initData() {
         pay_id = getIntent().getStringExtra("pay_id");
         type = getIntent().getStringExtra("type");
+        order_num = getIntent().getStringExtra("order_num");
         RetrofitHelper.getApiWithUid().getPayImmediately(pay_id)
                 .compose(RxScheduler.<BillPayImmediately>defaultScheduler())
                 .subscribe(new Observer<BillPayImmediately>() {
@@ -79,8 +80,6 @@ public class PayOnlineActivity extends BaseActivity implements CompoundButton.On
                     }
                 });
 
-        cb_ali.setOnCheckedChangeListener(this);
-        cb_weixin.setOnCheckedChangeListener(this);
     }
 
     @OnClick({R.id.tv_pay, R.id.iv_left,R.id.cb_ali,R.id.cb_weixin})
@@ -126,16 +125,19 @@ public class PayOnlineActivity extends BaseActivity implements CompoundButton.On
 
             case R.id.cb_ali:
                 method="1";
-                cb_weixin.setChecked(!cb_weixin.isChecked());
-                cb_ali.setChecked(!cb_ali.isChecked());
+                solveCheck(view);
                 break;
             case R.id.cb_weixin:
                 method="2";
-                cb_weixin.setChecked(!cb_weixin.isChecked());
-                cb_ali.setChecked(!cb_ali.isChecked());
-
+                solveCheck(view);
                 break;
         }
+    }
+
+    public void solveCheck(View view){
+        cb_weixin.setChecked(false);
+        cb_ali.setChecked(false);
+        ((CheckBox) view).setChecked(true);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -143,6 +145,15 @@ public class PayOnlineActivity extends BaseActivity implements CompoundButton.On
         if (requestCode == Pingpp.REQUEST_CODE_PAYMENT) {
             if (resultCode == Activity.RESULT_OK) {
                 String result = data.getExtras().getString("pay_result");
+                Intent intent;
+                if ("success".equals(result)){
+                    if (type.equals("2")){
+                         intent=new Intent(mActivity,LifeBillShowListActivity.class);
+                         intent.putExtra("order_num",order_num);
+                         startActivity(intent);
+                    }
+                }
+
             /* 处理返回值
              * "success" - 支付
              * 成功
@@ -154,16 +165,12 @@ public class PayOnlineActivity extends BaseActivity implements CompoundButton.On
                 String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
                 String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
 //                showMsg(result, errorMsg, extraMsg);
-                Log.d("88888888888", "onActivityResult: ");
+                Log.d("88888888888", "onActivityResult: "+result);
+
             }
         }
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        cb_ali.setChecked(false);
-        cb_weixin.setChecked(false);
-    }
 
 
 }

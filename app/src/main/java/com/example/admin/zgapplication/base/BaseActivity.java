@@ -21,9 +21,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
+import com.example.admin.zgapplication.ui.activity.LoginActivity;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.EmptyWrapper;
 import com.example.admin.zgapplication.utils.AppManager;
 import com.example.admin.zgapplication.utils.dialog.LoadingDialog;
@@ -100,6 +102,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     public Activity getmActivity() {
         return mActivity;
     }
+
+    public void checkIsLogin(Class clz){
+        if ("".equals(Constant.uid)){
+            startActivity(LoginActivity.class);
+        }else {
+            startActivity(clz);
+        }
+    }
+
 
     public void setmActivity(Activity mActivity) {
         this.mActivity = mActivity;

@@ -21,9 +21,11 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.admin.zgapplication.Constant;
@@ -37,6 +39,7 @@ import com.example.admin.zgapplication.mvp.module.StartIntent;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
+import com.example.admin.zgapplication.ui.activity.LoginActivity;
 import com.example.admin.zgapplication.ui.activity.WaitCrabActivity;
 import com.example.admin.zgapplication.ui.adapter.HomePositionAdapter;
 import com.example.admin.zgapplication.ui.view.CustomProgressView;
@@ -150,9 +153,9 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
 
                                 if (data!=null){
                                     for (AgentLocationResponse.DataBean datum : data) {
-                                        Log.d("88888888", "onNext: "+datum.getLat()+"   :  "+datum.getLnt());
+                                        Log.d("88888888", "onNext: "+datum.getLat()+"   :  "+datum.getLng());
                                         MarkerOptions markerOptions = new MarkerOptions()
-                                                .position(new LatLng(datum.getLat(), datum.getLnt()))
+                                                .position(new LatLng(datum.getLat(), datum.getLng()))
                                                 .icon(BitmapDescriptorFactory
                                                         .fromResource(R.drawable.person));
                                         options.add(markerOptions);
@@ -175,14 +178,20 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                         });
 
 
-                MyLocationData build = new MyLocationData.Builder().accuracy(bdLocation.getRadius())
-                        .direction(100).latitude(bdLocation.getLatitude())
-                        .longitude(bdLocation.getLongitude()).build();
+                    LatLng cenpt = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
 
+                    //定义地图状态
+                    MapStatus mMapStatus = new MapStatus.Builder()
+                            .target(cenpt)
+                            .zoom(18)
+                            .build();
+                    //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+                    MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+                    //改变地图状态
+                    baiduMap.setMapStatus(mMapStatusUpdate);
 
-                baiduMap.setMyLocationData(build);
+                }
 
-            }
         });
 
         locationClient.start();
@@ -202,7 +211,11 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                 dialog.show();
                 break;
             case R.id.btn_call_agent:
-                startCrabIntent();
+                if ("".equals(Constant.uid)){
+                    startActivity(new Intent(mActivity, LoginActivity.class));
+                }else {
+                    startCrabIntent();
+                }
                 break;
         }
     }

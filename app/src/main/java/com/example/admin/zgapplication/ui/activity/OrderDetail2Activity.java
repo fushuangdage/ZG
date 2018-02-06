@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
@@ -28,6 +30,10 @@ public class OrderDetail2Activity extends BaseActivity implements CompoundButton
     CheckBox cb_ali;
     @BindView(R.id.cb_weixin)
     CheckBox cb_weixin;
+
+    @BindView(R.id.tv_should_pay)
+    TextView tv_should_pay;
+
 
     public String method="1";
     private String data;
@@ -141,6 +147,7 @@ public class OrderDetail2Activity extends BaseActivity implements CompoundButton
 
                     @Override
                     public void next(RentReadyPayResponse rentReadyPayResponse) {
+                        tv_should_pay.setText(rentReadyPayResponse.getData().getPayment());
                         dialog.setBean(rentReadyPayResponse.getData());
                         bill_num = rentReadyPayResponse.getData().getBill_num();
                     }
@@ -172,7 +179,13 @@ public class OrderDetail2Activity extends BaseActivity implements CompoundButton
 //                showMsg(result, errorMsg, extraMsg);
                 Log.d("88888888888", "onActivityResult: ");
 
-                startActivity(FinishOrderActivity.class);
+                if ("success".equals(result)){
+                    Intent intent = new Intent(mActivity, FinishOrderActivity.class);
+                    intent.putExtra("order_id",order_id+"");
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(this, "支付调用失败", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
@@ -182,6 +195,7 @@ public class OrderDetail2Activity extends BaseActivity implements CompoundButton
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
             switch (buttonView.getId()) {
+
                 case R.id.cb_ali:
                     method="1";
                     break;

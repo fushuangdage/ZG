@@ -194,7 +194,7 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    @OnClick({R.id.tv_contact_agent})
+    @OnClick({R.id.tv_contact_agent,R.id.tv_take_tel})
     public void onClick(View v) {
 
         Intent intent;
@@ -215,11 +215,15 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
             case R.id.tv_contact_agent:
                 intent = new Intent(mActivity, ChatActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString(EaseConstant.EXTRA_USER_ID,data.getHx_username());
+                bundle.putString(EaseConstant.AGENT_ID,data.getId());
+                bundle.putString(EaseConstant.CHAT_HX_NAME,data.getHx_username());
                 bundle.putString(EaseConstant.NICK_NAME,data.getUsername());
                 bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                break;
+            case R.id.tv_take_tel:
+
                 break;
         }
     }

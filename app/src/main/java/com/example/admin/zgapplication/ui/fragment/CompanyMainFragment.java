@@ -11,6 +11,7 @@ import com.example.admin.zgapplication.mvp.module.CompanyHomePageResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
+import com.example.admin.zgapplication.ui.activity.CompanyDetailActivity;
 
 import butterknife.BindView;
 
@@ -44,6 +45,7 @@ public class CompanyMainFragment extends BaseSupportFragment{
                     @Override
                     public void next(CompanyHomePageResponse companyHomePageResponse) {
                         if (companyHomePageResponse.getCode()==0) {
+                            ((CompanyDetailActivity) getActivity()).setCompanyInfo(companyHomePageResponse);
                             String link = companyHomePageResponse.getData().getLink();
                             webView.loadUrl(link);
                         }

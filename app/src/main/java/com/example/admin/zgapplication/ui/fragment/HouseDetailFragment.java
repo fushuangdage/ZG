@@ -113,7 +113,7 @@ public class HouseDetailFragment extends BaseSupportFragment {
             R.drawable.shuzhuo_off,R.drawable.weishengjian_off,R.drawable.yigui_off,R.drawable.shafa_off,R.drawable.dianshi_off,
             R.drawable.xiyiji_off,R.drawable.bingxiang_off,R.drawable.reshuiqi_off,R.drawable.diancilu_off,R.drawable.weibolu_off,R.drawable.ranqizao_off,R.drawable.youyanji_off,R.drawable.yangtai_off};
     private CommonAdapter<RoomDetailResponse.DataBean.SameBean> sameAdapter;
-    private RoomDetailResponse.DataBean data;
+    public RoomDetailResponse.DataBean data;
 
 
     @Override

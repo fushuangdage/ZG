@@ -170,6 +170,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_agent_company"
                     android:text="链家地产"
                     android:layout_toRightOf="@id/iv_userhead"
                     android:layout_marginTop="3dp"
@@ -179,6 +180,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_chat_agent"
                     android:text="免费咨询"
                     android:textSize="12sp"
                     android:textColor="@color/lightgreen"
@@ -274,27 +276,27 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:id="@+id/rl_company_coupon"
-                    android:layout_width="match_parent"
-                    android:padding="14dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textSize="13sp"
-                        android:text="经纪公司优惠券"
-                        android:textColor="@color/toolbartitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/rl_company_coupon"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:padding="14dp"-->
+                    <!--android:layout_height="wrap_content">-->
+                    <!--<TextView-->
+                        <!--android:textSize="13sp"-->
+                        <!--android:text="经纪公司优惠券"-->
+                        <!--android:textColor="@color/toolbartitle"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content" />-->
 
-                    <TextView
-                        android:textSize="13sp"
-                        android:text="-¥200  "
-                        android:layout_alignParentEnd="true"
-                        android:drawableRight="@drawable/right_arrow"
-                        android:textColor="#717171"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
+                    <!--<TextView-->
+                        <!--android:textSize="13sp"-->
+                        <!--android:text="-¥200  "-->
+                        <!--android:layout_alignParentEnd="true"-->
+                        <!--android:drawableRight="@drawable/right_arrow"-->
+                        <!--android:textColor="#717171"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content" />-->
+                <!--</RelativeLayout>-->
 
                 <RelativeLayout
                     android:id="@+id/rl_zg_coupon"

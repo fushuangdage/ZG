@@ -196,8 +196,9 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_zg_discount"
                     style="@style/gray_text_13sp"
-                    android:text="-200"
+                    android:text="未选择"
                     android:gravity="right"
                     android:layout_width="0dp"
                     android:layout_weight="1"

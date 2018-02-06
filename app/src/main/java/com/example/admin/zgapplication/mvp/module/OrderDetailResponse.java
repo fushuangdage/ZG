@@ -85,6 +85,15 @@ public class OrderDetailResponse extends BaseResponse<OrderDetailResponse.OrderD
             private String real_name;
             private String telephone;
             private int sum_money;
+            public String avatar;
+
+            public String getAvatar() {
+                return avatar;
+            }
+
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
 
             public int getSum_money() {
                 return sum_money;

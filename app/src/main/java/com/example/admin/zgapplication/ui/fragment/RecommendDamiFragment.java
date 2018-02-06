@@ -98,11 +98,11 @@ public class RecommendDamiFragment extends BaseSupportFragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(mActivity, ChatActivity.class);
-                        intent.putExtra(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+                        intent.putExtra(EaseConstant.CHAT_HX_NAME,bean.getHx_username());
                         intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE,EMMessage.ChatType.Chat);
 
 //                        Bundle bundle = new Bundle();
-//                        bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+//                        bundle.putString(EaseConstant.CHAT_HX_NAME,bean.getHx_username());
 //                        bundle.pu(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
 //                        intent.putExtras(bundle);
 

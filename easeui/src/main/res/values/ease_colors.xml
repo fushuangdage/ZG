@@ -47,4 +47,12 @@
     <color name="recall_black">#61212121</color>
     <color name="recall_black_38">#89ffffff</color>
     <color name="recall_white_54">#89ffffff</color>
+
+
+    <color name="price_red">#F7513E</color>
+    <color name="price_blue">#359ABF</color>
+    <color name="price_green">#33BE85</color>
+    <color name="gray666">#666666</color>
+    <color name="white">#fff</color>
+    <color name="toolbartitle">#2a2e32</color>
 </resources>

@@ -29,6 +29,7 @@ import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.model.styles.EaseMessageListItemStyle;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.easeui.widget.EaseChatMessageList.MessageListItemClickListener;
+import com.hyphenate.easeui.widget.chatrow.EaseChatHouse;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRowBigExpression;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRowFile;
@@ -63,8 +64,9 @@ public class EaseMessageAdapter extends BaseAdapter{
 	private static final int MESSAGE_TYPE_RECV_FILE = 11;
 	private static final int MESSAGE_TYPE_SENT_EXPRESSION = 12;
 	private static final int MESSAGE_TYPE_RECV_EXPRESSION = 13;
-	
-	
+
+	private static final int MESSAGE_HOUSE_SENT_EXPRESSION = 14;
+	private static final int MESSAGE_HOUSE_RECV_EXPRESSION = 15;
 	public int itemTypeCount; 
 	
 	// reference to conversation object in chatsdk
@@ -171,9 +173,9 @@ public class EaseMessageAdapter extends BaseAdapter{
 	 */
 	public int getViewTypeCount() {
 	    if(customRowProvider != null && customRowProvider.getCustomChatRowTypeCount() > 0){
-	        return customRowProvider.getCustomChatRowTypeCount() + 14;
+	        return customRowProvider.getCustomChatRowTypeCount() + 16;
 	    }
-        return 14;
+        return 16;
     }
 	
 
@@ -187,10 +189,13 @@ public class EaseMessageAdapter extends BaseAdapter{
 		}
 		
 		if(customRowProvider != null && customRowProvider.getCustomChatRowType(message) > 0){
-		    return customRowProvider.getCustomChatRowType(message) + 13;
+		    return customRowProvider.getCustomChatRowType(message) + 15;
 		}
 		
 		if (message.getType() == EMMessage.Type.TXT) {
+			if(message.getStringAttribute("dataType","000").equals("102")){
+				return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_HOUSE_RECV_EXPRESSION : MESSAGE_HOUSE_SENT_EXPRESSION;
+			}
 		    if(message.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_BIG_EXPRESSION, false)){
 		        return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_EXPRESSION : MESSAGE_TYPE_SENT_EXPRESSION;
 		    }
@@ -223,7 +228,10 @@ public class EaseMessageAdapter extends BaseAdapter{
         }
         switch (message.getType()) {
         case TXT:
-            if(message.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_BIG_EXPRESSION, false)){
+
+			if(message.getStringAttribute("dataType","000").equals("102")){
+				chatRow = new EaseChatHouse(context, message, position, this);
+			}else if(message.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_BIG_EXPRESSION, false)){
                 chatRow = new EaseChatRowBigExpression(context, message, position, this);
             }else{
                 chatRow = new EaseChatRowText(context, message, position, this);

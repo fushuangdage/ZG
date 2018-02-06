@@ -3,6 +3,7 @@ package com.example.admin.zgapplication.ui.fragment;
 import android.content.Intent;
 import android.view.View;
 
+import com.example.admin.zgapplication.ui.activity.HouseDetailActivity;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
@@ -51,6 +52,18 @@ public class ChatFragment extends EaseChatFragment {
 
             @Override
             public boolean onMessageBubbleClick(EMMessage message) {
+
+
+                String houseId = message.getStringAttribute("houseId", "");
+                if (!"".equals(houseId)){
+                    Intent intent = new Intent(getActivity(), HouseDetailActivity.class);
+                    intent.putExtra("house_id",message.getStringAttribute("houseId",""));
+                    intent.putExtra("room_id", message.getStringAttribute("roomId",""));
+                    intent.putExtra("type", message.getStringAttribute("type",""));
+                    startActivity(intent);
+                    return true;
+                }
+
                 return false;
             }
 

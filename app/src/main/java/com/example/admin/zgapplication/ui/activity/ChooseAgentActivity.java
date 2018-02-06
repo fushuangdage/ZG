@@ -43,6 +43,9 @@ public class ChooseAgentActivity extends BaseActivity {
     public List<String> tagList = new ArrayList<>();
     private String from;
     private CommonAdapter<AgentListResponse.DataBean.ListBean> adapter;
+    private String house_id;
+    private String room_id;
+    private String type;
 
     @Override
     public int setLayout() {
@@ -90,9 +93,25 @@ public class ChooseAgentActivity extends BaseActivity {
                             // TODO: 2017/11/1 跳转到单聊
                             Intent intent = new Intent(mActivity, ChatActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putString(EaseConstant.EXTRA_USER_ID,bean.getHx_username());
+
+
+                            bundle.putString(EaseConstant.CHAT_HX_NAME,bean.getHx_username());
+                            bundle.putString(EaseConstant.AGENT_ID,bean.getId());
                             bundle.putString(EaseConstant.NICK_NAME,bean.getUsername());
                             bundle.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+
+
+                            //用于转发房源
+                            bundle.putString(EaseConstant.HOUSE_TITLE, getIntent().getStringExtra(EaseConstant.HOUSE_TITLE));
+
+                            bundle.putString(EaseConstant.HOUSE_PRISE, getIntent().getStringExtra(EaseConstant.HOUSE_PRISE));
+
+                            bundle.putString(EaseConstant.HOUSE_IMG, getIntent().getStringExtra(EaseConstant.HOUSE_IMG));
+                            bundle.putString(EaseConstant.HOUSE_ID, house_id);
+                            bundle.putString(EaseConstant.ROOM_ID, room_id);
+                            bundle.putString(EaseConstant.TYPE, type);
+
+
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }
@@ -144,9 +163,9 @@ public class ChooseAgentActivity extends BaseActivity {
     @Override
     public void initData() {
         Bundle bundle = getIntent().getExtras();
-        String house_id = bundle.getString("house_id");
-        String room_id = bundle.getString("room_id");
-        String type = bundle.getString("type");
+        house_id = bundle.getString("house_id");
+        room_id = bundle.getString("room_id");
+        type = bundle.getString("type");
         RetrofitHelper.getApiWithUid().getAgentList(room_id, type, house_id, page)
                 .compose(RxScheduler.<AgentListResponse>defaultScheduler())
                 .subscribe(new BaseObserver<AgentListResponse>(mActivity) {

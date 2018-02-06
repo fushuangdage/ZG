@@ -100,7 +100,7 @@ public class OrderListActivity extends BaseActivity {
         adapter = new CommonAdapter<OrderList.OrderListDataBean.ListBean>(this, R.layout.item_order_list, data) {
 
             @Override
-            protected void convert(ViewHolder holder, final OrderList.OrderListDataBean.ListBean listBean, int position) {
+            protected void convert(ViewHolder holder, final OrderList.OrderListDataBean.ListBean listBean, final int position) {
                 ((TextView) holder.getView(R.id.tv_user_tag)).setText(listBean.getCompany_name()+"  "+listBean.getAgent());
                 ((TextView) holder.getView(R.id.tv_state)).setText(listBean.getAgent());
                 ((TextView) holder.getView(R.id.tv_total_price)).setText("¥"+listBean.getPayment());
@@ -125,9 +125,12 @@ public class OrderListActivity extends BaseActivity {
                 tv_go_pay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent;
                         switch (listBean.getStatus()) {
                             case "已完成":
-                                tv_go_pay.setText("去评价");
+                                intent=new Intent(mActivity,MakeEvaluateActivity.class);
+//                                intent.putExtra("evaluated",listBean.get)
+//                                startActivity();
                                 break;
                             case "已取消":
                                 //删除订单
@@ -141,7 +144,11 @@ public class OrderListActivity extends BaseActivity {
 
                                             @Override
                                             public void next(BaseResponse baseResponse) {
-                                                Toast.makeText(OrderListActivity.this,baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                                if (baseResponse.getCode()==0){
+                                                    Toast.makeText(OrderListActivity.this,baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                                    data.remove(position);
+                                                    adapter.notifyDataSetChanged();
+                                                }
                                             }
 
                                             @Override
@@ -151,7 +158,7 @@ public class OrderListActivity extends BaseActivity {
                                         });
                                 break;
                             case "待付款":
-                                tv_go_pay.setText("去支付");
+                                intent= new Intent(mActivity,PayOnlineActivity.class);
                                 break;
                         }
                     }

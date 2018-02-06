@@ -123,6 +123,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     private String aid;
     private String myName;
     private String str;
+    private String house_title;
+    private String house_price;
+    private String house_img;
+    private String house_id;
+    private String room_id;
+    private String type;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -141,12 +147,19 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         // check if single chat or group chat
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
-        toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
+        toChatUsername = fragmentArgs.getString(EaseConstant.CHAT_HX_NAME);
         agentName = fragmentArgs.getString(EaseConstant.NICK_NAME);
         userId = fragmentArgs.getString(EaseConstant.USER_ID);
         my_head = fragmentArgs.getString(EaseConstant.MY_HEAD);
         myName=fragmentArgs.getString(EaseConstant.MY_NAME);
-        str = fragmentArgs.getString(EaseConstant.STR);
+        house_id = fragmentArgs.getString(EaseConstant.HOUSE_ID);
+        room_id = fragmentArgs.getString(EaseConstant.ROOM_ID);
+        type = fragmentArgs.getString(EaseConstant.TYPE);
+
+
+        house_title = fragmentArgs.getString(EaseConstant.HOUSE_TITLE, "");
+        house_price = fragmentArgs.getString(EaseConstant.HOUSE_PRISE, "");
+        house_img = fragmentArgs.getString(EaseConstant.HOUSE_IMG, "");
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -207,8 +220,22 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             fetchQueue = Executors.newSingleThreadExecutor();
         }
 
-        if (str!=null&&!str.equals("")){
+        if (str!=null&& !str.equals("")){
             EMMessage message = EMMessage.createTxtSendMessage(str, toChatUsername);
+            sendMessage(message);
+        }
+        if (!"".equals(house_title)){
+            //从房源咨询经纪人跳入,转发房源
+            EMMessage message = EMMessage.createTxtSendMessage("  ", toChatUsername);
+            message.setAttribute("dataType","102");
+
+            message.setAttribute(EaseConstant.HOUSE_TITLE,house_title);
+            message.setAttribute(EaseConstant.HOUSE_IMG,house_img);
+            message.setAttribute(EaseConstant.HOUSE_PRISE,house_price);
+            message.setAttribute(EaseConstant.HOUSE_ID,house_id);
+            message.setAttribute(EaseConstant.ROOM_ID,room_id);
+            message.setAttribute(EaseConstant.TYPE,type);
+
             sendMessage(message);
         }
 
@@ -802,10 +829,15 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         }
         //send message
         // TODO: 2017/11/2 给发送的信息添加附带信息
-        message.setAttribute("dataType","101");
+
+
+        if ("".equals(house_title)){
+            message.setAttribute("dataType","101");
+        }
         message.setAttribute("headImg",my_head);
         message.setAttribute("userId",userId);
         message.setAttribute("userName",myName);
+
         EMClient.getInstance().chatManager().sendMessage(message);
         //refresh ui
         if(isMessageListInited) {

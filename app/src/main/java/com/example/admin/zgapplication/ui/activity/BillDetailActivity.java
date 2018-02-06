@@ -57,8 +57,6 @@ public class BillDetailActivity extends BaseActivity {
         ll_agent_fee.setVisibility(View.GONE);
         ll_deposit.setVisibility(View.GONE);
         ll_serve_fee.setVisibility(View.GONE);
-
-
     }
 
     @Override
@@ -123,7 +121,6 @@ public class BillDetailActivity extends BaseActivity {
                             }
                         });
 
-                startActivity(PayOnlineActivity.class);
                 break;
             case R.id.rl_zg_coupon:
                 intent= new Intent(this,CouponChooseActivity.class);

@@ -47,7 +47,7 @@ public class ConversationListFragment extends EaseConversationListFragment{
 
                     }
                     // it's single chat
-                    intent.putExtra(Constant.EXTRA_USER_ID, username);
+                    intent.putExtra(Constant.CHAT_HX_NAME, username);
                     intent.putExtra(EaseConstant.NICK_NAME,nickName);
                     startActivity(intent);
                 }

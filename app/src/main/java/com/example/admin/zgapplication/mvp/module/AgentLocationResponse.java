@@ -12,7 +12,7 @@ public class AgentLocationResponse {
     /**
      * msg : 操作成功
      * code : 0
-     * data : [{"lnt":100.00083479,"lat":50.00026726},{"lnt":100.00011107,"lat":50.00075982},{"lnt":99.99964778,"lat":49.99963719},{"lnt":100.00044498,"lat":49.99956528},{"lnt":100.00030947,"lat":49.99965692},{"lnt":100.00041767,"lat":49.99923127},{"lnt":100.00099215,"lat":49.99936278},{"lnt":100.00044687,"lat":50.00091281},{"lnt":99.9996979,"lat":50.00070073}]
+     * data : [{"lng":100.00083479,"lat":50.00026726},{"lng":100.00011107,"lat":50.00075982},{"lng":99.99964778,"lat":49.99963719},{"lng":100.00044498,"lat":49.99956528},{"lng":100.00030947,"lat":49.99965692},{"lng":100.00041767,"lat":49.99923127},{"lng":100.00099215,"lat":49.99936278},{"lng":100.00044687,"lat":50.00091281},{"lng":99.9996979,"lat":50.00070073}]
      */
 
     private String msg;
@@ -45,19 +45,19 @@ public class AgentLocationResponse {
 
     public static class DataBean {
         /**
-         * lnt : 100.00083479
+         * lng : 100.00083479
          * lat : 50.00026726
          */
 
-        private double lnt;
+        private double lng;
         private double lat;
 
-        public double getLnt() {
-            return lnt;
+        public double getLng() {
+            return lng;
         }
 
-        public void setLnt(double lnt) {
-            this.lnt = lnt;
+        public void setLng(double lng) {
+            this.lng = lng;
         }
 
         public double getLat() {
