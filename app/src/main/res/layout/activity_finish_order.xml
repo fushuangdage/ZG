@@ -152,6 +152,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_company_name"
                     android:text="链家地产"
                     android:layout_toRightOf="@id/iv_userhead"
                     android:layout_marginTop="3dp"
@@ -264,6 +265,7 @@
                     android:background="#eee" />
 
                 <TextView
+                    android:id="@+id/tv_custom_info"
                     android:layout_marginTop="13dp"
                     style="@style/gray_text_13sp"
                     android:text="入住人信息：崔始源 15810245880"
@@ -271,6 +273,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_agent_info"
                     android:layout_marginTop="13dp"
                     style="@style/gray_text_13sp"
                     android:text="经纪人信息：王戴卫 13310425072"

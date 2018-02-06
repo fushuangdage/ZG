@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.OrderDetailResponse;
@@ -48,6 +49,19 @@ public class FinishOrderActivity extends BaseActivity {
     TextView tv_order_payment;
     @BindView(R.id.tv_order_net)
     TextView tv_order_net;
+
+
+    @BindView(R.id.iv_userhead)
+    ImageView iv_userhead;
+    @BindView(R.id.tv_user_name)
+    TextView tv_user_name;
+    @BindView(R.id.tv_company_name)
+    TextView tv_company_name;
+    @BindView(R.id.tv_custom_info)
+    TextView tv_custom_info;
+    @BindView(R.id.tv_agent_info)
+    TextView tv_agent_info;
+
     private OrderDetailResponse.OrderDetailDataBean.ListBean bean;
 
 
@@ -74,11 +88,17 @@ public class FinishOrderActivity extends BaseActivity {
 
                     @Override
                     public void next(OrderDetailResponse orderDetailResponse) {
-                        bean = (OrderDetailResponse.OrderDetailDataBean.ListBean) orderDetailResponse.getData().getList();
+                        bean = orderDetailResponse.getData().getList();
+                        Glide.with(mActivity).load(bean.getAvatar()).into(iv_userhead);
+                        tv_user_name.setText(bean.getAgent());
+                        tv_company_name.setText(bean.getCompany_name());
+                        Glide.with(mActivity).load(bean.getHouse_photo()).into(iv_house);
+
+
                         tv_house_name.setText(bean.getHouse_title());
                         tv_house_info.setText(bean.getHouse_area());
                         tv_house_location.setText(bean.getAddress());
-                        tv_house_rent.setText(bean.getRent()+"元/月");
+                        tv_house_rent.setText(bean.getRent_money()+"元/月");
 
 //                        showThreeTag(bean,ll_tag_container);
 
@@ -90,8 +110,10 @@ public class FinishOrderActivity extends BaseActivity {
                         tv_order_no.setText("订单号："+ bean.getOrder());
                         tv_order_net.setText("代理商："+ bean.getNet());
                         tv_order_pay_time.setText("支付时间："+TimeUtil.formatData(TimeUtil.dateFormatYMD3, bean.getPay_time()));
-                        tv_order_payment.setText("支付金额: "+ bean.getPayment());
+                        tv_order_payment.setText("支付金额: ¥"+ bean.getPayment());
 
+                        tv_custom_info.setText(String.format("入住人信息：%s %s",bean.getPhone_number(),bean.getReal_name()));
+                        tv_agent_info.setText(String.format("经纪人信息：%s %s",bean.getTelephone(),bean.getAgent()));
                     }
 
                     @Override

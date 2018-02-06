@@ -253,6 +253,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                         public void next(StartIntent baseResponse) {
                             Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
                             if (baseResponse.getCode()==0){
+                                home_progress.setVisibility(View.VISIBLE);
                                 home_progress.start();
                                 Intent intent = new Intent(mActivity, WaitCrabActivity.class);
                                 iid = baseResponse.getData().getId();
@@ -280,6 +281,9 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                         public void next(StartIntent baseResponse) {
                             Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
                             if (baseResponse.getCode()==0){
+                                home_progress.setVisibility(View.VISIBLE);
+                                home_progress.start();
+                                iid=baseResponse.getData().getId();
                                 Intent intent = new Intent(mActivity, WaitCrabActivity.class);
                                 intent.putExtra("iid",baseResponse.getData().getId());
                                 startActivity(intent);

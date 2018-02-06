@@ -142,7 +142,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
 
                     @Override
                     public void next(CollectionListResponse collectionListResponse) {
-                        if (page==0)
+                        if (page==1)
                         data.clear();
                         data.addAll(collectionListResponse.getData().getList());
                         adapter.notifyDataSetChanged();

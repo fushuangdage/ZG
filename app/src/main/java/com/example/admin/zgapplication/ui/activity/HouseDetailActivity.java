@@ -187,7 +187,6 @@ public class HouseDetailActivity extends BaseActivity {
                 break;
 
             case R.id.tv_collect:
-            case R.id.iv_shoppingcar:
                 RetrofitHelper.getApi().addCollection(Constant.uid,house_id,room_id==null?"0":room_id,type)
                         .compose(RxScheduler.<BaseResponse>defaultScheduler())
                         .subscribe(new BaseObserver<BaseResponse>(mActivity) {
@@ -211,6 +210,9 @@ public class HouseDetailActivity extends BaseActivity {
 
                             }
                         });
+                break;
+            case R.id.iv_shoppingcar:
+                startActivity(ShopCarActivity.class);
                 break;
 
         }

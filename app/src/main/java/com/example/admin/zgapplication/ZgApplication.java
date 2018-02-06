@@ -45,10 +45,10 @@ public class ZgApplication extends Application {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
 
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
-        PlatformConfig.setAlipay("2018020102126283");
+        PlatformConfig.setWeixin("wx0abcf6b5fcd82284", "4ce0e0eea4a6b46980c8be25a48c4bd1");
+        PlatformConfig.setQQZone("1104875105", "J4PnbQoQZKBx8iBF");
+        PlatformConfig.setSinaWeibo("178756640", "85348a69e5e84725a21f8eded16eb771", "http://sns.whalecloud.com");
+        PlatformConfig.setAlipay("2017030606078997");
 
         UMShareAPI.get(this);
         SDKInitializer.initialize(this);

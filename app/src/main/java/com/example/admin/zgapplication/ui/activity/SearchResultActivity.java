@@ -38,6 +38,8 @@ public class SearchResultActivity extends BaseActivity implements MultiItemTypeA
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     public List<Object> list = new ArrayList<>();
     private MultiItemTypeAdapter<Object> adapter;
 
@@ -49,6 +51,8 @@ public class SearchResultActivity extends BaseActivity implements MultiItemTypeA
 
     @Override
     public void initEvent() {
+
+        tv_title.setText("搜索结果");
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -183,6 +187,7 @@ public class SearchResultActivity extends BaseActivity implements MultiItemTypeA
 
                     @Override
                     public void onNext(SearchResultResponse searchResultResponse) {
+                        list.clear();
                         SearchResultResponse.DataBean data = searchResultResponse.getData();
                         list.add("房源");
                         for (int i = 0; i < Math.min(3, data.getList().size()); i++) {

@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiIte
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.wrapper.HeaderAndFooterWrapper;
 import com.example.admin.zgapplication.ui.view.StartBar;
+import com.example.admin.zgapplication.utils.system.SystemUtil;
 import com.hyphenate.easeui.EaseConstant;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -194,11 +196,17 @@ public class AgentActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    @OnClick({R.id.tv_contact_agent,R.id.tv_take_tel})
+    @OnClick({R.id.tv_contact_agent,R.id.tv_take_tel,R.id.ll_phone})
     public void onClick(View v) {
 
         Intent intent;
         switch (v.getId()) {
+            case R.id.ll_phone:
+                SystemUtil.callPhone(mActivity,data.getTelephone());
+                intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + data.getTelephone()));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
             case R.id.tv_look_evaluate:
                 intent = new Intent(mActivity, EvaluateShowActivity.class);
                 intent.putExtra("aid",aid);

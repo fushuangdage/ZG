@@ -88,4 +88,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile project(':easeui')
     implementation files('libs/SocialSDK_alipay.jar')
+    implementation files('libs/libapshare20161108.jar')
 }

@@ -40,6 +40,7 @@
 
             <com.example.admin.zgapplication.ui.view.CustomProgressView
                 android:id="@+id/home_progress"
+                android:visibility="invisible"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="240dp"
                 app:clock_wise="true"
