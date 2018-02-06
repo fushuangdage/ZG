@@ -36,6 +36,7 @@ public class OrderList extends BaseResponse<OrderList.OrderListDataBean>{
              */
 
             private String order_id;
+            private int reviewed;
             private String company_name;
             private String agent;
             private String status;
@@ -46,6 +47,14 @@ public class OrderList extends BaseResponse<OrderList.OrderListDataBean>{
             private int rent_money;
             private String payment;
             private List<String> label;
+
+            public int getReviewed() {
+                return reviewed;
+            }
+
+            public void setReviewed(int reviewed) {
+                this.reviewed = reviewed;
+            }
 
             public String getOrder_id() {
                 return order_id;

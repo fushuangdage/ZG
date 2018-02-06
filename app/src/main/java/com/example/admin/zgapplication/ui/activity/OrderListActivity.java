@@ -112,7 +112,11 @@ public class OrderListActivity extends BaseActivity {
                 final TextView tv_go_pay = (TextView) holder.getView(R.id.tv_go_pay);
                 switch (listBean.getStatus()) {
                     case "已完成":
-                        tv_go_pay.setText("去评价");
+                        if (listBean.getReviewed()==0){
+                            tv_go_pay.setText("去评价");
+                        }else {
+                            tv_go_pay.setText("查看评价");
+                        }
                         break;
                     case "已取消":
                         tv_go_pay.setText("删除订单");
@@ -129,6 +133,12 @@ public class OrderListActivity extends BaseActivity {
                         switch (listBean.getStatus()) {
                             case "已完成":
                                 intent=new Intent(mActivity,MakeEvaluateActivity.class);
+                                if (listBean.getReviewed()==0){
+                                    intent.putExtra("evaluated",false);
+                                }else {
+                                    intent.putExtra("evaluated",true);
+                                }
+
 //                                intent.putExtra("evaluated",listBean.get)
 //                                startActivity();
                                 break;
