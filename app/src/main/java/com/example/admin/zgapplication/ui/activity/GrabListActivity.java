@@ -20,6 +20,7 @@ import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
 import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
+import com.example.admin.zgapplication.utils.ZgUtil;
 import com.hyphenate.easeui.EaseConstant;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -149,7 +150,7 @@ public class GrabListActivity extends BaseActivity {
                         if (page==1) {
                             list.clear();
                         }
-                        str = "我是租客"+ Constant.username+",我要租"+crabListResponse.getData().getStr();
+                        str = ZgUtil.getHelloText(crabListResponse.getData().getStr());
                         list.addAll(crabListResponse.getData().getList());
                         adapter.notifyDataSetChanged();
                     }

@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.example.admin.zgapplication.Constant;
+
 /**
  * Created by fushuang on 2017/12/20.
  */
@@ -24,4 +26,9 @@ public class ZgUtil {
         cursor.close();
         return res;
     }
+
+    public static String getHelloText(String info){
+        return "我是租客"+ Constant.username+",我要租 "+info+" ,请问有可推荐的房源么?";
+    }
+
 }

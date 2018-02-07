@@ -155,7 +155,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         house_id = fragmentArgs.getString(EaseConstant.HOUSE_ID);
         room_id = fragmentArgs.getString(EaseConstant.ROOM_ID);
         type = fragmentArgs.getString(EaseConstant.TYPE);
-
+        str=fragmentArgs.getString(EaseConstant.STR);
 
         house_title = fragmentArgs.getString(EaseConstant.HOUSE_TITLE, "");
         house_price = fragmentArgs.getString(EaseConstant.HOUSE_PRISE, "");
@@ -167,6 +167,25 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
      * init view
      */
     protected void initView() {
+
+
+        if (str!=null&& !str.equals("")){
+            EMMessage message = EMMessage.createTxtSendMessage(str, toChatUsername);
+            sendMessage(message);
+        }
+        if (!"".equals(house_title)){
+            //从房源咨询经纪人跳入,转发房源
+            EMMessage message = EMMessage.createTxtSendMessage("  ", toChatUsername);
+            message.setAttribute("dataType","102");
+            message.setAttribute(EaseConstant.HOUSE_TITLE,house_title);
+            message.setAttribute(EaseConstant.HOUSE_IMG,house_img);
+            message.setAttribute(EaseConstant.HOUSE_PRISE,house_price);
+            message.setAttribute(EaseConstant.HOUSE_ID,house_id);
+            message.setAttribute(EaseConstant.ROOM_ID,room_id);
+            message.setAttribute(EaseConstant.TYPE,type);
+
+            sendMessage(message);
+        }
         // hold to record voice
         //noinspection ConstantConditions
         voiceRecorderView = (EaseVoiceRecorderView) getView().findViewById(R.id.voice_recorder);
@@ -220,24 +239,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             fetchQueue = Executors.newSingleThreadExecutor();
         }
 
-        if (str!=null&& !str.equals("")){
-            EMMessage message = EMMessage.createTxtSendMessage(str, toChatUsername);
-            sendMessage(message);
-        }
-        if (!"".equals(house_title)){
-            //从房源咨询经纪人跳入,转发房源
-            EMMessage message = EMMessage.createTxtSendMessage("  ", toChatUsername);
-            message.setAttribute("dataType","102");
 
-            message.setAttribute(EaseConstant.HOUSE_TITLE,house_title);
-            message.setAttribute(EaseConstant.HOUSE_IMG,house_img);
-            message.setAttribute(EaseConstant.HOUSE_PRISE,house_price);
-            message.setAttribute(EaseConstant.HOUSE_ID,house_id);
-            message.setAttribute(EaseConstant.ROOM_ID,room_id);
-            message.setAttribute(EaseConstant.TYPE,type);
-
-            sendMessage(message);
-        }
 
     }
 
