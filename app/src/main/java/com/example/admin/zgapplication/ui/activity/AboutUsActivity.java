@@ -23,6 +23,7 @@ public class AboutUsActivity extends BaseActivity {
     @BindView(R.id.tv_wx)
     TextView wx;
 
+
     @BindView(R.id.tv_customer_service)
     TextView tv_customer_service;
 
