@@ -50,4 +50,5 @@ public class Constant extends EaseConstant {
 	public static final int SECOND_LEVEL_REGION=1003;
 	public static final int RESULT_FOR_CHOOSE_COUPON=1004;
 
+	public static String myPhone;
 }

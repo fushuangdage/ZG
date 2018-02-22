@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
@@ -21,6 +22,7 @@ import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.utils.NumCode;
 import com.example.admin.zgapplication.utils.SPUtil;
+import com.example.admin.zgapplication.utils.img.GlideRoundTransform;
 import com.example.admin.zgapplication.utils.string.StringUtils;
 
 import butterknife.BindView;
@@ -45,6 +47,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @BindView(R.id.tv_reget_message_code)
     TextView tv_reget_message_code;
+
+    @BindView(R.id.riv_userpic)
+    ImageView riv_userpic;
+
+
     private String net_code;  //服务器给的短信验证码
     private String user_phoneNumber;
     private ValueAnimator valueAnimator;
@@ -56,21 +63,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void initEvent() {
-        inflate = LayoutInflater.from(mActivity).inflate(R.layout.dialog_register_getcede, null, false);
 
-        inflate.findViewById(R.id.btn_clear_pic).setOnClickListener(this);
-        inflate.findViewById(R.id.iv_shutdown).setOnClickListener(this);
-
-        inflate.findViewById(R.id.tv_post).setOnClickListener(this);
-        ivNumCode = (ImageView) inflate.findViewById(R.id.iv_num_code);
-        ivNumCode.setOnClickListener(this);
-        editText = (EditText) inflate.findViewById(R.id.et_num_code);
-        ivNumCode.setImageBitmap(NumCode.getInstance().getBitmap());
-        numCode = NumCode.getInstance().getCode();
     }
 
     @Override
     public void initData() {
+        String avatar = (String) SPUtil.get(mActivity, "avatar", "");
+        if (!"".equals(avatar)){
+            Glide.with(mActivity).load(avatar).transform(new GlideRoundTransform(mActivity)).into(riv_userpic);
+        }
     }
 
     @OnClick({R.id.tv_reget_message_code, R.id.btn_clear_phone, R.id.act_login_submit})
@@ -79,6 +80,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.tv_reget_message_code:
                 user_phoneNumber = act_login_phone.getText().toString();
                 if (StringUtils.isMobile(user_phoneNumber)) {
+                    inflate = LayoutInflater.from(mActivity).inflate(R.layout.dialog_register_getcede, null, false);
+
+                    inflate.findViewById(R.id.btn_clear_pic).setOnClickListener(this);
+                    inflate.findViewById(R.id.iv_shutdown).setOnClickListener(this);
+
+                    inflate.findViewById(R.id.tv_post).setOnClickListener(this);
+                    ivNumCode = (ImageView) inflate.findViewById(R.id.iv_num_code);
+                    ivNumCode.setOnClickListener(this);
+                    editText = (EditText) inflate.findViewById(R.id.et_num_code);
+                    ivNumCode.setImageBitmap(NumCode.getInstance().getBitmap());
+                    numCode = NumCode.getInstance().getCode();
+
                     dialog = new Dialog(mActivity);
                     ViewGroup parent = (ViewGroup) inflate.getParent();
                     if (parent != null) {
@@ -143,7 +156,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                                         @Override
                                         public void onComplete() {
-                                            dialog.hide();
+                                            tv_reget_message_code.setClickable(false);
+                                            dialog.dismiss();
                                         }
                                     });
                         }
@@ -151,6 +165,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             tv_reget_message_code.setText("获取验证码");
+                            tv_reget_message_code.setClickable(true);
                         }
 
                         @Override
@@ -192,11 +207,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                         Constant.uid = msgCodeResponse.getData().getId() + "";
                                         Constant.hx_username = msgCodeResponse.getData().getHx_username();
                                         Constant.hx_password = msgCodeResponse.getData().getHx_password();
-                                        Constant.username = msgCodeResponse.getData().getUsername();
+                                        Constant.username = msgCodeResponse.getData().getNick_name();
                                         Constant.password = msgCodeResponse.getData().getPassword();
                                         Constant.avatar=msgCodeResponse.getData().getAvatar();
+                                        Constant.myPhone=msgCodeResponse.getData().getPhone_number();
 
                                         SPUtil.put(mActivity,"uid",Constant.uid);
+                                        SPUtil.put(mActivity,"myPhone",Constant.myPhone);
                                         SPUtil.put(mActivity,"hx_username",Constant.hx_username);
                                         SPUtil.put(mActivity,"hx_password",Constant.hx_password);
                                         SPUtil.put(mActivity,"username",Constant.username);

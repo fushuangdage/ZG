@@ -82,6 +82,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         initEvent();
         //初始化数据
         initData();
+        View iv_left = findViewById(R.id.iv_left);
+        if (iv_left != null) {
+            iv_left.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
     }
 
     /**

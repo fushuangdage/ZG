@@ -264,6 +264,7 @@ public class MakeEvaluateActivity extends BaseActivity {
             tfl_pic.setAdapter(takePhotoTagAdapter);
 
         }else {
+            bar_title.setText("查看评价");
             sb_agent.setCanStart(false);
             sb_company.setCanStart(false);
             sb_house.setCanStart(false);
@@ -308,10 +309,6 @@ public class MakeEvaluateActivity extends BaseActivity {
                             return view;
                         }
 
-                        @Override
-                        public void onSelected(int position, View view) {
-                            super.onSelected(position, view);
-                        }
                     });
 
 

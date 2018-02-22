@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
+import com.example.admin.zgapplication.base.EventCenter;
 import com.example.admin.zgapplication.mvp.module.ModifyIconResponse;
 import com.example.admin.zgapplication.mvp.module.SelfInfo;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
@@ -25,6 +26,8 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.List;
@@ -63,6 +66,12 @@ public class SelfInfoActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     public void initData() {
         RetrofitHelper.getApiWithUid().getSelfInfo()
                 .compose(RxScheduler.<SelfInfo>defaultScheduler())
@@ -78,6 +87,11 @@ public class SelfInfoActivity extends BaseActivity {
                         SelfInfo.DataBean data = selfInfo.getData();
                         tv_user_tel.setText(data.getPhone_number());
                         tv_user_name.setText(data.getNick_name());
+
+                        Constant.myPhone=data.getPhone_number();
+                        Constant.username=data.getNick_name();
+                        Constant.avatar=data.getAvatar();
+
                         Glide.with(mActivity).load(selfInfo.getData().getAvatar()).transform(new GlideRoundTransform(mActivity)).into(iv_user_icon);
 
                     }
@@ -175,8 +189,8 @@ public class SelfInfoActivity extends BaseActivity {
                         public void onNext(ModifyIconResponse addEvaluationResponse) {
                             if (addEvaluationResponse.getCode()==0){
                                 Glide.with(mActivity).load(addEvaluationResponse.getData().getAvatar()).transform(new GlideRoundTransform(mActivity)).into(iv_user_icon);
-                                Constant.
-                                        avatar=addEvaluationResponse.getData().getAvatar();
+                                Constant.avatar=addEvaluationResponse.getData().getAvatar();
+                                EventBus.getDefault().post(new EventCenter(EventCenter.REFRESH_SELF_INFO));
                                 SPUtil.put(mActivity,"avatar",Constant.avatar);
                             }
 

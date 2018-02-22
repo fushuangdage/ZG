@@ -5,6 +5,9 @@ package com.example.admin.zgapplication.base;
  */
 
 public class EventCenter<T> {
+
+
+    public static int REFRESH_SELF_INFO=1;
     private int code;
     private T data;
 

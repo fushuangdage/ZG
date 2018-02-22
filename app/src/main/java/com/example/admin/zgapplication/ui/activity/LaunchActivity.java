@@ -1,5 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.example.admin.zgapplication.Constant;
@@ -13,6 +15,13 @@ import cn.jpush.android.api.JPushInterface;
 
 public class LaunchActivity extends BaseActivity {
 
+
+    public Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            startActivity(HomeActivity.class);
+        }
+    };
     @Override
     public int setLayout() {
         return R.layout.activity_launch;
@@ -27,6 +36,7 @@ public class LaunchActivity extends BaseActivity {
     public void initData() {
 
         Constant.hx_username = (String) SPUtil.get(mActivity, "hx_username", "");
+        Constant.myPhone = (String) SPUtil.get(mActivity, "myPhone", "");
         Constant.hx_password = (String) SPUtil.get(mActivity, "hx_password", "");
         Constant.username = (String) SPUtil.get(mActivity, "username", "");
         Constant.avatar = (String) SPUtil.get(mActivity, "avatar", "");
@@ -58,8 +68,11 @@ public class LaunchActivity extends BaseActivity {
 
         }
 
-        startActivity(HomeActivity.class);
+
+
+        handler.sendEmptyMessageDelayed(1,2000);
     }
+
 
 
 }

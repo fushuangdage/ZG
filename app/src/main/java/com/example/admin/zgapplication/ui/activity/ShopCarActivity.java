@@ -102,7 +102,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
                                         Toast.makeText(ShopCarActivity.this, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
                                         if (baseResponse.getCode() == 0) {
                                             data.remove(position);
-                                            adapter.notifyItemRemoved(position);
+                                            adapter.notifyDataSetChanged();
                                         }
                                     }
 

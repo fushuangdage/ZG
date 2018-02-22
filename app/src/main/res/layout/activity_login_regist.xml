@@ -240,6 +240,7 @@
 
                 <LinearLayout
                     android:id="@+id/ll_login_bottom"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
@@ -311,6 +312,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </RelativeLayout>
         </LinearLayout>
 

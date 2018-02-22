@@ -34,7 +34,8 @@ public abstract class BaseObserver<T extends BaseResponse> implements Observer<T
         this.clzName = clz.getName();
     }
 
-    public BaseObserver(Activity activity){
+    public
+    BaseObserver(Activity activity){
         this.mContext = new WeakReference<>(activity.getBaseContext());
         this.clzName = activity.getClass().getSimpleName();
     }

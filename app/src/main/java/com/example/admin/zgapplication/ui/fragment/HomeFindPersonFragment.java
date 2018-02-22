@@ -39,6 +39,7 @@ import com.example.admin.zgapplication.mvp.module.StartIntent;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
+import com.example.admin.zgapplication.ui.activity.ExchangeCouponActivity;
 import com.example.admin.zgapplication.ui.activity.LoginActivity;
 import com.example.admin.zgapplication.ui.activity.WaitCrabActivity;
 import com.example.admin.zgapplication.ui.adapter.HomePositionAdapter;
@@ -49,6 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -199,10 +201,16 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     }
 
     @Override
+    @OnClick({R.id.iv_red_packet})
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
+            case R.id.iv_red_packet:
+                intent = new Intent(getActivity(), ExchangeCouponActivity.class);
+                startActivity(intent);
+                break;
             case R.id.home_progress:
-                Intent intent = new Intent(getActivity(), WaitCrabActivity.class);
+                intent = new Intent(getActivity(), WaitCrabActivity.class);
                 intent.putExtra("iid",iid);
                 startActivity(intent);
                 break;

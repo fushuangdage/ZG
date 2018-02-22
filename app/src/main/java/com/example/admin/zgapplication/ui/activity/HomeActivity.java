@@ -27,9 +27,7 @@ import com.example.admin.zgapplication.mvp.presenter.HomePresenter;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
-import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.CommonAdapter;
-import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.MultiItemTypeAdapter;
-import com.example.admin.zgapplication.ui.adapter.ZhyBaseRecycleAdapter.base.ViewHolder;
+import com.example.admin.zgapplication.ui.adapter.CityChooseAdapter;
 import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
 import com.example.admin.zgapplication.ui.view.MessageBubbleView;
@@ -82,9 +80,11 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     private PopupWindow popupWindow;
     private List<CityResponse.DataBean.ListBean> cityList;
     private CityResponse.DataBean.ListBean currentCityBean;
-    private CommonAdapter<CityResponse.DataBean.ListBean> cityAdapter;
+    private CityChooseAdapter cityAdapter;
     private RegionResponse regionResponse;
     private RegionResponse.BaseRegion select_region;
+    private View headerView;
+    private ImageView iv_agent_icon;
 
 
     @Override
@@ -107,15 +107,16 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
                 .hide(houseFragment).commit();
         radioGroup.setOnCheckedChangeListener(this);
 
-        View headerView = navigationView.getHeaderView(0);
+        headerView = navigationView.getHeaderView(0);
         View evaluation = headerView.findViewById(R.id.ll_evaluation);
         View order = headerView.findViewById(R.id.ll_order);
         View contact = headerView.findViewById(R.id.ll_contract);
 
-        ImageView iv_agent_icon = (ImageView) headerView.findViewById(R.id.iv_agent_icon);
+        iv_agent_icon = (ImageView) headerView.findViewById(R.id.iv_agent_icon);
 
         Glide.with(mActivity).load(Constant.avatar).transform(new GlideRoundTransform(mActivity)).into(iv_agent_icon);
         ((TextView) headerView.findViewById(R.id.tv_user_name)).setText(Constant.username);
+        ((TextView) headerView.findViewById(R.id.tv_user_tel)).setText(Constant.myPhone);
 
 
         headerView.findViewById(R.id.ll_shopping_car).setOnClickListener(this);
@@ -210,16 +211,18 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
             case R.id.tv_city:
                 View contentView = LayoutInflater.from(mActivity).inflate(R.layout.city_choose_panel, null, false);
                 RecyclerView recyclerView = (RecyclerView) contentView.findViewById(R.id.recyclerView);
-                cityAdapter = new CommonAdapter<CityResponse.DataBean.ListBean>(mActivity, R.layout.item_text, cityList) {
-                    @Override
-                    protected void convert(ViewHolder holder, CityResponse.DataBean.ListBean bean, int position) {
-                        ((TextView) holder.getView(R.id.tv_content)).setText(bean.getName());
-                    }
-                };
-                cityAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+                cityAdapter = new CityChooseAdapter(mActivity, R.layout.item_text, cityList);
+//                {
+//                    @Override
+//                    protected void convert(ViewHolder holder, CityResponse.DataBean.ListBean bean, int position) {
+//                        ((TextView) holder.getView(R.id.tv_content)).setText(bean.getName());
+//                    }
+//                };
+
+
+                cityAdapter.setOnItemClickListener(new CityChooseAdapter.OnItemClickCallBack() {
                     @Override
                     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-
                         //点击刷新上拉抽屉列表地区选择
                         currentCityBean = cityList.get(position);
                         tv_city.setText(currentCityBean.getName());
@@ -243,13 +246,6 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 
                                     }
                                 });
-
-
-                    }
-
-                    @Override
-                    public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
-                        return false;
                     }
                 });
                 recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
@@ -326,4 +322,13 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     }
 
 
+    @Override
+    public void onReceiveEvent(EventCenter event) {
+        if (event.getCode()== EventCenter.REFRESH_SELF_INFO) {
+            Glide.with(mActivity).load(Constant.avatar).transform(new GlideRoundTransform(mActivity)).into(iv_agent_icon);
+            ((TextView) headerView.findViewById(R.id.tv_user_name)).setText(Constant.username);
+            ((TextView) headerView.findViewById(R.id.tv_user_tel)).setText(Constant.myPhone);
+        }
+        super.onReceiveEvent(event);
+    }
 }
