@@ -190,6 +190,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         //noinspection ConstantConditions
         voiceRecorderView = (EaseVoiceRecorderView) getView().findViewById(R.id.voice_recorder);
         tv_title = ((TextView) getView().findViewById(R.id.tv_title));
+        getView().findViewById(R.id.iv_left).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
         tv_title.setText(agentName);
         // message list layout
         messageList = (EaseChatMessageList) getView().findViewById(R.id.message_list);
@@ -638,7 +644,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             } else {
                 // single chat message
                 username = message.getFrom();
-                aid=message.getStringAttribute("userId","0");
+                aid=message.getStringAttribute(EaseConstant.AGENT_ID,"0");
             }
 
             // if the message is for current conversation

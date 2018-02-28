@@ -110,7 +110,7 @@ public class RoomPickDialog extends Dialog implements View.OnClickListener {
         tv_price.setText("¥ "+data.getRental());
         tv_payment_info.setText(String.format("租金: %s元/月, 押金: %s元",data.getRoom_n().get(0).getRental(),data.getRoom_n().get(0).getRoom_deposit()));
 
-        Glide.with(context).load(data.getLogo()).into(imageView);
+        Glide.with(context).load(data.getHouse_picture()).into(imageView);
 
         list_room = data.getRoom_n();
         check_roomBean=data.getRoom_n().get(0);
@@ -191,7 +191,7 @@ public class RoomPickDialog extends Dialog implements View.OnClickListener {
 
     public void refreshChooseData(){
         tv_room_id.setText("房源编号: "+check_roomBean.getRoom_code());
-        tv_price.setText("¥ "+(check_roomBean.getRental()*check_pay_way.getPay()+check_roomBean.getRoom_deposit()*check_pay_way.getPay()));
+        tv_price.setText("¥ "+(check_roomBean.getRental()*check_pay_way.getPay()+check_roomBean.getRoom_deposit()*check_pay_way.getPledge()));
         tv_payment_info.setText(String.format("租金: %d元/月, 押金: %d元",check_roomBean.getRental(),check_roomBean.getRoom_deposit()));
         tv_room_pay_mode.setText(String.format("已选: %s，%s",check_pay_way.getMethod_name(),check_roomBean.getRoom_number()));
     }

@@ -37,6 +37,9 @@ public class ChooseAgentActivity extends BaseActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     public Integer page;
 
     public List<AgentListResponse.DataBean.ListBean> data = new ArrayList<>();
@@ -54,6 +57,7 @@ public class ChooseAgentActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
+        tv_title.setText("选择经纪人");
         from = getIntent().getStringExtra("from");
         //代表是从咨询经纪人跳转过来,显示三个按钮
         // TODO: 2017/11/1 跳转到单聊
@@ -156,6 +160,8 @@ public class ChooseAgentActivity extends BaseActivity {
                 });
             }
         };
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setAdapter(adapter);
     }

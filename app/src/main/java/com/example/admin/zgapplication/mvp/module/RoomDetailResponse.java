@@ -83,6 +83,15 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
         private String lng;
         private String lat;
         private String share;
+        private String house_picture;
+
+        public String getHouse_picture() {
+            return house_picture;
+        }
+
+        public void setHouse_picture(String house_picture) {
+            this.house_picture = house_picture;
+        }
 
         public String getShare() {
             return share;
@@ -520,4 +529,5 @@ public class RoomDetailResponse extends BaseResponse<RoomDetailResponse.DataBean
             }
         }
     }
+
 }

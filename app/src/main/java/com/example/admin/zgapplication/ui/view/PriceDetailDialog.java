@@ -47,6 +47,7 @@ public class PriceDetailDialog extends Dialog{
     @BindView(R.id.service_money)
     TextView service_money;
     private TextView tv_rent_sum;
+    private TextView tv_zg_discount;
 
     public PriceDetailDialog(@NonNull Context context) {
         super(context);
@@ -67,7 +68,7 @@ public class PriceDetailDialog extends Dialog{
         service_count= (TextView) view.findViewById(R.id.service_count);
         service_money= (TextView) view.findViewById(R.id.service_money);
         tv_rent_sum = (TextView) view.findViewById(R.id.tv_rent_sum);
-
+        tv_zg_discount = ((TextView) view.findViewById(R.id.tv_zg_discount));
         setContentView(view);
         Window window = getWindow();
         WindowManager.LayoutParams params  = window.getAttributes();
@@ -97,6 +98,11 @@ public class PriceDetailDialog extends Dialog{
         service_count.setText("×"+bean.getService_count());
         service_money.setText("¥"+bean.getService_money());
         tv_rent_sum.setText("¥"+bean.getPayment());
+        if (bean.getDiscount()==0){
+            tv_zg_discount.setText("未选择 ");
+        }else {
+            tv_zg_discount.setText("-"+bean.getDiscount());
+        }
     }
 
 
@@ -116,6 +122,7 @@ public class PriceDetailDialog extends Dialog{
         service_count.setText(bean.getService_count());
         service_money.setText("¥"+bean.getService_money());
         tv_rent_sum.setText("¥"+bean.getPayment());
+
 
     }
 

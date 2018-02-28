@@ -81,6 +81,9 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
     private HashMap<String, Integer> configMap;
     private CommonAdapter<RegionResponse.BaseRegion> regionListAdapter1;
     private CommonAdapter<RegionResponse.BaseRegion> regionListAdapter2;
+    private int leftBallX;
+    private int rightBallX;
+    private BidirectionalSeekBar seekBar;
 
 
     @Override
@@ -282,12 +285,18 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
 
     private void initRentPanel() {
         View rent_pick_panel = LayoutInflater.from(getActivity()).inflate(R.layout.rent_pick_panel, null, false);
-        final BidirectionalSeekBar bidirectionalSeekBar = (BidirectionalSeekBar) rent_pick_panel.findViewById(R.id.bidirectionalSeekBar);
+        seekBar = (BidirectionalSeekBar) rent_pick_panel.findViewById(R.id.bidirectionalSeekBar);
+        rent_pick_panel.findViewById(R.id.tv_rent_reload).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rent_panel.dismiss();
+            }
+        });
         final TextView rent_region = (TextView) rent_pick_panel.findViewById(R.id.tv_text_show);
         rent_pick_panel.findViewById(R.id.tv_rent_reload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bidirectionalSeekBar.dataReLoad();
+                seekBar.dataReLoad();
             }
         });
         rent_pick_panel.findViewById(R.id.tv_rent_confirm).setOnClickListener(new View.OnClickListener() {
@@ -297,7 +306,7 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
             }
         });
 
-        bidirectionalSeekBar.setOnSeekBarChangeListener(new BidirectionalSeekBar.OnSeekBarChangeListener() {
+        seekBar.setOnSeekBarChangeListener(new BidirectionalSeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(int leftProgress, int rightProgress) {
                 CompanyHouseFragment.this.leftProgress = leftProgress;
@@ -310,6 +319,8 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
         rent_panel.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                leftBallX = seekBar.getLeftBallX();
+                rightBallX = seekBar.getRightBallX();
                 loadCompanyHouseList();
             }
         });
@@ -425,9 +436,13 @@ public class CompanyHouseFragment extends BaseSupportFragment implements MultiIt
                 }
                 break;
             case R.id.ll_rent:
-                if (rent_panel.isShowing()) {
+                if(rent_panel.isShowing()){
                     rent_panel.dismiss();
-                } else {
+                }else {
+                    if (rightBallX!=0){
+                        seekBar.setLeftBallX(leftBallX);
+                        seekBar.setRightBallX(rightBallX);
+                    }
                     rent_panel.showAsDropDown(ll_rent);
                 }
                 break;

@@ -2,6 +2,7 @@ package com.example.admin.zgapplication.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,6 +18,11 @@ import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
 import com.example.admin.zgapplication.retrofit.rx.RxScheduler;
 import com.example.admin.zgapplication.ui.view.PriceDetailDialog;
 import com.pingplusplus.android.Pingpp;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +45,7 @@ public class OrderDetail2Activity extends BaseActivity {
     private PriceDetailDialog dialog;
     private String bill_num;
     private int order_id;
+    private RentReadyPayResponse rentReadyPayResponse;
 
     //    @BindView(R.id.recyclerView)
 //    RecyclerView recyclerView;
@@ -75,6 +82,41 @@ public class OrderDetail2Activity extends BaseActivity {
                 dialog.show();
                 break;
             case R.id.tv_friend_pay:
+                String imageUrl ="https://"+rentReadyPayResponse.getData().getFriend_link();
+                UMImage image = new UMImage(mActivity,R.drawable.zhagen_logo);
+                image.compressStyle = UMImage.CompressStyle.SCALE;//大小压缩，默认为大小压缩，适合普通很大的图
+                image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分享
+                image.compressFormat = Bitmap.CompressFormat.PNG;//网络图片
+                UMWeb web = new UMWeb(imageUrl);
+
+                web.setTitle("我在扎根网平台要租一套房源");//标题
+                web.setThumb(image);  //缩略图
+                web.setDescription("快点来给人家支付啦");//描述
+                new ShareAction(this)
+                        .withMedia(web)
+                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.ALIPAY)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        })
+                        .open();
                 break;
             case R.id.tv_pay:
                 //// TODO: 2017/10/20  调用支付宝支付
@@ -158,7 +200,8 @@ public class OrderDetail2Activity extends BaseActivity {
 
                     @Override
                     public void next(RentReadyPayResponse rentReadyPayResponse) {
-                        tv_should_pay.setText(rentReadyPayResponse.getData().getPayment());
+                        OrderDetail2Activity.this.rentReadyPayResponse = rentReadyPayResponse;
+                        tv_should_pay.setText("¥"+ rentReadyPayResponse.getData().getPayment());
                         dialog.setBean(rentReadyPayResponse.getData());
                         bill_num = rentReadyPayResponse.getData().getBill_num();
                     }

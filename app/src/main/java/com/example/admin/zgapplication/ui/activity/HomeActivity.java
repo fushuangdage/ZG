@@ -14,7 +14,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.Constant;
@@ -32,10 +34,13 @@ import com.example.admin.zgapplication.ui.fragment.HomeFindHouseFragment;
 import com.example.admin.zgapplication.ui.fragment.HomeFindPersonFragment;
 import com.example.admin.zgapplication.ui.view.MessageBubbleView;
 import com.example.admin.zgapplication.utils.img.GlideRoundTransform;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -74,6 +79,9 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     @BindView(R.id.mb_message)
     MessageBubbleView mb_message;
 
+    @BindView(R.id.rl_message)
+    RelativeLayout rl_message;
+
     public HomeFindHouseFragment houseFragment;
     public HomeFindPersonFragment personFragment;
     private CityResponse cityResponse;
@@ -85,6 +93,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     private RegionResponse.BaseRegion select_region;
     private View headerView;
     private ImageView iv_agent_icon;
+    private long last_back_press;
+    private int unreadJMessage;
 
 
     @Override
@@ -143,6 +153,16 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
 //        int unreadMsgCount = conversation.getUnreadMsgCount();
 //        mb_message.setNumber(unreadMsgCount+"");
 
+        Map<String, EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversations();
+        synchronized (conversations) {
+            for (EMConversation conversation : conversations.values()) {
+                if (conversation.getUnreadMsgCount() != 0) {
+                    unreadJMessage += conversation.getUnreadMsgCount();
+                }
+            }
+        }
+
+        mb_message.setNumber(unreadJMessage+"");
 
         RxPermissions rxPermissions = new RxPermissions(this);
         String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -205,7 +225,7 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
     }
 
 
-    @OnClick({R.id.home_find, R.id.home_message, R.id.mine, R.id.tv_city})
+    @OnClick({R.id.home_find, R.id.home_message, R.id.mine, R.id.tv_city,R.id.rl_message})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_city:
@@ -290,6 +310,8 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
             case R.id.home_message:
                 checkIsLogin(EaseConversationListActivity.class);
                 break;
+            case R.id.rl_message:
+                checkIsLogin(EaseConversationListActivity.class);
             case R.id.ll_self:
                checkIsLogin(SelfInfoActivity.class);
                 break;
@@ -330,5 +352,17 @@ public class HomeActivity extends MVPBaseActivity<HomePresenter> implements Radi
             ((TextView) headerView.findViewById(R.id.tv_user_tel)).setText(Constant.myPhone);
         }
         super.onReceiveEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis()-last_back_press>3000) {
+            Toast.makeText(mActivity, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+        }else {
+            finish();
+            System.exit(0);
+        }
+        last_back_press = System.currentTimeMillis();
+        
     }
 }

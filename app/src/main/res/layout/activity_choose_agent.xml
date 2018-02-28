@@ -8,6 +8,8 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.admin.zgapplication.ui.activity.ChooseAgentActivity">
 
+
+    <include layout="@layout/action_bar" />
     <TextView
         style="@style/gray_text_17sp"
         android:text="确认经纪人"

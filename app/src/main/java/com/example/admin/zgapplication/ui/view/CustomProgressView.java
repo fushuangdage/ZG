@@ -32,7 +32,7 @@ public class CustomProgressView extends View{
     private int measuredHeight;
     private TextPaint mTextPaint;
     private Paint mCirclePaint;
-    private float progress=0.5f;
+    public float progress=0.5f;
     private int radius;
     private String time="02:30";  //记录抢单剩余时间
     private Paint bgPaint;

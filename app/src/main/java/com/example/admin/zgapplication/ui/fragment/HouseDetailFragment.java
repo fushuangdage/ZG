@@ -213,8 +213,8 @@ public class HouseDetailFragment extends BaseSupportFragment {
                         tv_add_shoppingcar.setText(data.getCollect());
 
                         house_code.setText(data.getHouse_code());
-                        house_type.setText(data.getType());
-                        space_area.setText(data.getSpace_area());
+                        house_type.setText(data.getHouse_type());
+                        space_area.setText(data.getSpace_area()+"㎡");
                         floor.setText(data.getFloor());
                         List<String> room = data.getRoom();
 

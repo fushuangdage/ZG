@@ -83,6 +83,7 @@ public class BidirectionalSeekBar extends View {
 
     public void setLeftBallX(int leftBallX) {
         this.leftBallX = leftBallX;
+        initalPositon=false;
         postInvalidate();
     }
 
@@ -97,6 +98,7 @@ public class BidirectionalSeekBar extends View {
 
     public void setRightBallX(int rightBallX) {
         this.rightBallX = rightBallX;
+        initalPositon=false;
         postInvalidate();
     }
 
@@ -170,6 +172,7 @@ public class BidirectionalSeekBar extends View {
     private Bitmap leftBitmap,rightBitmap;
     private int leftBitmapL,leftBitmapT,leftBitmapR,leftBitmapB;
     private int rightBitmapL,rightBitmapT,rightBitmapR,rightBitmapB;
+    private boolean initalPositon=true;
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -194,8 +197,12 @@ public class BidirectionalSeekBar extends View {
                 setMeasuredDimension(getMeasuredWidth(), mHeight);
             }
         }else {
-            leftBallX = ball_radius_size;
-            rightBallX = getMeasuredWidth() - ball_radius_size - offset;
+
+            if (initalPositon) {
+                leftBallX = ball_radius_size;
+                rightBallX = getMeasuredWidth() - ball_radius_size - offset;
+            }
+
             ballY = ball_radius_size;
 //            leftTextRect = new Rect();
 //            leftTextPaint.getTextBounds(text_left_num + "", 0, (text_left_num + "").length(), leftTextRect);

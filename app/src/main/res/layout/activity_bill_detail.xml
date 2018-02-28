@@ -183,7 +183,7 @@
 
             <TextView
                 android:textSize="13sp"
-                android:text="-¥200  "
+                android:text="未选择  "
                 android:layout_alignParentEnd="true"
                 android:drawableRight="@drawable/right_arrow"
                 android:textColor="#717171"

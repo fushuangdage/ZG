@@ -39,6 +39,9 @@ public class HouseFilterDialog extends Dialog implements DialogInterface.OnDismi
     private Set<Integer> house_type_set=new LinkedHashSet<>();
     private int leftProgress;
     private int rightProgress;
+    private BidirectionalSeekBar seekBar;
+    private int leftBallX;
+    private int rightBallX=0;
 
     public HouseFilterDialog(@NonNull Context context) {
         super(context);
@@ -52,6 +55,15 @@ public class HouseFilterDialog extends Dialog implements DialogInterface.OnDismi
     }
 
 
+    public void reloadStarBar(){
+        if (seekBar.getRightBallX()!=0) {
+            seekBar.setLeftBallX(leftBallX);
+            seekBar.setRightBallX(rightBallX);
+        }
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +74,7 @@ public class HouseFilterDialog extends Dialog implements DialogInterface.OnDismi
                 dismiss();
             }
         });
-        BidirectionalSeekBar seekBar = (BidirectionalSeekBar) view.findViewById(R.id.seekBar);
+        seekBar = (BidirectionalSeekBar) view.findViewById(R.id.seekBar);
         final TextView tv_text_show = (TextView) view.findViewById(R.id.tv_text_show);
         seekBar.setOnSeekBarChangeListener(new BidirectionalSeekBar.OnSeekBarChangeListener() {
             @Override
@@ -129,5 +141,7 @@ public class HouseFilterDialog extends Dialog implements DialogInterface.OnDismi
     @Override
     public void onDismiss(DialogInterface dialog) {
         EventBus.getDefault().post(new EventCenter<EventRegionSelect>(Constant.REGION_SELECT,new EventRegionSelect(rent_way_set,house_type_set,leftProgress,rightProgress)));
+        leftBallX = seekBar.getLeftBallX();
+        rightBallX = seekBar.getRightBallX();
     }
 }

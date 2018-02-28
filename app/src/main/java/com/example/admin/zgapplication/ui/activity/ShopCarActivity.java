@@ -62,7 +62,7 @@ public class ShopCarActivity extends BaseActivity implements MultiItemTypeAdapte
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                page = 0;
+                page = 1;
                 initData();
             }
         });

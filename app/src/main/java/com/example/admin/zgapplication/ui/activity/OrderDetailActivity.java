@@ -87,6 +87,9 @@ public class OrderDetailActivity extends BaseActivity {
     @BindView(R.id.service_money)
     TextView service_money;
 
+    @BindView(R.id.tv_panel_rent)
+    TextView tv_panel_rent;
+
     @BindView(R.id.et_username)
     EditText et_username;
 
@@ -105,6 +108,8 @@ public class OrderDetailActivity extends BaseActivity {
     @BindView(R.id.tv_agent_company)
     TextView tv_agent_company;
 
+    @BindView(R.id.tv_choose_zg_discount)
+    TextView tv_choose_zg_discount;
 
 
 
@@ -113,6 +118,7 @@ public class OrderDetailActivity extends BaseActivity {
     private int user_coupon_id;
     private int user_coupon_money;
     private String agent_phone_num;
+    private OrderDetailResponse.OrderDetailDataBean.ListBean beanSave;
 
 
     @Override
@@ -191,38 +197,45 @@ public class OrderDetailActivity extends BaseActivity {
 
     private void setView(OrderDetailResponse.OrderDetailDataBean.ListBean bean) {
 
+        if (bean==null){
+            tv_rent_sum.setText("¥"+(Double.valueOf(beanSave.getPayment())-user_coupon_money));
+        }else {
+            beanSave = bean;
+            Glide.with(mActivity).load(bean.getAvatar()).into(iv_userhead);
+            tv_user_name.setText(bean.getAgent());
+            tv_agent_company.setText(bean.getCompany_name());
+            agent_phone_num = bean.getPhone_number();
+            Glide.with(mActivity).load(bean.getHouse_photo()).into(iv_house);
+            tv_house_name.setText(bean.getHouse_title());
+            tv_house_info.setText(bean.getHouse_area());
+            tv_house_location.setText(bean.getAddress());
+            tv_house_rent.setText(bean.getRent_money()+"元/月");
 
-        Glide.with(mActivity).load(bean.getAvatar()).into(iv_userhead);
-        tv_user_name.setText(bean.getAgent());
-        tv_agent_company.setText(bean.getCompany_name());
-        agent_phone_num = bean.getPhone_number();
-        Glide.with(mActivity).load(bean.getHouse_photo()).into(iv_house);
-        tv_house_name.setText(bean.getHouse_title());
-        tv_house_info.setText(bean.getHouse_area());
-        tv_house_location.setText(bean.getAddress());
-        tv_house_rent.setText(bean.getRent_money()+"元/月");
+            showThreeTag(bean,ll_tag_container);
 
-        showThreeTag(bean,ll_tag_container);
+            rent_month.setText(bean.getRent_month()+"个月");
+            pay_type.setText(bean.getPay_type());
+            room_no.setText(bean.getRoom_num());
+            tv_tel.setText(bean.getPhone_number());
 
-        rent_month.setText(bean.getRent_month()+"个月");
-        pay_type.setText(bean.getPay_type());
-        room_no.setText(bean.getRoom_num());
-        tv_tel.setText(bean.getPhone_number());
+            tv_panel_rent.setText(String.format("租金（%d元/月）",bean.getRent_money()));
+            rent_money.setText("¥"+ bean.getR_money()+"");
+            tv_rent_count.setText(bean.getRent_pay()+"");
+            deposit_money.setText("¥"+ bean.getPay());
+            tv_deposit_count.setText(bean.getDeposit());
+            middle_count.setText(bean.getMiddle_count());
+            middle_money.setText("¥"+ bean.getMiddle_money());
+            service_count.setText(bean.getService_count());
+            service_money.setText("¥"+ bean.getService_money());
+            tv_rent_sum.setText("¥"+(Double.valueOf(bean.getPayment())-user_coupon_money));
+        }
 
-        rent_money.setText("¥"+bean.getRent_money()+"");
-        tv_rent_count.setText(bean.getRent_pay()+"");
-        deposit_money.setText("¥"+bean.getPay());
-        tv_deposit_count.setText(bean.getDeposit());
-        middle_count.setText(bean.getMiddle_count());
-        middle_money.setText("¥"+bean.getMiddle_money());
-        service_count.setText(bean.getService_count());
-        service_money.setText("¥"+bean.getService_money());
-        tv_rent_sum.setText("¥"+(Double.valueOf(bean.getPayment())-user_coupon_money));
+
     }
 
 
     private void  showThreeTag(OrderDetailResponse.OrderDetailDataBean.ListBean bean, LinearLayout ll_tag_container) {
-        for (int i = 0; i < 3&&bean.getLabel()!=null&&bean.getLabel().size()>i; i++) {
+        for (int i = 0; i < 3&& bean.getLabel()!=null&& bean.getLabel().size()>i; i++) {
             TextView childAt = ((TextView) ll_tag_container.getChildAt(i));
             childAt.setVisibility(View.VISIBLE);
             childAt.setText(bean.getLabel().get(i));
@@ -311,7 +324,12 @@ public class OrderDetailActivity extends BaseActivity {
         if (resultCode==Constant.RESULT_FOR_CHOOSE_COUPON){
             user_coupon_id = data.getIntExtra("user_coupon_id", 0);
             user_coupon_money=data.getIntExtra("user_coupon_money",0);
-            tv_zg_discount.setText("- "+user_coupon_money);
+            if (user_coupon_money>0){
+                tv_zg_discount.setText("- "+user_coupon_money);
+                tv_choose_zg_discount.setText("- "+user_coupon_money);
+            }
+            //用于刷新总价格计算
+            setView(null);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

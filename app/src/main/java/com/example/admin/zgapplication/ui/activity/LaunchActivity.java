@@ -20,6 +20,7 @@ public class LaunchActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             startActivity(HomeActivity.class);
+            LaunchActivity.this.finish();
         }
     };
     @Override

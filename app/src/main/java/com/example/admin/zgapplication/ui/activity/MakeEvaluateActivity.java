@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -294,7 +295,10 @@ public class MakeEvaluateActivity extends BaseActivity {
                     Glide.with(mActivity).load(bean.getAvatar()).into(iv_icon);
                     Glide.with(mActivity).load(bean.getLogo()).into(iv_company_icon);
                     sb_agent.setRating(Float.valueOf(bean.getMember_score()));
-                    sb_company.setRating(Float.valueOf(bean.getCompany_score()));
+                    if (method.equals("1")) {
+                        //1 代表成交评价,才有公司的分数
+                        sb_company.setRating(Float.valueOf(bean.getCompany_score()));
+                    }
                     sb_house.setRating(Float.valueOf(bean.getHouse_score()));
                     tv_agent_name.setText(bean.getUsername());
                     tv_company.setText(bean.getCompany_name());
@@ -304,7 +308,7 @@ public class MakeEvaluateActivity extends BaseActivity {
                     tfl_agent.setAdapter(new TagAdapter<String>(bean.getMember_label()) {
                         @Override
                         public View getView(FlowLayout parent, int position, String o) {
-                            TextView view = ((TextView) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_agent, false));
+                            Button view = ((Button) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_agent, false));
                             view.setText(o);
                             return view;
                         }
@@ -315,7 +319,7 @@ public class MakeEvaluateActivity extends BaseActivity {
                     tfl_house.setAdapter(new TagAdapter<String>(bean.getHouse_label()) {
                         @Override
                         public View getView(FlowLayout parent, int position, String o) {
-                            TextView view = (TextView) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_house, false);
+                            Button view = (Button) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_house, false);
                             view.setText(o);
                             return view;
                         }
@@ -342,7 +346,7 @@ public class MakeEvaluateActivity extends BaseActivity {
                         tfl_company.setAdapter(new TagAdapter<String>(bean.getCompany_label()) {
                             @Override
                             public View getView(FlowLayout parent, int position, String o) {
-                                TextView view = (TextView) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_company, false);
+                                Button view = (Button) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_company, false);
                                 view.setText(o);
                                 return view;
                             }
@@ -391,8 +395,9 @@ public class MakeEvaluateActivity extends BaseActivity {
                             tfl_agent.setAdapter(new TagAdapter<String>(bean.getMember_label()) {
                                 @Override
                                 public View getView(FlowLayout parent, int position, String o) {
-                                    TextView view = ((TextView) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_agent, false));
+                                    Button view = ((Button) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_agent, false));
                                     view.setText(o);
+
                                     return view;
                                 }
 
@@ -405,8 +410,9 @@ public class MakeEvaluateActivity extends BaseActivity {
                             tfl_company.setAdapter(new TagAdapter<String>(bean.getCompany_label()) {
                                 @Override
                                 public View getView(FlowLayout parent, int position, String o) {
-                                    TextView view = (TextView) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_company, false);
+                                    Button view = (Button) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_company, false);
                                     view.setText(o);
+
                                     return view;
                                 }
                             });
@@ -414,8 +420,9 @@ public class MakeEvaluateActivity extends BaseActivity {
                             tfl_house.setAdapter(new TagAdapter<String>(bean.getHouse_label()) {
                                 @Override
                                 public View getView(FlowLayout parent, int position, String o) {
-                                    TextView view = (TextView) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_house, false);
+                                    Button view = (Button) LayoutInflater.from(MakeEvaluateActivity.this).inflate(R.layout.flow_item, tfl_house, false);
                                     view.setText(o);
+
                                     return view;
                                 }
                             });
@@ -432,7 +439,7 @@ public class MakeEvaluateActivity extends BaseActivity {
                         }
                     });
         }
-        if (method.equals("2")) {
+        if ("2".equals(method)) {
             //带看没有公司评价信息
             ll_company_impression.setVisibility(View.GONE);
         }

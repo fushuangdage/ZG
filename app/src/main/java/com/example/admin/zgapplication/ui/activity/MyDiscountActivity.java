@@ -4,8 +4,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.DiscountListResponse;
@@ -109,6 +111,7 @@ public class MyDiscountActivity extends BaseActivity {
                 ((TextView) holder.getView(R.id.tv_time)).setText(TimeUtil.
                         formatData(TimeUtil.dateFormatYMD,o.getStart_time())
                         +" - "+TimeUtil.formatData(TimeUtil.dateFormatYMD,o.getExpire_time()));
+                Glide.with(mActivity).load(R.drawable.zhagen_logo).into((ImageView) holder.getView(R.id.iv_icon));
             }
         };
         recyclerView.setAdapter(adapter);

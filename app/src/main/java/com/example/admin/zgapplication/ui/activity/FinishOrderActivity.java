@@ -1,5 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,6 +63,9 @@ public class FinishOrderActivity extends BaseActivity {
     TextView tv_custom_info;
     @BindView(R.id.tv_agent_info)
     TextView tv_agent_info;
+    @BindView(R.id.tv_contact_agent)
+    TextView tv_contact_agent;
+
 
     private OrderDetailResponse.OrderDetailDataBean.ListBean bean;
 
@@ -108,7 +113,7 @@ public class FinishOrderActivity extends BaseActivity {
 
 
                         tv_order_no.setText("订单号："+ bean.getOrder());
-                        tv_order_net.setText("代理商："+ bean.getNet());
+                        tv_order_net.setText("代理商：扎根网");
                         tv_order_pay_time.setText("支付时间："+TimeUtil.formatData(TimeUtil.dateFormatYMD3, bean.getPay_time()));
                         tv_order_payment.setText("支付金额: ¥"+ bean.getPayment());
 
@@ -131,16 +136,27 @@ public class FinishOrderActivity extends BaseActivity {
 //        }
 //    }
 
-    @OnClick({R.id.tv_price_detail,R.id.tv_evaluate})
+    @OnClick({R.id.tv_price_detail,R.id.tv_evaluate,R.id.tv_contact_agent})
     public void onClick(View view){
         switch (view.getId()) {
+            case R.id.tv_contact_agent:
+                Intent intent1 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + bean.getPhone_number()));
+                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
+                break;
+
+
             case R.id.tv_price_detail:
                 PriceDetailDialog dialog = new PriceDetailDialog(this);
                 dialog.show();
 //                dialog.setBean(bean);
                 break;
             case R.id.tv_evaluate:
-                startActivity(MakeEvaluateActivity.class);
+                Intent intent = new Intent(mActivity, MakeEvaluateActivity.class);
+                intent.putExtra("id",bean.getOrder_id());
+                intent.putExtra("method","1");
+                intent.putExtra("evaluated",false);
+                startActivity(intent);
                 break;
             case R.id.iv_left:
                 finish();

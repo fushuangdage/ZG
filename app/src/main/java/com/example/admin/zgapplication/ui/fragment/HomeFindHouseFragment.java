@@ -89,7 +89,7 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
     private HashMap<String, Integer> configMap;
     private BidirectionalSeekBar seekBar;
     private int leftBallX;
-    private int rightBallX;
+    private int rightBallX=0;
 
     @Override
     protected int setLayout() {
@@ -309,7 +309,8 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
         rent_pick_panel.findViewById(R.id.tv_rent_reload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                seekBar.dataReLoad();
+//                seekBar.dataReLoad();
+                rent_panel.dismiss();
             }
         });
         rent_pick_panel.findViewById(R.id.tv_rent_confirm).setOnClickListener(new View.OnClickListener() {
@@ -452,8 +453,10 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
                 if(rent_panel.isShowing()){
                     rent_panel.dismiss();
                 }else {
-                    seekBar.setLeftBallX(leftBallX);
-                    seekBar.setRightBallX(rightBallX);
+                    if (rightBallX!=0){
+                        seekBar.setLeftBallX(leftBallX);
+                        seekBar.setRightBallX(rightBallX);
+                    }
                     rent_panel.showAsDropDown(ll_rent);
                 }
                 break;
@@ -520,8 +523,6 @@ public class HomeFindHouseFragment extends BaseSupportFragment implements MultiI
         configMap.put("阳台",16);
 
     }
-
-
 
 
 }

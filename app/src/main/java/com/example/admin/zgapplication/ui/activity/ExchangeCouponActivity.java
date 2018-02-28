@@ -5,6 +5,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
 import com.example.admin.zgapplication.mvp.module.BaseResponse;
@@ -31,7 +32,7 @@ public class ExchangeCouponActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-        tv_title.setText("兑换优惠卷");
+        tv_title.setText("兑换优惠券");
     }
 
     @Override
@@ -43,7 +44,7 @@ public class ExchangeCouponActivity extends BaseActivity {
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.tv_exchange:
-                RetrofitHelper.getApiWithUid().exChangeCoupon("33",et_exchange_coupon.getText().toString())
+                RetrofitHelper.getApiWithUid().exChangeCoupon(Constant.uid,et_exchange_coupon.getText().toString())
                         .compose(RxScheduler.<BaseResponse>defaultScheduler())
                         .subscribe(new BaseObserver<BaseResponse>(mActivity) {
                             @Override

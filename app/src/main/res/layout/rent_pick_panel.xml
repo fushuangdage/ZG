@@ -43,7 +43,7 @@
             android:id="@+id/tv_rent_reload"
             android:layout_width="155dp"
             android:layout_height="36dp"
-            android:text="重置"
+            android:text="关闭"
             android:background="#ff725c"
             android:gravity="center"
             android:textSize="12sp"

@@ -82,6 +82,7 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
     private RegionResponse currentSelectRegion;
     public int iid;
     private BaiduMap baiduMap;
+    private HouseFilterDialog dialog;
 
 
     @Override
@@ -121,6 +122,8 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
 
 
         initLocation();
+
+        dialog = new HouseFilterDialog(getContext(), R.style.translucent_dialog);
 
 
     }
@@ -215,8 +218,8 @@ public class HomeFindPersonFragment extends BaseSupportFragment implements View.
                 startActivity(intent);
                 break;
             case R.id.tv_filter:
-                HouseFilterDialog dialog = new HouseFilterDialog(getContext(),R.style.translucent_dialog);
                 dialog.show();
+                dialog.reloadStarBar();
                 break;
             case R.id.btn_call_agent:
                 if ("".equals(Constant.uid)){

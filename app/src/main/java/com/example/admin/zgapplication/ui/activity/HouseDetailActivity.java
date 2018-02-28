@@ -105,7 +105,7 @@ public class HouseDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.iv_share:
                 String imageUrl =detailFragment.data.getShare();
-                UMImage image = new UMImage(HouseDetailActivity.this, detailFragment.data.getHouse_photo().get(0));
+                UMImage image = new UMImage(HouseDetailActivity.this, detailFragment.data.getHouse_picture());
                 image.compressStyle = UMImage.CompressStyle.SCALE;//大小压缩，默认为大小压缩，适合普通很大的图
                 image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分享
                 image.compressFormat = Bitmap.CompressFormat.PNG;//网络图片

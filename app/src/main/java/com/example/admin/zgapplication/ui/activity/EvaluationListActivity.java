@@ -1,6 +1,7 @@
 package com.example.admin.zgapplication.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -110,7 +111,14 @@ public class EvaluationListActivity extends BaseActivity {
             protected void convert(ViewHolder holder, final EvaluationListResponse.DataBean.ListBean bean, int position) {
                 holder.getView(R.id.rl_my_evaluation_item_show).setVisibility(View.VISIBLE);
                 holder.getView(R.id.tv_contact_agent).setVisibility(View.VISIBLE);
-
+                holder.setOnClickListener(R.id.tv_contact_agent, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + bean.getTelephone()));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
 
                 Glide.with(mActivity).load(bean.getHouse_photo()).into((ImageView) holder.getView(R.id.iv_house));
                 Glide.with(mActivity).load(bean.getAvatar()).into((ImageView) holder.getView(R.id.iv_userhead));

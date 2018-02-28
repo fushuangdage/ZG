@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -193,7 +192,6 @@ public class WaitCrabActivity extends BaseActivity {
                                             CrabCountResponse.DataBean data = crabCountResponse.getData();
                                             bt_check_crab_list.setText(String.format("查看抢单(%s)",data.getCount()));
 
-                                            Log.d("88888888", "accept: 查看抢单"+data.getCount());
 
                                         }else {
                                             Toast.makeText(mActivity, crabCountResponse.getMsg(), Toast.LENGTH_SHORT).show();

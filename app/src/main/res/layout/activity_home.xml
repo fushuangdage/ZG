@@ -84,6 +84,7 @@
                 android:background="@drawable/sreach2" />
 
             <RelativeLayout
+                android:id="@+id/rl_message"
                 android:clipChildren="false"
                 android:layout_marginRight="10dp"
                 android:layout_width="25dp"

@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_panel_rent"
                     android:text="租金（3000元/月）"
                     style="@style/gray_text_13sp"
                     android:layout_width="0dp"

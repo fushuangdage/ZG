@@ -40,14 +40,19 @@ public class SearchActivity extends BaseActivity {
 
     @BindView(R.id.et_input)
     EditText et_input;
+
+
     private TagAdapter adapter;
 
     private List<String> list=new ArrayList<>();
     private List<HotSearchListResponse.DataBean> hotSearchList;
 
-    @OnClick({R.id.iv_del})
+    @OnClick({R.id.iv_del,R.id.tv_cancel})
     public void onClick(View view){
         switch (view.getId()) {
+            case R.id.tv_cancel:
+                finish();
+                break;
             case  R.id.iv_del:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("确认删除全部搜索历史").setNegativeButton("取消", new DialogInterface.OnClickListener() {
