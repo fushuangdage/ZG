@@ -1,17 +1,24 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.admin.zgapplication.Constant;
 import com.example.admin.zgapplication.R;
 import com.example.admin.zgapplication.base.BaseActivity;
+import com.example.admin.zgapplication.mvp.module.BaseResponse;
 import com.example.admin.zgapplication.mvp.module.TakeLookListResponse;
 import com.example.admin.zgapplication.retrofit.RetrofitHelper;
 import com.example.admin.zgapplication.retrofit.rx.BaseObserver;
@@ -50,6 +57,12 @@ public class TakeLookListActivity extends BaseActivity {
     @Override
     public int setLayout() {
         return R.layout.activity_take_look_list;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadListData();
     }
 
     @Override
@@ -93,8 +106,8 @@ public class TakeLookListActivity extends BaseActivity {
         //                ((TextView) holder.getView(R.id.tv_friend_pay)).setText("取消带看");
         adapter = new CommonAdapter<TakeLookListResponse.DataBean.ListBean>(this, R.layout.item_order_list, data) {
             @Override
-            protected void convert(ViewHolder holder, TakeLookListResponse.DataBean.ListBean bean, int position) {
-
+            protected void convert(ViewHolder holder, final TakeLookListResponse.DataBean.ListBean bean, int position) {
+                holder.getView(R.id.rl_pay_info).setVisibility(View.GONE);
                 View view = holder.getView(R.id.rl_my_evaluation_item_show);
                 view.setVisibility(View.VISIBLE);
                 switch (bean.getStatus()) {
@@ -131,6 +144,91 @@ public class TakeLookListActivity extends BaseActivity {
                     default:
                         break;
                 }
+
+                ((TextView) holder.getView(R.id.tv_go_pay)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (bean.getStatus()){
+                            case "1":
+                                RetrofitHelper.getApi().confirmTakeLook(Constant.uid, bean.getId())
+                                        .compose(RxScheduler.<BaseResponse>defaultScheduler())
+                                        .subscribe(new BaseObserver<BaseResponse>(mActivity) {
+                                            @Override
+                                            public void error(Throwable e) {
+
+                                            }
+
+                                            @Override
+                                            public void next(BaseResponse baseResponse) {
+                                                Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                                loadListData();
+                                            }
+
+                                            @Override
+                                            public void complete() {
+
+                                            }
+                                        });
+                                break;
+                            case "2":
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getTelephone()));
+                                if (ActivityCompat.checkSelfPermission(TakeLookListActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
+                                startActivity(intent);
+                                break;
+                            case "3":
+                                Intent intents = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + bean.getTelephone()));
+                                if (ActivityCompat.checkSelfPermission(TakeLookListActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
+                                startActivity(intents);
+                                break;
+                            case "4":
+                                Intent evaluate = new Intent(mActivity, MakeEvaluateActivity.class);
+                                evaluate.putExtra("id",bean.getId());
+                                evaluate.putExtra("method","2");
+                                evaluate.putExtra("evaluated",false);
+                                startActivity(evaluate);
+                                break;
+                            case "5":
+                                RetrofitHelper.getApi().deleteTakeLookResponse(Constant.uid, bean.getId())
+                                        .compose(RxScheduler.<BaseResponse>defaultScheduler())
+                                        .subscribe(new BaseObserver<BaseResponse>(mActivity) {
+                                            @Override
+                                            public void error(Throwable e) {
+
+                                            }
+
+                                            @Override
+                                            public void next(BaseResponse baseResponse) {
+                                                loadListData();
+                                            }
+
+                                            @Override
+                                            public void complete() {
+
+                                            }
+                                        });
+                                break;
+                        }
+                    }
+                });
+
                 holder.setText(R.id.tv_user_tag, TimeUtil.formatData(TimeUtil.dateFormatYMDHM,bean.getExpect_time()));
                 Glide.with(mActivity).load(bean.getAvatar()).into((ImageView) holder.getView(R.id.iv_userhead));
                 holder.setText(R.id.tv_user_name,bean.getUsername());

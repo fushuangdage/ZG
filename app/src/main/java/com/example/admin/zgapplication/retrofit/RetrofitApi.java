@@ -211,6 +211,11 @@ public interface RetrofitApi {
                                                              @Field("house_id") String house_id, @Field("member_id") String member_id,
                                                              @Field("uid") String uid, @Field("name") String name, @Field("expect_time") String expect_time);
 
+    //取消带看
+    //http://api.zhagen.com/member/visit-house/del
+    @FormUrlEncoded
+    @POST("/member/visit-house/del")
+    Observable<BaseResponse>deleteTakeLookResponse(@Field("uid") String uid,@Field("id") String id);
 
     // 推荐房源
     @GET("/member/intention/houses")

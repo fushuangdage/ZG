@@ -41,6 +41,7 @@ public class TakeLookListResponse extends BaseResponse<TakeLookListResponse.Data
              * house_label : ["简单大方","装修地中海风","可以养宠物","全新墙纸","阳台视野广阔"]
              */
 
+            private String telephone;
             private String room_id;
             private String house_id;
             private String id;
@@ -57,6 +58,14 @@ public class TakeLookListResponse extends BaseResponse<TakeLookListResponse.Data
             private String house_address;
             private String house_rental;
             private List<String> house_label;
+
+            public String getTelephone() {
+                return telephone;
+            }
+
+            public void setTelephone(String telephone) {
+                this.telephone = telephone;
+            }
 
             public String getRoom_id() {
                 return room_id;

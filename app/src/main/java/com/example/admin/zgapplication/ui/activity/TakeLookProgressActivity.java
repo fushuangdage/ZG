@@ -1,5 +1,6 @@
 package com.example.admin.zgapplication.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,6 +56,8 @@ public class TakeLookProgressActivity extends BaseActivity {
     RelativeLayout rl_bottom;
     @BindView(R.id.tv_cancel)
     TextView tv_cancel;
+    @BindView(R.id.tv_confirm)
+    TextView tv_confirm;
 
 
     private String intentID;
@@ -99,11 +102,14 @@ public class TakeLookProgressActivity extends BaseActivity {
                             case "4":
                                 tv_status.setText("带看完成");
                                 rl_bottom.setVisibility(View.VISIBLE);
+                                tv_confirm.setText("去评价");
+                                tv_cancel.setVisibility(View.GONE);
                                 break;
                             case "5":
                                 tv_status.setText("已取消");
                                 rl_bottom.setVisibility(View.VISIBLE);
                                 tv_cancel.setText("删除");
+                                tv_confirm.setText(View.GONE);
                                 break;
                             default:
                                 tv_status.setText("未指定");
@@ -147,31 +153,54 @@ public class TakeLookProgressActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_confirm:
-                RetrofitHelper.getApi().confirmTakeLook(Constant.uid, intentID)
-                        .compose(RxScheduler.<BaseResponse>defaultScheduler())
-                        .subscribe(new BaseObserver<BaseResponse>(mActivity) {
-                            @Override
-                            public void error(Throwable e) {
+                if(bean.getStatus().equals("4")){
+                    Intent evaluate = new Intent(mActivity, MakeEvaluateActivity.class);
+                    evaluate.putExtra("id",intentID);
+                    evaluate.putExtra("method","2");
+                    evaluate.putExtra("evaluated",false);
+                    startActivity(evaluate);
+                }else{
+                    RetrofitHelper.getApi().confirmTakeLook(Constant.uid, intentID)
+                            .compose(RxScheduler.<BaseResponse>defaultScheduler())
+                            .subscribe(new BaseObserver<BaseResponse>(mActivity) {
+                                @Override
+                                public void error(Throwable e) {
 
-                            }
+                                }
 
-                            @Override
-                            public void next(BaseResponse baseResponse) {
+                                @Override
+                                public void next(BaseResponse baseResponse) {
+                                    Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
 
-                                Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void complete() {
 
-                            }
-
-                            @Override
-                            public void complete() {
-
-                            }
-                        });
-
+                                }
+                            });
+                }
                 break;
             case R.id.tv_cancel:
                 if (bean.getStatus().equals("5")) {
+                    RetrofitHelper.getApi().deleteTakeLookResponse(Constant.uid, intentID)
+                            .compose(RxScheduler.<BaseResponse>defaultScheduler())
+                            .subscribe(new BaseObserver<BaseResponse>(mActivity) {
+                                @Override
+                                public void error(Throwable e) {
 
+                                }
+
+                                @Override
+                                public void next(BaseResponse baseResponse) {
+                                    finish();
+                                }
+
+                                @Override
+                                public void complete() {
+
+                                }
+                            });
                 } else {
                     RetrofitHelper.getApi().cancelTakeLook(Constant.uid, intentID, null)
                             .compose(RxScheduler.<BaseResponse>defaultScheduler())
@@ -183,9 +212,8 @@ public class TakeLookProgressActivity extends BaseActivity {
 
                                 @Override
                                 public void next(BaseResponse baseResponse) {
-
                                     Toast.makeText(mActivity, baseResponse.getMsg(), Toast.LENGTH_SHORT).show();
-
+                                    finish();
                                 }
 
                                 @Override
@@ -194,7 +222,6 @@ public class TakeLookProgressActivity extends BaseActivity {
                                 }
                             });
                 }
-
                 break;
         }
     }
